@@ -4,20 +4,67 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script>
-      // Ignore WebSocket disconnection errors in iframe sandbox
-      window.addEventListener('unhandledrejection', function(event) {
-        if (event.reason && (
-          String(event.reason.message || event.reason).includes('WebSocket') ||
-          String(event.reason.stack || '').includes('@vite/client')
-        )) {
-          event.preventDefault();
+      // Shim WebSocket for vite-hmr in iframe preview where WebSocket connections are blocked
+      (function() {
+        const NativeWebSocket = window.WebSocket;
+        window.WebSocket = function(url, protocols) {
+          const isViteHmr = protocols === 'vite-hmr' || 
+            (typeof url === 'string' && (url.includes('token=') || url.includes('/@vite')));
+          if (isViteHmr) {
+            const listeners = {};
+            const mock = {
+              OPEN: 1,
+              CLOSED: 3,
+              CONNECTING: 0,
+              CLOSING: 2,
+              readyState: 1,
+              url: String(url),
+              protocol: 'vite-hmr',
+              addEventListener: function(event, fn) {
+                if (!listeners[event]) listeners[event] = [];
+                listeners[event].push(fn);
+                if (event === 'open') {
+                  setTimeout(function() { fn(new Event('open')); }, 0);
+                }
+              },
+              removeEventListener: function(event, fn) {
+                if (listeners[event]) {
+                  listeners[event] = listeners[event].filter(function(f) { return f !== fn; });
+                }
+              },
+              dispatchEvent: function(e) {
+                (listeners[e.type] || []).forEach(function(fn) { fn(e); });
+                return true;
+              },
+              send: function() {},
+              close: function() {
+                mock.readyState = 3;
+                mock.dispatchEvent(new Event('close'));
+              }
+            };
+            return mock;
+          }
+          return new NativeWebSocket(url, protocols);
+        };
+        if (NativeWebSocket) {
+          window.WebSocket.prototype = NativeWebSocket.prototype;
         }
-      });
-      window.addEventListener('error', function(event) {
-        if (String(event.message || '').includes('WebSocket') || String(event.filename || '').includes('@vite/client')) {
-          event.preventDefault();
-        }
-      });
+
+        // Global unhandled rejection & error shield
+        window.addEventListener('unhandledrejection', function(event) {
+          if (event.reason && (
+            String(event.reason.message || event.reason).includes('WebSocket') ||
+            String(event.reason.stack || '').includes('@vite/client')
+          )) {
+            event.preventDefault();
+          }
+        });
+        window.addEventListener('error', function(event) {
+          if (String(event.message || '').includes('WebSocket') || String(event.filename || '').includes('@vite/client')) {
+            event.preventDefault();
+          }
+        });
+      })();
     </script>
     <title>Texas Capitol Legislative Intelligence & Policy Engine</title>
     <meta name="description" content="Interactive Texas Legislature tracker and AI policy analysis engine. Features daily priority bill scoring, comport/conflict analysis, lawmaker profiling, multi-version bill deep dives, committee minutes, and automated legislative pipeline scripts." />
