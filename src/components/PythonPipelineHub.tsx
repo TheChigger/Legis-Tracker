@@ -11,12 +11,33 @@ import {
   ArrowRight,
   Database,
   Cpu,
-  Layers
+  Layers,
+  RefreshCw
 } from 'lucide-react';
 
 export const PythonPipelineHub: React.FC = () => {
   const [selectedScript, setSelectedScript] = useState<PythonScriptDoc>(FIXED_PYTHON_SCRIPTS[0]);
   const [copied, setCopied] = useState(false);
+  const [isIngesting, setIsIngesting] = useState(false);
+  const [ingestStatus, setIngestStatus] = useState<string | null>(null);
+
+  const handleTriggerIngest = async () => {
+    setIsIngesting(true);
+    setIngestStatus(null);
+    try {
+      const res = await fetch('/api/ingest/trigger', { method: 'POST' });
+      const data = await res.json();
+      if (res.ok) {
+        setIngestStatus(`Success! Ingested from FTP. Total 90R Bills: ${data.total90RBills}`);
+      } else {
+        setIngestStatus(`Error: ${data.details || 'Failed to run script'}`);
+      }
+    } catch (e: any) {
+      setIngestStatus(`Failed: ${e.message}`);
+    } finally {
+      setIsIngesting(false);
+    }
+  };
 
   const handleCopyCode = () => {
     navigator.clipboard.writeText(selectedScript.code);
@@ -58,7 +79,15 @@ export const PythonPipelineHub: React.FC = () => {
             </p>
           </div>
 
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex flex-wrap items-center gap-2 shrink-0">
+            <button
+              onClick={handleTriggerIngest}
+              disabled={isIngesting}
+              className="px-3.5 py-2 text-xs font-bold rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 flex items-center gap-1.5 shadow-sm transition disabled:opacity-50"
+            >
+              <RefreshCw className={`w-3.5 h-3.5 ${isIngesting ? 'animate-spin' : ''}`} />
+              <span>{isIngesting ? 'Ingesting from FTP...' : 'Run Ingestion Now'}</span>
+            </button>
             <button
               onClick={handleCopyCode}
               className="px-3.5 py-2 text-xs font-semibold rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center gap-1.5 transition"
@@ -75,6 +104,13 @@ export const PythonPipelineHub: React.FC = () => {
             </button>
           </div>
         </div>
+
+        {ingestStatus && (
+          <div className="mt-4 p-3 rounded-lg bg-slate-900 border border-amber-500/30 text-xs font-mono text-amber-300 flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+            <span>{ingestStatus}</span>
+          </div>
+        )}
       </div>
 
       {/* Root Cause Diagnosis Section */}

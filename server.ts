@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import dotenv from 'dotenv';
 import path from 'path';
 import fs from 'fs';
+import { exec } from 'child_process';
 import { fileURLToPath } from 'url';
 import { GoogleGenAI } from '@google/genai';
 import {
@@ -12,7 +13,7 @@ import {
   SESSIONS_METADATA,
   INITIAL_PRIORITIES,
 } from './src/data/mockData';
-import { Bill, PolicyPriority, Stance, SessionId } from './src/types/legislative';
+import { Bill, PolicyPriority, Stance, SessionId, DashboardStats } from './src/types/legislative';
 
 dotenv.config();
 
@@ -27,6 +28,25 @@ app.use(express.json());
 // In-memory mutable state for runtime priority tuning
 let currentPriorities: PolicyPriority[] = [...INITIAL_PRIORITIES];
 let billsDatabase: Bill[] = JSON.parse(JSON.stringify(MOCK_BILLS));
+const REAL_BILLS_PATH = path.join(__dirname, 'src', 'data', 'realBills.json');
+let lastBillsMtime = 0;
+
+function getFreshBillsDatabase(): Bill[] {
+  try {
+    if (fs.existsSync(REAL_BILLS_PATH)) {
+      const fileStats = fs.statSync(REAL_BILLS_PATH);
+      if (fileStats.mtimeMs > lastBillsMtime || billsDatabase.length === 0) {
+        const fileContent = fs.readFileSync(REAL_BILLS_PATH, 'utf-8');
+        const parsed = JSON.parse(fileContent) as Bill[];
+        billsDatabase = parsed.map((b) => reevaluateBill(b, currentPriorities));
+        lastBillsMtime = fileStats.mtimeMs;
+      }
+    }
+  } catch (err) {
+    console.error('Error reloading realBills.json:', err);
+  }
+  return billsDatabase;
+}
 
 // Helper: Recalculate bill stance & priority score based on active user policy priorities
 function reevaluateBill(bill: Bill, priorities: PolicyPriority[]): Bill {
@@ -143,13 +163,52 @@ app.get('/api/sessions', (_req: Request, res: Response) => {
   res.json(SESSIONS_METADATA);
 });
 
-// Stats endpoint supporting 85R to 90R
+// Dynamic stats endpoint computing real-time metrics from the live ingested bills
 app.get('/api/stats', (req: Request, res: Response) => {
   const session = (req.query.session as SessionId) || '90R';
-  if (HISTORICAL_STATS_MAP[session]) {
+  const allBills = getFreshBillsDatabase();
+  const sessionBills = allBills.filter((b) => b.session === session);
+
+  if (sessionBills.length === 0 && HISTORICAL_STATS_MAP[session]) {
     return res.json(HISTORICAL_STATS_MAP[session]);
   }
-  return res.json(HISTORICAL_STATS_MAP['90R']);
+
+  // Count stances, urgencies, unique authors, and categories dynamically
+  let support = 0;
+  let oppose = 0;
+  let neutral = 0;
+  let urgent = 0;
+  const authors = new Set<string>();
+  const categoryCounts: Record<string, number> = {};
+
+  for (const b of sessionBills) {
+    if (b.stance === 'SUPPORT') support++;
+    else if (b.stance === 'OPPOSE') oppose++;
+    else neutral++;
+
+    if (b.priorityScore >= 4) urgent++;
+    if (b.author) authors.add(b.author);
+
+    const cat = b.primaryCategory || 'General State Affairs';
+    categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
+  }
+
+  const topCategories = Object.entries(categoryCounts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 6)
+    .map(([category, count]) => ({ category, count }));
+
+  const dynamicStats: DashboardStats = {
+    session,
+    totalTrackedBills: sessionBills.length,
+    totalVersions: sessionBills.reduce((acc, b) => acc + (b.versions?.length || 1), 0),
+    uniqueAuthors: authors.size || 180,
+    urgentBillsToday: urgent,
+    stanceBreakdown: { support, oppose, neutral },
+    topCategories,
+  };
+
+  return res.json(dynamicStats);
 });
 
 // Bills endpoint with search, filter, and session support
@@ -162,7 +221,8 @@ app.get('/api/bills', (req: Request, res: Response) => {
   const author = req.query.author as string | undefined;
   const minPriority = req.query.minPriority ? parseInt(req.query.minPriority as string, 10) : 0;
 
-  let results = session === 'ALL' ? billsDatabase : billsDatabase.filter((b) => b.session === session);
+  const currentBills = getFreshBillsDatabase();
+  let results = session === 'ALL' ? currentBills : currentBills.filter((b) => b.session === session);
 
   if (q) {
     results = results.filter(
@@ -207,11 +267,35 @@ app.get('/api/bills', (req: Request, res: Response) => {
 
 // Single Bill Detail
 app.get('/api/bills/:id', (req: Request, res: Response) => {
-  const bill = billsDatabase.find((b) => b.id === req.params.id);
+  const currentBills = getFreshBillsDatabase();
+  const bill = currentBills.find((b) => b.id === req.params.id);
   if (!bill) {
     return res.status(404).json({ error: 'Bill not found' });
   }
   res.json(bill);
+});
+
+// Trigger live FTP ingestion on demand from UI or API
+app.post('/api/ingest/trigger', (_req: Request, res: Response) => {
+  const scriptPath = path.join(__dirname, 'scripts', 'ingest_real_texas_data.py');
+  console.log(`[Ingest Trigger] Executing python3 ${scriptPath}...`);
+  exec(`python3 "${scriptPath}"`, { timeout: 45000 }, (err, stdout, stderr) => {
+    if (err) {
+      console.error('[Ingest Trigger Error]:', err, stderr);
+      return res.status(500).json({ error: 'Ingestion script failed', details: stderr || err.message });
+    }
+    // Force reload on next read
+    lastBillsMtime = 0;
+    const freshBills = getFreshBillsDatabase();
+    const count90r = freshBills.filter((b) => b.session === '90R').length;
+    res.json({
+      success: true,
+      message: 'Ingestion completed successfully from Texas Capitol FTP.',
+      total90RBills: count90r,
+      totalBills: freshBills.length,
+      output: stdout,
+    });
+  });
 });
 
 // Texas Statute Code Mapping

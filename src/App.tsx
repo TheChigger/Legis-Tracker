@@ -168,6 +168,7 @@ export default function App() {
             onOpenPriorities={() => setActiveTab('priorities')}
             onOpenAiChat={handleOpenAiChat}
             onSelectSession={setSession}
+            onRefreshData={() => fetchSessionData(session)}
           />
         )}
 

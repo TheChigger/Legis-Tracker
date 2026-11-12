@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Bill, DashboardStats, PolicyPriority, SessionId } from '../types/legislative';
 import { SESSIONS_METADATA } from '../data/mockData';
 import { 
@@ -15,7 +15,8 @@ import {
   Landmark,
   Calendar,
   History,
-  Scale
+  Scale,
+  RefreshCw
 } from 'lucide-react';
 
 interface PriorityDashboardProps {
@@ -26,6 +27,7 @@ interface PriorityDashboardProps {
   onOpenPriorities: () => void;
   onOpenAiChat: (prefillPrompt?: string) => void;
   onSelectSession?: (session: SessionId) => void;
+  onRefreshData?: () => Promise<void>;
 }
 
 export const PriorityDashboard: React.FC<PriorityDashboardProps> = ({
@@ -36,7 +38,33 @@ export const PriorityDashboard: React.FC<PriorityDashboardProps> = ({
   onOpenPriorities,
   onOpenAiChat,
   onSelectSession,
+  onRefreshData,
 }) => {
+  const [isSyncing, setIsSyncing] = useState(false);
+  const [syncMessage, setSyncMessage] = useState<string | null>(null);
+
+  const handleTriggerSync = async () => {
+    setIsSyncing(true);
+    setSyncMessage(null);
+    try {
+      const res = await fetch('/api/ingest/trigger', { method: 'POST' });
+      const data = await res.json();
+      if (res.ok) {
+        setSyncMessage(`Synced! Total 90R Bills: ${data.total90RBills}`);
+        if (onRefreshData) {
+          await onRefreshData();
+        }
+      } else {
+        setSyncMessage(`Sync warning: ${data.details || 'Check server logs'}`);
+      }
+    } catch (err: any) {
+      setSyncMessage(`Sync failed: ${err.message}`);
+    } finally {
+      setIsSyncing(false);
+      setTimeout(() => setSyncMessage(null), 5000);
+    }
+  };
+
   const urgentBills = bills.filter((b) => b.priorityScore >= 4);
   const supportBills = bills.filter((b) => b.stance === 'SUPPORT');
   const opposeBills = bills.filter((b) => b.stance === 'OPPOSE');
@@ -59,6 +87,21 @@ export const PriorityDashboard: React.FC<PriorityDashboardProps> = ({
               <span className="font-mono text-xs uppercase px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20 font-semibold">
                 Session {stats.session} • {stats.totalTrackedBills.toLocaleString()} Real Bills Ingested
               </span>
+              <button
+                onClick={handleTriggerSync}
+                disabled={isSyncing}
+                className="font-mono text-xs px-2.5 py-0.5 rounded bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 flex items-center gap-1.5 transition disabled:opacity-50"
+                title="Trigger immediate sync from ftp.legis.state.tx.us"
+              >
+                <RefreshCw className={`w-3 h-3 ${isSyncing ? 'animate-spin text-amber-400' : 'text-amber-300'}`} />
+                <span>{isSyncing ? 'Syncing FTP...' : 'Sync Live FTP'}</span>
+              </button>
+              {syncMessage && (
+                <span className="font-mono text-xs px-2 py-0.5 rounded bg-emerald-950/80 text-emerald-300 border border-emerald-700/50 flex items-center gap-1">
+                  <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                  {syncMessage}
+                </span>
+              )}
               <span className="text-xs text-slate-400 flex items-center gap-1 font-mono">
                 <Clock className="w-3 h-3 text-slate-500" />
                 Synced from ftp.legis.state.tx.us
