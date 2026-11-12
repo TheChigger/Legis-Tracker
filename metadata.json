@@ -1,0 +1,6 @@
+{
+  "name": "Texas Capitol Legislative Intelligence & Policy Engine",
+  "description": "Interactive Texas Legislature tracker and AI policy analysis engine. Features daily priority bill scoring, comport/conflict analysis, lawmaker profiling, multi-version bill deep dives, committee minutes, and automated legislative pipeline scripts.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

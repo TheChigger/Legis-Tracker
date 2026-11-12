@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Texas 90th Legislative Session - AI Portal</title>
+    <script src="https://tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 font-sans min-h-screen">
+    <header class="border-b border-gray-800 bg-gray-950 p-6 flex justify-between items-center">
+        <div>
+            <h1 class="text-2xl font-bold text-white tracking-wide">Texas Legislative Intelligence</h1>
+            <p class="text-sm text-blue-400 font-medium">90th Session • Pre-Filing Dashboard</p>
+        </div>
+        <div class="bg-emerald-500/10 text-emerald-400 text-xs px-3 py-1.5 rounded-full font-semibold border border-emerald-500/20">
+            App Engine Online
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto p-6 space-y-8">
+        <!-- Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6" id="stats-grid">
+            <div class="bg-gray-950 border border-gray-800 rounded-xl p-6 animate-pulse">Loading stats...</div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+            <!-- Authors Column -->
+            <div class="bg-gray-950 border border-gray-800 rounded-xl p-6 space-y-4">
+                <h3 class="text-md font-bold text-white">🔥 Active Lawmakers</h3>
+                <div class="divide-y divide-gray-800" id="author-list"><p class="text-gray-500 py-2">Loading authors...</p></div>
+            </div>
+
+            <!-- AI Chat Column -->
+            <div class="lg:col-span-2 bg-gray-950 border border-gray-800 rounded-xl p-6 flex flex-col h-[550px]">
+                <h3 class="text-lg font-bold text-white mb-2">🤖 Local AI RAG Briefing Portal</h3>
+                <div id="chat-display" class="flex-1 overflow-y-auto space-y-4 pr-2 bg-gray-900 border border-gray-800 rounded-lg p-4 text-sm text-gray-400">
+                    Welcome! Type a session query pattern below...
+                </div>
+                <div class="flex gap-3 pt-4 border-t border-gray-800 mt-4">
+                    <input type="text" id="chat-input" placeholder="Ask a question about active pre-filed bills..." 
+                           class="flex-1 bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500">
+                    <button onclick="submitQuery()" id="send-btn" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-3 rounded-lg shadow">
+                        Analyze
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const BACKEND_URL = "http://192.168.4.20:8000";
+
+        async function loadDashboardData() {
+            try {
+                const statsRes = await fetch(`${BACKEND_URL}/stats`);
+                const stats = await statsRes.json();
+                document.getElementById('stats-grid').innerHTML = `
+                    <div class="bg-gray-950 border border-gray-800 rounded-xl p-6 shadow-md"><p class="text-xs font-semibold text-gray-400 uppercase">Tracked Versions</p><p class="text-3xl font-extrabold text-white mt-1">${stats.total_tracked_versions}</p></div>
+                    <div class="bg-gray-950 border border-gray-800 rounded-xl p-6 shadow-md"><p class="text-xs font-semibold text-gray-400 uppercase">Unique Bills</p><p class="text-3xl font-extrabold text-blue-400 mt-1">${stats.total_unique_bills}</p></div>
+                    <div class="bg-gray-950 border border-gray-800 rounded-xl p-6 shadow-md"><p class="text-xs font-semibold text-gray-400 uppercase">Registered Authors</p><p class="text-3xl font-extrabold text-purple-400 mt-1">${stats.total_authors_registered}</p></div>
+                    <div class="bg-gray-950 border border-gray-800 rounded-xl p-6 shadow-md"><p class="text-xs font-semibold text-gray-400 uppercase">Secondary Docs</p><p class="text-3xl font-extrabold text-amber-400 mt-1">${stats.total_secondary_documents}</p></div>
+                `;
+
+                const authorRes = await fetch(`${BACKEND_URL}/authors?limit=8`);
+                const authors = await authorRes.json();
+                document.getElementById('author-list').innerHTML = authors.map((item, idx) => `
+                    <div class="flex justify-between items-center py-3 text-sm"><span class="text-gray-300">Rep. ${item.author}</span><span class="text-blue-400 font-bold">${item.bills_filed} Filed</span></div>
+                `).join('');
+            } catch (err) { console.error("Dashboard link failure:", err); }
+        }
+
+        async function submitQuery() {
+            const inputEl = document.getElementById('chat-input');
+            const query = inputEl.value.trim();
+            if (!query) return;
+
+            const chatDisplay = document.getElementById('chat-display');
+            const sendBtn = document.getElementById('send-btn');
+
+            chatDisplay.innerHTML += `<div class="flex justify-end"><div class="bg-blue-600 text-white rounded-lg px-4 py-2 max-w-[85%] font-medium">${query}</div></div>`;
+            inputEl.value = "";
+            sendBtn.disabled = true;
+            sendBtn.innerText = "Thinking...";
+
+            const loadingId = "loader_" + Date.now();
+            chatDisplay.innerHTML += `<div class="flex justify-start" id="${loadingId}"><div class="text-gray-500 text-xs italic">Running local vector match and querying Llama 3.1 on your GPU...</div></div>`;
+            chatDisplay.scrollTop = chatDisplay.scrollHeight;
+
+            try {
+                const res = await fetch(`${BACKEND_URL}/ai-chat?q=${encodeURIComponent(query)}`);
+                const data = await res.json();
+                document.getElementById(loadingId).remove();
+
+                const sourcesHtml = data.source_material_used.length > 0 
+                    ? `<div class="mt-2 text-xs text-gray-500 font-semibold">Sources: ${data.source_material_used.map(b => `<span class="bg-gray-800 text-blue-400 px-1.5 py-0.5 rounded mr-1">${b}</span>`).join('')}</div>` : "";
+
+                chatDisplay.innerHTML += `
+                    <div class="flex justify-start">
+                        <div class="bg-gray-900 border border-gray-800 text-gray-200 rounded-lg px-4 py-3 max-w-[90%] leading-relaxed">
+                            <p class="whitespace-pre-line">${data.answer}</p>
+                            ${sourcesHtml}
+                        </div>
+                    </div>
+                `;
+            } catch (err) {
+                document.getElementById(loadingId).remove();
+                chatDisplay.innerHTML += `<div class="text-red-400 text-xs">Error connecting to local app engine.</div>`;
+            }
+            sendBtn.disabled = false;
+            sendBtn.innerText = "Analyze";
+            chatDisplay.scrollTop = chatDisplay.scrollHeight;
+        }
+
+        window.onload = loadDashboardData;
+        document.getElementById("chat-input").addEventListener("keyup", function(e) { if (e.key === "Enter") submitQuery(); });
+    </script>
+</body>
+</html>
