@@ -1,0 +1,122 @@
+89(R) HB 103 - Introduced version - Bill Text
+89R19842 TYPED
+By: Troxclair
+H.B. No. 103
+A BILL TO BE ENTITLED
+AN ACT
+relating to the creation and maintenance of a database of taxing
+unit bonds, taxes, and bond-related projects; providing a civil
+penalty.
+BE IT ENACTED BY THE LEGISLATURE OF THE STATE OF TEXAS:
+SECTION 1.  Subchapter B, Chapter 403, Government Code, is
+amended by adding Sections 403.0248 and 403.0249 to read as
+follows:
+Sec.
+403.0248.
+BOND, TAX, AND PROJECT DATABASE. (a) In
+this section, "Taxing unit" has the meaning assigned by Section
+1.04(12), Tax Code.
+(b)
+The comptroller shall consult and coordinate with the
+Bond Review Board to develop and maintain a database that includes
+current and historical information regarding taxing unit bonds,
+taxes, and bond-related projects, including:
+(1)
+for each bond or other debt obligation issued or
+proposed by a taxing unit:
+(A)
+the language of the ballot proposition if the
+bond or other debt obligation has been or will be approved at an
+election;
+(B)
+the projected interest and sinking fund tax
+rate or projected tax rate for debt service, as applicable,
+associated with a proposed bond;
+(C)
+the result of an election held for the
+purpose of issuing a proposed bond or other debt obligation;
+(D)
+a list of the projects to be funded using the
+bond;
+(E)
+an accounting of the use of the proceeds of
+any issued bond, including descriptions of any projects paid for
+with the proceeds; and
+(F)
+any increase in the interest and sinking fund
+tax rate or tax rate for debt service, as applicable, resulting from
+issued bonds;
+(2)
+the results of any election held under Chapter 26,
+Tax Code, including the ad valorem tax rate proposed by the taxing
+unit for purposes of the election and the taxing unit's
+voter-approval tax rate for the tax year of the election;
+(3)
+for maintenance taxes that have been levied or
+proposed by a school district:
+(A)
+each school district's proposed or approved
+tax rate; and
+(B)
+the language of the ballot proposition under
+Section 45.003(d), Education Code;
+(4)
+a report generation function to allow the
+comptroller to generate reports of the information described by
+Subdivisions (1) through (3) for each taxing unit, disaggregated by
+geographic area; and
+(5)
+a function that allows for the proposal of updates
+or corrections to the information included in the database.
+(c)
+A taxing unit shall provide the comptroller with the
+information described by Subsections (b)(1) through (3) and any
+other information requested by the comptroller for the purpose of
+maintaining the database established under this section. The
+comptroller may consult with the appropriate officer of, or other
+person representing, each taxing unit to obtain the information
+necessary to operate and update the database.
+(d)
+The comptroller may contract with a third party as
+necessary for the development or maintenance of the database under
+this section.
+(e)
+The comptroller may not charge a fee to the public to
+access the database.
+(f)
+The comptroller may establish procedures and adopt
+rules as necessary to implement this section.
+Sec.
+403.0249.
+NONCOMPLIANCE; CIVIL PENALTY. (a) If a
+taxing unit has not complied with a requirement to provide
+information under Section 403.0248, the comptroller shall send a
+notice to the taxing unit.
+The notice must be in writing, describe
+the information that must be submitted to the comptroller, and
+inform the taxing unit that if the information is not provided on or
+before the 30th day after the date the notice is provided, the
+taxing unit will be subject to a civil penalty of $1,000.
+(b)
+If a taxing unit does not report the required
+information as prescribed by Subsection (b), the taxing unit is
+liable to the state for a civil penalty of $1,000.
+(c)
+The attorney general may sue to collect a civil penalty
+imposed under this section.
+(d)
+It is a defense to an action brought under this section
+that the taxing unit provided the required information or documents
+to the extent the information or documents are not exempt from
+disclosure or confidential under Chapter 552.
+SECTION 2.  The comptroller shall create and post on the
+comptroller's Internet website the database required by Section
+403.0248, Government Code, as added by this Act, not later than
+January 1, 2026.
+SECTION 3.  The comptroller is required to implement the
+changes in law made by this Act only if the legislature appropriates
+money specifically for that purpose.  If the legislature does not
+appropriate money specifically for that purpose, the comptroller
+may, but is not required to, implement this Act using other
+appropriations available for that purpose.
+SECTION 4.  This Act takes effect September 1, 2025.

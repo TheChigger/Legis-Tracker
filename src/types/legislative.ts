@@ -85,8 +85,20 @@ export interface Bill {
   fiscalNote?: FiscalNote;
   billAnalysis?: BillAnalysis;
   impactedAgencies: string[];
+  amendedStatutes?: AmendedStatute[];
+  officialTloUrl?: string;
+  officialPdfUrl?: string;
   urgencyLevel: 'Immediate Attention' | 'High Watch' | 'Moderate' | 'Routine';
   filedDateTimestamp: number;
+}
+
+export interface AmendedStatute {
+  codeName: string;
+  codeAbbr: string;
+  chapters: string[];
+  sections: string[];
+  statuteUrl: string;
+  currentLawSnippet?: string;
 }
 
 export interface Legislator {

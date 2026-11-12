@@ -1,0 +1,43 @@
+90(R) HB 139 - Introduced version - Bill Text
+90R3437 CXP-D
+By: González of El Paso
+H.B. No. 139
+A BILL TO BE ENTITLED
+AN ACT
+relating to maximum nonfuel rates certain electric utilities may
+charge residential retail customers.
+BE IT ENACTED BY THE LEGISLATURE OF THE STATE OF TEXAS:
+SECTION 1.  Subchapter E, Chapter 36, Utilities Code, is
+amended by adding Section 36.218 to read as follows:
+Sec.
+36.218.
+MAXIMUM NONFUEL RATES CHARGED BY CERTAIN
+NON-ERCOT UTILITIES TO RESIDENTIAL RETAIL CUSTOMERS. (a) This
+section applies only to an electric utility that operates solely
+outside of ERCOT.
+(b)
+The commission by rule shall adopt a process for setting
+during a base rate proceeding a maximum nonfuel rate that an
+electric utility may charge residential retail customers.
+The rate
+must be equal to the average of the nonfuel rates the utility
+charged that class of customers at times of summer weather-adjusted
+peak demand during the five-year period preceding the year in which
+the base rate proceeding occurs, adjusted for inflation.
+(c)
+Notwithstanding any other provision of this chapter, a
+regulatory authority may approve an adjustment of the maximum
+nonfuel rate in a proceeding other than a base rate proceeding only:
+(1)  for inflation; or
+(2)
+if the regulatory authority determines that the
+rate is unreasonable.
+(d)
+An electric utility shall provide notice to each
+residential retail customer at least 30 days before the date the
+utility anticipates charging the customer a new maximum nonfuel
+rate set under Subsection (b).
+The notice must be provided using
+the customer's preferred method of communication with the electric
+utility.
+SECTION 2.  This Act takes effect September 1, 2027.

@@ -1,0 +1,348 @@
+85(R) SB 4 - Introduced version - Bill Text
+85R3668 SCL/ADM-D
+By: Perry
+S.B. No. 4
+A BILL TO BE ENTITLED
+AN ACT
+relating to the enforcement by certain governmental entities of
+state and federal laws governing immigration and to the duties of
+law enforcement agencies concerning certain arrested persons.
+BE IT ENACTED BY THE LEGISLATURE OF THE STATE OF TEXAS:
+SECTION 1.  Chapter 2, Code of Criminal Procedure, is
+amended by adding Articles 2.251, 2.252, and 2.253 to read as
+follows:
+Art.
+2.251.
+ENFORCEMENT OF FEDERAL IMMIGRATION LAW.
+(a)
+A
+peace officer may not stop a motor vehicle or conduct a search of a
+business or residence solely to enforce a federal law relating to
+immigrants or immigration, including the federal Immigration and
+Nationality Act (8 U.S.C. Section 1101 et seq.), unless the officer
+is acting:
+(1)
+at the request of, and providing assistance to, an
+appropriate federal law enforcement officer; or
+(2)
+under the terms of an agreement between the law
+enforcement agency employing the officer and the federal government
+under which the agency receives delegated authority to enforce
+federal law relating to immigrants or immigration.
+(b)
+A peace officer may arrest an undocumented person only
+if the officer is acting under the authority granted under Article
+2.13.
+Art.
+2.252.
+DUTIES RELATED TO CERTAIN ARRESTED PERSONS.
+(a) If a person is arrested and is unable to provide proof of the
+person's lawful presence in the United States, not later than 48
+hours after the person is arrested and before the person is released
+on bond, a law enforcement agency performing the booking process
+shall:
+(1)
+review any information available from the federal
+Priority Enforcement Program operated by United States Immigration
+and Customs Enforcement or a successor program; and
+(2)
+if information obtained under Subdivision (1)
+reveals that the person is not a citizen or national of the United
+States and is unlawfully present in the United States according to
+the terms of the federal Immigration and Nationality Act (8 U.S.C.
+Section 1101 et seq.):
+(A)
+provide notice of that fact to the judge or
+magistrate authorized to grant or deny the person's release on bail
+under Chapter 17; and
+(B)  record that fact in the person's case file.
+(b)
+A law enforcement agency is not required to perform a
+duty imposed by Subsection (a) with respect to a person who is
+transferred to the custody of the agency by another law enforcement
+agency if the transferring agency performed that duty before
+transferring custody of the person.
+(c)
+A judge or magistrate who receives notice of a person's
+immigration status under this article shall record that status in
+the court record.
+Art.
+2.253.
+DUTIES RELATED TO IMMIGRATION DETAINER. (a) A
+law enforcement agency that has custody of a person subject to an
+immigration detainer issued by United States Immigration and
+Customs Enforcement shall:
+(1)
+provide to the judge or magistrate authorized to
+grant or deny the person's release on bail under Chapter 17 notice
+that the person is subject to an immigration detainer;
+(2)
+record in the person's case file that the person is
+subject to an immigration detainer; and
+(3)
+comply with, honor, and fulfill the requests made
+in the detainer.
+(b)
+A law enforcement agency is not required to perform a
+duty imposed by Subsection (a)(1) or (2) with respect to a person
+who is transferred to the custody of the agency by another law
+enforcement agency if the transferring agency performed that duty
+before transferring custody of the person.
+(c)
+A judge or magistrate who receives notice that a person
+is subject to a detainer under this article shall record that fact
+in the court record, regardless of whether the notice is received
+before or after a judgment in the case.
+SECTION 2.  Chapter 42, Code of Criminal Procedure, is
+amended by adding Article 42.039 to read as follows:
+Art.
+42.039.
+RELEASE INTO FEDERAL CUSTODY. (a) This
+article applies only to a criminal case in which:
+(1)
+the judgment requires the defendant to be confined
+in a secure correctional facility; and
+(2)  the judge:
+(A)
+indicates in the record under Article 2.253
+that the defendant is subject to an immigration detainer; or
+(B)
+otherwise indicates in the record that the
+defendant is subject to a transfer into federal custody.
+(b)
+In a criminal case described by Subsection (a), the
+judge shall, at the time of pronouncement of a sentence of
+confinement, issue an order requiring the secure correctional
+facility in which the defendant is to be confined to reduce the
+defendant's sentence by a period of not more than seven days on the
+facility's determination that the reduction in sentence will
+facilitate the seamless transfer of the defendant into federal
+custody.
+(c)
+If the applicable information described by Subsection
+(a)(2)(A) or (B) is not available at the time sentence is pronounced
+in the case, the judge shall issue the order described by Subsection
+(b) as soon as the information becomes available.
+(d)
+For purposes of Subsection (b), "secure correctional
+facility" has the meaning assigned by Section 1.07, Penal Code.
+SECTION 3.  Subtitle C, Title 11, Local Government Code, is
+amended by adding Chapter 364 to read as follows:
+CHAPTER 364. ENFORCEMENT OF STATE AND FEDERAL IMMIGRATION LAWS
+Sec. 364.001.  DEFINITIONS. In this chapter:
+(1)
+"Immigration detainer"
+means a United States
+Department of Homeland Security Form I-247 or a similar or
+successor form that requests a local entity to maintain temporary
+custody of an alien for the federal government.
+(2)
+"Immigration laws" means the laws of this state or
+federal law relating to immigrants or immigration, including the
+federal Immigration and Nationality Act (8 U.S.C. Section 1101 et
+seq.).
+(3)
+"Lawful detention" means the detention of an
+individual by a local entity for the investigation of a criminal
+offense. The term excludes a detention if the sole reason for the
+detention is that the individual:
+(A)
+is a victim of or witness to a criminal
+offense; or
+(B)  is reporting a criminal offense.
+(4)  "Local entity" means:
+(A)
+the governing body of a municipality, county,
+or special district or authority, subject to Sections 364.002(a)
+and (b);
+(B)
+an officer or employee of or a division,
+department, or other body that is part of a municipality, county, or
+special district or authority, including a sheriff, municipal
+police department, municipal attorney, or county attorney; and
+(C)
+a district attorney or criminal district
+attorney.
+(5)
+"Policy" includes a formal, written rule, order,
+ordinance, or policy and an informal, unwritten policy.
+Sec.
+364.002.
+APPLICABILITY OF CHAPTER. (a) This chapter
+does not apply to a school district or open-enrollment charter
+school. This chapter does not apply to the release of information
+contained in education records of an educational agency or
+institution, except in conformity with the Family Educational
+Rights and Privacy Act of 1974 (20 U.S.C. Section 1232g).
+(b)
+This chapter does not apply to a hospital or hospital
+district created under Subtitle C or D, Title 4, Health and Safety
+Code, or a hospital district created under a general or special law
+authorized by Article IX, Texas Constitution, to the extent that
+the hospital or hospital district is providing access to or
+delivering medical or health care services as required under the
+following applicable federal or state laws:
+(1)  42 U.S.C. Section 1395dd;
+(2)  42 U.S.C. Section 1396b(v);
+(3)  Subchapter C, Chapter 61, Health and Safety Code;
+(4)  Chapter 81, Health and Safety Code; and
+(5)  Section 311.022, Health and Safety Code.
+(c)
+Subsection (b) does not exclude the application of this
+chapter to a commissioned peace officer employed by or commissioned
+by a hospital or hospital district subject to Subsection (b).
+Sec.
+364.003.
+LOCAL GOVERNMENT POLICY REGARDING
+IMMIGRATION ENFORCEMENT. (a) A local entity shall not adopt,
+enforce, or endorse a policy under which the entity prohibits or
+discourages the enforcement of immigration laws.
+(b)
+In compliance with Subsection (a), a local entity shall
+not prohibit or discourage a person who is a commissioned peace
+officer described by Article 2.12, Code of Criminal Procedure, a
+corrections officer, a booking clerk, a magistrate, or a district
+attorney, criminal district attorney, or other prosecuting
+attorney and who is employed by or otherwise under the direction or
+control of the entity from doing any of the following:
+(1)
+inquiring into the immigration status of a person
+under a lawful detention or under arrest;
+(2)
+with respect to information relating to the
+immigration status, lawful or unlawful, of any person under a
+lawful detention or under arrest:
+(A)
+sending the information to or requesting or
+receiving the information from United States Citizenship and
+Immigration Services or United States Immigration and Customs
+Enforcement, including information regarding a person's place of
+birth;
+(B)  maintaining the information; or
+(C)
+exchanging the information with another
+local entity or a federal or state governmental entity;
+(3)
+assisting or cooperating with a federal
+immigration officer as reasonable or necessary, including
+providing enforcement assistance; or
+(4)
+permitting a federal immigration officer to enter
+and conduct enforcement activities at a municipal or county jail to
+enforce federal immigration laws.
+Sec.
+364.004.
+DISCRIMINATION PROHIBITED. A local entity or
+a person employed by or otherwise under the direction or control of
+the entity may not consider race, color, language, or national
+origin while enforcing immigration laws except to the extent
+permitted by the United States Constitution or Texas Constitution.
+Sec.
+364.005.
+COMPLAINT; EQUITABLE RELIEF. (a) Any
+person, including the federal government, may file a complaint with
+the attorney general if the person offers evidence to support an
+allegation that a local entity has adopted, enforced, or endorsed a
+policy under which the entity prohibits or discourages the
+enforcement of immigration laws or that the entity, by consistent
+actions, prohibits or discourages the enforcement of those laws.
+The person must include with the complaint the evidence the person
+has that supports the complaint.
+(b)
+A local entity for which the attorney general has
+received a complaint under Subsection (a) shall comply with a
+document request, including a request for supporting documents,
+from the attorney general related to the complaint.
+(c)
+If the attorney general determines that a complaint
+filed under Subsection (a) against a local entity is valid, the
+attorney general shall, not later than the 10th day after the date
+of the determination, provide written notification to the entity
+that:
+(1)  the complaint has been filed;
+(2)
+the attorney general has determined that the
+complaint is valid;
+(3)
+the attorney general is authorized to file an
+action to enjoin the violation if the entity does not come into
+compliance with the requirements of Section 364.003 on or before
+the 90th day after the date the notification is provided; and
+(4)
+the entity will be denied state grant funds for the
+state fiscal year following the year in which a final judicial
+determination in an action brought under Subsection (e) is made.
+(d)
+Not later than the 30th day after the day a local entity
+receives written notification under Subsection (c), the local
+entity shall provide the attorney general with a copy of:
+(1)
+the entity's written policies related to
+immigration enforcement actions;
+(2)
+each immigration detainer received by the entity
+from the United States Department of Homeland Security; and
+(3)
+each response sent by the entity for a detainer
+described by Subdivision (2).
+(e)
+If the attorney general determines that a complaint
+filed under Subsection (a) against a local entity is valid, the
+attorney general may file a petition for a writ of mandamus or apply
+for other appropriate equitable relief in a district court in
+Travis County or in a county in which the principal office of the
+entity is located to compel the entity that adopts, enforces, or
+endorses a policy under which the local entity prohibits or
+discourages the enforcement of immigration laws or that, by
+consistent actions, prohibits or discourages the enforcement of
+those laws to comply with Section 364.003.
+The attorney general may
+recover reasonable expenses incurred in obtaining relief under this
+subsection, including court costs, reasonable attorney's fees,
+investigative costs, witness fees, and deposition costs.
+(f)
+An appeal of a suit brought under Subsection (e) is
+governed by the procedures for accelerated appeals in civil cases
+under the Texas Rules of Appellate Procedure. The appellate court
+shall render its final order or judgment with the least possible
+delay.
+Sec.
+364.006.
+DENIAL OF STATE GRANT FUNDS. (a) A local
+entity may not receive state grant funds if the entity adopts,
+enforces, or endorses a policy under which the entity prohibits or
+discourages the enforcement of immigration laws or, by consistent
+actions, prohibits or discourages the enforcement of immigration
+laws.
+(b)
+State grant funds for a local entity shall be denied for
+the state fiscal year following the year in which a final judicial
+determination in an action brought under Section 364.005 is made
+that the entity has intentionally prohibited or discouraged the
+enforcement of immigration laws.
+(c)
+The comptroller shall adopt rules to implement this
+section uniformly among the state agencies from which state grant
+funds are distributed to a municipality or county.
+(d)
+A local entity that has not violated Section 364.003 may
+not be denied state grant funds, regardless of whether the entity is
+a part of another entity that is in violation of that section.
+SECTION 4.  Not later than January 1, 2018, each local law
+enforcement agency subject to this Act shall:
+(1)  formalize in writing any unwritten, informal
+policies relating to the enforcement of immigration laws; and
+(2)  update the agency's policies to be consistent with
+this Act and to include:
+(A)  provisions prohibiting an agency officer or
+employee from preventing agency personnel from taking immigration
+enforcement actions described by Section 364.003, Local Government
+Code, as added by this Act; and
+(B)  provisions requiring each agency officer or
+employee to comply with Articles 2.251, 2.252, and 2.253, Code of
+Criminal Procedure, as added by this Act, if applicable.
+SECTION 5.  This Act takes effect immediately if it receives
+a vote of two-thirds of all the members elected to each house, as
+provided by Section 39, Article III, Texas Constitution.  If this
+Act does not receive the vote necessary for immediate effect, this
+Act takes effect September 1, 2017.

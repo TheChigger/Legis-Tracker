@@ -1,0 +1,144 @@
+90(R) HB 115 - Introduced version - Bill Text
+90R3693 RDS-F
+By: Oliverson
+H.B. No. 115
+A BILL TO BE ENTITLED
+AN ACT
+relating to managed care plan coverage of a health care service that
+was referred by certain primary care providers; creating an
+administrative penalty.
+BE IT ENACTED BY THE LEGISLATURE OF THE STATE OF TEXAS:
+SECTION 1.  Subtitle C, Title 8, Insurance Code, is amended
+by adding Chapter 1276 to read as follows:
+CHAPTER 1276. HEALTH CARE SERVICES REQUIRING REFERRAL
+Sec. 1276.001.  DEFINITIONS. In this chapter:
+(1)
+"Advanced practice registered nurse" means an
+individual licensed by the Texas Board of Nursing as a registered
+nurse and recognized by that board as an advanced practice
+registered nurse.
+(2)
+"Direct patient care" and "direct patient care
+agreement" have the meanings assigned by Section 117.001,
+Occupations Code.
+(3)
+"Health benefit plan" means a plan that provides
+benefits for medical or surgical expenses incurred as a result of a
+health condition, accident, or sickness, including an individual,
+group, blanket, or franchise insurance policy.
+(4)
+"Health care service" has the meaning assigned by
+Section 117.001, Occupations Code.
+(5)
+"Managed care plan" means a health benefit plan
+under which health care services or supplies are provided to
+enrollees through contracts with health care providers and that
+requires enrollees to use contracting providers or that provides a
+different level of coverage for enrollees who use contracting
+providers.
+(6)
+"Physician" and "physician assistant" have the
+meanings assigned by Section 1451.001.
+(7)
+"Primary care provider" means a physician,
+advanced practice registered nurse, or physician assistant who is
+trained to serve as the first point of contact with a patient and to
+provide continuous comprehensive health care services to a patient.
+The term includes a physician who practices family medicine,
+general practice, internal medicine, obstetrics, gynecology, or
+pediatrics.
+Sec.
+1276.002.
+APPLICABILITY OF CHAPTER. (a) This chapter
+applies to a managed care plan issued by a health maintenance
+organization operating under Chapter 843 or an insurer offering a
+preferred provider benefit plan under Chapter 1301.
+(b)  Notwithstanding any other law, this chapter applies to:
+(1)  a basic coverage plan under Chapter 1551;
+(2)  a basic plan under Chapter 1575;
+(3)
+a primary care coverage plan under Chapter 1579;
+and
+(4)
+a plan providing basic coverage under Chapter
+1601.
+Sec. 1276.003.  EXCLUSIONS. This chapter does not apply to:
+(1)
+a managed care plan that provides coverage only
+for:
+(A)  a specified disease;
+(B)  accidental death or dismemberment; or
+(C)
+lost wages for a period during which an
+employee is absent from work due to sickness or injury;
+(2)  credit insurance;
+(3)  dental or vision benefits;
+(4)
+benefits for long-term care, home health care,
+community-based care, or benefits for a combination of the types of
+care described by this subdivision; or
+(5)
+a Medicare supplemental policy as defined by
+Section 1882(g)(1), Social Security Act (42 U.S.C. Section
+1395ss(g)(1)).
+Sec.
+1276.004.
+PROHIBITED PRACTICES RELATED TO REFERRAL BY
+PRIMARY CARE PROVIDER. (a) A managed care plan issuer or
+administrator may not, solely on the basis that the referral for a
+covered health care service was made by an out-of-network primary
+care provider:
+(1)  deny coverage;
+(2)
+apply a deductible, coinsurance, copayment, or
+other cost-sharing requirement that exceeds the deductible,
+coinsurance, copayment, or other cost-sharing requirement
+applicable to the service if the referral had been made by a
+participating provider;
+(3)  assess a facility or administrative fee; or
+(4)  assess any other penalty.
+(b)
+A managed care plan issuer or administrator may not
+refuse to recognize a referral for a covered health care service on
+the basis that the referral was made by a primary care provider
+that:
+(1)  is an out-of-network provider;
+(2)
+provides direct patient care under a direct
+patient care agreement; or
+(3)
+is not credentialed by the issuer or administrator
+if the provider is authorized to provide primary care services in
+this state and is acting within the scope of the provider's license,
+certificate, or other authorization.
+Sec.
+1276.005.
+ENFORCEMENT. (a) In addition to other
+enforcement authority under Subtitle B, Title 2, the commissioner
+may impose an additional administrative penalty in an amount not to
+exceed $5,000 against a managed care plan issuer or administrator
+that violates this chapter. The commissioner shall impose the
+additional administrative penalty in accordance with Chapter 84.
+(b)
+A violation of Section 1276.004(a)(3) or (4) is an
+unfair method of competition or an unfair or deceptive act or
+practice in the business of insurance under Chapter 541 and is
+subject to enforcement under that chapter.
+(c)  For purposes of enforcing this chapter:
+(1)
+each denial of coverage, application of an
+additional deductible, coinsurance, copayment, or other
+cost-sharing requirement, or assessment of an additional facility
+or administrative fee or other penalty in violation of this chapter
+is considered a separate violation; and
+(2)
+each day a violation described by Subdivision (1)
+continues is considered a separate violation.
+Sec.
+1276.006.
+RULES. The commissioner may adopt rules
+necessary to implement this chapter.
+SECTION 2.  The changes in law made by this Act apply only to
+a managed care plan delivered, issued for delivery, or renewed on or
+after the effective date of this Act.
+SECTION 3.  This Act takes effect September 1, 2027.

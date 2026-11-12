@@ -1,0 +1,35 @@
+90(R) HB 124 - Introduced version - Bill Text
+90R469 KRM-D
+By: Garcia of Dallas
+H.B. No. 124
+A BILL TO BE ENTITLED
+AN ACT
+relating to the remote participation of certain persons in a
+proceeding for the issuance or modification of a protective order.
+BE IT ENACTED BY THE LEGISLATURE OF THE STATE OF TEXAS:
+SECTION 1.  Chapter 84, Family Code, is amended by adding
+Section 84.007 to read as follows:
+Sec.
+84.007.
+REMOTE PARTICIPATION BY APPLICANT OR WITNESS.
+On written request by an applicant or a witness who is to be
+protected by a proposed protective order, the court shall provide a
+method by which the applicant or witness may give testimony or
+otherwise participate in the hearing on the application for the
+protective order remotely, unless the court finds there is good
+cause to deny the request to participate remotely.
+SECTION 2.  Chapter 87, Family Code, is amended by adding
+Section 87.005 to read as follows:
+Sec.
+87.005.
+REMOTE PARTICIPATION BY APPLICANT OR WITNESS.
+On written request by an applicant or a witness who is protected by
+a protective order, the court shall provide a method by which the
+applicant or witness may give testimony or otherwise participate in
+the hearing on the motion for modification of the protective order
+remotely, unless the court finds there is good cause to deny the
+request to participate remotely.
+SECTION 3.  The change in law made by this Act applies to a
+proceeding under Subtitle B, Title 4, Family Code, that is pending
+on or filed on or after the effective date of this Act.
+SECTION 4.  This Act takes effect September 1, 2027.

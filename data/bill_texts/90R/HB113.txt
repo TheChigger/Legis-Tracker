@@ -1,0 +1,562 @@
+90(R) HB 113 - Introduced version - Bill Text
+90R3217 LRM-F
+By: Lalani
+H.B. No. 113
+A BILL TO BE ENTITLED
+AN ACT
+relating to a "Texas solution" to reforming and addressing issues
+related to the Medicaid program, including the creation of an
+alternative program designed to ensure health benefit plan coverage
+to certain low-income individuals through the private marketplace;
+requiring a fee.
+BE IT ENACTED BY THE LEGISLATURE OF THE STATE OF TEXAS:
+ARTICLE 1.  BLOCK GRANT FUNDING SYSTEM FOR STATE MEDICAID PROGRAM
+SECTION 1.01.  Subtitle I, Title 4, Government Code, is
+amended by adding Chapter 532A to read as follows:
+CHAPTER 532A.
+BLOCK GRANT FUNDING SYSTEM FOR STATE MEDICAID
+PROGRAM
+SUBCHAPTER A. GENERAL PROVISIONS
+Sec.
+532A.0001.
+DEFINITIONS. Notwithstanding Section
+521.0001, in this chapter:
+(1)
+"Health benefit exchange" means an American Health
+Benefit Exchange administered by the federal government or an
+exchange created under Section 1311(b) of the Patient Protection
+and Affordable Care Act (42 U.S.C. Section 18031(b)).
+(2)
+"Medicaid program" means the medical assistance
+program established and operated under Title XIX, Social Security
+Act (42 U.S.C. Section 1396 et seq.).
+(3)
+"State Medicaid program" means the medical
+assistance program provided by this state under the Medicaid
+program.
+Sec.
+532A.0002.
+FEDERAL AUTHORIZATION TO REFORM MEDICAID
+REQUIRED. If the federal government establishes, through
+conversion or otherwise, a block grant funding system for the
+Medicaid program or otherwise authorizes the state Medicaid program
+to operate under a block grant funding system, including under a
+Medicaid program waiver, the commission, in cooperation with
+applicable health and human services agencies, shall, subject to
+Section 532A.0003, administer and operate the state Medicaid
+program in accordance with this chapter.
+Sec.
+532A.0003.
+CONFLICT WITH OTHER LAW. To the extent of a
+conflict between a provision of this chapter and:
+(1)
+another provision of state law, the provision of
+this chapter controls, subject to Section 545A.0002(b); and
+(2)
+a provision of federal law or any authorization
+described under Section 532A.0002, the federal law or authorization
+controls.
+Sec.
+532A.0004.
+ESTABLISHMENT OF REFORMED STATE MEDICAID
+PROGRAM. The commission shall establish a state Medicaid program
+that provides benefits under a risk-based Medicaid managed care
+model.
+Sec.
+532A.0005.
+RULES. The executive commissioner shall
+adopt rules necessary to implement this chapter.
+SUBCHAPTER B.
+ACUTE CARE
+Sec.
+532A.0051.
+ELIGIBILITY FOR MEDICAID ACUTE CARE. (a)
+An individual is eligible to receive acute care benefits under the
+state Medicaid program if the individual:
+(1)
+has a household income at or below 100 percent of
+the federal poverty level;
+(2)  is younger than 19 years of age and:
+(A)
+is receiving Supplemental Security Income
+(SSI) under 42 U.S.C. Section 1381 et seq.; or
+(B)
+is in foster care or resides in another
+residential care setting under the conservatorship of the
+Department of Family and Protective Services; or
+(3)
+meets the eligibility requirements that were in
+effect in this state on August 31, 2027.
+(b)
+The commission shall provide acute care benefits under
+the state Medicaid program to each individual eligible under this
+section through the most cost-effective means, as determined by the
+commission.
+(c)
+If an individual is not eligible for the state Medicaid
+program under Subsection (a), the commission shall refer the
+individual to the program established under Chapter 545A that helps
+connect eligible residents with health benefit plan coverage
+through private market solutions, a health benefit exchange, or any
+other resource the commission determines appropriate.
+Sec.
+532A.0052.
+MEDICAID SLIDING SCALE SUBSIDIES. (a)
+An
+individual who is eligible for the state Medicaid program under
+Section 532A.0051 may receive a Medicaid sliding scale subsidy to
+purchase a health benefit plan from an authorized health benefit
+plan issuer.
+(b)
+A sliding scale subsidy provided to an individual under
+this section must:
+(1)  be based on:
+(A)  the average premium in the market; and
+(B)
+a realistic assessment of the individual's
+ability to pay a portion of the premium; and
+(2)
+include an enhancement for individuals who choose
+a high deductible health plan with a health savings account.
+(c)
+The commission shall ensure that counselors are made
+available to individuals receiving a subsidy to advise the
+individuals on selecting a health benefit plan that meets the
+individuals' needs.
+(d)
+An individual receiving a subsidy under this section is
+responsible for paying:
+(1)
+any difference between the premium costs
+associated with the purchase of a health benefit plan and the amount
+of the individual's subsidy under this section; and
+(2)
+any copayments associated with the health benefit
+plan, except to the extent the individual receives an additional
+subsidy under Section 532A.0053 to pay the copayments.
+(e)
+If the amount of a subsidy received by an individual
+under this section exceeds the premium costs associated with the
+individual's purchase of a health benefit plan, the individual may
+deposit the excess amount in a health savings account that may be
+used only in the manner described by Section 532A.0054(b).
+Sec.
+532A.0053.
+ADDITIONAL COST-SHARING SUBSIDIES. In
+addition to providing a subsidy to an individual under Section
+532A.0052, the commission shall provide additional subsidies for
+coinsurance payments, copayments, deductibles, and other
+cost-sharing requirements associated with the individual's health
+benefit plan.
+The commission shall provide the additional
+subsidies on a sliding scale based on income.
+Sec.
+532A.0054.
+DELIVERY OF SUBSIDIES; HEALTH SAVINGS
+ACCOUNTS.
+(a)
+The commission shall determine the most appropriate
+manner for delivering and administering subsidies provided under
+Sections 532A.0052 and 532A.0053. In determining the most
+appropriate manner, the commission shall consider depositing
+subsidy amounts for an individual in a health savings account
+established for that individual.
+(b)
+A health savings account established under this section
+may be used only to:
+(1)
+pay health benefit plan premiums and cost-sharing
+amounts; and
+(2)
+if appropriate, purchase health care-related
+goods and services.
+Sec.
+532A.0055.
+MEDICAID HEALTH BENEFIT PLAN ISSUERS AND
+MINIMUM COVERAGE. The commission shall allow any health benefit
+plan issuer authorized to write health benefit plans in this state
+to participate in the state Medicaid program.
+The commission in
+consultation with the commissioner of insurance shall establish
+minimum coverage requirements for a health benefit plan to be
+eligible for purchase under the state Medicaid program, subject to
+the requirements specified by this chapter.
+Sec.
+532A.0056.
+REINSURANCE FOR PARTICIPATING HEALTH
+BENEFIT PLAN ISSUERS.
+(a)
+The commission in consultation with the
+commissioner of insurance shall study a reinsurance program to
+reinsure participating health benefit plan issuers.
+(b)
+In examining options for a reinsurance program, the
+commission and the commissioner of insurance shall consider a plan
+design under which:
+(1)
+a participating health benefit plan is not charged
+a premium for the reinsurance; and
+(2)
+the health benefit plan issuer retains risk on a
+sliding scale.
+SUBCHAPTER C. LONG-TERM SERVICES AND SUPPORTS
+Sec.
+532A.0101.
+PLAN TO REFORM DELIVERY OF LONG-TERM
+SERVICES AND SUPPORTS.
+The commission shall develop a
+comprehensive plan to reform the delivery of long-term services and
+supports that is designed to achieve the following objectives under
+the state Medicaid program or any other program created as an
+alternative to the state Medicaid program:
+(1)  encourage consumer direction;
+(2)  simplify and streamline the provision of services;
+(3)
+provide flexibility to design benefits packages
+that meet the needs of individuals receiving long-term services and
+supports under the program;
+(4)
+improve the cost-effectiveness and sustainability
+of the provision of long-term services and supports;
+(5)  reduce reliance on institutional settings; and
+(6)
+encourage cost-sharing by family members when
+appropriate.
+ARTICLE 2. IMMEDIATE REFORM: PROGRAM TO ENSURE HEALTH BENEFIT
+COVERAGE FOR CERTAIN INDIVIDUALS THROUGH PRIVATE MARKETPLACE
+SECTION 2.01.  Subtitle I, Title 4, Government Code, is
+amended by adding Chapter 545A to read as follows:
+CHAPTER 545A.
+PROGRAM TO ENSURE HEALTH BENEFIT PLAN COVERAGE FOR
+CERTAIN INDIVIDUALS THROUGH PRIVATE MARKET SOLUTIONS
+SUBCHAPTER A. GENERAL PROVISIONS
+Sec.
+545A.0001.
+DEFINITION. In this chapter, "state
+Medicaid program" has the meaning assigned by Section 532A.0001.
+Sec.
+545A.0002.
+CONFLICT WITH OTHER LAW. (a)
+Except as
+provided by Subsection (b), to the extent of a conflict between a
+provision of this chapter and:
+(1)
+another provision of state law, the provision of
+this chapter controls; and
+(2)
+a provision of federal law or any authorization
+described under Subchapter B, the federal law or authorization
+controls.
+(b)
+The program operated under this chapter is in addition
+to the state Medicaid program operated under Chapter 32, Human
+Resources Code, or under a block grant funding system under Chapter
+532A.
+Sec.
+545A.0003.
+PROGRAM FOR HEALTH BENEFIT PLAN COVERAGE
+THROUGH PRIVATE MARKET SOLUTIONS. Subject to the requirements of
+this chapter, the commission in consultation with the commissioner
+of insurance shall develop and implement a program that helps
+connect certain low-income residents of this state with health
+benefit plan coverage through private market solutions.
+Sec.
+545A.0004.
+NOT AN ENTITLEMENT. This chapter does not
+establish an entitlement to assistance in obtaining health benefit
+plan coverage.
+Sec.
+545A.0005.
+RULES. The executive commissioner shall
+adopt rules necessary to implement this chapter.
+SUBCHAPTER B.
+FEDERAL AUTHORIZATION
+Sec.
+545A.0051.
+FEDERAL AUTHORIZATION FOR FLEXIBILITY TO
+ESTABLISH PROGRAM. (a)
+The commission in consultation with the
+commissioner of insurance shall negotiate with the United States
+secretary of health and human services, the Centers for Medicare
+and Medicaid Services, and other appropriate persons for purposes
+of seeking a waiver or other authorization necessary to obtain the
+flexibility to use federal matching funds to help provide, in
+accordance with Subchapter C, health benefit plan coverage to
+certain low-income individuals through private market solutions.
+(b)  Any agreement reached under this section must:
+(1)
+create a program that is made cost neutral to this
+state by:
+(A)  leveraging premium tax revenues; and
+(B)
+achieving cost savings through offsets to
+general revenue health care costs or the implementation of other
+cost savings mechanisms;
+(2)
+create more efficient health benefit plan coverage
+options for eligible individuals through:
+(A)
+program changes that may be made without the
+need for additional federal approval; and
+(B)
+program changes that require additional
+federal approval;
+(3)
+require the commission to achieve efficiency and
+reduce unnecessary utilization, including duplication, of health
+care services;
+(4)  be designed with the goals of:
+(A)  relieving local tax burdens;
+(B)
+reducing general revenue reliance so as to
+make general revenue available for other state priorities; and
+(C)
+minimizing the impact of any federal health
+care laws on Texas-based businesses; and
+(5)
+afford this state the opportunity to develop a
+state-specific solution with benefits that specifically meet the
+unique needs of this state's population.
+(c)  An agreement reached under this section may be:
+(1)  limited in duration; and
+(2)
+contingent on continued funding by the federal
+government.
+SUBCHAPTER C.
+PROGRAM REQUIREMENTS
+Sec.
+545A.0101.
+ENROLLMENT ELIGIBILITY. (a)
+Subject to
+Subsection (b), an individual may be eligible to enroll in a program
+designed and established under this chapter if the person:
+(1)  is younger than 65 years of age;
+(2)
+has a household income at or below 133 percent of
+the federal poverty level; and
+(3)
+is not otherwise eligible to receive benefits
+under the state Medicaid program, including through a program
+operated under Chapter 32, Human Resources Code, or under Chapter
+532A through a block grant funding system or a waiver, other than a
+waiver granted under this chapter, to the program.
+(b)
+The executive commissioner may modify or further define
+the eligibility requirements of this section if the commission
+determines it necessary to reach an agreement under Subchapter B.
+Sec.
+545A.0102.
+MINIMUM PROGRAM REQUIREMENTS. A program
+designed and established under this chapter must:
+(1)
+if cost-effective for this state, provide premium
+assistance to purchase health benefit plan coverage in the private
+market, including health benefit plan coverage offered through a
+managed care delivery model;
+(2)
+provide enrollees with access to health benefits,
+including benefits provided through a managed care delivery model,
+that:
+(A)  are tailored to the enrollees;
+(B)
+provide levels of coverage that are
+customized to meet health care needs of individuals within defined
+categories of the enrolled population; and
+(C)
+emphasize personal responsibility and
+accountability through flexible and meaningful cost-sharing
+requirements and wellness initiatives, including through
+incentives for compliance with health, wellness, and treatment
+strategies and disincentives for noncompliance;
+(3)
+include pay-for-performance initiatives for
+private health benefit plan issuers that participate in the
+program;
+(4)
+use technology to maximize the efficiency with
+which the commission and any health benefit plan issuer, health
+care provider, or managed care organization participating in the
+program manage enrollee participation;
+(5)
+allow recipients under the state Medicaid program
+to enroll in the program to receive premium assistance as an
+alternative to the state Medicaid program;
+(6)
+encourage eligible individuals to enroll in other
+private or employer-sponsored health benefit plan coverage, if
+available and appropriate;
+(7)
+encourage the utilization of health care services
+in the most appropriate low-cost settings; and
+(8)
+establish health savings accounts for enrollees,
+as appropriate.
+SECTION 2.02.  The Health and Human Services Commission in
+consultation with the commissioner of insurance and the Medicaid
+Reform Task Force established under Article 4 of this Act shall
+actively develop a proposal for the authorization from the
+appropriate federal entity as required by Subchapter B, Chapter
+545A, Government Code, as added by this article. As soon as
+possible after the effective date of this Act, the Health and Human
+Services Commission shall request and actively pursue obtaining the
+authorization from the appropriate federal entity.
+ARTICLE 3.  MEDICAID: INCREMENTAL REFORM
+SECTION 3.01.  Subchapter B, Chapter 546, Government Code,
+is amended by adding Section 546.0059 to read as follows:
+Sec.
+546.0059.
+CUSTOMIZED BENEFITS PACKAGE. The commission
+shall, for individuals receiving home and community-based services
+and supports instead of institutional long-term services and
+supports, develop and implement customized benefits packages that
+are designed to prevent the overutilization of services.
+Customized benefits packages under this section must be based on an
+individualized needs assessment administered at a single point of
+entry.
+SECTION 3.02.  Subchapter B, Chapter 32, Human Resources
+Code, is amended by adding Sections 32.0501, 32.0642, and 32.078 to
+read as follows:
+Sec.
+32.0501.
+DUAL ELIGIBLE INTEGRATED CARE DEMONSTRATION
+PROJECT. (a)
+In this section:
+(1)
+"ICF-IID" has the meaning assigned by Section
+531.002, Health and Safety Code.
+(2)
+"Nursing facility" has the meaning assigned by
+Section 546.0351, Government Code.
+(3)
+"State supported living center" has the meaning
+assigned by Section 531.002, Health and Safety Code.
+(b)
+Subject to Subsection (c), the commission shall
+establish a dual eligible integrated care demonstration project
+that would allow appropriate individuals described by Section
+32.050(a), as determined by the commission, to receive long-term
+services and supports under both the medical assistance program and
+the Medicare program through a single managed care plan.
+(c)
+An individual who is a resident of a nursing facility,
+ICF-IID, or state supported living center is exempt from
+participation in the demonstration project.
+Sec.
+32.0642.
+PARENTAL FEE PROGRAM. (a)
+To the extent
+allowed by federal law, the commission shall establish a parental
+fee program that requires the parent or legal guardian of a child
+receiving institutional long-term services and supports or home and
+community-based services and supports under the medical assistance
+program established under this chapter to pay a fee that:
+(1)
+correlates with the services and supports
+provided; and
+(2)
+takes into consideration the child's household
+income.
+(b)
+Failure to pay a fee under this section may not affect a
+child's eligibility for benefits under the medical assistance
+program.
+(c)
+The executive commissioner shall adopt rules necessary
+to implement this section.
+Sec.
+32.078.
+HOUSING BENEFITS FOR CERTAIN RECIPIENTS. To
+the extent allowed by federal law, the commission shall provide
+housing payment assistance for recipients receiving home and
+community-based services and supports under the medical assistance
+program established under this chapter.
+SECTION 3.03.  (a)  The Health and Human Services Commission
+shall conduct a study to examine the estate recovery program
+implemented by this state under 42 U.S.C. Section 1396p(b)(1) and
+determine options the state has to improve recovery under and
+increase the efficacy of the program.
+(b)  Not later than December 1, 2028, the commission shall
+submit a written report containing the findings of the study
+conducted under this section together with the commission's
+recommendations to the governor, the lieutenant governor, and the
+standing committees of the senate and house of representatives
+having primary jurisdiction over Medicaid.
+SECTION 3.04.  (a)  The Health and Human Services Commission
+shall conduct a study on imposing alternative income and asset
+limits for purposes of determining eligibility for long-term
+services and supports under the medical assistance program under
+Chapter 32, Human Resources Code. The commission shall consider:
+(1)  imposing greater restrictions on exempt assets;
+(2)  limiting the amount of income that an individual
+may transfer into a qualified trust under 42 U.S.C. Section
+1396p(d)(4)(B) to an amount equal to the average cost of nursing
+home care; and
+(3)  reducing the income eligibility limit to qualify
+for Medicaid institutional long-term services and supports or home
+and community-based waiver services under the medical assistance
+program under Chapter 32, Human Resources Code.
+(b)  Not later than December 1, 2028, the commission shall
+submit a written report containing the findings of the study
+conducted under this section together with the commission's
+recommendations to the governor, the lieutenant governor, and the
+standing committees of the senate and house of representatives
+having primary jurisdiction over Medicaid.
+ARTICLE 4. MEDICAID REFORM TASK FORCE
+SECTION 4.01.  (a)  In this section:
+(1)  "Commission" means the Health and Human Services
+Commission.
+(2)  "Medicaid program" and "state Medicaid program"
+have the meanings assigned by Section 532A.0001, Government Code,
+as added by this Act.
+(3)  "Task force" means the Medicaid Reform Task Force
+established under this section.
+(b)  The Medicaid Reform Task Force is established for
+purposes of advising the commission in designing a state Medicaid
+program and a program for ensuring health benefit plan coverage for
+low-income individuals that are:
+(1)  consistent with Articles 2 and 3 of this Act; and
+(2)  if the federal government establishes a block
+grant funding system in accordance with Section 532A.0002,
+Government Code, as added by this Act, consistent with Article 1 of
+this Act.
+(c)  The task force consists of 12 members appointed as
+follows:
+(1)  one member appointed by the governor;
+(2)  two members of the senate appointed by the
+lieutenant governor;
+(3)  two members of the house of representatives
+appointed by the speaker of the house of representatives;
+(4)  one member of the Senate Committee on Finance,
+appointed by the presiding officer;
+(5)  one member of the House Appropriations Committee,
+appointed by the presiding officer;
+(6)  one member of the Senate Committee on Health and
+Human Services, appointed by the presiding officer;
+(7)  one member of the House Public Health Committee,
+appointed by the presiding officer;
+(8)  the executive commissioner of the commission or
+the executive commissioner's designee;
+(9)  the commissioner of insurance or the
+commissioner's designee to represent the Texas Department of
+Insurance; and
+(10)  the director of the Legislative Budget Board or
+the director's designee.
+(d)  The lieutenant governor and the speaker of the house of
+representatives shall each appoint a member of the task force to act
+as co-presiding officers.
+(e)  A member of the task force serves without compensation.
+(f)  Not later than January 1, 2028, the appropriate
+appointing officers shall appoint the members of the task force.
+(g)  Not later than December 1, 2028, the task force shall
+submit a report to the legislature regarding its activities under
+this section.
+(h)  This section expires September 1, 2029.
+ARTICLE 5.  FEDERAL AUTHORIZATION AND EFFECTIVE DATE
+SECTION 5.01.  Subject to Section 2.02 of this Act, if before
+implementing any provision of this Act a state agency determines
+that a waiver or authorization from a federal agency is necessary
+for implementation of that provision, the agency affected by the
+provision shall request the waiver or authorization and may delay
+implementing that provision until the waiver or authorization is
+granted.
+SECTION 5.02.  This Act takes effect September 1, 2027.

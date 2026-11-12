@@ -1,0 +1,187 @@
+90(R) HB 159 - Introduced version - Bill Text
+90R793 JDK-D
+By: Ward Johnson
+H.B. No. 159
+A BILL TO BE ENTITLED
+AN ACT
+relating to the release of an inmate on medically recommended
+intensive supervision.
+BE IT ENACTED BY THE LEGISLATURE OF THE STATE OF TEXAS:
+SECTION 1.  Section 508.146, Government Code, is amended by
+amending Subsections (a), (a-1), (b), (e), (f), and (g) and adding
+Subsection (b-1) to read as follows:
+(a)
+Except as provided by
+[
+Subject to
+] Subsection (b), an
+inmate, other than an inmate who is serving a sentence of death or
+life without parole or an inmate who is not a citizen of the United
+States, as defined by federal law,
+shall
+[
+may
+] be released on
+medically recommended intensive supervision on a date designated by
+a parole panel described by Subsection (e) if:
+(1)  the Texas Correctional Office on Offenders with
+Medical or Mental Impairments, in cooperation with the Correctional
+Managed Health Care Committee, identifies the inmate as:
+(A)  being
+50 years of age or older
+[
+elderly
+],
+regardless of whether the inmate has a condition described in
+Paragraphs (B)-(H);
+(B)  being terminally ill;
+(C)  having a mental illness;
+(D)  having an intellectual disability or a
+physical disability;
+(E)  having a condition requiring long-term care;
+(F)  being in a persistent vegetative state;
+(G)  having an organic brain syndrome with
+significant to total mobility impairment; or
+(H)  having another eligible medical condition as
+prescribed by board rule;
+and
+(2)  [
+the parole panel determines that, based on the
+inmate's condition and a medical evaluation, the inmate does not
+constitute a threat to public safety; and
+]
+[
+(3)
+]  the inmate's medically recommended intensive
+supervision plan under Subsection (a-1) is approved by the Texas
+Correctional Office on Offenders with Medical or Mental
+Impairments.
+(a-1)  The Texas Correctional Office on Offenders with
+Medical or Mental Impairments, in cooperation with the division,
+shall prepare for an inmate who is
+eligible
+[
+approved
+] for release
+under Subsection (a) a medically recommended intensive supervision
+plan that requires the inmate to submit to
+appropriate supervision
+under the least restrictive conditions necessary
+[
+electronic
+monitoring, places the inmate on super-intensive supervision, or
+otherwise ensures appropriate supervision of the inmate
+].
+(b)
+A parole panel may not release an inmate on medically
+recommended intensive supervision under Subsection (a) if the panel
+finds by clear and convincing evidence that the inmate poses a risk
+to public safety that cannot be mitigated while under the
+supervision of the division. A parole panel acting under this
+subsection may not deny an inmate's release on medically
+recommended intensive supervision solely on the basis of:
+(1)
+the nature of the offense for which the inmate is
+serving the sentence; or
+(2)  the inmate's criminal history.
+(b-1)
+Not later than the 30th day after the date a parole
+panel denies an inmate's release on medically recommended intensive
+supervision under Subsection (b), the panel shall:
+(1)
+produce a written statement explaining the reasons
+for the panel's finding that the inmate poses a risk to public
+safety that cannot be mitigated while under the supervision of the
+division;
+(2)  provide a copy of the statement to the inmate; and
+(3)
+include a copy of the statement in the inmate's
+file
+[
+In addition to the requirements of Subsection (a), the
+following inmates may be released on medically recommended
+intensive supervision under that subsection only if the inmates are
+identified under Subsection (a)(1) as:
+[
+(1)
+having a condition described by Subsection
+(a)(1)(B) or (E), if the inmate has an instant offense that is
+described in Article 42A.054, Code of Criminal Procedure; or
+[
+(2)
+being in or having a condition described by
+Subsection (a)(1)(F) or (G), if the inmate has a reportable
+conviction or adjudication under Chapter 62, Code of Criminal
+Procedure
+].
+(e)  Parole panels composed of board members and parole
+commissioners appointed to the panel by the presiding officer may
+make determinations regarding the release of inmates on medically
+recommended intensive supervision under Subsection (a) or of
+inmates released pending deportation under Subsection (f). If the
+Texas Correctional Office on Offenders with Medical or Mental
+Impairments identifies an inmate as a candidate for release under
+the guidelines established by Subsection (a)(1)[
+, (b),
+] or (f)(1),
+as applicable, the office shall present to a parole panel described
+by this subsection relevant information concerning the inmate and
+the inmate's potential for release under this section.
+(f)  An inmate who is not a citizen of the United States, as
+defined by federal law,
+other than an inmate
+who is
+serving
+[
+not
+under
+] a sentence of death or life without parole, [
+and who does not
+have a reportable conviction or adjudication under Chapter 62, Code
+of Criminal Procedure, or an instant offense described in Article
+42A.054, Code of Criminal Procedure,
+] may be released to
+immigration authorities pending deportation on a date designated by
+a parole panel described by Subsection (e) if:
+(1)  the Texas Correctional Office on Offenders with
+Medical or Mental Impairments, in cooperation with the Correctional
+Managed Health Care Committee, identifies the inmate as being in or
+having a condition described by Subsection (a)(1); and
+(2)  the parole panel determines that on release the
+inmate would be deported to another country and that the inmate does
+not constitute a threat to public safety in the other country or
+this country and is unlikely to reenter this country illegally.
+(g)  The board shall adopt rules to administer this section.
+The rules must:
+(1)  specify the procedures for evaluating the
+prognosis of inmates who are eligible for medically recommended
+intensive supervision under Subsection (a) because of a qualifying
+medical condition;
+(2)  specify the factors, other than an inmate's
+condition, that are relevant or statutorily required to release an
+inmate on medically recommended intensive supervision; [
+and
+]
+(3)
+define for purposes of Subsection (b) what
+constitutes a risk to public safety that cannot be mitigated while
+under the supervision of the division and specify the factors that a
+parole panel acting under that subsection must consider when
+determining whether an inmate poses a risk to public safety that
+cannot be mitigated; and
+(4)
+define
+for purposes of Subsection (f)
+what
+constitutes a threat to public safety [
+for purposes of Subsections
+(a)(2) and (f)
+] and specify the factors that a parole panel
+acting
+under that subsection
+[
+described by Subsection (e)
+] must consider
+when determining whether an inmate constitutes a threat to public
+safety.
+SECTION 2.  This Act takes effect September 1, 2027.

@@ -1,0 +1,45 @@
+90(R) HB 142 - Introduced version - Bill Text
+90R5309 PRL-D
+By: Plesa
+H.B. No. 142
+A BILL TO BE ENTITLED
+AN ACT
+relating to the dissemination of certain school district ad valorem
+tax-related information.
+BE IT ENACTED BY THE LEGISLATURE OF THE STATE OF TEXAS:
+SECTION 1.  Section 26.17, Tax Code, is amended by adding
+Subsection (b-1) to read as follows:
+(b-1)
+This subsection applies only to property that is
+located in one or more school districts that have a local revenue
+level in excess of entitlement as specified by Section 48.257,
+Education Code, and that, for the school year beginning in the
+current tax year, have taken measures to reduce the district's
+local revenue level in accordance with Section 49.002, Education
+Code. In addition to the information required by Subsection (b) of
+this section, the database must include, with respect to each
+property to which this subsection applies that is listed on the
+appraisal roll for the appraisal district, the following
+information, if applicable, for each school district in which the
+property is located:
+(1)
+the estimated percentage of the taxes for
+maintenance and operations imposed by the district for the current
+tax year that the district is required to pay under the agreement
+for the school year beginning in the current tax year to purchase
+average daily attendance credits;
+(2)
+the estimated percentage of the taxes for
+maintenance and operations imposed by the district for the current
+tax year that the district is not required to pay under the
+agreement for the school year beginning in the current tax year to
+purchase average daily attendance credits; and
+(3)  the following statement:
+"For the current tax year, (name of school district) is
+estimated to pay (percentage described by Subdivision (1) for
+applicable school district) of local property tax collections to
+the state as recaptured local taxes and (percentage described by
+Subdivision (2) for applicable school district) is estimated to
+remain in (name of school district) for the maintenance and
+operations of the district.".
+SECTION 2.  This Act takes effect January 1, 2028.

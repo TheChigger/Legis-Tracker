@@ -1,0 +1,63 @@
+90(R) HB 125 - Introduced version - Bill Text
+90R1103 RDR-F
+By: Metcalf
+H.B. No. 125
+A BILL TO BE ENTITLED
+AN ACT
+relating to certain death benefits for peace officers under public
+retirement systems.
+BE IT ENACTED BY THE LEGISLATURE OF THE STATE OF TEXAS:
+SECTION 1.  Chapter 810, Government Code, is amended by
+adding Section 810.007 to read as follows:
+Sec.
+810.007.
+LUMP-SUM DEATH BENEFIT FOR PEACE OFFICERS.
+(a) In this section, "governing body of a public retirement system"
+and "public retirement system" have the meanings assigned by
+Section 802.001.
+(b)
+Notwithstanding any other law, the governing body of a
+public retirement system by rule may provide a death benefit in the
+event of the death of an active member of the system who is a peace
+officer and who dies as the direct and proximate result of a
+personal injury associated with a single event and sustained in the
+performance of a member's employment duties as a peace officer.
+(c)
+The death benefit under Subsection (b) is payable in a
+lump sum not to exceed $1,000,000 to the member's surviving spouse,
+or if the member has no surviving spouse, to the member's surviving
+children.
+If the member has no surviving spouse or surviving
+children at the time of the member's death, the benefit is payable
+to the member's estate.
+If a member has more than one surviving
+child who is entitled to the benefit, the benefit must be split
+equally between each of the member's surviving children.
+(d)  The rule adopted under Subsection (b) must:
+(1)
+require the governing body of a public retirement
+system to ensure, after consulting with the system's actuary, that
+payment of the death benefit would not threaten the actuarial
+soundness of the system; and
+(2)
+prohibit the system from paying the benefit if
+paying the benefit would threaten the actuarial soundness of the
+system.
+(e)
+If the public retirement system does not employ an
+actuary, the system may contract with an actuary for purposes of
+Subsection (d).
+(f)
+If the governing body of a public retirement system
+adopts a death benefit under Subsection (b), the governing body
+shall revise the system's plan documents as necessary to ensure
+that the system's benefit plan remains a qualified plan under
+Section 401(a), Internal Revenue Code of 1986.
+SECTION 2.  Section 810.007, Government Code, as added by
+this Act, applies only to a death occurring on or after the
+effective date of this Act.
+SECTION 3.  This Act takes effect immediately if it receives
+a vote of two-thirds of all the members elected to each house, as
+provided by Section 39, Article III, Texas Constitution.  If this
+Act does not receive the vote necessary for immediate effect, this
+Act takes effect September 1, 2027.

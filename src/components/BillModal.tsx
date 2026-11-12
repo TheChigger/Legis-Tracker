@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Bill, BillVersion } from '../types/legislative';
+import React, { useState, useEffect } from 'react';
+import { Bill, BillVersion, AmendedStatute } from '../types/legislative';
 import { 
   X, 
   FileText, 
@@ -11,10 +11,14 @@ import {
   Vote, 
   Building, 
   History, 
-  ChevronRight,
-  ExternalLink,
-  Copy,
-  Check
+  ChevronRight, 
+  ExternalLink, 
+  Copy, 
+  Check, 
+  Download, 
+  BookOpen, 
+  Loader2,
+  AlertCircle
 } from 'lucide-react';
 
 interface BillModalProps {
@@ -28,9 +32,59 @@ export const BillModal: React.FC<BillModalProps> = ({
   onClose,
   onOpenAiChat,
 }) => {
-  const [activeTab, setActiveTab] = useState<'policy' | 'versions' | 'analysis' | 'fiscal' | 'votes'>('policy');
+  const [activeTab, setActiveTab] = useState<'policy' | 'versions' | 'statutes' | 'analysis' | 'fiscal' | 'votes'>('policy');
   const [selectedVersionCode, setSelectedVersionCode] = useState<string>('I');
   const [copied, setCopied] = useState(false);
+  const [copiedText, setCopiedText] = useState(false);
+  
+  // Full text and statute state
+  const [liveFullText, setLiveFullText] = useState<string>('');
+  const [amendedStatutes, setAmendedStatutes] = useState<AmendedStatute[]>([]);
+  const [officialTloUrl, setOfficialTloUrl] = useState<string>('');
+  const [officialPdfUrl, setOfficialPdfUrl] = useState<string>('');
+  const [isLoadingText, setIsLoadingText] = useState<boolean>(false);
+  
+  // Preview statute text
+  const [selectedStatutePreview, setSelectedStatutePreview] = useState<{ code: string; chapter: string; text: string } | null>(null);
+  const [isLoadingStatute, setIsLoadingStatute] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!bill) return;
+
+    // Reset state
+    setSelectedStatutePreview(null);
+    const existingVer = bill.versions.find((v) => v.versionCode === selectedVersionCode) || bill.versions[0];
+    const initialText = existingVer?.fullText || '';
+    setLiveFullText(initialText);
+    setAmendedStatutes(bill.amendedStatutes || []);
+
+    const m = bill.billNumber.replace(/\s+/g, '').toUpperCase().match(/^([A-Z]+)(\d+)$/);
+    if (m) {
+      const [, prefix, num] = m;
+      const padded = `${prefix}${String(num).padStart(5, '0')}I`;
+      setOfficialTloUrl(bill.officialTloUrl || `https://capitol.texas.gov/tlodocs/${bill.session}/billtext/html/${padded}.htm`);
+      setOfficialPdfUrl(bill.officialPdfUrl || `https://capitol.texas.gov/tlodocs/${bill.session}/billtext/pdf/${padded}.pdf`);
+    }
+
+    // If initial text is short or was a stub (< 600 chars), fetch the complete authentic text from the server
+    if (!initialText || initialText.length < 600) {
+      setIsLoadingText(true);
+      fetch(`/api/bills/${bill.session}/${bill.billNumber}/text?version=${selectedVersionCode}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.fullText && data.fullText.length > initialText.length) {
+            setLiveFullText(data.fullText);
+          }
+          if (data.amendedStatutes && data.amendedStatutes.length > 0) {
+            setAmendedStatutes(data.amendedStatutes);
+          }
+          if (data.officialTloUrl) setOfficialTloUrl(data.officialTloUrl);
+          if (data.officialPdfUrl) setOfficialPdfUrl(data.officialPdfUrl);
+        })
+        .catch((err) => console.warn('Could not fetch authentic text:', err))
+        .finally(() => setIsLoadingText(false));
+    }
+  }, [bill, selectedVersionCode]);
 
   if (!bill) return null;
 
@@ -44,10 +98,50 @@ export const BillModal: React.FC<BillModalProps> = ({
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const handleCopyFullText = () => {
+    navigator.clipboard.writeText(liveFullText || currentVersion?.fullText || '');
+    setCopiedText(true);
+    setTimeout(() => setCopiedText(false), 2000);
+  };
+
+  const handleDownloadTextFile = () => {
+    const textToDownload = liveFullText || currentVersion?.fullText || '';
+    const blob = new Blob([textToDownload], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${bill.session}_${bill.billNumber.replace(/\s+/g, '')}_FullText.txt`;
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const handleFetchStatutePreview = (codeAbbr: string, chapter: string) => {
+    setIsLoadingStatute(true);
+    fetch(`/api/statutes/${codeAbbr}/${chapter}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setSelectedStatutePreview({
+          code: codeAbbr,
+          chapter,
+          text: data.snippet || 'No statute text preview available from portal.',
+        });
+      })
+      .catch(() => {
+        setSelectedStatutePreview({
+          code: codeAbbr,
+          chapter,
+          text: 'Failed to fetch statute preview from statutes.capitol.texas.gov.',
+        });
+      })
+      .finally(() => setIsLoadingStatute(false));
+  };
+
+  const isPrefilingSession = bill.session === '90R';
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-950/80 backdrop-blur-sm animate-fade-in">
       <div 
-        className="relative w-full max-w-4xl max-h-[90vh] bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl flex flex-col overflow-hidden text-slate-100"
+        className="relative w-full max-w-4xl max-h-[92vh] bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl flex flex-col overflow-hidden text-slate-100"
         onClick={(e) => e.stopPropagation()}
       >
         
@@ -107,11 +201,12 @@ export const BillModal: React.FC<BillModalProps> = ({
         {/* Modal Navigation Tabs */}
         <div className="flex overflow-x-auto border-b border-slate-800 bg-slate-950/60 px-5 gap-1 text-xs">
           {[
-            { id: 'policy', label: 'Policy Alignment & Comport/Conflict', icon: ShieldAlert },
-            { id: 'versions', label: `Statutory Text (${bill.versions.length} Versions)`, icon: History },
+            { id: 'policy', label: 'Policy Alignment', icon: ShieldAlert },
+            { id: 'versions', label: `Full Statutory Text (${(liveFullText || currentVersion.fullText).length.toLocaleString()} chars)`, icon: FileText },
+            { id: 'statutes', label: `Amended Statutes (${amendedStatutes.length})`, icon: BookOpen },
             { id: 'analysis', label: 'State Agency Analysis', icon: Scale },
             { id: 'fiscal', label: 'Fiscal Note (LBB)', icon: DollarSign },
-            { id: 'votes', label: `Votes & Amendments (${bill.votes.length} Votes)`, icon: Vote },
+            { id: 'votes', label: `Votes & Amendments (${bill.votes.length})`, icon: Vote },
           ].map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
@@ -230,44 +325,168 @@ export const BillModal: React.FC<BillModalProps> = ({
             </div>
           )}
 
-          {/* TAB 2: Versions & Statutory Text */}
+          {/* TAB 2: Full Statutory Text Viewer */}
           {activeTab === 'versions' && (
             <div className="space-y-4">
               
-              {/* Version Selectors */}
-              <div className="flex flex-wrap gap-2 pb-2 border-b border-slate-800">
-                {bill.versions.map((ver) => (
-                  <button
-                    key={ver.versionCode}
-                    onClick={() => setSelectedVersionCode(ver.versionCode)}
-                    className={`px-3 py-1.5 text-xs font-mono rounded-lg border transition ${
-                      currentVersion.versionCode === ver.versionCode
-                        ? 'bg-amber-500/20 text-amber-300 border-amber-500/40 font-bold'
-                        : 'bg-slate-950 text-slate-400 border-slate-800 hover:text-slate-200'
-                    }`}
-                  >
-                    <span>Version {ver.versionCode}: {ver.versionName}</span>
-                    <span className="text-[10px] text-slate-500 ml-1.5">({ver.charCount.toLocaleString()} chars)</span>
-                  </button>
-                ))}
-              </div>
-
-              {/* Text Viewer Panel */}
-              <div className="bg-slate-950 border border-slate-800 rounded-xl p-4">
-                <div className="flex items-center justify-between text-xs text-slate-400 font-mono pb-3 border-b border-slate-800/80 mb-3">
-                  <span>Version Date: {currentVersion.dateFiled}</span>
-                  <span>Length: {currentVersion.charCount.toLocaleString()} characters</span>
+              {/* Controls & Official Links Bar */}
+              <div className="bg-slate-950 border border-slate-800 rounded-xl p-3.5 flex flex-wrap items-center justify-between gap-3">
+                <div className="flex items-center gap-2">
+                  <span className="font-mono text-xs font-bold text-amber-400 bg-amber-950/40 px-2 py-0.5 rounded border border-amber-800/40">
+                    Version {selectedVersionCode} (Introduced)
+                  </span>
+                  <span className="text-xs font-mono text-slate-400">
+                    Length: <strong>{(liveFullText || currentVersion.fullText).length.toLocaleString()}</strong> characters
+                  </span>
+                  {isLoadingText && (
+                    <span className="text-xs font-mono text-amber-400 flex items-center gap-1">
+                      <Loader2 className="w-3 h-3 animate-spin" />
+                      <span>Syncing live text...</span>
+                    </span>
+                  )}
                 </div>
 
-                <div className="font-mono text-xs text-slate-200 bg-slate-900/70 p-4 rounded-lg overflow-x-auto whitespace-pre-wrap leading-relaxed max-h-96 border border-slate-800/60">
-                  {currentVersion.fullText}
+                <div className="flex flex-wrap items-center gap-2">
+                  <button
+                    onClick={handleCopyFullText}
+                    className="px-2.5 py-1 text-xs font-mono rounded bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center gap-1.5 transition"
+                  >
+                    {copiedText ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                    <span>{copiedText ? 'Copied' : 'Copy Text'}</span>
+                  </button>
+
+                  <button
+                    onClick={handleDownloadTextFile}
+                    className="px-2.5 py-1 text-xs font-mono rounded bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center gap-1.5 transition"
+                  >
+                    <Download className="w-3.5 h-3.5" />
+                    <span>Download .txt</span>
+                  </button>
+
+                  {officialTloUrl && (
+                    <a
+                      href={officialTloUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-2.5 py-1 text-xs font-mono rounded bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 flex items-center gap-1.5 transition"
+                    >
+                      <ExternalLink className="w-3.5 h-3.5" />
+                      <span>Official TLO HTML</span>
+                    </a>
+                  )}
+
+                  {officialPdfUrl && (
+                    <a
+                      href={officialPdfUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-2.5 py-1 text-xs font-mono rounded bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 flex items-center gap-1.5 transition"
+                    >
+                      <ExternalLink className="w-3.5 h-3.5" />
+                      <span>Official PDF</span>
+                    </a>
+                  )}
+                </div>
+              </div>
+
+              {/* Full Text Display Panel */}
+              <div className="bg-slate-950 border border-slate-800 rounded-xl overflow-hidden">
+                <div className="bg-slate-900/80 px-4 py-2 border-b border-slate-800 flex items-center justify-between text-[11px] font-mono text-slate-400">
+                  <span>Official Statutory Draft • Texas Legislature</span>
+                  <span>Full Text Viewer</span>
+                </div>
+
+                <div className="font-mono text-xs text-slate-200 bg-slate-950 p-5 overflow-x-auto whitespace-pre-wrap leading-relaxed max-h-[500px] select-text">
+                  {liveFullText || currentVersion.fullText}
                 </div>
               </div>
 
             </div>
           )}
 
-          {/* TAB 3: State Agency Analysis */}
+          {/* TAB 3: Amended Texas Statutes */}
+          {activeTab === 'statutes' && (
+            <div className="space-y-4">
+              <div className="bg-slate-950/60 border border-slate-800 rounded-xl p-4">
+                <div className="text-xs font-mono uppercase tracking-wider text-amber-400 flex items-center gap-2">
+                  <BookOpen className="w-4 h-4" />
+                  <span>Texas Codes & Statutes Amended or Referenced by {bill.billNumber}</span>
+                </div>
+                <p className="text-xs text-slate-300 mt-1">
+                  When a bill is enacted, it alters existing Texas law. Below are the specific statutory codes, chapters, and sections amended by this legislation, with direct access to the official Texas Statutes portal.
+                </p>
+              </div>
+
+              {amendedStatutes.length === 0 ? (
+                <div className="text-center py-10 text-xs text-slate-500 bg-slate-950 rounded-xl border border-slate-800 font-mono">
+                  No statutory code amendments parsed for this bill draft (may be an uncodified act, constitutional amendment, or resolution).
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {amendedStatutes.map((stat, idx) => (
+                    <div
+                      key={idx}
+                      className="bg-slate-950 border border-slate-800 rounded-xl p-4 space-y-3"
+                    >
+                      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+                        <div>
+                          <div className="font-bold text-sm text-slate-100 flex items-center gap-2 font-mono">
+                            <span className="text-amber-400">[{stat.codeAbbr}]</span>
+                            <span>{stat.codeName}</span>
+                          </div>
+                          <div className="text-xs text-slate-400 font-mono mt-1">
+                            {stat.chapters.length > 0 && <span>Chapters: {stat.chapters.join(', ')}</span>}
+                            {stat.sections.length > 0 && <span className="ml-3">Sections: {stat.sections.join(', ')}</span>}
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-2 shrink-0 font-mono text-xs">
+                          {stat.chapters[0] && (
+                            <button
+                              onClick={() => handleFetchStatutePreview(stat.codeAbbr, stat.chapters[0])}
+                              className="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition"
+                            >
+                              <span>Preview in App</span>
+                            </button>
+                          )}
+
+                          <a
+                            href={stat.statuteUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-2.5 py-1 rounded bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 flex items-center gap-1 transition"
+                          >
+                            <span>Read on statutes.capitol.texas.gov</span>
+                            <ExternalLink className="w-3 h-3" />
+                          </a>
+                        </div>
+                      </div>
+
+                      {/* In-App Statute Text Preview if requested */}
+                      {selectedStatutePreview && selectedStatutePreview.code === stat.codeAbbr && (
+                        <div className="mt-3 p-3.5 rounded-lg bg-slate-900/90 border border-slate-800 text-xs font-mono text-slate-300 space-y-2">
+                          <div className="flex items-center justify-between text-slate-400 border-b border-slate-800 pb-1.5 text-[11px]">
+                            <span>Current Law Excerpt: {stat.codeName} Chapter {selectedStatutePreview.chapter}</span>
+                            <button
+                              onClick={() => setSelectedStatutePreview(null)}
+                              className="text-slate-400 hover:text-slate-200"
+                            >
+                              Close
+                            </button>
+                          </div>
+                          <div className="max-h-60 overflow-y-auto whitespace-pre-wrap leading-relaxed">
+                            {selectedStatutePreview.text}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* TAB 4: State Agency Analysis */}
           {activeTab === 'analysis' && (
             <div className="space-y-5">
               {bill.billAnalysis ? (
@@ -325,14 +544,42 @@ export const BillModal: React.FC<BillModalProps> = ({
                   </div>
                 </>
               ) : (
-                <div className="text-center py-10 text-xs text-slate-500">
-                  Official House Research Organization analysis not yet published for this version.
+                <div className="p-6 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-400 space-y-3">
+                  <div className="flex items-center gap-2 text-amber-400 font-semibold font-mono">
+                    <AlertCircle className="w-4 h-4" />
+                    <span>Official State Agency Analysis Publication Status</span>
+                  </div>
+                  <p className="leading-relaxed">
+                    Under Texas Legislative rules (House Rule 4, Sec. 32 and Senate Rule 7.12), committee bill analyses by the <strong>House Research Organization (HRO)</strong> and <strong>Texas Legislative Council</strong> are prepared and published <strong>only when a bill is set for a committee hearing and voted out of committee</strong>.
+                  </p>
+                  {isPrefilingSession ? (
+                    <div className="p-3 bg-slate-900 rounded-lg border border-slate-800 font-mono text-[11px] text-slate-300">
+                      • <strong>Current Stage:</strong> Session {bill.session} is in early pre-filing. Committees have not yet convened, so state agency analyses have not been published on the FTP portal yet.
+                    </div>
+                  ) : (
+                    <div className="p-3 bg-slate-900 rounded-lg border border-slate-800 font-mono text-[11px] text-slate-300">
+                      • Analysis pending publication from the committee clerk for this version.
+                    </div>
+                  )}
+                  {officialTloUrl && (
+                    <div className="pt-2">
+                      <a
+                        href={officialTloUrl.replace('billtext', 'analysis')}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-amber-400 hover:text-amber-300 underline font-mono text-xs"
+                      >
+                        <span>Check Live Capitol Analysis Directory</span>
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
           )}
 
-          {/* TAB 4: Fiscal Note */}
+          {/* TAB 5: Fiscal Note */}
           {activeTab === 'fiscal' && (
             <div className="space-y-4">
               {bill.fiscalNote ? (
@@ -375,14 +622,42 @@ export const BillModal: React.FC<BillModalProps> = ({
                   </div>
                 </>
               ) : (
-                <div className="text-center py-10 text-xs text-slate-500">
-                  Fiscal note pending review by the Legislative Budget Board.
+                <div className="p-6 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-400 space-y-3">
+                  <div className="flex items-center gap-2 text-amber-400 font-semibold font-mono">
+                    <AlertCircle className="w-4 h-4" />
+                    <span>Legislative Budget Board (LBB) Fiscal Note Status</span>
+                  </div>
+                  <p className="leading-relaxed">
+                    Under Texas Government Code Chapter 314, official fiscal notes are prepared by the <strong>Legislative Budget Board (LBB)</strong> at the formal request of a committee chair when a bill is set for committee consideration.
+                  </p>
+                  {isPrefilingSession ? (
+                    <div className="p-3 bg-slate-900 rounded-lg border border-slate-800 font-mono text-[11px] text-slate-300">
+                      • <strong>Pre-filing Status:</strong> In the pre-filing stage of Session {bill.session}, committee assignments and hearings have not commenced. The LBB will publish official fiscal impact notes once hearing schedules are posted.
+                    </div>
+                  ) : (
+                    <div className="p-3 bg-slate-900 rounded-lg border border-slate-800 font-mono text-[11px] text-slate-300">
+                      • Fiscal note pending formal review and publication by the Legislative Budget Board.
+                    </div>
+                  )}
+                  {officialTloUrl && (
+                    <div className="pt-2">
+                      <a
+                        href={officialTloUrl.replace('billtext', 'fiscalnotes')}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-amber-400 hover:text-amber-300 underline font-mono text-xs"
+                      >
+                        <span>Check Live LBB Fiscal Notes Directory</span>
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
           )}
 
-          {/* TAB 5: Committee Votes & Amendments */}
+          {/* TAB 6: Committee Votes & Amendments */}
           {activeTab === 'votes' && (
             <div className="space-y-6">
               
@@ -467,3 +742,4 @@ export const BillModal: React.FC<BillModalProps> = ({
     </div>
   );
 };
+

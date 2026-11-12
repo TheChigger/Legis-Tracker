@@ -1,0 +1,28 @@
+90(R) HB 127 - Introduced version - Bill Text
+90R1736 LRM-F
+By: Flores
+H.B. No. 127
+A BILL TO BE ENTITLED
+AN ACT
+relating to the provision of the reason for rejecting a voter
+registration application.
+BE IT ENACTED BY THE LEGISLATURE OF THE STATE OF TEXAS:
+SECTION 1.  Section 13.073, Election Code, is amended by
+adding Subsections (d) and (e) to read as follows:
+(d)
+In providing a written or oral reason for rejection
+under Subsection (a) or (b), the registrar shall identify which
+section or sections of the application resulted in the rejection.
+For each section identified, the registrar shall specify whether
+the section:
+(1)  was incomplete;
+(2)  was improperly filled out; or
+(3)
+contained information identifying the applicant
+as ineligible to vote.
+(e)
+The registrar shall use the official form prescribed by
+the secretary of state if a written notice is provided under
+Subsection (a). The secretary of state shall prescribe the
+procedures and forms necessary to implement this section.
+SECTION 2.  This Act takes effect September 1, 2027.

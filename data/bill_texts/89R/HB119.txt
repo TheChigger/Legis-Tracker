@@ -1,0 +1,178 @@
+89(R) HB 119 - Introduced version - Bill Text
+89R14789 CJD-F
+By: Gerdes
+H.B. No. 119
+A BILL TO BE ENTITLED
+AN ACT
+relating to the registration as a lobbyist of persons who engage in
+certain lobbying activities on behalf of a foreign adversary and to
+prohibitions on the receipt of compensation related to those
+lobbying activities; providing a civil penalty.
+BE IT ENACTED BY THE LEGISLATURE OF THE STATE OF TEXAS:
+SECTION 1.  Section 305.003(a), Government Code, is amended
+to read as follows:
+(a)  A person must register with the commission under this
+chapter if the person:
+(1)  makes a total expenditure of an amount determined
+by commission rule but not less than $200 in a calendar quarter, not
+including the person's own travel, food, or lodging expenses or the
+person's own membership dues, on activities described in Section
+305.006(b) to communicate directly with one or more members of the
+legislative or executive branch to influence legislation or
+administrative action; [
+or
+]
+(2)  receives, or is entitled to receive under an
+agreement under which the person is retained or employed,
+compensation or reimbursement, not including reimbursement for the
+person's own travel, food, or lodging expenses or the person's own
+membership dues, of more than an amount determined by commission
+rule but not less than $200 in a calendar quarter from another
+person to communicate directly with a member of the legislative or
+executive branch to influence legislation or administrative
+action
+; or
+(3)
+communicates directly with one or more members of
+the legislative or executive branch to influence legislation or
+administrative action on behalf of a foreign adversary, a foreign
+adversary client, or a foreign adversary political party, as those
+terms are defined by Section 305.030
+.
+SECTION 2.  Subchapter B, Chapter 305, Government Code, is
+amended by adding Section 305.030 to read as follows:
+Sec.
+305.030.
+COMPENSATION FROM FOREIGN ADVERSARY AND
+RELATED PERSONS PROHIBITED; CIVIL ENFORCEMENT. (a) In this
+section:
+(1)
+"Control" means the direct or indirect power to
+determine, direct, dictate, or decide important matters affecting
+an entity, including through:
+(A)
+the ownership of at least 20 percent of the
+total outstanding voting interest in an entity;
+(B)  board representation;
+(C)
+the ability to appoint or discharge a board
+member, officer, director, employee, or contractor;
+(D)
+proxy voting, a special share, a contractual
+arrangement, a legal obligation, or a formal or informal
+arrangement to act in concert; or
+(E)  another means of exercising power.
+(2)  "Foreign adversary" means:
+(A)
+a foreign government or foreign
+nongovernment person designated as a foreign adversary by the
+United States secretary of commerce under 15 C.F.R. Section 791.4;
+(B)
+an agency or entity under the control of a
+country described by Paragraph (A);
+(C)
+a person wholly or partly owned or operated
+by or subject to the control of a country described by Paragraph
+(A);
+(D)
+a subsidiary or parent of a person described
+by Paragraph (C);
+(E)
+a person organized under the laws of or that
+has its principal place of business in a country described by
+Paragraph (A); and
+(F)
+a subsidiary of a person described by
+Paragraph (E).
+(3)  "Foreign adversary client" means:
+(A)  a current or former:
+(i)
+official in the executive, legislative,
+administrative, military, or judicial branch of a foreign
+adversary;
+(ii)
+official of a foreign adversary
+political party; or
+(iii)
+executive or officer of a foreign
+adversary;
+(B)
+a corporation, business, or other entity that
+has been formed by, or for the benefit of, a person described by
+Paragraph (A); and
+(C)
+an immediate family member of a person
+described by Paragraph (A), including the person's spouse, parent,
+sibling, and child and a parent or sibling of the person's spouse.
+(4)
+"Foreign adversary political party" means an
+organization or a combination of individuals in the jurisdictional
+limits of a foreign adversary, including a unit or branch of a
+foreign adversary's government, that is engaged in an activity
+wholly or partly devoted to or whose aim or purpose is to:
+(A)
+establish, administer, control, or acquire
+the administration or control of a foreign adversary or a
+subdivision of a foreign adversary; or
+(B)
+further or influence the political or public
+interests, policies, or relations of a foreign adversary or a
+subdivision of a foreign adversary.
+(5)  "Wholly or partly owned or operated" means:
+(A)
+for a person that is a publicly traded
+company, that a foreign adversary has:
+(i)
+the ability to exercise control over
+the company;
+(ii)
+access to any material, nonpublic, and
+technical information in the company's possession; or
+(iii)
+other rights or involvement in
+controlling or participating in the decision-making of the company
+beyond those available to a retail investor holding an equivalent
+share of ownership; and
+(B)
+for a person that is a privately held
+company, that a foreign adversary has any share of ownership of the
+company.
+(b)
+A registrant who is required to register under Section
+305.003(a)(3) may not receive or agree to receive direct or
+indirect compensation, including intangible or in-kind
+compensation, from a foreign adversary, a foreign adversary client,
+or a foreign adversary political party on whose behalf the
+registrant communicates directly with one or more members of the
+legislative or executive branch to influence legislation or
+administrative action.
+(c)
+The attorney general may bring an action for injunctive
+relief against a registrant who violates this section or is
+threatening to violate this section. In an injunction issued under
+this section, a court may include reasonable requirements to
+prevent further violations of this section.
+(d)
+In addition to injunctive relief under Subsection (c),
+the attorney general may bring an action for civil penalties
+against a registrant who violates this section. A civil penalty
+assessed under this section must be in an amount not to exceed:
+(1)  $10,000 for each violation; and
+(2)
+the amount of any compensation the registrant
+received in violation of this section.
+(e)
+The attorney general may recover reasonable expenses
+incurred in bringing an action under this section, including court
+costs, reasonable attorney's fees, investigative costs, witness
+fees, and deposition costs.
+SECTION 3.  The changes in law made by this Act apply only to
+conduct requiring a person to register as a lobbyist or to
+compensation received by a person required to register as a
+lobbyist under Chapter 305, Government Code, that occurs or is
+received on or after the effective date of this Act. Conduct that
+occurs or compensation received before the effective date of this
+Act is governed by the law in effect on the date the conduct
+occurred or compensation was received, and the former law is
+continued in effect for that purpose.
+SECTION 4.  This Act takes effect September 1, 2025.

@@ -1,0 +1,702 @@
+90(R) HB 137 - Introduced version - Bill Text
+90R597 RDS-D
+By: Tepper
+H.B. No. 137
+A BILL TO BE ENTITLED
+AN ACT
+relating to employment practices of governmental entities, state
+and local contractors, and private employers in this state
+regarding the legal status of employees, including requiring
+participation in the federal electronic verification of employment
+authorization program, or E-verify program, and authorizing the
+suspension of certain licenses held by private employers for
+certain conduct in relation to the employment of persons not
+lawfully present.
+BE IT ENACTED BY THE LEGISLATURE OF THE STATE OF TEXAS:
+SECTION 1.  The heading to Chapter 2264, Government Code, is
+amended to read as follows:
+CHAPTER 2264.
+CERTAIN
+RESTRICTIONS ON [
+USE OF CERTAIN
+] PUBLIC
+SUBSIDIES
+AND STATE AND LOCAL CONTRACTS
+SECTION 2.  Section 2264.101, Government Code, is
+transferred to Subchapter B, Chapter 2264, Government Code,
+redesignated as Section 2264.054, Government Code, and amended to
+read as follows:
+Sec.
+2264.054
+[
+2264.101
+].  RECOVERY. (a)  A public agency,
+local taxing jurisdiction, or economic development corporation, or
+the attorney general on behalf of the state or a state agency, may
+bring a civil action to recover any amounts owed to the public
+agency, state or local taxing jurisdiction, or economic development
+corporation under this
+subchapter
+[
+chapter
+].
+(b)  The public agency, local taxing jurisdiction, economic
+development corporation, or attorney general, as applicable, shall
+recover court costs and reasonable attorney's fees incurred in an
+action brought under Subsection (a).
+(c)  A business is not liable for a violation of this
+subchapter
+[
+chapter
+] by a subsidiary, affiliate, or franchisee of
+the business, or by a person with whom the business contracts.
+SECTION 3.  The heading to Subchapter C, Chapter 2264,
+Government Code, is amended to read as follows:
+SUBCHAPTER C.
+E-VERIFY PROGRAM
+[
+ENFORCEMENT
+]
+SECTION 4.  Subchapter C, Chapter 2264, Government Code, is
+amended by adding Sections 2264.1011, 2264.102, and 2264.103 to
+read as follows:
+Sec. 2264.1011.  DEFINITIONS.  In this subchapter:
+(1)
+"E-verify program" has the meaning assigned by
+Section 673.001.
+(2)
+"Governmental entity"
+means a state agency or a
+political subdivision of this state.
+Sec.
+2264.102.
+VERIFICATION BY CONTRACTORS.
+(a)
+Except as
+provided by Subsection (b), a governmental entity may not award a
+contract for goods or services within this state to a contractor
+unless the contractor and any subcontractor register with and
+participate in the E-verify program to verify employee information.
+The contractor and any subcontractor must continue to participate
+in the program during the term of the contract.
+(b)
+This section does not apply to a contract for goods or
+services:
+(1)
+a governmental entity determines is necessary to
+the operation of the entity; and
+(2)
+for which the entity can find no reasonable
+alternative to a bid submitted by a contractor that does not
+participate in the E-verify program or require its subcontractors
+to participate in the E-verify program.
+(c)
+Each contract with a governmental entity must include
+the following statement:
+"The contractor certifies that the contractor is not
+ineligible to receive this contract under Subchapter C, Chapter
+2264, Government Code, and acknowledges that if this certification
+is inaccurate or becomes inaccurate during the term of the
+contract, the contractor may be barred from participating in state
+and local contracts."
+(d)
+If a governmental entity determines that a contractor
+was ineligible to have the contract awarded under Subsection (a),
+that a contractor has ceased participation in the E-verify program
+during the term of the contract, or that a subcontractor is not
+registered with or is not participating in the E-verify program,
+the governmental entity shall refer the matter to the comptroller
+for action.
+(e)
+Each governmental entity shall develop procedures for
+the administration of this section.
+Sec.
+2264.103.
+BARRING FROM STATE AND LOCAL CONTRACTS. (a)
+Using procedures prescribed under Section 2155.077, the
+comptroller may bar a contractor from participating in state and
+local contracts if the comptroller determines that the contractor
+was awarded a contract in violation of Section 2264.102 or, in
+violation of Section 2264.102:
+(1)
+has ceased participation in the E-verify program
+during the term of the contract; or
+(2)
+knowingly hired a subcontractor, other than a
+subcontractor who acts exclusively as a supplier for the contract,
+to perform work under the contract that is not registered with or is
+not participating in the E-verify program.
+(b)
+Debarment under this section is for a period of one year
+except that the debarment may be extended by the comptroller for
+additional one-year periods if the comptroller determines that the
+grounds for debarment under this section continue to exist.
+(c)
+It is an affirmative defense to a debarment proceeding
+under this section that the contractor did not know that a
+subcontractor hired to perform work under the contract is not
+registered with or is not participating in the E-verify program.
+SECTION 5.  Subtitle A, Title 6, Government Code, is amended
+by adding Chapter 621 to read as follows:
+CHAPTER 621. VERIFICATION OF EMPLOYEE INFORMATION; EMPLOYMENT OF
+PERSONS NOT LAWFULLY PRESENT
+SUBCHAPTER A. GENERAL PROVISIONS
+Sec. 621.001.  DEFINITIONS.  In this chapter:
+(1)
+"E-verify program" has the meaning assigned by
+Section 673.001.
+(2)
+"Governmental entity" has the meaning assigned by
+Section 620.001, except that the term includes a school district or
+open-enrollment charter school.
+(3)
+"Person not lawfully present"
+means an individual
+who, at the time of employment, is not:
+(A)
+a citizen or national of the United States;
+or
+(B)
+an alien who is lawfully admitted for
+permanent residence in the United States under the federal
+Immigration and Nationality Act (8 U.S.C. Section 1101 et seq.) or
+authorized to be employed by that Act or by the United States
+attorney general.
+SUBCHAPTER B. VERIFICATION OF EMPLOYEE INFORMATION
+Sec.
+621.051.
+E-VERIFY PROGRAM.
+(a) A governmental entity
+shall register and participate in the E-verify program to verify
+information of all new employees.
+(b)
+This section may not be construed as limiting a
+requirement imposed on a state agency under Chapter 673.
+SUBCHAPTER C. EMPLOYMENT OF PERSONS NOT LAWFULLY PRESENT
+Sec.
+621.101.
+PROHIBITED EMPLOYMENT. A governmental entity
+may not knowingly hire, employ, recruit, or refer for a fee a person
+not lawfully present.
+SUBCHAPTER D. ENFORCEMENT
+Sec.
+621.151.
+REPORTING VIOLATION. (a) A person who has a
+reasonable belief that a governmental entity violated this chapter
+may report the allegation to the attorney general.
+(b)
+The person alleging a violation under Subsection (a)
+must, to the extent known by the person, provide to the attorney
+general:
+(1)
+the name, address, and telephone number of the
+person filing the report;
+(2)  the name and address of the governmental entity;
+(3)
+if applicable, the name of the individual alleged
+to be a person not lawfully present who has performed or will
+perform work for the governmental entity;
+(4)
+the information that caused the person to make the
+report and the source of the information; and
+(5)  any other information relevant to the allegation.
+Sec.
+621.152.
+INVESTIGATION. (a) On receipt of a report
+made under Section 621.151, the attorney general shall determine
+whether reasonable cause exists to merit an investigation of the
+allegation. If the attorney general determines reasonable cause
+exists, the attorney general shall conduct an investigation.
+In
+conducting the investigation, the attorney general must provide the
+governmental entity a reasonable opportunity to present evidence to
+dispute the allegation.
+(b)
+A governmental entity must comply with reasonable
+requests for documents or other information made by the attorney
+general during an investigation conducted under this section,
+including a request for:
+(1)
+documents related to the legal status of an
+employee;
+(2)
+if applicable, evidence related to the entity's
+affirmative defense under Section 621.153;
+(3)
+documents related to the entity's finances and
+operations; or
+(4)
+other documents or information the attorney
+general determines necessary for conducting the investigation.
+(c)
+The attorney general may request the assistance of the
+Department of Public Safety and local law enforcement entities to
+ensure compliance with this section.
+(d)
+In conducting an investigation under this section, the
+attorney general may not interview a minor or collect information
+related to a minor without first obtaining consent from the minor's
+parent or legal guardian.
+(e)
+Information the attorney general obtains during an
+investigation under this section is confidential and excepted from
+disclosure under Chapter 552 but may be used in an administrative
+proceeding under this chapter at the attorney general's discretion.
+Sec.
+621.153.
+AFFIRMATIVE DEFENSE. It is an affirmative
+defense to a proceeding under this subchapter in relation to an
+alleged violation of Subchapter C that the governmental entity
+complied in good faith with the document review requirements
+described by the federal Immigration Reform and Control Act of 1986
+(8 U.S.C. Section 1324a(b)).
+Sec.
+621.154.
+DETERMINATION BY ATTORNEY GENERAL;
+OPPORTUNITY TO CURE. (a) If the attorney general determines under
+Section 621.152 that a governmental entity violated this chapter,
+the attorney general shall provide written notice of the
+determination to the entity.
+The notice must explain the
+governmental entity's options for taking corrective action to cure
+the violation, which must include:
+(1)
+for a violation under Section 621.051, submitting
+to the attorney general evidence that the entity has registered and
+is participating in the E-verify program to verify information of
+all new employees; or
+(2)
+for a violation under Section 621.101, submitting
+to the attorney general, as applicable:
+(A)
+evidence that the person not lawfully present
+is no longer employed by or working for the entity; or
+(B)
+a sworn statement attesting that the entity
+has ceased and will continue to cease recruiting or referring for a
+fee persons not lawfully present.
+(b)
+On receipt of notice from the attorney general under
+Subsection (a), the governmental entity shall take appropriate
+corrective action to cure the violation. Not later than the 10th
+business day after the date the governmental entity receives the
+notice, the entity must notify the attorney general of the
+corrective action taken by the entity to cure the violation.
+(c)
+If the attorney general determines that the
+governmental entity has taken appropriate corrective action under
+Subsection (b), the attorney general shall close the investigation
+and promptly notify the entity accordingly.
+Sec.
+621.155.
+STATE GRANT FUNDING ELIGIBILITY. (a)
+A
+governmental entity is ineligible to receive grant funding from
+this state if:
+(1)
+the entity fails to reply to the attorney general's
+notice under Section 621.154; or
+(2)
+the attorney general determines that the
+corrective action taken by the entity under that section did not
+cure the entity's violation.
+(b)
+The attorney general shall provide to a governmental
+entity described by Subsection (a) written notice, as applicable,
+that:
+(1)  the entity:
+(A)  is in violation of this chapter;
+(B)
+is ineligible to receive grant funding from
+this state; and
+(C)
+may take appropriate corrective action to
+cure the violation and become eligible to receive state grant
+funding; or
+(2)  the entity:
+(A)
+has failed to reply to the attorney general's
+notice under Section 621.154;
+(B)
+is ineligible to receive grant funding from
+this state; and
+(C)
+may reply to the notice and become eligible
+to receive state grant funding.
+Sec. 621.156. COMPTROLLER RECORDS.
+(a)
+The comptroller
+shall maintain a list of governmental entities identified by the
+attorney general under Subsection (b) for purposes of ensuring that
+an entity included in the list does not receive grant funding from
+this state.
+(b)
+At the time the attorney general sends notice to a
+governmental entity under Section 621.155(b), the attorney general
+shall provide to the comptroller the identity of the entity for
+inclusion in the list the comptroller maintains under Subsection
+(a).
+(c)
+Information provided to the comptroller by the attorney
+general under this section is confidential and excepted from
+disclosure under Chapter 552.
+Sec.
+621.157.
+REINSTATEMENT OF GRANT ELIGIBILITY. (a)
+A
+governmental entity may request that the attorney general reinstate
+the entity's eligibility to receive grant funding from this state
+by notifying the attorney general, as appropriate, of:
+(1)
+corrective action taken by the entity to cure the
+violation; or
+(2)
+the entity's reply to the attorney general's
+notice under Section 621.154.
+(b)
+If the attorney general determines that the corrective
+action taken by the governmental entity cured the violation or that
+the entity's reply is responsive to the notice, as appropriate, the
+entity becomes eligible to receive grant funding from this state.
+(c)
+At the time the attorney general makes a determination
+under Subsection (b), the attorney general shall instruct the
+comptroller to remove the governmental entity from the list the
+comptroller maintains under Section 621.156, and the comptroller
+shall remove the entity from the list.
+SECTION 6.  Subtitle B, Title 2, Labor Code, is amended by
+adding Chapter 53 to read as follows:
+CHAPTER 53.
+VERIFICATION OF EMPLOYEE INFORMATION; EMPLOYMENT OF
+PERSONS NOT LAWFULLY PRESENT
+SUBCHAPTER A.
+GENERAL PROVISIONS
+Sec. 53.001.  DEFINITIONS.  In this chapter:
+(1)
+"Employee" means an individual who is employed by
+an employer for compensation.
+The term includes an individual
+employed on a part-time basis.
+(2)
+"Employer" means a person, other than a
+governmental entity, who:
+(A)  employs at least one employee; or
+(B)
+acts directly or indirectly in the interests
+of an employer in relation to an employee.
+(3)
+"E-verify program"
+has the meaning assigned by
+Section 673.001, Government Code.
+(4)
+"License" means a license, certificate,
+registration, permit, or other authorization that:
+(A)  is issued by a licensing authority;
+(B)
+is subject before expiration to renewal,
+suspension, revocation, forfeiture, or termination by a licensing
+authority; and
+(C)
+is required for a person to practice or
+engage in a particular business, occupation, or profession.
+(5)
+"Licensing authority" means a department,
+commission, board, office, or other agency of this state that
+issues or renews a license.
+(6)
+"Person not lawfully present" means an individual
+who, at the time of employment, is not:
+(A)
+a citizen or national of the United States;
+or
+(B)
+an alien who is lawfully admitted for
+permanent residence in the United States under the federal
+Immigration and Nationality Act (8 U.S.C. Section 1101 et seq.) or
+authorized to be employed by that Act or by the United States
+attorney general.
+Sec.
+53.002.
+EMPLOYEE STATUS. An employer may not classify
+an individual performing services for the employer as an
+independent contractor instead of as an employee of the employer
+solely for the purpose of avoiding the requirements applicable to
+an employer under this chapter.
+SUBCHAPTER B. VERIFICATION OF EMPLOYEE INFORMATION
+Sec.
+53.051.
+VERIFICATION.
+An employer shall register and
+participate in the E-verify program to verify information of all
+new employees.
+SUBCHAPTER C. EMPLOYMENT OF PERSONS NOT LAWFULLY PRESENT
+Sec.
+53.101.
+PROHIBITED EMPLOYMENT. An employer may not
+knowingly hire, employ, recruit, or refer for a fee an individual
+who is a person not lawfully present.
+SUBCHAPTER D.
+ENFORCEMENT
+Sec.
+53.151.
+REPORTING VIOLATION. (a)
+A person who has a
+reasonable belief that an employer violated this chapter may report
+the allegation to the attorney general.
+(b)
+The person alleging a violation under Subsection (a)
+must, to the extent known by the person, provide to the attorney
+general:
+(1)
+the name, address, and telephone number of the
+person filing the report;
+(2)  the name and address of the employer;
+(3)
+if applicable, the name of the person not lawfully
+present who has performed or will perform work for the employer;
+(4)
+the information that caused the person to make the
+report and the source of the information; and
+(5)  any other information relevant to the allegation.
+Sec.
+53.152.
+INVESTIGATION BY ATTORNEY GENERAL. (a)
+On
+receipt of a report made under Section 53.151, the attorney general
+shall determine whether reasonable cause exists to merit an
+investigation of the allegation.
+If the attorney general
+determines reasonable cause exists, the attorney general shall
+conduct an investigation.
+In conducting the investigation, the
+attorney general must provide the employer a reasonable opportunity
+to present evidence to dispute the allegation.
+(b)
+An employer must comply with reasonable requests for
+documents or other information made by the attorney general during
+an investigation, including a request for:
+(1)
+documents related to the legal status of an
+employee;
+(2)
+if applicable, evidence related to an employer's
+affirmative defense under Section 53.153;
+(3)
+documents related to the employer's finances and
+operations;
+(4)  a list of all licenses held by the employer; and
+(5)
+other documents or information the attorney
+general determines necessary for conducting the investigation.
+(c)
+The attorney general may request the assistance of the
+Department of Public Safety and local law enforcement entities to
+ensure compliance with this section.
+(d)
+In conducting an investigation under this section, the
+attorney general may not:
+(1)
+interview a minor or collect information related
+to a minor without first obtaining consent from the minor's parent
+or legal guardian; or
+(2)
+visit the employer's premises at an unreasonable
+time without obtaining the employer's consent.
+(e)
+Information obtained during an investigation under this
+section is confidential and excepted from disclosure under Chapter
+552, Government Code, but may be used in an administrative
+proceeding under this chapter at the attorney general's discretion.
+Sec.
+53.153.
+AFFIRMATIVE DEFENSE. It is an affirmative
+defense to a proceeding under this subchapter in relation to an
+alleged violation of Subchapter C that the employer complied in
+good faith with the document review requirements described by the
+federal Immigration Reform and Control Act of 1986 (8 U.S.C.
+Section 1324a(b)).
+Sec.
+53.154.
+INITIAL DETERMINATION BY ATTORNEY GENERAL;
+OPPORTUNITY TO CURE.
+(a)
+If the attorney general determines under
+Section 53.152 that the employer violated this chapter, the
+attorney general shall provide written notice of the determination
+to the employer.
+The notice must:
+(1)
+explain the employer's options for taking
+corrective action to cure the violation, which must include:
+(A)
+for a violation under Section 53.002,
+submitting to the attorney general evidence that the employer is
+properly classifying individuals performing services for the
+employer, together with a sworn statement attesting that the
+employer will continue to do so;
+(B)
+for a violation under Section 53.051,
+submitting to the attorney general evidence that the employer has
+registered and is participating in the E-verify program to verify
+information of all new employees; or
+(C)
+for a violation under Section 53.101,
+submitting to the attorney general, as applicable:
+(i)
+evidence that the person not lawfully
+present is no longer employed by or working for the employer; or
+(ii)
+a sworn statement attesting that the
+employer has ceased and will continue to cease recruiting or
+referring for a fee persons not lawfully present; and
+(2)
+inform the employer that each license held by the
+employer is subject to suspension if the employer does not take
+appropriate corrective action and notify the attorney general of
+that action in the time prescribed by Subsection (b).
+(b)
+On receipt of notice from the attorney general under
+Subsection (a), the employer shall take appropriate corrective
+action to cure the violation. Not later than the 10th business day
+after the date the employer receives the notice, the employer must
+notify the attorney general of the corrective action taken by the
+employer to cure the violation.
+Sec.
+53.155.
+FINAL DETERMINATION BY ATTORNEY GENERAL;
+LICENSE SUSPENSION FOR FAILURE TO CURE; RIGHT TO JUDICIAL REVIEW.
+(a)
+If the attorney general determines that an employer has taken
+appropriate corrective action under Section 53.154(b), the
+attorney general shall close the investigation and promptly notify
+the employer accordingly.
+(b)
+If the attorney general determines that an employer
+failed to reply to the attorney general's notice under Section
+53.154(b) or that the corrective action taken by the employer under
+that subsection did not cure the employer's violation, the attorney
+general shall promptly provide written notice to the employer that:
+(1)
+the employer has been finally determined by the
+attorney general to have violated this chapter; and
+(2)
+each license issued to the employer by a licensing
+authority will be suspended for a period of two years, subject to
+judicial review of the attorney general's determination as a
+contested case under Chapter 2001, Government Code.
+(c)
+Not later than the 30th day after the date an employer
+receives notice under Subsection (b), an employer may seek judicial
+review as provided by Chapter 2001, Government Code, of the
+attorney general's determination.
+Sec.
+53.156.
+ORDER FOR LICENSE SUSPENSION. If an employer
+finally determined by the attorney general to have violated this
+chapter does not seek judicial review of the attorney general's
+determination in the time prescribed by Section 53.155 or does not
+prevail on judicial review, the attorney general shall promptly:
+(1)
+render a final order suspending each license held
+by the employer for a period of two years; and
+(2)  send a copy of the order to:
+(A)  the employer; and
+(B)
+each licensing authority the attorney
+general determines to have issued a license held by the employer.
+Sec.
+53.157.
+ACTION BY LICENSING AUTHORITY. (a)
+On receipt
+from the attorney general of a final order under this chapter
+suspending an employer's license, a licensing authority shall
+immediately determine if the authority has issued a license to the
+person named on the order and, if a license has been issued:
+(1)
+record the suspension of the license in the
+licensing authority's records;
+(2)  report the suspension as appropriate;
+(3)
+provide written notice of the suspension to the
+person; and
+(4)
+demand surrender of the suspended license if
+required by law for other cases in which a license is suspended.
+(b)
+A licensing authority shall implement the terms of a
+final order suspending a license without additional review or
+hearing. The authority may provide notice as appropriate to the
+license holder or to others concerned with the license.
+(c)
+A licensing authority may not modify, remand, reverse,
+vacate, or stay an order suspending a license issued under this
+chapter and may not review, vacate, or reconsider the terms of a
+final order suspending a license.
+(d)
+A person who is the subject of a final order suspending a
+license is not entitled to a refund for any fee or other amount paid
+to the licensing authority.
+(e)
+A person who continues to engage in the business,
+occupation, profession, or other licensed activity after the
+implementation of the order suspending a license by the licensing
+authority is liable for the same civil, administrative, and
+criminal penalties provided for engaging in the licensed activity
+without a license or while a license is suspended that apply to any
+other license holder of that licensing authority.
+(f)
+A licensing authority is exempt from liability to a
+license holder for any act authorized under this chapter performed
+by the authority.
+(g)
+Except as provided by this chapter, an order suspending
+a license does not affect the power of a licensing authority to
+grant, deny, suspend, revoke, terminate, or renew a license.
+Sec.
+53.158.
+ENFORCEMENT BY STATE AGENCIES; RULES.
+(a)
+Notwithstanding any other law and in addition to any duty relating
+to the enforcement of this chapter that is assigned to another
+governmental entity by this subchapter, each appropriate state
+agency shall ensure that employers in this state comply with this
+chapter and may require compliance with this chapter as a condition
+of a license.
+(b)
+Each appropriate state agency shall adopt rules and
+prescribe forms as necessary to implement this section.
+SECTION 7.  Subchapter A, Chapter 204, Labor Code, is
+amended by adding Section 204.0021 to read as follows:
+Sec.
+204.0021.
+ADDITIONAL REQUIREMENT FOR WAGE REPORTING.
+Any verification form or electronic process used by the commission
+for an employer to report wages paid by the employer for purposes of
+this subtitle must require the employer to certify the employer's
+compliance with Chapter 53.
+SECTION 8.  Each governmental entity subject to Subchapter
+C, Chapter 2264, Government Code, as amended by this Act, shall
+develop the procedures required under Section 2264.102(e),
+Government Code, as added by this Act, not later than December 31,
+2027.
+SECTION 9.  Sections 2264.1011, 2264.102, and 2264.103,
+Government Code, as added by this Act, apply only in relation to a
+contract for which the request for bids or proposals or other
+applicable expression of interest is made public on or after the
+effective date of this Act.
+SECTION 10.  As soon as practicable after the effective date
+of this Act, each appropriate state agency subject to Section
+53.158, Labor Code, as added by this Act, shall adopt rules and
+prescribe forms as required by that section.
+SECTION 11.  Section 204.0021, Labor Code, Subchapter C,
+Chapter 53, Labor Code, and Chapter 621, Government Code, as added
+by this Act, apply beginning January 1, 2029.
+SECTION 12.  It is the intent of the legislature that every
+provision in this Act, and every application of the provisions in
+this Act to every person, group of persons, or circumstances, is
+severable from each other.  If any application of any provision in
+this Act to any person, group of persons, or circumstances is found
+by a court to be invalid for any reason, the remaining applications
+of that provision to all other persons and circumstances shall be
+severed and may not be affected.
+SECTION 13.  This Act takes effect September 1, 2027.

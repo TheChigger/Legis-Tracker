@@ -1,0 +1,717 @@
+89(R) HB 127 - Introduced version - Bill Text
+89R4522 CXP-F
+By: Wilson
+H.B. No. 127
+A BILL TO BE ENTITLED
+AN ACT
+relating to measures to protect public institutions of higher
+education from foreign adversaries and to the prosecution of the
+criminal offense of theft of trade secrets; providing civil and
+administrative penalties; increasing a criminal penalty.
+BE IT ENACTED BY THE LEGISLATURE OF THE STATE OF TEXAS:
+SECTION 1.  Subtitle A, Title 3, Education Code, is amended
+by adding Chapter 51B to read as follows:
+CHAPTER 51B.
+HIGHER EDUCATION RESEARCH AND PROTECTION
+SUBCHAPTER A.
+GENERAL PROVISIONS
+Sec. 51B.001.  DEFINITIONS. In this chapter:
+(1)
+"Affiliate organization" means an entity under the
+control of or established for the benefit of an organization.
+The
+term includes a direct-support organization that is organized and
+operated to receive, hold, invest, and administer property and make
+expenditures to or for the benefit of an institution of higher
+education or for the benefit of a research and development park or
+authority affiliated with an institution of higher education.
+(2)
+"Coordinating board" means the Texas Higher
+Education Coordinating Board.
+(3)  "Foreign adversary" means:
+(A)
+any country designated as a foreign adversary
+by the United States secretary of commerce under 15 C.F.R. Section
+791.4; and
+(B)  the State of Qatar.
+(4)
+"Foreign government" means the government or an
+agent of a country, nation, or group of nations, or a province or
+other political subdivision of a country or nation, other than the
+United States government.
+(5)  "Foreign source" means:
+(A)
+a foreign government or agency of a foreign
+government;
+(B)
+a legal entity created solely under the laws
+of a foreign government;
+(C)
+an individual who is not a citizen or a
+national of the United States, including a territory or
+protectorate of the United States;
+(D)
+a partnership, association, organization, or
+other combination of persons, or a subsidiary of such an entity,
+organized under the laws of or having its principal place of
+business in a foreign adversary;
+(E)
+a political party or member of a political
+party of a foreign adversary; or
+(F)
+an agent acting on behalf of an individual or
+entity described by Paragraph (A), (B), (C), (D), or (E).
+(6)
+"Gift" means a gift, grant, endowment, award, or
+donation of money or property of any kind, including a conditional
+or unconditional pledge of the gift, grant, endowment, award, or
+donation.
+(7)
+"Institution of higher education" has the meaning
+assigned by Section 61.003.
+(8)
+"Interest" when referring to an entity means any
+direct or indirect:
+(A)
+investment in or loan extended to the entity
+that is valued at five percent or more of the entity's net worth; or
+(B)
+control over the entity at a level exerting
+similar or greater influence on the governance of the entity as an
+investment described by Paragraph (A).
+(9)
+"Political party" means an organization or
+combination of individuals whose aim or purpose is, or who is
+engaged in an activity devoted to, the establishment, control, or
+acquisition of administration or control of a government, or the
+furtherance or influencing of the political or public interest,
+policies, or relations of a government.
+Sec.
+51B.002.
+RULES. The coordinating board shall adopt
+rules as necessary to implement this chapter.
+SUBCHAPTER B. REQUIREMENTS FOR GIFTS FROM AND CONTRACTS WITH
+FOREIGN ADVERSARIES
+Sec.
+51B.051.
+GIFT FROM FOREIGN ADVERSARY. (a)
+Each
+institution of higher education may not accept a gift the
+institution is directly or indirectly offered from a foreign source
+of a foreign adversary unless the gift is approved by the
+coordinating board.
+(b)
+An institution of higher education shall promptly
+submit to the coordinating board a report on any gift the
+institution is directly or indirectly offered from a foreign source
+of a foreign adversary.
+(b-1)
+Not later than November 1, 2025, each institution of
+higher education shall submit to the coordinating board a report on
+each gift the institution received directly or indirectly from a
+foreign source of a foreign adversary from December 31, 2015, to
+September 1, 2025.
+This subsection expires January 1, 2026.
+(c)
+For each gift required to be reported under this
+section, an institution of higher education must include in the
+report the following information, unless the disclosure of that
+information is prohibited or the information is confidential under
+federal or state law:
+(1)
+the date the institution received the offer of the
+gift;
+(2)  the value of the gift;
+(3)  the purpose of the gift;
+(4)
+an identification of the persons the gift is
+explicitly intended to benefit;
+(5)
+any applicable condition, requirement,
+restriction, or term made a part of the gift;
+(6)
+the foreign source's name and country of residence
+or domicile;
+(7)
+the name and mailing address of the person making
+the disclosure; and
+(8)  the date the gift terminates, if applicable.
+(d)
+Not later than the 30th day after the date the
+coordinating board receives a report under Subsection (b), the
+coordinating board shall determine whether and under what
+conditions the institution may accept the gift.
+(e)  The coordinating board shall adopt:
+(1)
+forms for an institution of higher education to
+use in reporting the offering of a gift described by Subsection (b);
+and
+(2)
+rules and procedures for deciding whether to allow
+an institution of higher education to accept a gift described by
+Subsection (b).
+(f)
+The coordinating board shall maintain a public Internet
+portal disclosing each gift reported under this section and the
+coordinating board's decision whether to allow the institution of
+higher education to accept the gift.
+(g)
+For purposes of this section, a gift offered through an
+intermediary or affiliate organization is considered an indirect
+gift and subject to reporting.
+(h)
+On the request of the governor, the lieutenant governor,
+or the speaker of the house of representatives, the coordinating
+board shall inspect or audit a gift reported under this section.
+(i)
+Information required to be reported under this section
+is not confidential except as otherwise provided by state law or
+unless protected as a trade secret by federal or state law.
+Sec.
+51B.052.
+CONTRACT OR CULTURAL AGREEMENT WITH FOREIGN
+ADVERSARY. (a)
+Each institution of higher education may not enter
+into a contract or cultural agreement with a foreign source of a
+foreign adversary unless the contract or agreement is approved by
+the coordinating board.
+(b)
+An institution of higher education shall promptly
+submit to the coordinating board a report on any contract or
+cultural agreement the institution is directly or indirectly
+offered from a foreign source of a foreign adversary.
+(b-1)
+Not later than November 1, 2025, each institution of
+higher education shall submit to the coordinating board a report on
+each contract or cultural agreement the institution directly or
+indirectly entered into with a foreign source of a foreign
+adversary from December 31, 2013, to September 1, 2025.
+This
+subsection expires January 1, 2026.
+(c)
+For each contract or cultural agreement required to be
+reported under this section, an institution of higher education
+must include in the report, unless the disclosure of that
+information is prohibited or the information is confidential under
+federal or state law:
+(1)
+the information described by Section 51B.051(c)
+with respect to the contract or agreement; and
+(2)  a copy of the contract or agreement.
+(d)
+Not later than the 30th day after the date the
+coordinating board receives a report under Subsection (b), the
+coordinating board shall determine whether and under what
+conditions the institution may enter into the contract or cultural
+agreement.
+(e)  The coordinating board shall adopt:
+(1)
+forms for an institution of higher education to
+use in reporting the offering of a contract or cultural agreement
+described by Subsection (b); and
+(2)
+rules and procedures for deciding whether to allow
+an institution of higher education to enter into a contract or
+cultural agreement described by Subsection (b).
+(f)
+The coordinating board shall maintain a public Internet
+portal disclosing each contract and cultural agreement reported
+under this section and the coordinating board's decision whether to
+allow the institution of higher education to enter into the
+contract or agreement.
+(g)
+For purposes of this section, a contract or cultural
+agreement entered into through an intermediary or affiliate
+organization is considered an indirect contract or cultural
+agreement and subject to reporting.
+(h)
+On the request of the governor, the lieutenant governor,
+or the speaker of the house of representatives, the coordinating
+board shall inspect or audit a contract or cultural agreement
+reported under this section.
+Sec.
+51B.053.
+INVESTIGATION. (a) The coordinating board
+shall investigate an alleged violation of this subchapter if the
+coordinating board receives:
+(1)
+a complaint from a compliance officer of a state
+agency or institution of higher education; or
+(2)
+a sworn complaint based on substantive information
+and reasonable belief.
+(b)
+The coordinating board may request from any person
+records relevant to a reasonable suspicion of a violation of this
+subchapter.
+A person who receives a request under this subsection
+shall produce the records not later than the 10th day after the date
+the person receives the request, unless the coordinating board and
+the person agree to a later date.
+Sec.
+51B.054.
+ENFORCEMENT; PENALTIES FOR VIOLATION. (a) A
+person who fails to submit a report required under this subchapter,
+obtain coordinating board approval for a gift, contract, or
+cultural agreement as required under this subchapter, or provide a
+record requested under Section 51B.053 is liable to this state for a
+civil penalty in the amount of $10,000 for the first violation and
+$20,000 for each subsequent violation.
+(b)
+A final order finding a failure to submit a report
+required under this subchapter or to obtain coordinating board
+approval for a gift, contract, or cultural agreement as required
+under this subchapter must:
+(1)
+identify the state officer or employee responsible
+for accepting or entering into the unreported or unapproved gift,
+contract, or cultural agreement; and
+(2)  refer the violation to, as applicable:
+(A)
+the governor to consider removing a state
+officer identified under Subdivision (1) from office; or
+(B)
+the employing institution of higher
+education to consider terminating the employment of an employee
+identified under Subdivision (1).
+(c)
+The attorney general may sue to collect the civil
+penalty under Subsection (a).
+A suit under this subsection may be
+filed in a district court in Travis County.
+(d)
+If the coordinating board determines that an
+institution of higher education negligently failed to report
+information required by this subchapter or obtain coordinating
+board approval for a gift, contract, or cultural agreement as
+required under this subchapter, the coordinating board may assess
+an administrative penalty against the institution in an amount
+equal to 105 percent of the value of each unreported or unapproved
+gift, contract, or agreement.
+(e)
+An institution of higher education may not pay a civil
+penalty imposed under Subsection (a) or an administrative penalty
+assessed under Subsection (d) using state or federal money.
+(f)
+A person who reports a violation described by Subsection
+(a) may also report the violation to the attorney general and retain
+protection under Chapter 554, Government Code.
+The person is
+entitled to receive a reward in the amount of 25 percent of any
+penalty recovered under this section.
+SUBCHAPTER C.
+INTERNATIONAL CULTURAL EXCHANGE AGREEMENTS AND
+PARTNERSHIPS AND STUDENT ASSOCIATIONS
+Sec. 51B.101.  DEFINITIONS. In this subchapter:
+(1)
+"Cultural exchange agreement" means a written or
+spoken statement of mutual interest in cultural exchange or
+academic or research collaboration.
+(2)
+"Cultural exchange partnership" means a faculty or
+student exchange program, study abroad program, matriculation
+program, recruiting program, or dual degree program.
+Sec.
+51B.102.
+CERTAIN INTERNATIONAL CULTURAL AGREEMENTS
+PROHIBITED. (a) An institution of higher education may not
+participate in a cultural exchange agreement with a foreign source
+of a foreign adversary, or an entity controlled by a foreign
+adversary, that:
+(1)  constrains the institution's freedom of contract;
+(2)
+allows the institution's curriculum or values to
+be directed, controlled, or influenced by the foreign adversary; or
+(3)
+promotes an agenda detrimental to the safety or
+security of this state, the residents of this state, or the United
+States.
+(b)
+Before entering into a cultural exchange agreement with
+a foreign source of a foreign adversary, an institution of higher
+education shall share the substance of the agreement with the
+coordinating board and federal agencies responsible for national
+security or the enforcement of trade sanctions, embargoes, or other
+trade restrictions.
+If the coordinating board or a federal agency
+consulted under this subsection determines that the agreement
+violates the prohibition under Subsection (a), the institution may
+not participate in the agreement.
+Sec.
+51B.103.
+PROHIBITIONS ON STUDENT ASSOCIATIONS. (a) A
+student or scholars association affiliated with an institution of
+higher education may not:
+(1)
+accept a gift from a foreign source of a foreign
+adversary; or
+(2)
+enter into a contract or agreement with a foreign
+source of a foreign adversary.
+(b)
+An institution of higher education shall terminate an
+affiliation with a student or scholars association if the
+institution determines that the association has violated this
+section.
+(c)
+For purposes of this section, member dues or fees are
+not considered a gift from a foreign source of a foreign adversary.
+Sec.
+51B.104.
+ANNUAL REPORT. (a) Not later than December 1
+of each year, the coordinating board shall submit a written report
+to the governor, the lieutenant governor, and the speaker of the
+house of representatives on the grant programs, cultural exchange
+agreements, cultural exchange partnerships, and contracts between
+an institution of higher education and a foreign adversary or a
+foreign source of a foreign adversary.
+(b)
+The report must include the following information for
+the preceding fiscal year:
+(1)
+data regarding each grant program, cultural
+exchange agreement, cultural exchange partnership, or contract
+between an institution of higher education and an educational
+institution or other institution that is based in or controlled by a
+foreign adversary;
+(2)
+a list of each office, campus, or physical
+location used or maintained by an institution of higher education
+in a foreign adversary; and
+(3)
+the date on which each grant program, agreement,
+partnership, or contract described by Subdivision (1) is expected
+to terminate.
+(c)
+Not later than July 1 of each year, each institution of
+higher education shall submit to the coordinating board the
+information described by Subsection (b).
+SUBCHAPTER D.
+SCREENING OF FOREIGN RESEARCHERS
+Sec.
+51B.151.
+APPLICABILITY. This subchapter applies only
+to an institution of higher education that has an annual research
+budget of $10 million or more.
+Sec.
+51B.152.
+SCREENING OF FOREIGN RESEARCHERS REQUIRED.
+(a)
+Before interviewing or offering an applicant employment for a
+research or research-related support position at the institution or
+granting an applicant access to research data or activities or
+other sensitive data of the institution, an institution of higher
+education must screen the applicant as provided by this subchapter
+if the applicant:
+(1)
+is a citizen of a foreign country and is not a
+permanent resident of the United States; or
+(2)
+is affiliated with an institution or program, or
+has at least one year of employment or training, in a foreign
+adversary, other than employment or training by an agency of the
+United States.
+(b)
+An institution of higher education may screen
+additional applicants as provided by this subchapter for a position
+described by Subsection (a) at the institution's discretion.
+Sec.
+51B.153.
+APPLICATION: REQUIRED MATERIALS. (a) An
+institution of higher education must require an applicant subject
+to screening under Section 51B.152 to submit to the institution:
+(1)
+if the applicant is a citizen of a foreign country,
+a copy of the applicant's passport and nonimmigrant visa
+application most recently submitted to the United States Department
+of State; and
+(2)  a resume and curriculum vitae that includes:
+(A)
+a list of each postsecondary educational
+institution in which the applicant has been enrolled;
+(B)
+a list of all places of employment since the
+applicant's 18th birthday;
+(C)
+a list of all published materials for which
+the applicant received credit as an author, a researcher, or
+otherwise or to which the applicant contributed significant
+research, writing, or editorial support;
+(D)
+a list of the applicant's current and pending
+research funding from any source, including the source of funding,
+the amount of funding, the applicant's role on the project, and a
+brief description of the research; and
+(E)
+a full disclosure of the applicant's
+professional activities outside of higher education, including any
+affiliation with an institution or program in a foreign adversary.
+(b)
+Notwithstanding Subsection (a)(2)(B), an applicant who
+has been continuously employed or enrolled in a postsecondary
+educational institution in the United States for the preceding 20
+years may include in the applicant's resume only the applicant's
+employment history for the preceding 20 years.
+(c)
+An institution of higher education may destroy or return
+to an applicant the copy of the applicant's nonimmigrant visa
+application submitted under Subsection (a)(1) after extracting all
+information relevant to the requirements of this subchapter.
+Sec.
+51B.154.
+RESEARCH INTEGRITY OFFICE. (a) The chief
+administrative officer of an institution of higher education shall
+establish a research integrity office to:
+(1)
+review the materials submitted to the institution
+by an applicant under Section 51B.153; and
+(2)
+take reasonable steps to verify the information in
+the application, including by:
+(A)
+searching public databases for research
+publications and presentations and public conflict of interest
+records to identify any research publication or presentation that
+may have been omitted from the application;
+(B)
+contacting each of the applicant's employers
+during the preceding 10 years to verify employment;
+(C)
+contacting each postsecondary educational
+institution the applicant attended to verify enrollment and
+educational progress;
+(D)
+searching public listings of persons subject
+to sanctions or restrictions under federal law;
+(E)
+submitting the applicant's name and other
+identifying information to the Federal Bureau of Investigation or
+another federal agency for screening related to national security
+or counterespionage; and
+(F)
+taking any other action the office considers
+appropriate.
+(b)
+An institution of higher education may direct the
+research integrity office to approve applicants for hire using a
+risk-based determination that considers the nature of the research
+and the applicant's background and ongoing affiliations.
+(c)
+An institution of higher education must complete the
+requirements of this subchapter before:
+(1)
+interviewing or offering a position to an
+applicant described by Section 51B.152(a) in a research or
+research-related support position; or
+(2)
+granting the applicant access to research data or
+activities or other sensitive data.
+(d)
+An institution of higher education may not employ an
+applicant subject to screening under Section 51B.152(a) in a
+research or research-related support position if the applicant
+fails to disclose in the application a substantial educational,
+employment, or research-related activity or publication or
+presentation unless the applicable department head or the
+department head's designee certifies in writing the substance of
+the failure to disclosure and the reasons for disregarding that
+failure.
+A copy of the certification must be kept in the
+investigative file of the research integrity office and must be
+submitted to the nearest Federal Bureau of Investigation field
+office.
+(e)
+The research integrity office shall report to the
+nearest Federal Bureau of Investigation field office, and to any
+law enforcement agency designated by the governor or the
+institution of higher education's governing board, the identity of
+an applicant who is rejected for employment based on the screening
+required by this subchapter or other risk-based screening.
+Sec.
+51B.155.
+OPERATIONAL AUDIT. Not later than March 31,
+2026, the coordinating board shall conduct an operational audit
+regarding the implementation of this subchapter.
+This section
+expires September 1, 2026.
+SUBCHAPTER E. FOREIGN TRAVEL: RESEARCH INSTITUTIONS
+Sec.
+51B.201.
+APPLICABILITY. This subchapter applies only
+to an institution of higher education that has an annual research
+budget of $10 million or more.
+Sec.
+51B.202.
+FOREIGN TRAVEL: RESEARCH INSTITUTIONS.
+(a)
+Each institution of higher education shall establish an
+international travel approval and monitoring program.
+(b)
+The program must require, in addition to any other
+travel approval process required by the institution of higher
+education, preapproval from the institution's research integrity
+office established under Section 51B.154 for any
+employment-related foreign travel or activities by a faculty
+member, researcher, or research department staff member of the
+institution.
+(c)
+A research integrity office may preapprove travel or
+activities under the program only if the applicant:
+(1)
+reviews and acknowledges guidance published by the
+institution of higher education that relates to foreign adversaries
+or countries under sanctions or other restrictions by this state or
+the United States government, including:
+(A)  federal license requirements;
+(B)  customs rules;
+(C)  export controls;
+(D)
+restrictions on taking institution of higher
+education property, including intellectual property, abroad;
+(E)
+restrictions on presentations, teaching, and
+interactions with foreign colleagues; and
+(F)
+other subjects important to the research and
+academic integrity of the institution of higher education; and
+(2)
+agrees to comply with the institution of higher
+education's limitations on travel and activities abroad and all
+applicable federal laws.
+Sec.
+51B.203.
+MAINTENANCE OF RECORDS AND REPORT. (a) An
+institution of higher education shall maintain for at least three
+years, or any longer period of time required by applicable federal
+or state law, records relating to foreign travel and activities by a
+faculty member, researcher, or research department staff member of
+the institution, including:
+(1)  each foreign travel request and approval;
+(2)
+expenses reimbursed by the institution for foreign
+travel, including for travel, food, and lodging;
+(3)
+payments and honoraria received during foreign
+travel and activities, including for travel, food, and lodging;
+(4)
+a statement of the purpose of each foreign travel;
+and
+(5)  any record related to the foreign activity review.
+(b)
+Each institution of higher education shall annually
+submit to the institution's governing board a report on foreign
+travel by a faculty member, researcher, or research department
+staff member of the institution to a foreign adversary.
+The report
+must list each traveler, foreign location visited, and foreign
+institution visited.
+Sec.
+51B.204.
+OPERATIONAL AUDIT. Not later than March 31,
+2026, the coordinating board shall conduct an operational audit
+regarding the implementation of this subchapter.
+This section
+expires September 1, 2026.
+SUBCHAPTER F. ACADEMIC PARTNERSHIPS
+Sec.
+51B.251.
+APPROVAL OF CERTAIN ACADEMIC PARTNERSHIPS
+REQUIRED. (a) Subject to approval by the coordinating board, an
+institution of higher education may enter into or renew an academic
+partnership with an educational or research institution located in
+a foreign adversary only if the institution of higher education
+maintains sufficient structural safeguards to protect the
+institution's intellectual property, the security of this state,
+and the national security interests of the United States.
+(b)
+The coordinating board may approve an academic
+partnership described by Subsection (a) only if the coordinating
+board, in consultation with the attorney general's office,
+determines that the partnership includes the following safeguards:
+(1)
+compliance with all federal requirements,
+including requirements of:
+(A)
+federal research sponsors and federal export
+control agencies, including regulations regarding international
+traffic in arms and export administration regulations; and
+(B)
+economic and trade sanctions administered by
+the Office of Foreign Assets Control of the United States
+Department of the Treasury;
+(2)
+annual formal institution-level training programs
+for faculty on conflicts of interest and conflicts of commitment;
+and
+(3)
+a formalized foreign visitor process and uniform
+visiting scholar agreement.
+(c)
+The coordinating board, in consultation with the
+attorney general's office, may reject or terminate an academic
+partnership described by Subsection (a) at any time and for any
+reason.
+SUBCHAPTER G. FOREIGN ADVERSARY SOFTWARE AND EDUCATION SERVICES
+Sec.
+51B.301.
+REVIEW OF EDUCATION SOFTWARE. (a) The
+coordinating board shall:
+(1)
+conduct a thorough review of the use by
+institutions of higher education of testing, tutoring, or other
+education software owned or controlled by a foreign adversary or a
+company domiciled or headquartered in a foreign adversary; and
+(2)
+develop a plan to eliminate the use of education
+software described by Subdivision (1).
+(b)
+An institution of higher education may not enter into or
+renew a contract to provide testing, tutoring, or other education
+software with a foreign adversary or a company domiciled or
+headquartered in a foreign adversary.
+SECTION 2.  Section 31.05(a), Penal Code, is amended by
+adding Subdivisions (2-a), (2-b), and (2-c) to read as follows:
+(2-a)
+"Foreign agent" means an officer, employee,
+proxy, servant, delegate, or representative of a foreign
+government.
+(2-b)
+"Foreign government" has the meaning assigned by
+Section 51B.001, Education Code.
+(2-c)
+"Foreign instrumentality" means an agency,
+bureau, ministry, component, institution, association, or legal,
+commercial, or business organization, corporation, firm, or entity
+that is substantially owned, controlled, sponsored, commanded,
+managed, or dominated by a foreign government.
+SECTION 3.  Section 31.05(c), Penal Code, is amended to read
+as follows:
+(c)  An offense under this section is a felony of the third
+degree
+, except that the offense is a felony of the second degree if
+it is shown on the trial of the offense that the person who
+committed the offense intended to benefit a foreign agent, foreign
+government, or foreign instrumentality
+.
+SECTION 4.  Not later than March 31, 2026, each public
+institution of higher education shall establish an international
+travel approval and monitoring program required by Section 51B.202,
+Education Code, as added by this Act.
+SECTION 5.  Not later than December 1, 2026, the Texas Higher
+Education Coordinating Board shall prepare and submit the initial
+report required by Section 51B.104, Education Code, as added by
+this Act.
+SECTION 6.  The changes in law made by this Act apply only to
+a contract entered into or renewed on or after the effective date of
+this Act.  A contract entered into or renewed before the effective
+date of this Act is governed by the law in effect on the date the
+contract was entered into or renewed, and the former law is
+continued in effect for that purpose.
+SECTION 7.  The changes in law made by this Act apply only to
+an offense committed on or after the effective date of this Act. An
+offense committed before the effective date of this Act is governed
+by the law in effect on the date the offense was committed, and the
+former law is continued in effect for that purpose.  For purposes of
+this section, an offense was committed before the effective date of
+this Act if any element of the offense occurred before that date.
+SECTION 8.  This Act takes effect September 1, 2025.

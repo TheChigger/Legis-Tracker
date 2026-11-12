@@ -1,0 +1,222 @@
+89(R) HB 130 - Introduced version - Bill Text
+89R4352 SRA-F
+By: Bonnen
+H.B. No. 130
+A BILL TO BE ENTITLED
+AN ACT
+relating to genetic information security for residents of this
+state; providing a civil penalty; providing a private cause of
+action.
+BE IT ENACTED BY THE LEGISLATURE OF THE STATE OF TEXAS:
+SECTION 1.  Subtitle H, Title 2, Health and Safety Code, is
+amended by adding Chapter 174 to read as follows:
+CHAPTER
+174. SECURITY OF GENETIC INFORMATION
+Sec.
+174.001.
+SHORT TITLE.
+This chapter may be cited as the
+Texas Genomic Act of 2025.
+Sec. 174.002.  DEFINITIONS.  In this chapter:
+(1)
+"Company" means a sole proprietorship,
+organization, association, corporation, partnership, joint
+venture, limited partnership, limited liability partnership, or
+limited liability company that exists to make a profit. The term
+includes a wholly owned subsidiary, majority-owned subsidiary,
+parent company, or affiliate of those entities or business
+associations.
+(2)  "Domicile" means the country in which:
+(A)
+a company or nonprofit organization is
+formed, incorporated, or registered and headquartered;
+(B)
+a company's or nonprofit organization's
+affairs are primarily conducted; or
+(C)
+the majority of the company's ownership
+shares are held.
+(3)
+"Foreign adversary" has the meaning assigned by 15
+C.F.R. Section 791.4(a).
+(4)
+"Genome sequencer" means any device or platform
+used to conduct genome sequencing, resequencing, or isolation or
+other genome research.
+(5)
+"Genome sequencing" means any method used to
+determine the identity and order of nucleotide bases in the human
+genome.
+(6)
+"Human genome" means the set of DNA found in human
+cells.
+(7)
+"Medical facility" means a facility licensed or
+registered by a state or federal agency to provide health care
+services that receives any state funding, including pass-through
+federal money provided to a state agency for grant awards.
+(8)
+"Software" means computer programs and related
+equipment used for genome sequencing or the operation, control,
+analysis, research, or other functions of genome sequencers.
+Sec.
+174.003.
+APPLICABILITY. This chapter applies to a
+medical facility, research facility, company, or nonprofit
+organization that conducts research on or testing of genome
+sequencing or the human genome in this state.
+Sec.
+174.004.
+PURPOSE AND LEGISLATIVE POLICY.
+(a)
+The
+purpose of this chapter is to
+ensure that a medical facility,
+research facility, company, or nonprofit organization subject to
+this chapter and acting on behalf of a foreign adversary does not
+gain access to the genetic information of residents of this state.
+(b)  The policy of this state is to:
+(1)
+oppose the collection and analysis of genomic
+information by a foreign adversary or for use by a foreign
+adversary; and
+(2)
+support sanctions the United States Department of
+Commerce or the United States Department of Defense imposes on a
+medical facility, research facility, company, or nonprofit
+organization engaged in the collection and analysis of genomic
+information for use by a foreign adversary.
+Sec.
+174.005.
+PROHIBITED USE OF CERTAIN GENOME SEQUENCERS
+AND GENOME SEQUENCING TECHNOLOGIES.
+A medical facility, research
+facility, company, or nonprofit organization subject to this
+chapter may not use a genome sequencer or software produced by or on
+behalf of:
+(1)  a foreign adversary;
+(2)  a state-owned enterprise of a foreign adversary;
+(3)
+a company or nonprofit organization domiciled
+within the borders of a country that is a foreign adversary; or
+(4)
+an owned or controlled subsidiary or affiliate of
+a company or nonprofit organization domiciled within the borders of
+a country that is a foreign adversary.
+Sec.
+174.006.
+REQUIREMENTS FOR GENOMIC INFORMATION
+STORAGE.
+(a)
+A medical facility, research facility, company, or
+nonprofit organization subject to this chapter shall store all
+genome sequencing data of residents of this state only at a location
+in the United States.
+(b)
+A medical facility, research facility, company, or
+nonprofit organization subject to this chapter that stores genome
+sequencing data of residents of this state, including storage of
+genome sequencing data through a contract with a third-party data
+storage company, shall ensure the security of the genome sequencing
+data using reasonable encryption methods, restriction on access,
+and other cybersecurity best practices.
+(c)
+Except as authorized by the attorney general under
+Subsection (d), a medical facility, research facility, company, or
+nonprofit organization subject to this chapter shall ensure genome
+sequencing data of residents of this state, other than open data, is
+inaccessible to any person located outside of the United States.
+(d)
+A medical facility, research facility, company, or
+nonprofit organization subject to this chapter that stores genome
+sequencing data of residents of this state may apply to the attorney
+general in the form and manner prescribed by attorney general rule
+to allow remote access to genome sequencing data of residents of
+this state by persons located outside of the United States. The
+attorney general may allow remote access to genome sequencing data
+of residents of this state only if the attorney general determines
+that:
+(1)
+remote access is necessary for the facility,
+company, or organization to perform its functions;
+(2)
+appropriate security safeguards are implemented
+for remote access; and
+(3)
+remote access is not available to any person
+located within the borders of a country that is a foreign adversary.
+Sec.
+174.007.
+REQUIRED ANNUAL CERTIFICATION OF COMPLIANCE.
+(a)
+Not later than December 31 of each year, a medical facility,
+research facility, company, or nonprofit organization subject to
+this chapter shall certify to the attorney general that the
+facility, company, or organization is in compliance with this
+chapter.
+(b)
+An attorney representing a medical facility, research
+facility, company, or nonprofit organization subject to this
+chapter shall submit the certification required under Subsection
+(a).
+Sec.
+174.008.
+INVESTIGATIVE AUTHORITY OF ATTORNEY GENERAL.
+(a)
+The attorney general may investigate an allegation of a
+violation of this chapter.
+(b)
+Any person may notify the attorney general of a
+violation or potential violation of this chapter.
+Sec.
+174.009.
+CIVIL PENALTY.
+(a)
+A medical facility,
+research facility, company, or nonprofit organization that
+violates this chapter is liable to this state for a civil penalty of
+$10,000 for each violation.
+(b)
+The attorney general may bring an action to recover the
+civil penalty imposed under this section.
+(c)
+An action under this section may be brought in a
+district court in:
+(1)  Travis County; or
+(2)  a county in which any part of the violation occurs.
+(d)
+The attorney general shall deposit a civil penalty
+collected under this section in the state treasury to the credit of
+the general revenue fund.
+(e)
+The attorney general may recover reasonable expenses
+incurred in obtaining a civil penalty under this section, including
+court costs, reasonable attorney's fees, investigative costs,
+witness fees, and deposition expenses.
+Sec.
+174.010.
+PRIVATE CAUSE OF ACTION.
+(a)
+A resident of
+this state who is a patient or research subject of a medical
+facility, research facility, company, or nonprofit organization
+subject to this chapter and who is harmed by the storage or use of
+the patient's or subject's genome sequencing data in violation of
+this chapter may bring an action against the facility, company, or
+organization that violated this chapter and is entitled to obtain:
+(1)  the greater of:
+(A)  actual damages; or
+(B)
+statutory damages in an amount not to exceed
+$5,000 for each violation; and
+(2)  court costs and reasonable attorney's fees.
+(b)
+Sections 41.003 and 41.004, Civil Practice and Remedies
+Code, do not apply to an action brought under this section.
+SECTION 2.  The change in law made by this Act applies only
+to a cause of action that accrues on or after the effective date of
+this Act.  A cause of action that accrues before the effective date
+of this Act is governed by the law in effect on the date the cause of
+action accrued, and the former law is continued in effect for that
+purpose.
+SECTION 3.  This Act takes effect September 1, 2025.

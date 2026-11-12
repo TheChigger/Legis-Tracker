@@ -1,0 +1,64 @@
+90(R) HB 153 - Introduced version - Bill Text
+90R3465 JDK-F
+By: Gervin-Hawkins
+H.B. No. 153
+A BILL TO BE ENTITLED
+AN ACT
+relating to the creation of the criminal offense of trespass in a
+facility housing an animal and to restitution for property damage
+resulting from that offense.
+BE IT ENACTED BY THE LEGISLATURE OF THE STATE OF TEXAS:
+SECTION 1.  Chapter 30, Penal Code, is amended by adding
+Section 30.08 to read as follows:
+Sec.
+30.08.
+TRESPASS IN FACILITY HOUSING AN ANIMAL. (a) In
+this section, "harass" means to engage in any act that:
+(1)
+demonstrates a disregard for the well-being of an
+animal; or
+(2)
+disrupts the normal behavior patterns of an
+animal, including disrupting the animal's feeding, watering,
+resting, or breeding.
+(b)
+A person commits an offense if the person enters an
+indoor or outdoor facility housing an animal that is operated for
+the purpose of public visitation, conservation, education, or
+science, including a zoo, and the person:
+(1)
+enters a cage, enclosure, or other area where an
+animal is exhibited or housed; and
+(2)
+knows the person has no legal authority, license,
+or permission to enter.
+(c)
+An offense under this section is a state jail felony,
+except that the offense is a felony of the third degree if it is
+shown on the trial of the offense that:
+(1)  the actor harassed the animal; and
+(2)  the animal suffered injury or death.
+(d)
+It is a defense to prosecution under this section that
+the person entered the cage, enclosure, or other area to aid another
+person or an animal located in the cage, enclosure, or other area.
+(e)
+It is not a defense to prosecution under this section
+that:
+(1)
+entry to the cage, enclosure, or other area where
+the animal was exhibited or housed was not sufficiently guarded,
+locked, or made otherwise inaccessible; or
+(2)
+injury to the animal was necessary to protect the
+person who entered the cage, enclosure, or other area from injury or
+death.
+SECTION 2.  Article 42.037, Code of Criminal Procedure, is
+amended by adding Subsection (y) to read as follows:
+(y)
+If a defendant is convicted of an offense under Section
+30.08, Penal Code, the court shall order the defendant to make
+restitution to the facility for the cost of any damage, loss, or
+destruction as a result of the offense, including the injury or
+death of the animal.
+SECTION 3.  This Act takes effect September 1, 2027.

@@ -1,0 +1,162 @@
+90(R) HB 146 - Introduced version - Bill Text
+90R3145 AND-F
+By: Curry
+H.B. No. 146
+A BILL TO BE ENTITLED
+AN ACT
+relating to impoundment, storage, and notification fees for
+vehicles stored at vehicle storage facilities; authorizing fee
+increases and decreases; requiring the adjustment of authorized
+fees.
+BE IT ENACTED BY THE LEGISLATURE OF THE STATE OF TEXAS:
+SECTION 1.  Sections 2303.155(b) and (c), Occupations Code,
+are amended to read as follows:
+(b)  The operator of a vehicle storage facility or
+governmental vehicle storage facility may charge the owner of a
+vehicle stored or parked at the facility:
+(1)  a notification fee set in a reasonable amount
+,
+subject to Subsection (c),
+for providing notice under this
+subchapter, including notice under Section 2303.154(c);
+(2)  an impoundment fee of $20, subject to Section
+2303.1552, for any action that:
+(A)  is taken by or at the direction of the owner
+or operator of the facility; and
+(B)  is necessary to preserve, protect, or service
+a vehicle stored or parked at the facility;
+(3)  a daily storage fee, subject to Section 2303.1552,
+of:
+(A)  $20 for each day or part of a day the vehicle
+is stored at the facility if the vehicle is not
+an electric or
+hybrid passenger vehicle and is not
+longer than 25 feet; [
+or
+]
+(B)  $35 for each day or part of a day the vehicle
+is stored at the facility if the vehicle is
+not an electric or
+hybrid passenger vehicle and is
+longer than 25 feet;
+or
+(C)
+$70 for each day or part of a day the vehicle
+is stored at the facility if the vehicle is an electric or hybrid
+passenger vehicle;
+and
+(4)  any fee that is required to be submitted to a law
+enforcement agency, the agency's authorized agent, or a
+governmental entity.
+(c)  A notification fee under Subsection (b) may not
+, subject
+to Section 2303.1552,
+exceed $50, except that if notice by
+publication is required by this chapter and the cost of publication
+exceeds 50 percent of the notification fee, the vehicle storage
+facility may recover the additional amount of the cost of
+publication from the vehicle owner or agent.
+SECTION 2.  Section 2303.1552(b), Occupations Code, is
+amended to read as follows:
+(b)  Each
+even-numbered
+[
+odd-numbered
+] year, the commission,
+not later than
+February
+[
+November
+] 1:
+(1)  by rule may adjust the impoundment fee under
+Section 2303.155(b)(2)
+,
+[
+and
+] the storage fees under Section
+2303.155(b)(3)
+, and the maximum amount of the notification fee
+under Section 2303.155(c)
+by an amount equal to the amount of the
+applicable
+impoundment or storage
+fee
+or maximum notification fee
+in effect on December 31 of the preceding year multiplied by the
+percentage increase or decrease
+, if any,
+in the consumer price
+index during the [
+preceding
+] state fiscal biennium
+ending August 31
+of the year preceding the year in which the commission adopts a
+final rule under this section
+; and
+(2)  if
+a fee or maximum amount is
+[
+the fees are
+]
+adjusted under Subdivision (1), shall publish the adjusted
+fee or
+maximum amount
+[
+fees
+] on the department's Internet website.
+SECTION 3.  Subchapter D, Chapter 2303, Occupations Code, is
+amended by adding Sections 2303.1553 and 2303.1554 to read as
+follows:
+Sec.
+2303.1553.
+ONE-TIME ADJUSTMENT TO CERTAIN FEES:
+TEMPORARY PROVISION.
+(a)
+Not later than February 1, 2028, the
+commission shall:
+(1)
+adjust the impoundment fee under Section
+2303.155(b)(2), the storage fees under Section 2303.155(b)(3), and
+the maximum amount of the notification fee under Section
+2303.155(c) by an amount equal to the amount of the applicable fee
+or maximum amount in effect on December 31, 2005, multiplied by the
+percentage increase or decrease, if any, in the consumer price
+index, as defined by Section 2303.1552(a), that occurred during the
+period beginning December 31, 2005, and ending December 31, 2019;
+and
+(2)
+if a fee or maximum amount is adjusted under
+Subdivision (1), publish the adjusted fee or maximum amount on the
+department's Internet website.
+(b)  This section expires September 1, 2029.
+Sec.
+2303.1554.
+ONE-TIME INCREASE TO NOTIFICATION FEE
+MAXIMUM AMOUNT: TEMPORARY PROVISION. (a) Not later than February 1,
+2028, the commission shall increase the maximum amount of the
+notification fee under Section 2303.155(c) by an amount equal to
+the sum of:
+(1)
+the maximum amount of the notification fee in
+effect on December 31, 2019, multiplied by the percentage increase
+the commission applied to the impoundment fee under Section
+2303.155(b)(2) and the storage fees under Section 2303.155(b)(3) in
+the final rule adopted by the commission under Section 2303.1552(b)
+on October 25, 2019, 44 Tex. Reg. 6365 (2019);
+(2)
+the maximum amount of the notification fee as
+adjusted under Section 2303.1553(a)(1) multiplied by the
+percentage increase the commission applied to the impoundment fee
+under Section 2303.155(b)(2) and the storage fees under Section
+2303.155(b)(3) in the final rule adopted by the commission under
+Section 2303.1552(b) on October 29, 2021, 46 Tex. Reg. 7399 (2021);
+and
+(3)
+the maximum amount of the notification fee as
+adjusted under Subdivision (2) multiplied by the percentage
+increase the commission applied to the impoundment fee under
+Section 2303.155(b)(2) and the storage fees under Section
+2303.155(b)(3) in the final rule adopted by the commission under
+Section 2303.1552(b) on January 5, 2024, 49 Tex. Reg. 38 (2024).
+(b)  This section expires September 1, 2029.
+SECTION 4.  This Act takes effect September 1, 2027.

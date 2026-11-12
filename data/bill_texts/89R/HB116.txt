@@ -1,0 +1,230 @@
+89(R) HB 116 - Introduced version - Bill Text
+89R17242 AMF-D
+By: Dutton
+H.B. No. 116
+A BILL TO BE ENTITLED
+AN ACT
+relating to grounds for the involuntary termination of the
+parent-child relationship.
+BE IT ENACTED BY THE LEGISLATURE OF THE STATE OF TEXAS:
+SECTION 1.  Section 154.001(a-1), Family Code, is amended to
+read as follows:
+(a-1)  The court may order each person who is financially
+able and whose parental rights have been terminated with respect to
+a child in substitute care for whom the department has been
+appointed managing conservator, a child for a reason described by
+Section
+161.001(b)(1)(S)(iv) or (b)(1)(T)
+[
+161.001(b)(1)(T)(iv) or
+(b)(1)(U)
+], or a child who was conceived as a direct result of
+conduct that constitutes an offense under Section 21.02, 22.011,
+22.021, or 25.02, Penal Code, to support the child in the manner
+specified by the order:
+(1)  until the earliest of:
+(A)  the child's adoption;
+(B)  the child's 18th birthday or graduation from
+high school, whichever occurs later;
+(C)  removal of the child's disabilities of
+minority by court order, marriage, or other operation of law; or
+(D)  the child's death; or
+(2)  if the child is disabled as defined in this
+chapter, for an indefinite period.
+SECTION 2.  Section 161.001(b), Family Code, is amended to
+read as follows:
+(b)  The court may order termination of the parent-child
+relationship if the court finds by clear and convincing evidence:
+(1)  that the parent has:
+(A)  voluntarily left the child alone or in the
+possession of another not the parent and expressed an intent not to
+return;
+(B)  voluntarily left the child alone or in the
+possession of another not the parent without expressing an intent
+to return, without providing for the adequate support of the child,
+and remained away for a period of at least three months;
+(C)  voluntarily left the child alone or in the
+possession of another without providing adequate support of the
+child and remained away for a period of at least six months;
+(D)  knowingly placed or knowingly allowed the
+child to remain in conditions or surroundings which endanger the
+physical or emotional well-being of the child;
+(E)  engaged in conduct or knowingly placed the
+child with persons who engaged in conduct which endangers the
+physical or emotional well-being of the child;
+(F)  failed to support the child in accordance
+with the parent's ability during a period of one year ending within
+six months of the date of the filing of the petition;
+(G)  abandoned the child without identifying the
+child or furnishing means of identification, and the child's
+identity cannot be ascertained by the exercise of reasonable
+diligence;
+(H)  voluntarily, and with knowledge of the
+pregnancy, abandoned the mother of the child beginning at a time
+during her pregnancy with the child and continuing through the
+birth, failed to provide adequate support or medical care for the
+mother during the period of abandonment before the birth of the
+child, and remained apart from the child or failed to support the
+child since the birth;
+(I)  contumaciously refused to submit to a
+reasonable and lawful order of a court under Subchapter D, Chapter
+261;
+(J)  been the major cause of:
+(i)  the failure of the child to be enrolled
+in school as required by the Education Code; or
+(ii)  the child's absence from the child's
+home without the consent of the parents or guardian for a
+substantial length of time or without the intent to return;
+(K)  executed before or after the suit is filed an
+unrevoked or irrevocable affidavit of relinquishment of parental
+rights as provided by this chapter;
+(L)  been convicted or has been placed on
+community supervision, including deferred adjudication community
+supervision, for being criminally responsible for the death or
+serious injury of a child under the following sections of the Penal
+Code, or under a law of another jurisdiction that contains elements
+that are substantially similar to the elements of an offense under
+one of the following Penal Code sections, or adjudicated under
+Title 3 for conduct that caused the death or serious injury of a
+child and that would constitute a violation of one of the following
+Penal Code sections:
+(i)  Section 19.02 (murder);
+(ii)  Section 19.03 (capital murder);
+(iii)  Section 19.04 (manslaughter);
+(iv)  Section 21.11 (indecency with a
+child);
+(v)  Section 22.01 (assault);
+(vi)  Section 22.011 (sexual assault);
+(vii)  Section 22.02 (aggravated assault);
+(viii)  Section 22.021 (aggravated sexual
+assault);
+(ix)  Section 22.04 (injury to a child,
+elderly individual, or disabled individual);
+(x)  Section 22.041 (abandoning or
+endangering a child, elderly individual, or disabled individual);
+(xi)  Section 25.02 (prohibited sexual
+conduct);
+(xii)  Section 43.25 (sexual performance by
+a child);
+(xiii)  Section 43.26 (possession or
+promotion of child pornography);
+(xiv)  Section 21.02 (continuous sexual
+abuse of young child or disabled individual);
+(xv)  Section 20A.02(a)(7) or (8)
+(trafficking of persons); and
+(xvi)  Section 43.05(a)(2) (compelling
+prostitution);
+(M)  had his or her parent-child relationship
+terminated with respect to another child based on a finding that the
+parent's conduct was in violation of Paragraph (D) or (E) or
+substantially equivalent provisions of the law of another state;
+(N)  constructively abandoned the child who has
+been in the permanent or temporary managing conservatorship of the
+Department of Family and Protective Services for not less than six
+months, and:
+(i)  the department has made reasonable
+efforts to return the child to the parent;
+(ii)  the parent has not regularly visited
+or maintained significant contact with the child; and
+(iii)  the parent has demonstrated an
+inability to provide the child with a safe environment;
+(O)  [
+failed to comply with the provisions of a
+court order that specifically established the actions necessary for
+the parent to obtain the return of the child who has been in the
+permanent or temporary managing conservatorship of the Department
+of Family and Protective Services for not less than nine months as a
+result of the child's removal from the parent under Chapter 262 for
+the abuse or neglect of the child;
+[
+(P)
+]  used a controlled substance, as defined by
+Chapter 481, Health and Safety Code, in a manner that endangered the
+health or safety of the child, and:
+(i)  failed to complete a court-ordered
+substance abuse treatment program; or
+(ii)  after completion of a court-ordered
+substance abuse treatment program, continued to abuse a controlled
+substance;
+(P)
+[
+(Q)
+]  knowingly engaged in criminal conduct
+that has resulted in the parent's:
+(i)  conviction of an offense; and
+(ii)  confinement or imprisonment and
+inability to care for the child for not less than two years from the
+date of filing the petition;
+(Q)
+[
+(R)
+]  been the cause of the child being born
+addicted to alcohol or a controlled substance, other than a
+controlled substance legally obtained by prescription;
+(R)
+[
+(S)
+]  voluntarily delivered the child to a
+designated emergency infant care provider under Section 262.302
+without expressing an intent to return for the child;
+(S)
+[
+(T)
+]  been convicted of:
+(i)  the murder of the other parent of the
+child under Section 19.02 or 19.03, Penal Code, or under a law of
+another state, federal law, the law of a foreign country, or the
+Uniform Code of Military Justice that contains elements that are
+substantially similar to the elements of an offense under Section
+19.02 or 19.03, Penal Code;
+(ii)  criminal attempt under Section 15.01,
+Penal Code, or under a law of another state, federal law, the law of
+a foreign country, or the Uniform Code of Military Justice that
+contains elements that are substantially similar to the elements of
+an offense under Section 15.01, Penal Code, to commit the offense
+described by Subparagraph (i);
+(iii)  criminal solicitation under Section
+15.03, Penal Code, or under a law of another state, federal law, the
+law of a foreign country, or the Uniform Code of Military Justice
+that contains elements that are substantially similar to the
+elements of an offense under Section 15.03, Penal Code, of the
+offense described by Subparagraph (i); or
+(iv)  the sexual assault of the other parent
+of the child under Section 22.011 or 22.021, Penal Code, or under a
+law of another state, federal law, or the Uniform Code of Military
+Justice that contains elements that are substantially similar to
+the elements of an offense under Section 22.011 or 22.021, Penal
+Code;
+(T)
+[
+(U)
+]  been placed on community supervision,
+including deferred adjudication community supervision, or another
+functionally equivalent form of community supervision or
+probation, for being criminally responsible for the sexual assault
+of the other parent of the child under Section 22.011 or 22.021,
+Penal Code, or under a law of another state, federal law, or the
+Uniform Code of Military Justice that contains elements that are
+substantially similar to the elements of an offense under Section
+22.011 or 22.021, Penal Code; or
+(U)
+[
+(V)
+]  been convicted of:
+(i)  criminal solicitation of a minor under
+Section 15.031, Penal Code, or under a law of another state, federal
+law, the law of a foreign country, or the Uniform Code of Military
+Justice that contains elements that are substantially similar to
+the elements of an offense under Section 15.031, Penal Code; or
+(ii)  online solicitation of a minor under
+Section 33.021, Penal Code, or under a law of another state, federal
+law, the law of a foreign country, or the Uniform Code of Military
+Justice that contains elements that are substantially similar to
+the elements of an offense under Section 33.021, Penal Code; and
+(2)  that termination is in the best interest of the
+child.
+SECTION 3.  The change in law made by this Act applies to a
+suit affecting the parent-child relationship that is pending in a
+trial court on the effective date of this Act or that is filed on or
+after the effective date of this Act.
+SECTION 4.  This Act takes effect September 1, 2025.

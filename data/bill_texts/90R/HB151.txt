@@ -1,0 +1,189 @@
+90(R) HB 151 - Introduced version - Bill Text
+90R1692 DNC-F
+By: Flores
+H.B. No. 151
+A BILL TO BE ENTITLED
+AN ACT
+relating to workplace heat illness prevention, including the
+creation of a heat illness prevention advisory board; imposing
+administrative penalties.
+BE IT ENACTED BY THE LEGISLATURE OF THE STATE OF TEXAS:
+SECTION 1.  This Act shall be known as the Antelmo Ramirez
+Heat Safety Act.
+SECTION 2.  Subtitle B, Title 2, Labor Code, is amended by
+adding Chapter 53 to read as follows:
+CHAPTER 53. WORKPLACE HEAT SAFETY
+Sec. 53.001.  DEFINITIONS. In this chapter:
+(1)
+"Advisory board" means the heat illness prevention
+advisory board established under Section 53.003.
+(2)
+"Commission" means the Texas Workforce
+Commission.
+(3)
+"Employer" means a person who employs one or more
+employees.
+(4)
+"Heat illness" means a serious medical condition
+resulting from the body's inability to cope with a particular heat
+load and includes heat cramps, heat exhaustion, heat syncope, and
+heatstroke.
+(5)  "Heat safety expert" means an individual who:
+(A)
+holds a certification or educational degree
+in environmental science, human physiology, medicine, occupational
+safety, public health, or a related field; and
+(B)
+performs work focused on heat safety in the
+workplace.
+Sec.
+53.002.
+APPLICABILITY. This chapter applies to all
+employers in this state, regardless of the location of employment,
+type of employment, or size or type of employer.
+Sec.
+53.003.
+HEAT ILLNESS PREVENTION ADVISORY BOARD. (a)
+A
+heat illness prevention advisory board is established to assist the
+commission in adopting heat illness prevention standards under this
+chapter.
+(b)
+The advisory board consists of the following members
+appointed by the commission:
+(1)  two members who are heat safety experts;
+(2)
+two members who are employed as construction
+workers;
+(3)  one member who is an employer;
+(4)
+one member who is a representative of a nonprofit
+organization engaged in worker safety issues; and
+(5)
+one member who is a representative of construction
+worker labor unions.
+(c)
+The advisory board shall develop and recommend to the
+commission heat illness prevention standards, consistent with this
+chapter, that are designed to protect employees from heat illness
+in indoor and outdoor worksites.
+Sec.
+53.004.
+HEAT ILLNESS PREVENTION STANDARDS. (a)
+The
+commission by rule shall adopt heat illness prevention standards.
+In adopting the standards, the commission shall give full
+consideration to the recommendations the advisory board makes under
+Section 53.003(c).
+(b)  The heat illness prevention standards must:
+(1)
+be consistent with the standards and
+recommendations relating to heat and workforce safety contained in
+the Criteria for a Recommended Standard: Occupational Exposure to
+Heat and Hot Environments published by the National Institute for
+Occupational Safety and Health, as those standards and
+recommendations existed on January 1, 2027; and
+(2)  include:
+(A)  requirements for providing:
+(i)  drinking water;
+(ii)
+access to nearby shade or
+climate-controlled environments, restrooms, and handwashing
+stations; and
+(iii)  rest periods;
+(B)
+standards for effective emergency response
+procedures;
+(C)  standards for heat acclimatization;
+(D)
+training on heat and workforce safety for
+employees and supervisors; and
+(E)
+other related standards for protecting
+workers from heat illness.
+Sec.
+53.005.
+NOTICE TO EMPLOYEES. (a)
+Each employer shall
+post in a conspicuous place accessible to employees the notice the
+commission prescribes under Subsection (b) at:
+(1)  the employer's place of business; and
+(2)
+if applicable, each worksite at which employees
+perform job duties for the employer.
+(b)
+The commission shall prescribe the form and content of
+the employer notice required by Subsection (a) and make the notice
+available on the commission's Internet website.
+The notice must:
+(1)
+be in English, Spanish, Vietnamese, and any other
+language the commission determines appropriate; and
+(2)  outline:
+(A)
+the heat illness prevention standards the
+commission adopts under this chapter; and
+(B)  employees' rights under this chapter.
+Sec.
+53.006.
+EMPLOYEE TRAINING REQUIRED. Each employer
+shall provide training to the employer's employees about the
+commission's heat illness prevention standards as the standards
+relate to employees, supervisors, and employers.
+The training,
+including any related written materials, must be provided to each
+employee in a language that the employee understands.
+Sec.
+53.007.
+UNLAWFUL EMPLOYMENT PRACTICE. An employer
+commits an unlawful employment practice under this chapter if the
+employer retaliates or discriminates against an employee who:
+(1)  experiences heat illness in the workplace;
+(2)
+reports to the employer an instance of heat
+illness or a violation of this chapter or other applicable
+standards;
+(3)
+files a complaint with the commission related to a
+violation of this chapter or rules adopted under this chapter;
+(4)
+files an action related to a violation of this
+chapter or rules adopted under this chapter; or
+(5)
+testifies, assists, or participates in any manner
+in an investigation, proceeding, or hearing under this chapter.
+Sec.
+53.008.
+ADMINISTRATIVE PENALTY.
+The commission shall
+assess an administrative penalty in an amount that is not less than
+$1,000 against an employer for each violation of this chapter or a
+rule adopted under this chapter.
+Each day a violation continues or
+occurs is a separate violation for purposes of imposing a penalty.
+SECTION 3.  (a) As soon as practicable after the effective
+date of this Act, but not later than October 1, 2027, the Texas
+Workforce Commission shall appoint the advisory board members to
+the heat illness prevention advisory board established under
+Section 53.003, Labor Code, as added by this Act.
+(b)  Not later than January 1, 2028, the heat illness
+prevention advisory board shall submit to the Texas Workforce
+Commission the recommended workplace heat illness prevention
+standards the board develops under Section 53.003(c), Labor Code,
+as added by this Act.
+(c)  Not later than March 1, 2028, the Texas Workforce
+Commission shall:
+(1)  adopt heat illness prevention standards as
+required by Section 53.004, Labor Code, as added by this Act; and
+(2)  prescribe the employer notice required by Section
+53.005, Labor Code, as added by this Act.
+SECTION 4.  An employer is not required to comply with
+Chapter 53, Labor Code, as added by this Act, before March 1, 2028.
+SECTION 5.  The change in law made by this Act applies only
+to an unlawful employment practice that occurs on or after March 1,
+2028.
+SECTION 6.  This Act takes effect immediately if it receives
+a vote of two-thirds of all the members elected to each house, as
+provided by Section 39, Article III, Texas Constitution.  If this
+Act does not receive the vote necessary for immediate effect, this
+Act takes effect September 1, 2027.

@@ -1,0 +1,212 @@
+90(R) HB 687 - Introduced version - Bill Text
+By: Harrison
+H.B. No. 687
+A BILL TO BE ENTITLED
+AN ACT
+relating to the vote required in an election to approve an ad
+valorem tax rate that exceeds a taxing unit's voter-approval tax
+rate; making conforming changes.
+BE IT ENACTED BY THE LEGISLATURE OF THE STATE OF TEXAS:
+SECTION 1.  Sections 281.124(d) and (f), Health and Safety
+Code, are amended to read as follows:
+(d)  If
+at least 60 percent
+[
+a majority
+] of the votes cast in
+the election favor the proposition, the tax rate for the specified
+tax year is the rate approved by the voters, and that rate is not
+subject to Section 26.07, Tax Code. The board shall adopt the tax
+rate as provided by Chapter 26, Tax Code.
+(f)  Notwithstanding any other law, if
+at least 60 percent
+[
+a
+majority
+] of the votes cast in the election favor the proposition, a
+governing body with approval authority over the district's budget
+or tax rate may not disapprove the tax rate approved by the voters
+or disapprove the budget based solely on the tax rate approved by
+the voters.
+SECTION 2.  Section 1101.254(f), Special District Local Laws
+Code, is amended to read as follows:
+(f)  This section does not affect the applicability of
+Section 26.07, Tax Code, to the district's tax rate, except that if
+at least 60 percent of the
+district voters approve a tax rate
+increase under this section, Section 26.07, Tax Code, does not
+apply to the tax rate for that year.
+SECTION 3.  Sections 26.06(b-1) and (b-3), Tax Code, are
+amended to read as follows:
+(b-1)  If the proposed tax rate exceeds the no-new-revenue
+tax rate and the voter-approval tax rate of the taxing unit, the
+notice must contain a statement in the following form:
+"NOTICE OF PUBLIC HEARING ON TAX INCREASE
+"PROPOSED TAX RATE            $__________ per $100
+"NO-NEW-REVENUE TAX RATE      $__________ per $100
+"VOTER-APPROVAL TAX RATE      $__________ per $100
+"The no-new-revenue tax rate is the tax rate for the (current
+tax year) tax year that will raise the same amount of property tax
+revenue for (name of taxing unit) from the same properties in both
+the (preceding tax year) tax year and the (current tax year) tax
+year.
+"The voter-approval tax rate is the highest tax rate that
+(name of taxing unit) may adopt without holding an election to seek
+voter approval of the rate.
+"The proposed tax rate is greater than the no-new-revenue tax
+rate. This means that (name of taxing unit) is proposing to
+increase property taxes for the (current tax year) tax year.
+"A public hearing on the proposed tax rate will be held on
+(date and time) at (meeting place).
+"The proposed tax rate is also greater than the
+voter-approval tax rate. If (name of taxing unit) adopts the
+proposed tax rate, (name of taxing unit) is required to hold an
+election so that the voters may accept or reject the proposed tax
+rate.
+Unless at least 60 percent
+[
+If a majority
+] of the voters
+accept
+[
+reject
+] the proposed tax rate, the tax rate of the (name of
+taxing unit) will be the voter-approval tax rate. The election will
+be held on (date of election). You may contact the (name of office
+responsible for administering the election) for information about
+voting locations. The hours of voting on election day are (voting
+hours).
+"Your taxes owed under any of the tax rates mentioned above
+can be calculated as follows:
+"Property tax amount = tax rate x taxable value of your
+property / 100
+"(Names of all members of the governing body, showing how
+each voted on the proposal to consider the tax increase or, if one
+or more were absent, indicating the absences.)
+"Visit Texas.gov/PropertyTaxes to find a link to your local
+property tax database on which you can easily access information
+regarding your property taxes, including information about
+proposed tax rates and scheduled public hearings of each entity
+that taxes your property.
+"The 86th Texas Legislature modified the manner in which the
+voter-approval tax rate is calculated to limit the rate of growth of
+property taxes in the state."
+(b-3)  If the proposed tax rate does not exceed the
+no-new-revenue tax rate but exceeds the voter-approval tax rate of
+the taxing unit, the notice must contain a statement in the
+following form:
+"NOTICE OF PUBLIC HEARING ON TAX RATE
+"PROPOSED TAX RATE            $__________ per $100
+"NO-NEW-REVENUE TAX RATE      $__________ per $100
+"VOTER-APPROVAL TAX RATE      $__________ per $100
+"The no-new-revenue tax rate is the tax rate for the (current
+tax year) tax year that will raise the same amount of property tax
+revenue for (name of taxing unit) from the same properties in both
+the (preceding tax year) tax year and the (current tax year) tax
+year.
+"The voter-approval tax rate is the highest tax rate that
+(name of taxing unit) may adopt without holding an election to seek
+voter approval of the rate.
+"The proposed tax rate is not greater than the no-new-revenue
+tax rate. This means that (name of taxing unit) is not proposing to
+increase property taxes for the (current tax year) tax year.
+"A public hearing on the proposed tax rate will be held on
+(date and time) at (meeting place).
+"The proposed tax rate is greater than the voter-approval tax
+rate. If (name of taxing unit) adopts the proposed tax rate, (name
+of taxing unit) is required to hold an election so that the voters
+may accept or reject the proposed tax rate.
+Unless at least 60
+percent
+[
+If a majority
+] of the voters
+accept
+[
+reject
+] the proposed
+tax rate, the tax rate of the (name of taxing unit) will be the
+voter-approval tax rate. The election will be held on (date of
+election). You may contact the (name of office responsible for
+administering the election) for information about voting
+locations. The hours of voting on election day are (voting hours).
+"Your taxes owed under any of the tax rates mentioned above
+can be calculated as follows:
+"Property tax amount = tax rate x taxable value of your
+property / 100
+"(Names of all members of the governing body, showing how
+each voted on the proposal to consider the tax rate or, if one or
+more were absent, indicating the absences.)
+"Visit Texas.gov/PropertyTaxes to find a link to your local
+property tax database on which you can easily access information
+regarding your property taxes, including information about
+proposed tax rates and scheduled public hearings of each entity
+that taxes your property.
+"The 86th Texas Legislature modified the manner in which the
+voter-approval tax rate is calculated to limit the rate of growth of
+property taxes in the state."
+SECTION 4.  Section 26.063(b), Tax Code, is amended to read
+as follows:
+(b)  This subsection applies only to a taxing unit that is
+required to hold an election under Section 26.07.  In the notice
+required to be provided by the taxing unit under Section 26.06(b-1)
+or (b-3), as applicable, the taxing unit shall:
+(1)  add the following to the end of the list of rates
+included in the notice:
+"DE MINIMIS RATE          $__________ per $100";
+(2)  substitute the following for the definition of
+"voter-approval tax rate":  "The voter-approval tax rate is the
+highest tax rate that (name of taxing unit) may adopt without
+holding an election to seek voter approval of the rate, unless the
+de minimis rate for (name of taxing unit) exceeds the
+voter-approval tax rate for (name of taxing unit).";
+(3)  add the following definition of "de minimis rate":
+"The de minimis rate is the rate equal to the sum of the
+no-new-revenue maintenance and operations rate for (name of taxing
+unit), the rate that will raise $500,000, and the current debt rate
+for (name of taxing unit)."; and
+(4)  substitute the following for the provision that
+provides notice that an election is required:  "The proposed tax
+rate is greater than the voter-approval tax rate and the de minimis
+rate.  If (name of taxing unit) adopts the proposed tax rate, (name
+of taxing unit) is required to hold an election so that the voters
+may accept or reject the proposed tax rate.
+Unless at least 60
+percent
+[
+If a majority
+] of the voters
+accept
+[
+reject
+] the proposed
+tax rate, the tax rate of the (name of taxing unit) will be the
+voter-approval tax rate of the (name of taxing unit).  The election
+will be held on (date of election).  You may contact the (name of
+office responsible for administering the election) for information
+about voting locations.  The hours of voting on election day are
+(voting hours).".
+SECTION 5.  Section 26.07(d), Tax Code, is amended to read as
+follows:
+(d)  If
+at least 60 percent
+[
+a majority
+] of the votes cast in
+the election favor the proposition, the tax rate for the current
+year is the rate that was adopted by the governing body.
+SECTION 6.  Section 26.08(c), Tax Code, is amended to read as
+follows:
+(c)  If
+at least 60 percent
+[
+a majority
+] of the votes cast in
+the election favor the proposition, the tax rate for the current
+year is the rate that was adopted by the governing body.
+SECTION 7.  The changes in law made by this Act apply only to
+an election held on or after the effective date of this Act.  An
+election held before the effective date of this Act is governed by
+the law in effect on the date the election was held, and that law is
+continued in effect for that purpose.
+SECTION 8.  This Act takes effect January 1, 2028.

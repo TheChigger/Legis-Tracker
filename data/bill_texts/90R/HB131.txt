@@ -1,0 +1,48 @@
+90(R) HB 131 - Introduced version - Bill Text
+90R911 SRA-D
+By: Raymond
+H.B. No. 131
+A BILL TO BE ENTITLED
+AN ACT
+relating to an exemption from sales and use taxes for taxable items
+purchased by a totally disabled veteran.
+BE IT ENACTED BY THE LEGISLATURE OF THE STATE OF TEXAS:
+SECTION 1.  Subchapter H, Chapter 151, Tax Code, is amended
+by adding Section 151.3272 to read as follows:
+Sec.
+151.3272.
+TAXABLE ITEMS PURCHASED BY TOTALLY DISABLED
+VETERAN.
+(a)
+In this section:
+(1)
+"Disability rating" and "disabled veteran" have
+the meanings assigned by Section 11.22.
+(2)
+"Qualified disabled veteran" means a disabled
+veteran with a disability rating of 100 percent.
+(b)
+Subject to Subsection (d), the sale or storage, use, or
+other consumption of a taxable item purchased by a qualified
+disabled veteran or a person authorized to make purchases on behalf
+of a qualified disabled veteran is exempted from the taxes imposed
+by this chapter if the qualified disabled veteran or authorized
+person completes, signs, and presents at the time of purchase the
+exemption certificate form described by Subsection (c).
+(c)
+The comptroller shall develop an exemption certificate
+form that a qualified disabled veteran or authorized person must
+complete and use to claim the exemption provided by Subsection (b).
+The comptroller shall make the form available on the comptroller's
+Internet website.
+(d)
+The exemption provided by Subsection (b) applies only to
+the first $25,000 of taxable items purchased in a calendar year by a
+qualified disabled veteran or authorized person.
+SECTION 2.  The change in law made by this Act does not
+affect tax liability accruing before the effective date of this
+Act.  That liability continues in effect as if this Act had not been
+enacted, and the former law is continued in effect for the
+collection of taxes due and for civil and criminal enforcement of
+the liability for those taxes.
+SECTION 3.  This Act takes effect October 1, 2027.

@@ -1,0 +1,495 @@
+90(R) HB 112 - Introduced version - Bill Text
+90R22 JCG-D
+By: Guillen
+H.B. No. 112
+A BILL TO BE ENTITLED
+AN ACT
+relating to retirement benefits for certain law enforcement
+officers who are members of the Teacher Retirement System of Texas,
+including the creation of a supplemental retirement program.
+BE IT ENACTED BY THE LEGISLATURE OF THE STATE OF TEXAS:
+SECTION 1.  Section 821.001, Government Code, is amended by
+adding Subdivisions (17-a), (17-b), and (17-c) to read as follows:
+(17-a)
+"Supplemental program member" means a member of
+the retirement system who has, is earning, or is eligible to earn
+credit for supplemental program service under Subchapter G, Chapter
+823.
+(17-b)
+"Supplemental program service" means
+membership service that qualifies as supplemental program service
+under Section 823.551.
+(17-c)
+"Supplemental program service credit" means
+the amount of supplemental program service credited to a member
+under Subchapter G, Chapter 823.
+SECTION 2.  Section 822.005, Government Code, is amended by
+adding Subsection (e) to read as follows:
+(e)
+For a supplemental program member, the withdrawal of
+accumulated contributions under Subsection (a) includes all of the
+member's contributions made under Section 825.403.
+SECTION 3.  Chapter 823, Government Code, is amended by
+adding Subchapter G to read as follows:
+SUBCHAPTER G. SUPPLEMENTAL PROGRAM SERVICE CREDIT
+Sec.
+823.551.
+SUPPLEMENTAL PROGRAM SERVICE:
+QUALIFICATIONS. Membership service qualifies as supplemental
+program service if:
+(1)
+the membership service was provided in a position
+with an employer that required the member to hold an officer license
+issued by the Texas Commission on Law Enforcement under Chapter
+1701, Occupations Code; and
+(2)
+the primary duty of the position was the
+enforcement of the criminal or juvenile laws of this state.
+Sec.
+823.552.
+SUPPLEMENTAL PROGRAM SERVICE: BASIS OF
+CREDIT.
+Supplemental program service credit is creditable as
+provided by rule of the board of trustees.
+SECTION 4.  Section 824.203(a), Government Code, is amended
+to read as follows:
+(a)  Except as provided by Subsections (c) and (d)
+and
+Section 824.2035
+, the standard service retirement annuity is an
+amount computed on the basis of the member's average annual
+compensation for the five years of service, whether or not
+consecutive, in which the member received the highest annual
+compensation, times 2.3 percent for each year of service credit in
+the retirement system.
+SECTION 5.  Subchapter C, Chapter 824, Government Code, is
+amended by adding Section 824.2035 to read as follows:
+Sec.
+824.2035.
+ENHANCED SERVICE RETIREMENT ANNUITY FOR
+SUPPLEMENTAL PROGRAM MEMBERS; ELIGIBILITY.
+(a)
+Subject to
+Subsections (c) and (d) and notwithstanding Section 824.203,
+the
+standard service retirement annuity of a supplemental program
+member under this section is an amount computed on the basis of the
+member's average annual compensation for the five years of
+supplemental program service, whether or not consecutive, in which
+the member received the highest annual compensation, times 2.8
+percent for each year of supplemental program service credit in the
+retirement system. With respect to any year of the five years of
+supplemental program service that is not supplemental service, the
+annuity must be computed by applying the percentage factor required
+under Section 824.203 instead of 2.8 percent for that year.
+(b)
+Notwithstanding Section 824.202 and subject to
+Subsections (c) and (d), a supplemental program member is eligible
+to retire and receive the annuity described by Subsection (a) if the
+member has at least 25 years of supplemental program service
+credit, regardless of age.
+(c)
+The annuity described by Subsection (a) of a
+supplemental program member who retires before attaining the age of
+57 under the eligibility criteria established by Subsection (b) is
+actuarially reduced by five percent for each year of difference
+between the member's age at retirement and 57.
+The actuarial
+reduction described by this subsection is in addition to any other
+actuarial reduction required by Subsection (d) or other law, and a
+member is not entitled to have the annuity recalculated at age 57.
+(d)
+A supplemental program member who retires under
+Subsection (b) before attaining the age of 50 is entitled only to an
+annuity that is actuarially reduced from the annuity available at
+the age of 50 to the supplemental program member whose service
+credit annuity amount is based on the sum of the member's age and
+amount of supplemental program service credit and other service
+credit, and is not entitled to have the annuity recalculated at age
+57.
+(e)
+A provision of law that applies to a member eligible to
+retire under Section 824.202 or receiving a service retirement
+annuity under Section 824.203 applies to the same extent and in the
+same manner to a member eligible for or receiving a service
+retirement annuity under this section, except to the extent the
+provision conflicts with this section. Optional retirement
+annuities provided by Section 824.204 are available to a member
+eligible to receive a service retirement annuity under this
+section.
+(f)
+Notwithstanding any other provision of this subchapter,
+a supplemental program member who is eligible to retire under this
+section or Section 824.202 is entitled to whichever computation of
+a service retirement annuity under this subchapter provides the
+higher annuity.
+SECTION 6.  Sections 824.304(a) and (b), Government Code,
+are amended to read as follows:
+(a)  Subject to
+Sections 824.3045 and
+[
+Section
+] 824.310, if a
+member has a total of less than 10 years of service credit in the
+retirement system on the date of disability retirement, the
+retirement system shall pay the person a disability retirement
+annuity of $150 a month for the shortest of the following periods:
+(1)  the duration of the disability;
+(2)  the number of months of creditable service the
+person has at retirement; or
+(3)  the duration of the person's life.
+(b)  Subject to
+Sections 824.3045 and
+[
+Section
+] 824.310, if a
+member has a total of at least 10 years of service credit in the
+retirement system on the date of disability retirement, the
+retirement system shall pay the person for the duration of the
+disability a disability retirement annuity in an amount equal to
+the greater of:
+(1)  a standard service retirement annuity computed
+under Section 824.203; or
+(2)  $150 a month.
+SECTION 7.  Subchapter D, Chapter 824, Government Code, is
+amended by adding Sections 824.3045 and 824.3046 to read as
+follows:
+Sec.
+824.3045.
+OCCUPATIONAL DISABILITY RETIREMENT BENEFITS
+FOR SUPPLEMENTAL PROGRAM MEMBERS. (a) Except as provided by
+Subsection (b), an annuity payable under Section 824.304 for a
+disability resulting from a risk to which supplemental program
+members are exposed because of the nature of the members' duties is
+an amount computed on the basis of the supplemental program
+member's average annual compensation, times 2.8 percent.
+(b)
+A disability retirement annuity described by Subsection
+(a) is not reducible because of age and may not be less than 50
+percent of the supplemental program member's average annual
+compensation regardless of the amount of service credited to the
+member.
+(c)
+If a retiring member or retiree under this section
+presents evidence satisfactory to the retirement system that the
+person's disability makes the person incapable of substantial
+gainful activity solely because of the disability and is considered
+a total disability under federal social security law, the
+retirement system shall increase the person's disability
+retirement annuity to 100 percent of the member's average annual
+compensation.
+(d)
+An annuity increase under Subsection (c) is not payable
+before the first month following the month in which the
+satisfactory evidence is received by the retirement system under
+that subsection.
+(e)
+For purposes of this section, "average annual
+compensation" means:
+(1)
+a member's average annual compensation for the
+three highest years of compensation attributable to supplemental
+program service; or
+(2)
+a member's average annual compensation
+attributable to supplemental program service if a member retires
+with less than three years of service.
+Sec.
+824.3046.
+INFORMATION ABOUT OCCUPATIONAL DISABILITY
+OF SUPPLEMENTAL PROGRAM MEMBER. (a) A supplemental program member
+who applies for retirement for a disability under Section 824.3045
+shall furnish to the retirement system all information and other
+data requested by the retirement system and relating to the
+disability.
+(b)
+The retirement system may require information and other
+data relating to a disability retirement application to be
+furnished by any officer or employee of the employer with which the
+applicant holds a position.
+(c)
+After receiving information and other data the
+retirement system considers necessary, the executive director
+shall determine, subject to review by the board of trustees,
+whether or not the disability resulted from a risk described by
+Section 824.3045(a).
+SECTION 8.  Subchapter E, Chapter 824, Government Code, is
+amended by adding Section 824.4025 to read as follows:
+Sec.
+824.4025.
+ANNUITY FOR SURVIVOR OF SUPPLEMENTAL PROGRAM
+MEMBER. If a supplemental program member who has at least 25 years
+of supplemental program service credit dies, the amount of the
+death benefit annuity payable for the member's supplemental program
+service is the amount of the annuity computed as provided by Section
+824.2035, including any applicable reduction factors.
+SECTION 9.  Section 825.102, Government Code, is amended to
+read as follows:
+Sec. 825.102.  RULEMAKING. Subject to the limitations of
+this subtitle, the board of trustees may adopt rules for:
+(1)  eligibility for membership;
+(2)  the administration of the funds of the retirement
+system; [
+and
+]
+(3)  the transaction of business of the board
+; and
+(4)
+the administration of supplemental benefits for
+supplemental program members
+.
+SECTION 10.  Section 825.403, Government Code, is amended by
+adding Subsection (a-1) to read as follows:
+(a-1)
+In addition to the contribution under Subsection (a),
+each employer of a supplemental program member shall deduct an
+additional 0.5 percent contribution from that member's
+compensation, provided that the member's contribution rate for a
+fiscal year is reduced by 0.1 percent for each 0.1 percent that the
+state contribution rate established for that fiscal year under
+Section 824.404(a)(2) is less than 0.5 percent.
+SECTION 11.  Sections 825.404(a) and (a-2), Government Code,
+are amended to read as follows:
+(a)  Except as provided by Subsection (a-1) and subject to
+Subsection (a-2), during each fiscal year, the state shall
+contribute to the retirement system
+:
+(1)
+an amount equal to at least six and not more than
+10 percent of the aggregate annual compensation of all members of
+the retirement system during that fiscal year
+; and
+(2)
+an additional amount equal to 1.5 percent of the
+aggregate annual compensation of all supplemental program members
+for that fiscal year
+.
+(a-2)  The state contribution required by
+Subsection (a)(1)
+[
+Subsection (a)
+] is:
+(1)  for the fiscal years beginning on September 1,
+2019, and September 1, 2020, 7.5 percent of the aggregate annual
+compensation of all members of the retirement system during the
+applicable fiscal year;
+(2)  for the fiscal year beginning on September 1,
+2021, 7.75 percent of the aggregate annual compensation of all
+members of the retirement system during that fiscal year;
+(3)  for the fiscal year beginning on September 1,
+2022, eight percent of the aggregate annual compensation of all
+members of the retirement system during that fiscal year; and
+(4)  for the fiscal year beginning on September 1,
+2023, and each subsequent fiscal year, 8.25 percent of the
+aggregate annual compensation of all members of the retirement
+system during that fiscal year.
+SECTION 12.  Section 825.4092, Government Code, is amended
+by adding Subsection (f) to read as follows:
+(f)
+If a retiree is employed in a position for which member
+service would qualify as supplemental program service, the current
+contribution amount that a reporting employer is required to
+contribute under Subsection (b) must include contributions that
+would be required to be contributed by an active supplemental
+program member under Section 825.403(a-1) and by the state under
+Section 825.404(a)(2).
+SECTION 13.  Subchapter F, Chapter 825, Government Code, is
+amended by adding Section 825.5155 to read as follows:
+Sec.
+825.5155.
+CERTIFICATION OF NAMES OF SUPPLEMENTAL
+PROGRAM MEMBERS. Not later than the sixth day of the month
+following the month in which a person begins or ceases employment in
+a position described by Section 823.551, the employer shall certify
+to the retirement system, in the manner prescribed by the system,
+the name of the employee and any other information the system
+determines necessary for the crediting of service and financing of
+benefits under this subtitle.
+SECTION 14.  Section 1551.102, Insurance Code, is amended by
+adding Subsection (c-3) to read as follows:
+(c-3)
+An individual is eligible to participate in the group
+benefits program as provided by Subsection (a) if the individual:
+(1)
+retires under the jurisdiction of the Teacher
+Retirement System of Texas with at least 10 years of eligible
+service credit;
+(2)
+retires under Section 824.2035, Government Code;
+and
+(3)
+was employed, as the last state employment before
+retirement, including employment by a public junior college, by a
+state agency whose employees are authorized to participate in the
+group benefits program.
+SECTION 15.  Section 1575.004(a), Insurance Code, is amended
+to read as follows:
+(a)  In this chapter, "retiree" means:
+(1)  an individual not eligible for coverage under a
+plan provided under Chapter 1551 or 1601 who:
+(A)  has taken a service retirement under the
+Teacher Retirement System of Texas after September 1, 2005, with at
+least 10 years of service credit in the system, which may include up
+to five years of military service credit, but which may not include
+any other service credit purchased for equivalent or special
+service credit, and
+who meets any of the following criteria
+[
+either
+]:
+(i)  the sum of the retiree's age and years
+of service credit in the retirement system equals or exceeds 80 at
+the time of retirement, regardless of whether the retiree had a
+reduction in the retirement annuity for early age; [
+or
+]
+(ii)  the retiree has 30 or more years of
+service credit in the retirement system at the time of retirement;
+or
+(iii)
+the retiree's service retirement was
+taken under Section 824.2035, Government Code;
+(B)  has taken a service retirement under the
+Teacher Retirement System of Texas after September 1, 2004, but on
+or before August 31, 2005, and on September 1, 2005, either:
+(i)  meets the requirements for eligibility
+for the group program for coverage as a retiree as those
+requirements existed on August 31, 2004;
+(ii)  meets the requirements of Paragraph
+(A); or
+(iii)  is enrolled in the group program and
+was enrolled in the group program on August 31, 2005; or
+(C)  has taken a service retirement under the
+Teacher Retirement System of Texas on or before August 31, 2004, and
+who is enrolled in the group program on August 31, 2005;
+(2)  an individual who:
+(A)  has taken a disability retirement under the
+Teacher Retirement System of Texas; and
+(B)  is entitled to receive monthly benefits from
+the Teacher Retirement System of Texas; or
+(3)  an individual who:
+(A)  has taken a disability retirement under the
+Teacher Retirement System of Texas;
+(B)  has at least 10 years of service credit in the
+Teacher Retirement System of Texas on the date of disability
+retirement, as determined under Section 824.304, Government Code;
+and
+(C)  is not entitled to receive monthly benefits
+from the Teacher Retirement System of Texas because those benefits
+have been suspended in accordance with Section 824.310, Government
+Code.
+SECTION 16.  Section 1601.102, Insurance Code, is amended by
+amending Subsection (f) and adding Subsection (j) to read as
+follows:
+(f)  Notwithstanding Subsections (b)-(d),
+and except as
+provided by Subsection (j),
+an individual is eligible to
+participate in the uniform program only if the individual:
+(1)  has at least 10 years of service credit and the sum
+of the person's age and amount of service credit, including months
+of age and credit, equals or exceeds the number 80; or
+(2)  is at least 65 years old and has at least 10 years
+of service credit.
+(j)
+An individual is eligible to participate in the uniform
+program as provided by Subsection (a) if the individual:
+(1)  meets the minimum requirements of Subsection (b);
+(2)  is at least 50 years old; and
+(3)
+retires under Section 824.2035, Government Code,
+with at least 10 years of service credit.
+SECTION 17.  (a)  An employer participating in the Teacher
+Retirement System of Texas shall begin making deductions and
+collecting the contributions for the supplemental program as
+provided by Section 825.403(a-1), Government Code, as added by this
+Act, based on service that is performed on or after September 1,
+2029. The employer shall also begin making the additional
+contributions under Section 825.4092(f), Government Code, as added
+by this Act, and provide the certification required by Section
+825.5155, Government Code, as added by this Act, based on service
+that is performed on or after September 1, 2029.
+(b)  The board of trustees of the Teacher Retirement System
+of Texas shall adopt rules as soon as possible after the effective
+date of this Act to implement the changes in law made by this Act,
+including rules governing the treatment of a member of the Teacher
+Retirement System of Texas whose employment in a position described
+by Section 823.551, Government Code, as added by this Act, began
+before September 1, 2029.
+SECTION 18.  (a)  In this section, "supplemental program
+member" and "supplemental program service credit" have the meanings
+assigned by Section 821.001, Government Code, as amended by this
+Act.
+(b)  Subject to the requirements of this section, the changes
+in law made by this Act apply only to a member of the Teacher
+Retirement System of Texas who, on or after the effective date of
+this Act, is a supplemental program member.
+(c)  A member described by Subsection (b) of this section and
+the member's beneficiaries are not entitled to receive payment of a
+benefit under Section 824.2035, 824.3045, or 824.4025, Government
+Code, as added by this Act, until September 1, 2029. The Teacher
+Retirement System of Texas shall pay the benefit described by this
+subsection to a member or beneficiary who accrues entitlement to
+the benefit under this subsection between the effective date of
+this Act and September 1, 2029, as soon as practicable after
+September 1, 2029, but not later than September 1, 2030.  Between
+the effective date of this Act and September 1, 2029, the retirement
+system may provide a service, disability, or death benefit, as
+appropriate, to a member or beneficiary who is otherwise eligible
+for that benefit under Chapter 824, Government Code, as that
+chapter existed immediately before the effective date of this Act.
+If the retirement system provides a benefit under prior law in
+accordance with this subsection, on September 1, 2029, the
+retirement system shall recompute that benefit under Section
+824.2035, 824.3045, or 824.4025, Government Code, as added by this
+Act, as applicable, as of the date of the member's retirement or
+death, as applicable, and pay to the member or the member's
+beneficiaries, in a lump sum, the difference between:
+(1)  the sum of the amount of the recomputed benefit
+accrued between the effective date of this Act and September 1,
+2029; and
+(2)  the sum of the amount of the benefit paid to the
+member or beneficiary under authority of this subsection between
+the effective date of this Act and September 1, 2029.
+(d)  Except as provided by Subsection (f) of this section,
+service credit earned by a member described by Subsection (b) of
+this section before September 1, 2029, qualifies as supplemental
+program service credit only if:
+(1)  the member verifies in accordance with Subsection
+(e) of this section that the service credit qualifies as
+supplemental program service credit under Section 823.551,
+Government Code, as added by this Act; and
+(2)  subject to Subsection (e) of this section, the
+board of trustees of the Teacher Retirement System of Texas
+determines the prior supplemental program service credit can be
+established in the retirement system without increasing the period
+required to amortize the unfunded actuarial liabilities of the
+retirement system to a period that exceeds 30 years by one or more
+years.
+(e)  As soon as practicable after the effective date of this
+Act, the board of trustees of the Teacher Retirement System of Texas
+shall determine whether the legislature appropriated sufficient
+money to the retirement system for the retirement system to provide
+prior supplemental program service credit in accordance with
+Subsection (d)(2) of this section.  If the board determines that
+insufficient money was appropriated by the legislature to the
+retirement system to provide prior supplemental program service
+credit in accordance with Subsection (d)(2) of this section, the
+board shall adopt rules governing how a supplemental program member
+may establish supplemental program service credit for service
+performed before September 1, 2029, by verifying that service and
+depositing with the retirement system, for each year of
+supplemental program service credit, the actuarial present value,
+at the time of deposit, of the additional standard retirement
+annuity benefits that would be attributable to the purchase of
+service credit under this section, based on rates and tables
+recommended by the retirement system's actuary and adopted by the
+board. The rules must require that the verification of prior
+service as supplemental program service credit be completed not
+later than September 1, 2030.
+(f)  If a member described by Subsection (b) of this section
+fails to establish prior supplemental program service credit in
+accordance with this section before September 1, 2029, the member
+is not entitled to establish the supplemental program service
+credit or receive the related benefits authorized by this Act.
+SECTION 19.  This Act takes effect September 1, 2027.

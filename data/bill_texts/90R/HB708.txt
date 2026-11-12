@@ -1,0 +1,214 @@
+90(R) HB 708 - Introduced version - Bill Text
+By: Harrison
+H.B. No. 708
+A BILL TO BE ENTITLED
+AN ACT
+relating to the authority of the legislature, courts, the governor,
+and other state and local officials regarding declared states of
+disaster.
+BE IT ENACTED BY THE LEGISLATURE OF THE STATE OF TEXAS:
+SECTION 1.  Subchapter A, Chapter 418, Government Code, is
+amended by adding Sections 418.007, 418.008, and 418.009 to read as
+follows:
+Sec.
+418.007.
+RECOMMENDATIONS, GUIDELINES, AND
+COORDINATION.
+A state or local official may issue recommendations
+and nonbinding guidelines to assist with a state of disaster
+declared under this chapter and may coordinate public and private
+resources to prevent or respond to the disaster.
+Sec.
+418.008.
+PROTECTION OF RIGHTS. Notwithstanding any
+other law, an order issued by the governor or a state or local
+official under this chapter that regulates and infringes on the
+rights of any private person must be:
+(1)
+narrowly tailored to serve a compelling public
+health or safety purpose; and
+(2)
+limited in duration, applicability, and scope to
+reduce any infringement on individual liberty.
+Sec.
+418.009.
+STATE COURT JURISDICTION. (a)
+District and
+appellate courts of this state have jurisdiction to hear cases
+challenging a state or local disaster order, including cases
+challenging compliance with limitations on orders prescribed under
+this chapter and other law, and shall expedite hearings for the
+cases to the extent practicable.
+(b)
+A court may invalidate or enjoin a disaster order, or
+the application of a disaster order, that is not narrowly tailored
+to serve a compelling public health or safety purpose because of the
+order's inequality in application to or impact on groups,
+situations, or circumstances.
+SECTION 2.  Section 418.012, Government Code, is amended to
+read as follows:
+Sec. 418.012.  EXECUTIVE ORDERS
+, PROCLAMATIONS, AND
+REGULATIONS
+.
+(a)
+Under this chapter, the governor may issue
+,
+amend, or rescind
+executive orders, proclamations, and regulations
+[
+and amend or rescind them
+].
+(b)
+Notwithstanding any law authorizing a state or local
+official to issue an order related to a declared state of disaster
+and only to the extent allowed under the United States Constitution
+or Texas Constitution, only the governor may issue an order that
+from the date the order is issued infringes in a nontrivial manner
+on a protected constitutional right, including, but not limited to:
+(1)  the rights to travel, work, assemble, and speak;
+(2)  the freedom of religious exercise;
+(3)  the right to contract without state interference;
+(4)  property rights;
+(5)
+the freedom from unreasonable searches and
+seizures; and
+(6)
+the freedom to purchase lawfully acquired firearms
+and ammunition.
+(c)
+An order described by Subsection (b) expires on the 30th
+day after the date the governor issues the order unless:
+(1)
+the governor or the legislature by law terminates
+the order on an earlier date; or
+(2)
+the legislature by law extends the order on or
+before the expiration date.
+(d)
+If the legislature is not convened in a regular or
+special session, the governor may convene the legislature to
+consider an order described by Subsection (b).
+The members of the
+legislature may remotely vote to approve, extend, or terminate the
+order:
+(1)
+by an electronic method authorized under the rules
+prescribed by each house of the legislature; or
+(2)
+as the lieutenant governor or speaker of the house
+of representatives specifies when the rules do not address an
+electronic voting method.
+(e)
+The governor may not issue the same or a substantially
+similar order as an order described by Subsection (b) that has
+expired unless the governor determines significantly changed
+circumstances require issuance of the similar order for a period
+not to exceed three days or a greater period the legislature by law
+approves
+[
+Executive orders, proclamations, and regulations have
+the force and effect of law
+].
+SECTION 3.  Section 418.014(c), Government Code, is amended
+to read as follows:
+(c)  A state of disaster may not continue for more than 30
+days unless renewed by the
+legislature by law
+[
+governor
+].  The
+legislature by law may terminate a state of disaster at any
+time.  On termination by the legislature, the governor shall issue
+an executive order ending the state of disaster.
+The governor may
+not declare a new state of disaster based on the same or a
+substantially similar finding as a prior state of disaster that the
+legislature terminated or refused to renew.
+SECTION 4.  Section 418.0155, Government Code, is amended to
+read as follows:
+Sec. 418.0155.  SUSPENSION LIST.  (a)  The governor's
+office, using existing resources, shall compile and maintain a
+comprehensive list of
+state agency
+[
+regulatory statutes and
+] rules
+that may require suspension during a disaster.
+(b)  On request by the governor's office, a state agency that
+would be impacted by the suspension of a [
+statute or
+] rule on the
+list compiled under Subsection (a) shall review the list for
+accuracy and shall advise the governor's office regarding any
+[
+statutes or
+] rules that should be added to the list.
+SECTION 5.  The heading to Section 418.016, Government Code,
+is amended to read as follows:
+Sec. 418.016.  SUSPENSION OF CERTAIN [
+LAWS AND
+] RULES.
+SECTION 6.  Sections 418.016(a) and (e), Government Code,
+are amended to read as follows:
+(a)  The governor may suspend [
+the provisions of any
+regulatory statute prescribing the procedures for conduct of state
+business or
+] the orders or rules of a state agency if strict
+compliance with the [
+provisions,
+] orders[
+,
+] or rules would in any
+way prevent, hinder, or delay necessary action in coping with a
+disaster.
+(e)  On request of a political subdivision, the governor may
+waive or suspend a deadline imposed by [
+a statute or
+] the orders or
+rules of a state agency on the political subdivision, including a
+deadline relating to a budget or ad valorem tax, if the waiver or
+suspension is reasonably necessary to cope with a disaster.
+SECTION 7.  Section 418.020(c), Government Code, is amended
+to read as follows:
+(c)  Under regulations prescribed by the governor, the
+governor may temporarily suspend or modify for a period of not more
+than 60 days any public health, safety, zoning, intrastate
+transportation, or other [
+law or
+] regulation if by proclamation the
+governor considers the suspension or modification essential to
+provide temporary housing or emergency shelter for disaster
+victims.
+SECTION 8.  Section 418.042(c), Government Code, is amended
+to read as follows:
+(c)  All or part of the state emergency management plan may
+be incorporated into regulations of the division or executive
+orders [
+that have the force and effect of law
+].
+SECTION 9.  Section 51.408(b), Occupations Code, is amended
+to read as follows:
+(b)  An emergency license issued under this section expires
+on the date indicated by the executive director, but not later than
+the 90th day after the date the license is issued.  If the governor
+declares
+a
+[
+an extended
+] state of disaster
+that the legislature
+renews
+under Section 418.014, Government Code, the executive
+director may extend the term of an emergency license to an
+expiration date after the 90th day after the date the license was
+issued.
+SECTION 10.  The changes in law made by this Act apply only
+to an order, proclamation, or regulation issued on or after the
+effective date of this Act.
+SECTION 11.  This Act takes effect immediately if it
+receives a vote of two-thirds of all the members elected to each
+house, as provided by Section 39, Article III, Texas Constitution.
+If this Act does not receive the vote necessary for immediate
+effect, this Act takes effect September 1, 2027.

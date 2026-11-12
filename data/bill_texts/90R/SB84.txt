@@ -1,0 +1,39 @@
+90(R) SB 84 - Introduced version - Bill Text
+90R1984 JDK-F
+By: Zaffirini
+S.B. No. 84
+A BILL TO BE ENTITLED
+AN ACT
+relating to grounds for recounting paperless electronic voting
+system ballots.
+BE IT ENACTED BY THE LEGISLATURE OF THE STATE OF TEXAS:
+SECTION 1.  The heading to Section 212.0241, Election Code,
+is amended to read as follows:
+Sec. 212.0241.  NO GROUND REQUIRED FOR
+PAPERLESS
+ELECTRONIC
+VOTING SYSTEM RECOUNT.
+SECTION 2.  Sections 212.0241(a), (b), and (c), Election
+Code, are amended to read as follows:
+(a)  A ground for obtaining an initial recount as prescribed
+by this subchapter is not required to obtain an initial recount of
+paperless
+electronic voting system results, subject to Subsection
+(b).
+(b)  A candidate for nomination or election to an office may
+obtain an initial recount of
+paperless
+electronic voting system
+results in an election in which the person was a candidate only if
+the candidate is shown by the election returns not to be nominated
+or elected.  However, a candidate shown to be nominated or elected
+may obtain an initial recount if an opposing candidate's initial
+recount petition is approved for a recount that is covered by
+Section 212.131(c) and that does not include all of the voting
+system precincts in the election.
+(c)  The secretary of state shall prescribe any procedures
+necessary to accommodate the authorization to obtain a recount of
+paperless
+electronic voting system results without a specific
+ground.
+SECTION 3.  This Act takes effect September 1, 2027.

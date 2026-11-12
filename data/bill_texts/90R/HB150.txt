@@ -1,0 +1,70 @@
+90(R) HB 150 - Introduced version - Bill Text
+By: Bucy
+H.B. No. 150
+A BILL TO BE ENTITLED
+AN ACT
+relating to electronic voter registration.
+BE IT ENACTED BY THE LEGISLATURE OF THE STATE OF TEXAS:
+SECTION 1.  Subchapter A, Chapter 13, Election Code, is
+amended by adding Section 13.009 to read as follows:
+Sec.
+13.009.
+ELECTRONIC VOTER REGISTRATION. (a) The
+secretary of state shall work with the Department of Public Safety
+and the Department of Information Resources to implement a program
+to allow a person to complete a voter registration application over
+the Internet from the official website of this state. The Internet
+websites of the secretary of state and the Department of Public
+Safety must also provide a link to the location of the application
+on the official website of this state.
+(b)
+An applicant for electronic voter registration who has
+an unexpired driver's license or personal identification card
+issued in this state must:
+(1)
+attest to the truth of the information provided on
+the application by affirmatively accepting the information as true;
+and
+(2)
+affirmatively consent to the use of the signature
+on the applicant's driver's license or personal identification card
+for voter registration purposes.
+(c)
+An applicant for electronic voter registration who does
+not have an unexpired driver's license or personal identification
+card issued in this state must:
+(1)
+attest to the truth of the information provided on
+the application by affirmatively accepting the information as true;
+and
+(2)
+digitally sign the applicant's application before
+submitting it electronically.
+(d)
+For each application submitted under Subsection (b),
+the program shall require that a digital copy of the applicant's
+signature be obtained from the Department of Public Safety.
+(e)
+A digital signature given as provided by secretary of
+state rule meets the signature requirement under Section 13.002(b).
+An application submitted under this section is considered for all
+purposes an application submitted by mail under this title.
+(f)
+The secretary of state shall adopt rules as necessary to
+implement this section, including rules to provide for additional
+security measures necessary to ensure the accuracy and integrity of
+applications submitted electronically.
+(g)
+The rules adopted under Subsection (f) must require
+that:
+(1)
+the Internet website through which a person may
+complete a voter registration application include a description of
+the offense described by Section 13.007 in a conspicuous location
+on the website near the place where the person begins or submits the
+application; and
+(2)
+the state electronic Internet portal project be
+used to authenticate the identity and address of a person who
+submits an application electronically under this section.
+SECTION 2.  This Act takes effect September 1, 2027.

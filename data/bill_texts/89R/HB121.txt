@@ -1,0 +1,325 @@
+89(R) HB 121 - Introduced version - Bill Text
+89R5011 ANG-F
+By: King
+H.B. No. 121
+A BILL TO BE ENTITLED
+AN ACT
+relating to measures for ensuring public school safety, including
+the commissioning of peace officers by the Texas Education Agency,
+public school safety and security requirements, and the provision
+of safety-related resources.
+BE IT ENACTED BY THE LEGISLATURE OF THE STATE OF TEXAS:
+SECTION 1.  Article 2A.001, Code of Criminal Procedure, is
+amended to conform to Section 2, Chapter 624 (H.B. 4372), Section 1,
+Chapter 870 (H.B. 3981), Section 1, Chapter 950 (S.B. 1727), and
+Section 1, Chapter 984 (S.B. 2612), Acts of the 88th Legislature,
+Regular Session, 2023, and is further amended to read as follows:
+Art. 2A.001.  PEACE OFFICERS GENERALLY.  The following are
+peace officers:
+(1)  a sheriff, a sheriff's deputy, or a reserve deputy
+sheriff who holds a permanent peace officer license issued under
+Chapter 1701, Occupations Code;
+(2)  a constable, a deputy constable, or a reserve
+deputy constable who holds a permanent peace officer license issued
+under Chapter 1701, Occupations Code;
+(3)  a marshal or police officer of a municipality or a
+reserve municipal police officer who holds a permanent peace
+officer license issued under Chapter 1701, Occupations Code;
+(4)  a ranger, officer, or member of the reserve
+officer corps commissioned by the Public Safety Commission and the
+director of the Department of Public Safety;
+(5)  an investigator of a district attorney's, criminal
+district attorney's, or county attorney's office;
+(6)  a law enforcement agent of the Texas Alcoholic
+Beverage Commission;
+(7)  a member of an arson investigating unit
+commissioned by a municipality, a county, or the state;
+(8)  an officer commissioned under Section 37.081
+or
+37.0818
+, Education Code, or Subchapter E, Chapter 51, Education
+Code;
+(9)  an officer commissioned by the Texas Facilities
+Commission;
+(10)  a law enforcement officer commissioned by the
+Parks and Wildlife Commission;
+(11)  an officer commissioned under Chapter 23,
+Transportation Code;
+(12)  a municipal park and recreational patrol officer
+or security officer;
+(13)  a security officer or investigator commissioned
+as a peace officer by the comptroller;
+(14)  an officer commissioned by a water control and
+improvement district under Section 49.216, Water Code;
+(15)  an officer commissioned by a board of trustees
+under Chapter 54, Transportation Code;
+(16)  an investigator commissioned by the Texas Medical
+Board;
+(17)  an officer commissioned by:
+(A)  the board of managers of the Dallas County
+Hospital District, the Tarrant County Hospital District, the Bexar
+County Hospital District, or the El Paso County Hospital District
+under Section 281.057, Health and Safety Code;
+(B)  the board of directors of the Ector County
+Hospital District under Section 1024.117, Special District Local
+Laws Code;
+(C)  the board of directors of the Midland County
+Hospital District of Midland County, Texas, under Section 1061.121,
+Special District Local Laws Code; or
+(D)  the board of hospital managers of the Lubbock
+County Hospital District of Lubbock County, Texas, under Section
+1053.113, Special District Local Laws Code;
+(18)  a county park ranger commissioned under
+Subchapter E, Chapter 351, Local Government Code;
+(19)  an investigator employed by the Texas Racing
+Commission;
+(20)  an officer commissioned under Chapter 554,
+Occupations Code;
+(21)  an officer commissioned by the governing body of
+a metropolitan rapid transit authority under Section 451.108,
+Transportation Code, or a regional transportation authority under
+Section 452.110, Transportation Code;
+(22)  an investigator commissioned by the attorney
+general under Section 402.009, Government Code;
+(23)  a security officer or investigator commissioned
+as a peace officer under Chapter 466, Government Code;
+(24)  an officer appointed by an appellate court under
+Subchapter F, Chapter 53, Government Code;
+(25)  an officer commissioned by the state fire marshal
+under Chapter 417, Government Code;
+(26)  an investigator commissioned by the commissioner
+of insurance under Section 701.104, Insurance Code;
+(27)  an
+officer appointed by the inspector general of
+[
+apprehension specialist or inspector general commissioned by
+] the
+Texas Juvenile Justice Department [
+as an officer
+] under Section
+242.102 [
+or 243.052
+], Human Resources Code;
+(28)  an officer appointed by the inspector general of
+the Texas Department of Criminal Justice under Section 493.019,
+Government Code;
+(29)  an investigator commissioned by the Texas
+Commission on Law Enforcement under Section 1701.160, Occupations
+Code;
+(30)  a fire marshal or any related officer, inspector,
+or investigator commissioned by a county under Subchapter B,
+Chapter 352, Local Government Code;
+(31)  a fire marshal or any officer, inspector, or
+investigator commissioned by an emergency services district under
+Chapter 775, Health and Safety Code;
+(32)
+a fire marshal or any officer, inspector, or
+investigator of a municipality who holds a permanent peace officer
+license issued under Chapter 1701, Occupations Code;
+(33)
+an officer commissioned by the State Board of
+Dental Examiners under Section 254.013, Occupations Code, subject
+to the limitations imposed by that section; [
+and
+]
+(34)
+[
+(33)
+]  an
+Alamo complex ranger commissioned by
+the General Land Office under Section 31.0515, Natural Resources
+Code, subject to the limitations imposed by that section; and
+(35)
+an officer commissioned by the Texas Education
+Agency as an officer under Section 37.1031, Education Code
+[
+investigator commissioned by the Texas Juvenile Justice
+Department as an officer under Section 221.011, Human Resources
+Code
+].
+SECTION 2.  Section 7.021, Education Code, is amended by
+adding Subsection (d) to read as follows:
+(d)
+The agency may commission peace officers as provided by
+Section 37.1031 to enforce Subchapter D, Chapter 37.
+SECTION 3.  Section 37.0814, Education Code, is amended by
+adding Subsection (d-1) to read as follows:
+(d-1)
+A good cause exception claimed by the board of
+trustees of a school district under Subsection (c) expires on the
+fifth anniversary of the date the exception is claimed. On the
+expiration of the exception, the board must reevaluate whether the
+board is able to comply with this section and, if not, renew:
+(1)
+the claim for an exception under Subsection (c);
+and
+(2)
+the alternative standard developed under
+Subsection (d).
+SECTION 4.  Subchapter D, Chapter 37, Education Code, is
+amended by adding Section 37.1031 to read as follows:
+Sec.
+37.1031.
+AGENCY PEACE OFFICERS. (a)
+The agency may
+commission as a peace officer to enforce this subchapter an
+employee who has been certified as qualified to be a peace officer
+by the Texas Commission on Law Enforcement.
+(b)
+An employee commissioned as a peace officer under this
+section has the powers, privileges, and immunities of a peace
+officer while carrying out duties as a peace officer under this
+subchapter.
+SECTION 5.  Section 37.108(f), Education Code, is amended to
+read as follows:
+(f)  A school district shall include in its multihazard
+emergency operations plan:
+(1)  a chain of command that designates the individual
+responsible for making final decisions during a disaster or
+emergency situation and identifies other individuals responsible
+for making those decisions if the designated person is unavailable;
+(2)  provisions that address physical and
+psychological safety for responding to a natural disaster, active
+shooter, and any other dangerous scenario identified for purposes
+of this section by the agency or the Texas School Safety Center;
+(3)  provisions for ensuring the safety of students in
+portable buildings;
+(4)  provisions for ensuring that students and district
+personnel with disabilities are provided equal access to safety
+during a disaster or emergency situation;
+(5)  provisions for providing immediate notification
+to parents, guardians, and other persons standing in parental
+relation in circumstances involving a significant threat to the
+health or safety of students, including identification of the
+individual with responsibility for overseeing the notification;
+(6)  provisions for supporting the psychological
+safety of students, district personnel, and the community during
+the response and recovery phase following a disaster or emergency
+situation that:
+(A)  are aligned with best practice-based
+programs and research-based practices recommended under Section
+38.351;
+(B)  include strategies for ensuring any required
+professional development training for suicide prevention and
+grief-informed and trauma-informed care is provided to appropriate
+school personnel;
+(C)  include training on integrating
+psychological safety and suicide prevention strategies into the
+district's plan, such as psychological first aid for schools
+training, from an approved list of recommended training established
+by the commissioner and Texas School Safety Center for:
+(i)  members of the district's school safety
+and security committee under Section 37.109;
+(ii)  district school counselors and mental
+health professionals; and
+(iii)  educators and other district
+personnel as determined by the district;
+(D)  include strategies and procedures for
+integrating and supporting physical and psychological safety that
+align with the provisions described by Subdivision (2); and
+(E)  implement trauma-informed policies;
+(7)  a policy for providing a substitute teacher access
+to school campus buildings and materials necessary for the
+substitute teacher to carry out the duties of a district employee
+during an emergency or a mandatory emergency drill;
+(8)
+provisions, as determined by the agency, for
+ensuring the safety of students, staff, and spectators during
+extracurricular activities sponsored or sanctioned by the
+district;
+(9)
+the name of each individual on the district's
+school safety and security committee established under Section
+37.109 and the date of each committee meeting during the preceding
+year; and
+(10)
+[
+(9)
+]  certification that the district is in
+compliance with Section 37.117.
+SECTION 6.  Subchapter D, Chapter 37, Education Code, is
+amended by adding Section 37.1088 to read as follows:
+Sec.
+37.1088.
+AGENCY REPORT ON SCHOOL SAFETY. (a)
+Not
+later than December 31 of each year, the agency shall prepare and
+submit to the governor, the lieutenant governor, the speaker of the
+house of representatives, and each standing committee of each house
+of the legislature with primary jurisdiction over primary and
+secondary education, finance, and appropriations a report that
+includes the deidentified results of the vulnerability assessments
+and intruder detection audits conducted under Sections 37.1083 and
+37.1084 during the preceding year.
+(b)
+The report under Subsection (a) must include
+recommendations and possible corrective actions for specific
+deficiencies in campus security identified at multiple school
+districts and open-enrollment charter schools.
+SECTION 7.  Section 37.222(b), Education Code, is amended to
+read as follows:
+(b)
+At least three times each school year, each
+[
+Each
+]
+school district and open-enrollment charter school shall provide
+the information and other resources described under Subsection (a)
+to the parent or guardian of each student enrolled in the district
+or school.
+SECTION 8.  Section 37.353, Education Code, is amended by
+adding Subsection (c) to read as follows:
+(c)
+A good cause exception claimed by a school district
+under Subsection (a) expires on the fifth anniversary of the date on
+which the exception is claimed.
+On the expiration of the exception,
+the district must reevaluate whether the district is able to comply
+with each school facility standard related to safety and security,
+and if not, renew:
+(1)
+the claim for an exception under Subsection (a);
+and
+(2)
+the alternative performance standard developed
+under Subsection (b).
+SECTION 9.  Sections 85.024(a) and (b), Local Government
+Code, are amended to read as follows:
+(a)  The sheriff of a county with a total population of less
+than 350,000 in which a public school is located shall call and
+conduct
+a meeting at least twice each year
+[
+semiannual meetings
+] to
+discuss:
+(1)  school safety;
+(2)  coordinated law enforcement response to school
+violence incidents;
+(3)  law enforcement agency capabilities;
+(4)  available resources;
+(5)  emergency radio interoperability;
+(6)  chain of command planning; and
+(7)  other related subjects proposed by a person in
+attendance at the meeting.
+(b)  The sheriff of a county to which this section applies in
+which more than one public school is located is only required to
+hold one [
+semiannual
+] meeting described by Subsection (a)
+for all
+the public schools located in the county
+.  This subsection does not
+require public schools located within the same county to adopt the
+same school safety policies.
+SECTION 10.  This Act applies beginning with the 2025-2026
+school year.
+SECTION 11.  To the extent of any conflict, this Act prevails
+over another Act of the 89th Legislature, Regular Session, 2025,
+relating to nonsubstantive additions to and corrections in enacted
+codes.
+SECTION 12.  This Act takes effect immediately if it
+receives a vote of two-thirds of all the members elected to each
+house, as provided by Section 39, Article III, Texas Constitution.
+If this Act does not receive the vote necessary for immediate
+effect, this Act takes effect September 1, 2025.

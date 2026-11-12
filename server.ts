@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import dotenv from 'dotenv';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { GoogleGenAI } from '@google/genai';
 import {
@@ -211,6 +212,219 @@ app.get('/api/bills/:id', (req: Request, res: Response) => {
     return res.status(404).json({ error: 'Bill not found' });
   }
   res.json(bill);
+});
+
+// Texas Statute Code Mapping
+const TEXAS_CODES_MAP: Record<string, string> = {
+  'human resources code': 'HR',
+  'education code': 'ED',
+  'tax code': 'TX',
+  'health and safety code': 'HS',
+  'penal code': 'PE',
+  'government code': 'GV',
+  'election code': 'EL',
+  'utilities code': 'UT',
+  'insurance code': 'IN',
+  'family code': 'FA',
+  'occupations code': 'OC',
+  'transportation code': 'TN',
+  'water code': 'WA',
+  'labor code': 'LA',
+  'finance code': 'FI',
+  'local government code': 'LG',
+  'parks and wildlife code': 'PW',
+  'civil practice and remedies code': 'CP',
+  'code of criminal procedure': 'CR',
+  'property code': 'PR',
+  'agriculture code': 'AG',
+  'business and commerce code': 'BC',
+  'natural resources code': 'NR',
+};
+
+function extractStatutes(text: string) {
+  const results: Array<{
+    codeName: string;
+    codeAbbr: string;
+    chapters: string[];
+    sections: string[];
+    statuteUrl: string;
+  }> = [];
+  const seen = new Set<string>();
+
+  for (const [codeName, codeAbbr] of Object.entries(TEXAS_CODES_MAP)) {
+    if (text.toLowerCase().includes(codeName)) {
+      const properName = codeName.split(' ').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+      const chaps = Array.from(text.matchAll(/Chapter\s+(\d+)/gi)).map((m) => m[1]);
+      const secs = Array.from(text.matchAll(/(?:Section|Sec\.)\s+([\d\.]+)/gi)).map((m) => m[1].replace(/\.$/, ''));
+
+      const chapNum = chaps[0] || '1';
+      const key = `${codeAbbr}-${chapNum}`;
+      if (!seen.has(key)) {
+        seen.add(key);
+        results.push({
+          codeName: properName,
+          codeAbbr,
+          chapters: Array.from(new Set(chaps)),
+          sections: Array.from(new Set(secs)).slice(0, 5),
+          statuteUrl: `https://statutes.capitol.texas.gov/Docs/${codeAbbr}/htm/${codeAbbr}.${chapNum}.htm`,
+        });
+      }
+    }
+  }
+  return results;
+}
+
+// On-demand Full Text & Statute Lookup with Persistent Disk Cache
+app.get('/api/bills/:session/:billNumber/text', async (req: Request, res: Response) => {
+  const session = (req.params.session || '90R').toUpperCase();
+  const billNumber = req.params.billNumber.replace(/%20/g, ' ').trim();
+  const cleanNum = billNumber.replace(/\s+/g, '').toUpperCase();
+  const versionCode = (req.query.version as string) || 'I';
+
+  const cacheDir = path.join(__dirname, 'data', 'bill_texts', session);
+  const cacheFilePath = path.join(cacheDir, `${cleanNum}.txt`);
+
+  let fullText = '';
+  let sourceUrl = '';
+  let pdfUrl = '';
+
+  const match = cleanNum.match(/^([A-Z]+)(\d+)$/);
+  if (match) {
+    const [, prefix, num] = match;
+    const paddedCode = `${prefix}${String(num).padStart(5, '0')}${versionCode}`;
+    sourceUrl = `https://capitol.texas.gov/tlodocs/${session}/billtext/html/${paddedCode}.htm`;
+    pdfUrl = `https://capitol.texas.gov/tlodocs/${session}/billtext/pdf/${paddedCode}.pdf`;
+  }
+
+  // Check local file cache first
+  if (fs.existsSync(cacheFilePath)) {
+    try {
+      fullText = fs.readFileSync(cacheFilePath, 'utf-8');
+    } catch {
+      // Ignore read error
+    }
+  }
+
+  // If not cached on disk, fetch live from Texas Capitol TLO portal
+  if (!fullText && sourceUrl) {
+    try {
+      const response = await fetch(sourceUrl, {
+        headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) TexasLegisEngine/1.0' },
+      });
+      if (response.ok) {
+        const rawHtml = await response.text();
+        // Strip styling, scripts, and HTML tags into clean text
+        const cleaned = rawHtml
+          .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
+          .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
+          .replace(/<[^>]+>/g, '\n')
+          .replace(/&nbsp;/g, ' ')
+          .replace(/&amp;/g, '&')
+          .replace(/&lt;/g, '<')
+          .replace(/&gt;/g, '>');
+
+        const lines = cleaned
+          .split('\n')
+          .map((l) => l.trim())
+          .filter((l) => l.length > 0 && !l.startsWith('td {') && !l.startsWith('table {'));
+
+        fullText = lines.join('\n');
+
+        // Persist to disk cache
+        if (fullText.length > 100) {
+          fs.mkdirSync(cacheDir, { recursive: true });
+          fs.writeFileSync(cacheFilePath, fullText, 'utf-8');
+        }
+      }
+    } catch (err) {
+      console.warn(`[TLO Fetch Warning] Could not fetch live text for ${billNumber}:`, err);
+    }
+  }
+
+  // If still empty, check in-memory bill
+  if (!fullText) {
+    const found = billsDatabase.find(
+      (b) => b.session === session && b.billNumber.replace(/\s+/g, '').toUpperCase() === cleanNum
+    );
+    if (found && found.versions && found.versions.length > 0) {
+      fullText = found.versions[0].fullText;
+    }
+  }
+
+  const amendedStatutes = extractStatutes(fullText || '');
+
+  // Update in-memory bill if present
+  const targetBill = billsDatabase.find(
+    (b) => b.session === session && b.billNumber.replace(/\s+/g, '').toUpperCase() === cleanNum
+  );
+  if (targetBill && fullText) {
+    if (!targetBill.versions || targetBill.versions.length === 0) {
+      targetBill.versions = [{
+        versionCode: 'I',
+        versionName: 'Introduced',
+        dateFiled: targetBill.dateFiled,
+        charCount: fullText.length,
+        snippet: fullText.slice(0, 300) + '...',
+        fullText,
+      }];
+    } else {
+      targetBill.versions[0].fullText = fullText;
+      targetBill.versions[0].charCount = fullText.length;
+    }
+    targetBill.amendedStatutes = amendedStatutes;
+    targetBill.officialTloUrl = sourceUrl;
+    targetBill.officialPdfUrl = pdfUrl;
+  }
+
+  res.json({
+    session,
+    billNumber,
+    cleanNum,
+    fullText,
+    charCount: fullText.length,
+    officialTloUrl: sourceUrl,
+    officialPdfUrl: pdfUrl,
+    amendedStatutes,
+    cached: fs.existsSync(cacheFilePath),
+  });
+});
+
+// Texas Statute Chapter Text Live Reader
+app.get('/api/statutes/:code/:chapter', async (req: Request, res: Response) => {
+  const code = req.params.code.toUpperCase();
+  const chapter = req.params.chapter;
+  const statuteUrl = `https://statutes.capitol.texas.gov/Docs/${code}/htm/${code}.${chapter}.htm`;
+
+  try {
+    const response = await fetch(statuteUrl, {
+      headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) TexasLegisEngine/1.0' },
+    });
+    if (!response.ok) {
+      return res.status(404).json({ error: 'Statute chapter not found on Capitol portal', statuteUrl });
+    }
+    const html = await response.text();
+    const cleanText = html
+      .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
+      .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
+      .replace(/<[^>]+>/g, '\n')
+      .replace(/&nbsp;/g, ' ')
+      .replace(/&amp;/g, '&')
+      .split('\n')
+      .map((l) => l.trim())
+      .filter((l) => l.length > 0 && !l.startsWith('td {'))
+      .join('\n');
+
+    res.json({
+      code,
+      chapter,
+      statuteUrl,
+      charCount: cleanText.length,
+      snippet: cleanText.slice(0, 4000),
+      fullStatuteAvailable: true,
+    });
+  } catch (err: any) {
+    res.status(500).json({ error: 'Failed to retrieve statute', message: err.message, statuteUrl });
+  }
 });
 
 // Legislators

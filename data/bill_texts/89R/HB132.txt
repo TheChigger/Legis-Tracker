@@ -1,0 +1,104 @@
+89(R) HB 132 - Introduced version - Bill Text
+89R8691 JON-D
+By: Lopez of Bexar
+H.B. No. 132
+A BILL TO BE ENTITLED
+AN ACT
+relating to the confidentiality of information used to prevent,
+detect, respond to, or investigate a hostile act of a foreign
+adversary of the United States.
+BE IT ENACTED BY THE LEGISLATURE OF THE STATE OF TEXAS:
+SECTION 1.  Section 418.176(a), Government Code, is amended
+to read as follows:
+(a)  Information is confidential if the information is
+collected, assembled, or maintained by or for a governmental entity
+for the purpose of preventing, detecting, responding to, or
+investigating an act of terrorism or related criminal activity
+or a
+hostile act by a foreign adversary of the United States
+and:
+(1)  relates to the staffing requirements of an
+emergency response provider, including a law enforcement agency, a
+fire-fighting agency, or an emergency services agency;
+(2)  relates to a tactical plan of the provider; or
+(3)  consists of a list or compilation of pager or
+telephone numbers, including mobile and cellular telephone
+numbers, of the provider.
+SECTION 2.  Section 418.177, Government Code, is amended to
+read as follows:
+Sec. 418.177.  CONFIDENTIALITY OF CERTAIN INFORMATION
+RELATING TO RISK OR VULNERABILITY ASSESSMENT.  Information is
+confidential if the information:
+(1)  is collected, assembled, or maintained by or for a
+governmental entity for the purpose of preventing, detecting, or
+investigating an act of terrorism or related criminal activity
+or a
+hostile act by a foreign adversary of the United States
+; and
+(2)  relates to an assessment by or for a governmental
+entity, or an assessment that is maintained by a governmental
+entity, of the risk or vulnerability of persons or property,
+including critical infrastructure, to an act of terrorism or
+related criminal activity.
+SECTION 3.  Section 418.179(a), Government Code, is amended
+to read as follows:
+(a)  Information is confidential if the information:
+(1)  is collected, assembled, or maintained by or for a
+governmental entity for the purpose of preventing, detecting, or
+investigating an act of terrorism or related criminal activity
+or a
+hostile act by a foreign adversary of the United States
+; and
+(2)  relates to the details of the encryption codes or
+security keys for a public communications system.
+SECTION 4.  Section 418.180, Government Code, is amended to
+read as follows:
+Sec. 418.180.  CONFIDENTIALITY OF CERTAIN INFORMATION
+PREPARED FOR UNITED STATES.  Information, other than financial
+information, in the possession of a governmental entity is
+confidential if the information:
+(1)  is part of a report to an agency of the United
+States;
+(2)  relates to an act of terrorism or related criminal
+activity
+or a hostile act by a foreign adversary of the United
+States
+; and
+(3)  is specifically required to be kept confidential:
+(A)  under Section 552.101 because of a federal
+statute or regulation;
+(B)  to participate in a state-federal
+information sharing agreement; or
+(C)  to obtain federal funding.
+SECTION 5.  Section 418.181, Government Code, is amended to
+read as follows:
+Sec. 418.181.  CONFIDENTIALITY OF CERTAIN INFORMATION
+RELATING TO CRITICAL INFRASTRUCTURE.  Those documents or portions
+of documents in the possession of a governmental entity are
+confidential if they identify the technical details of particular
+vulnerabilities of critical infrastructure to an act of terrorism
+or a hostile act by a foreign adversary of the United States
+.
+SECTION 6.  Section 418.182(a), Government Code, is amended
+to read as follows:
+(a)  Except as provided by Subsections (b) and (c),
+information, including access codes and passwords, in the
+possession of a governmental entity
+is confidential if the
+information
+[
+that
+] relates to the specifications, operating
+procedures, or location of a security system used to protect public
+or private property from an act of terrorism or related criminal
+activity
+or a hostile act by a foreign adversary of the United
+States
+[
+is confidential
+].
+SECTION 7.  This Act takes effect immediately if it receives
+a vote of two-thirds of all the members elected to each house, as
+provided by Section 39, Article III, Texas Constitution.  If this
+Act does not receive the vote necessary for immediate effect, this
+Act takes effect September 1, 2025.

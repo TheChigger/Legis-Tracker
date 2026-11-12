@@ -1,0 +1,28 @@
+90(R) HB 135 - Introduced version - Bill Text
+90R5533 KRM-F
+By: Garcia of Dallas
+H.B. No. 135
+A BILL TO BE ENTITLED
+AN ACT
+relating to the accrual of interest on delinquent child support
+owed by obligors who are incarcerated.
+BE IT ENACTED BY THE LEGISLATURE OF THE STATE OF TEXAS:
+SECTION 1.  Section 157.265, Family Code, is amended by
+adding Subsection (c-1) to read as follows:
+(c-1)
+Notwithstanding Subsections (a), (b), and (c), for
+delinquent child support owed by a child support obligor who is
+confined in local, state, or federal jail or prison, the interest
+rate on child support arrearages described by each of those
+subsections accrues at the rate of three percent simple interest
+per year from the date of the obligor's incarceration until the date
+the obligor is released from incarceration.
+SECTION 2.  Section 157.265(c-1), Family Code, as added by
+this Act, applies only to the accrual of interest on child support
+arrearages owed by a child support obligor who is incarcerated on or
+after the effective date of this Act. The accrual of interest on
+child support arrearages owed by a child support obligor
+incarcerated before the effective date of this Act is governed by
+the law in effect immediately before the effective date of this Act,
+and the former law is continued in effect for that purpose.
+SECTION 3.  This Act takes effect September 1, 2027.

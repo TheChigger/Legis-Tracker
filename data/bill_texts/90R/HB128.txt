@@ -1,0 +1,89 @@
+90(R) HB 128 - Introduced version - Bill Text
+90R233 SCR-D
+By: Holt
+H.B. No. 128
+A BILL TO BE ENTITLED
+AN ACT
+relating to disclosures required to record certain contracts for
+the conveyance of real property.
+BE IT ENACTED BY THE LEGISLATURE OF THE STATE OF TEXAS:
+SECTION 1.  Chapter 12, Property Code, is amended by adding
+Section 12.0014 to read as follows:
+Sec.
+12.0014.
+DISCLOSURE REQUIREMENTS FOR CONTRACT FOR DEED
+RECORDATION. (a)
+In this section, "contract for deed" has the
+meaning assigned by Section 2306.004(3), Government Code.
+(b)
+A contract for deed may not be recorded unless it is
+accompanied by a completed notice of contract for deed on a form
+prescribed by the secretary of state under Subsection (d).
+For the
+purposes of this section, "completed notice" means that the form
+contains:
+(1)  the name of the buyer and seller;
+(2)  the address of the buyer and seller; and
+(3)
+the social security number or taxpayer
+identification number of the buyer and seller.
+(c)  The notice of contract for deed form must be:
+(1)  signed by the buyer and seller under oath; or
+(2)
+made by the buyer and seller as an unsworn
+declaration under Section 132.001, Civil Practice and Remedies
+Code.
+(d)
+The secretary of state by rule shall prescribe a form
+for the notice of contract for deed required by this section.
+(e)
+The form prescribed under Subsection (d) must include a
+place for the buyer and seller to state:
+(1)
+the address and a description of the real property
+to be conveyed under the contract for deed;
+(2)
+the full name, address, telephone number,
+citizenship status, and social security number or taxpayer
+identification number of the seller;
+(3)
+the full name, address, telephone number,
+citizenship status, and social security number or taxpayer
+identification number of the buyer;
+(4)
+the date the contract for deed was signed by the
+seller;
+(5)  the county in which the contract was signed;
+(6)
+the name and mailing address of any lienholder and
+the date of lien, if applicable;
+(7)
+the purchase price and amount of any taxes paid, if
+applicable;
+(8)  the signature of the buyer;
+(9)  the signature of the seller;
+(10)  the date the buyer and seller signed the form; and
+(11)  an appropriate jurat.
+(f)
+The notice required by this section shall be retained by
+the county clerk separately from the real property records.
+Subject to Subsection (g), a notice filed under this section and
+information contained in the notice is confidential and not subject
+to disclosure under Chapter 552, Government Code.
+(g)
+On request of the attorney general, the county clerk
+shall disclose a notice filed under this section to the attorney
+general.
+A notice obtained by the attorney general under this
+section and information contained in the notice is confidential and
+not subject to disclosure under Chapter 552, Government Code. The
+notice and information may be used only for a governmental purpose.
+SECTION 2.  The changes in law made by this Act apply only to
+a contract that is filed for recording on or after January 1, 2028.
+A contract filed for recording before January 1, 2028, is governed
+by the law in effect immediately before the effective date of this
+Act, and that law is continued in effect for that purpose.
+SECTION 3.  Not later than December 31, 2027, the secretary
+of state shall adopt rules necessary for the implementation of
+Section 12.0014, Property Code, as added by this Act.
+SECTION 4.  This Act takes effect September 1, 2027.

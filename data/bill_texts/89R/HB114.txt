@@ -1,0 +1,293 @@
+89(R) HB 114 - Introduced version - Bill Text
+89R18621 TYPED
+By: Cortez
+H.B. No. 114
+A BILL TO BE ENTITLED
+AN ACT
+relating to the transition of certain veterans' mental health
+initiatives from the Texas Health and Human Services Commission to
+the Texas Veterans Commission.
+BE IT ENACTED BY THE LEGISLATURE OF THE STATE OF TEXAS:
+SECTION 1.  Subchapter A, Chapter 434, Government Code, is
+amended by adding Section 434.0172 to read as follows:
+Sec.
+434.0172.
+GRANT PROGRAM FOR MENTAL HEALTH SERVICES FOR
+VETERANS AND THEIR FAMILIES. (a) To the extent funds are
+appropriated to the commission for that purpose, the commission
+shall establish a grant program for the purpose of supporting
+community mental health programs providing services and treatment
+to veterans and their families.
+(b)
+The commission shall ensure that each grant recipient
+obtains or secures contributions to match awarded grants in amounts
+of money or other consideration. The money or other consideration
+obtained or secured by the commission may, as determined by the
+executive director, include cash or in-kind contributions from
+private contributors or local governments but may not include state
+or federal funds.
+(c)
+Money appropriated to, or obtained by, the commission
+for the grant program must be disbursed directly to grant
+recipients by the commission, as authorized by the executive
+director.
+(c-1)
+For services and treatment provided in a single
+county, the commission shall condition each grant provided under
+this section on a potential grant recipient providing funds from
+non-state sources in a total amount at least equal to:
+(1)
+25 percent of the grant amount if the community
+mental health program to be supported by the grant provides
+services and treatment in a county with a population of less than
+100,000;
+(2)
+50 percent of the grant amount if the community
+mental health program to be supported by the grant provides
+services and treatment in a county with a population of 100,000 or
+more but less than 250,000; or
+(3)
+100 percent of the grant amount if the community
+mental health program to be supported by the grant provides
+services and treatment in a county with a population of 250,000 or
+more.
+(c-2)
+For a community mental health program that provides
+services and treatment in more than one county, the commission
+shall condition each grant provided under this section on a
+potential grant recipient providing funds from non-state sources in
+a total amount at least equal to:
+(1)
+25 percent of the grant amount if the county with
+the largest population in which the community mental health program
+to be supported by the grant provides services and treatment has a
+population of less than 100,000;
+(2)
+50 percent of the grant amount if the county with
+the largest population in which the community mental health program
+to be supported by the grant provides services and treatment has a
+population of 100,000 or more but less than 250,000; or
+(3)
+100 percent of the grant amount if the county with
+the largest population in which the community mental health program
+to be supported by the grant provides services and treatment has a
+population of 250,000 or more.
+(d)
+All grants awarded under the grant program must be used
+for the sole purpose of supporting community programs that provide
+mental health care services and treatment to veterans and their
+families and that coordinate mental health care services for
+veterans and their families with other transition support services.
+(e)
+The commission shall select grant recipients based on
+the submission of applications or proposals by nonprofit and
+governmental entities. The executive director shall develop
+criteria for the evaluation of those applications or proposals and
+the selection of grant recipients. The selection criteria must:
+(1)  evaluate and score:
+(A)  fiscal controls for the project;
+(B)  project effectiveness;
+(C)  project cost; and
+(D)
+an applicant's previous experience with
+grants and contracts;
+(2)
+address the possibility of and method for making
+multiple awards; and
+(3)
+include other factors that the executive director
+considers relevant.
+(f)
+A reasonable amount not to exceed five percent of the
+money appropriated by the legislature for the purposes of this
+section may be used by the commission to pay administrative costs of
+implementing this section.
+SECTION 2.  Section 434.352, Government Code, is amended to
+read as follows:
+Sec. 434.352.
+GENERAL POWERS AND
+DUTIES. (a) The
+commission [
+and the Health and Human Services Commission
+] shall
+[
+coordinate to
+] administer the mental health program for veterans
+developed under
+this chapter
+[
+Chapter 1001, Health and Safety
+Code
+].
+(a-1)  The mental health program for veterans must include:
+(1)  peer-to-peer counseling;
+(2)
+access to licensed mental health professionals for
+peer service coordinators and peers;
+(3)
+training approved by the commission for peer
+service coordinators, licensed mental health professionals, and
+peers;
+(4)
+technical assistance for peer service
+coordinators, licensed mental health professionals, and peers;
+(5)
+identification, retention, and screening of
+community-based licensed mental health professionals;
+(6)
+suicide prevention training for peer service
+coordinators and peers;
+(7)
+veteran jail diversion services, including
+veterans treatment courts; and
+(8)
+coordination of mental health first aid for
+veterans training to veterans and immediate family members of
+veterans.
+(b)  For the mental health program for veterans, the
+commission shall:
+(1)  provide training to peer service coordinators and
+peers in accordance with Section 434.353;
+(2)  provide technical assistance to peer service
+coordinators and peers;
+(3)  identify, train, and communicate with
+community-based licensed mental health professionals,
+community-based organizations, and faith-based organizations;
+(4)  coordinate services for justice involved
+veterans;
+(5)  coordinate local delivery to veterans and
+immediate family members of veterans of mental health first aid for
+veterans training; [
+and
+]
+(6)  employ and train mental health professionals to
+administer
+[
+assist the Health and Human Services Commission in the
+administration of
+] the program
+;
+(7)
+develop a rural veterans mental health initiative
+and a women veterans mental health initiative; and
+(8)
+solicit and ensure that specialized training is
+provided to persons who are peers and who want to provide
+peer-to-peer counseling or other peer-to-peer services under the
+program
+.
+(c)  Subject to Section 434.3525, the executive director of
+the commission shall appoint a program director to administer the
+mental health program for veterans.
+(d)  The commission shall provide appropriate facilities in
+support of the mental health program for veterans to the extent
+funding is available for that purpose.
+(e)  A state agency may not award a grant to an entity for the
+provision of mental health services to veterans or veterans'
+families unless the entity demonstrates the entity:
+(1)  has previously received and successfully executed
+a grant from the state agency; or
+(2)  provides training on military informed care or
+military cultural competency to entity personnel who provide mental
+health services to veterans or veterans' families or requires those
+personnel to complete military competency training provided by any
+of the following:
+(A)  the commission;
+(B)  the Health and Human Services Commission;
+(C)  the Military Veteran Peer Network;
+(D)  the Substance Abuse and Mental Health
+Services Administration within the United States Department of
+Health and Human Services;
+(E)  the United States Department of Defense;
+(F)  the United States Department of Veterans
+Affairs; or
+(G)  a nonprofit organization that is exempt from
+federal income taxation under Section 501(a), Internal Revenue Code
+of 1986, by being listed as an exempt entity under Section 501(c)(3)
+of that code, with experience in providing training or technical
+assistance to entities that provide mental health services to
+veterans or veterans' families.
+(f)  The commission and the
+Health and Human Services
+Commission
+[
+Department of State Health Services
+] shall jointly
+verify that each state agency authorized to award a grant subject to
+the requirements of Subsection (e) has adopted policies to ensure
+compliance with Subsection (e).
+SECTION 3.  Subchapter H, Chapter 434, Government Code, is
+amended by adding Section 434.354 to read as follows:
+Sec.
+434.354.
+ANNUAL REPORT. Not later than December 1 of
+each year, the commission shall submit a report to the governor and
+the legislature that includes:
+(1)
+the number of veterans who received services
+through the mental health program for veterans;
+(2)
+the number of peers and peer service coordinators
+trained;
+(3)
+an evaluation of the services provided under this
+subchapter; and
+(4)  recommendations for program improvements.
+SECTION 4.  Chapter 434, Government Code, is amended by
+adding Subchapter J to read as follows:
+SUBCHAPTER J. VETERAN SUICIDE PREVENTION ACTION PLAN.
+Sec.
+434.501.
+VETERAN SUICIDE PREVENTION ACTION PLAN. (a)
+The commission, in collaboration with the Texas Coordinating
+Council for Veterans Services, the United States Department of
+Veterans Affairs, the Service Members, Veterans, and Their Families
+Technical Assistance Center Implementation Academy of the
+Substance Abuse and Mental Health Services Administration of the
+United States Department of Health and Human Services, veteran
+advocacy groups, medical providers, and any other organization or
+interested party the commission considers appropriate, shall
+develop a comprehensive action plan to increase access to and
+availability of professional veteran health services to prevent
+veteran suicides.
+(b)  The action plan must:
+(1)
+identify opportunities for raising awareness of
+and providing resources for veteran suicide prevention;
+(2)
+identify opportunities to increase access to
+veteran mental health services;
+(3)
+identify funding resources to provide accessible,
+affordable veteran mental health services;
+(4)
+provide measures to expand public-private
+partnerships to ensure access to quality, timely mental health
+services;
+(5)
+provide for proactive outreach measures to reach
+veterans needing care;
+(6)
+provide for peer-to-peer service coordination,
+including training, certification, recertification, and continuing
+education for peer coordinators; and
+(7)
+address suicide prevention awareness, measures,
+and training regarding veterans involved in the justice system.
+(c)
+The commission shall make specific short-term and
+long-term statutory, administrative, and budget-related
+recommendations to the legislature and the governor regarding the
+policy initiatives and reforms necessary to implement the action
+plan developed under this section. The initiatives and reforms
+must be fully implemented by September 1, 2027.
+(d)  This subchapter expires September 1, 2027.
+SECTION 5.  The following provisions are repealed:
+(1)  Subchapter I, Chapter 1001, Health and Safety
+Code; and
+(2)  Sections 531.0925 and 531.0992, Government Code.
+SECTION 6.  This Act takes effect immediately if it receives
+a vote of two-thirds of all the members elected to each house, as
+provided by Section 39, Article III, Texas Constitution. If this
+Act does not receive the vote necessary for immediate effect, this
+Act takes effect September 1, 2025.

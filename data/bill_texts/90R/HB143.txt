@@ -1,0 +1,487 @@
+90(R) HB 143 - Introduced version - Bill Text
+90R3364 MEW-F
+By: Guillen
+H.B. No. 143
+A BILL TO BE ENTITLED
+AN ACT
+relating to the improper relationship between educator and student,
+including the statute of limitations for and the applicability of
+sex offender registration requirements to the offense, the rights
+and protection of victims of the offense, and the punishment of
+certain acts committed in furtherance of the offense.
+BE IT ENACTED BY THE LEGISLATURE OF THE STATE OF TEXAS:
+SECTION 1.  Article 7B.001(a), Code of Criminal Procedure,
+is amended to read as follows:
+(a)  The following persons may file an application for a
+protective order under this subchapter without regard to the
+relationship between the applicant and the alleged offender:
+(1)  a person who is the victim of an offense under
+Section 20A.02, 20A.03, 21.02, 21.11,
+21.12,
+22.011, 22.012,
+22.021, 42.072, or 43.05, Penal Code;
+(2)  a person who is the victim of an offense under
+Section 30.02, Penal Code, that is punishable under Subsection
+(c)(2) or (d) of that section;
+(3)  any adult, including a parent or guardian, who is
+acting on behalf of a victim described by Subdivision (1) or (2), if
+the victim is younger than 18 years of age or an adult ward; or
+(4)  a prosecuting attorney acting on behalf of a
+person described by Subdivision (1), (2), or (3).
+SECTION 2.  Article 7B.004, Code of Criminal Procedure, is
+amended to read as follows:
+Art. 7B.004.  HEARSAY STATEMENT OF CHILD VICTIM.  In a
+hearing on an application for a protective order under this
+subchapter, a statement that is made by a child younger than 14
+years of age who is the victim of an offense under Section 21.02,
+21.11,
+21.12,
+22.011, 22.012, or 22.021, Penal Code, and that
+describes the offense committed against the child is admissible as
+evidence in the same manner that a child's statement regarding
+alleged abuse against the child is admissible under Section
+104.006, Family Code, in a suit affecting the parent-child
+relationship.
+SECTION 3.  Article 12.01, Code of Criminal Procedure, is
+amended to read as follows:
+Art. 12.01.  FELONIES.  Except as provided in Articles
+12.015 and 12.03, felony indictments may be presented within these
+limits, and not afterward:
+(1)  no limitation:
+(A)  murder and manslaughter;
+(B)  sexual assault under Section 22.011(a)(2),
+Penal Code, or aggravated sexual assault under Section
+22.021(a)(1)(B), Penal Code;
+(C)  sexual assault, if:
+(i)  during the investigation of the offense
+biological matter is collected and the matter:
+(a)  has not yet been subjected to
+forensic DNA testing; or
+(b)  has been subjected to forensic DNA
+testing and the testing results show that the matter does not match
+the victim or any other person whose identity is readily
+ascertained; or
+(ii)  probable cause exists to believe that
+the defendant has committed the same or a similar sex offense
+against five or more victims;
+(D)  continuous sexual abuse of young child or
+disabled individual under Section 21.02, Penal Code;
+(E)  indecency with a child under Section 21.11,
+Penal Code;
+(F)  an offense involving leaving the scene of a
+collision under Section 550.021, Transportation Code, if the
+collision resulted in the death of a person;
+(G)  trafficking of persons under Section
+20A.02(a)(7) or (8), Penal Code;
+(H)  continuous trafficking of persons under
+Section 20A.03, Penal Code;
+(I)  compelling prostitution under Section
+43.05(a)(2) or (3), Penal Code;
+(J)  tampering with physical evidence under
+Section 37.09(a)(1) or (d)(1), Penal Code, if:
+(i)  the evidence tampered with is a human
+corpse, as defined by that section; or
+(ii)  the investigation of the offense shows
+that a reasonable person in the position of the defendant at the
+time of the commission of the offense would have cause to believe
+that the evidence tampered with is related to a criminal homicide
+under Chapter 19, Penal Code;
+(K)  interference with child custody under
+Section 25.03(a)(3), Penal Code;
+(L)  burglary under Section 30.02, Penal Code, if:
+(i)  the offense is punishable under
+Subsection (d) of that section because the defendant entered a
+habitation with the intent to commit an offense under Section
+22.011 or 22.021, Penal Code; and
+(ii)  during the investigation of the
+offense biological matter is collected and the matter:
+(a)  has not yet been subjected to
+forensic DNA testing; or
+(b)  has been subjected to forensic DNA
+testing and the testing results show that the matter does not match
+the victim or any other person whose identity is readily
+ascertained;
+(M)  failure to stop or report sexual or
+assaultive offense against child under Section 38.17, Penal Code;
+or
+(N)  continuous promotion of prostitution under
+Section 43.032, Penal Code;
+(2)  ten years from the date of the commission of the
+offense:
+(A)  theft of any estate, real, personal or mixed,
+by an executor, administrator, guardian or trustee, with intent to
+defraud any creditor, heir, legatee, ward, distributee,
+beneficiary or settlor of a trust interested in such estate;
+(B)  theft by a public servant of government
+property over which the public servant exercises control in the
+public servant's official capacity;
+(C)  forgery or the uttering, using, or passing of
+forged instruments;
+(D)  injury to an elderly or disabled individual
+punishable as a felony of the first degree under Section 22.04,
+Penal Code;
+(E)  sexual assault, except as provided by
+Subdivision (1) or (10);
+(F)  arson;
+(G)  trafficking of persons under Section
+20A.02(a)(1), (2), (3), or (4), Penal Code;
+(H)  compelling prostitution under Section
+43.05(a)(1), Penal Code;
+(I)  real property theft under Section 31.23,
+Penal Code; [
+or
+]
+(J)  real property fraud under Section 32.60,
+Penal Code;
+or
+(K)
+improper relationship between educator and
+student under Section 21.12, Penal Code;
+(3)  seven years from the date of the commission of the
+offense:
+(A)  an offense under Chapter 32, Penal Code,
+except as provided by Subdivision (2)(C) or (J);
+(B)  a felony violation under Chapter 162, Tax
+Code;
+(C)  money laundering;
+(D)  health care fraud under Section 35A.02, Penal
+Code;
+(E)  bigamy under Section 25.01, Penal Code,
+except as provided by Subdivision (7); or
+(F)  possession or promotion of child pornography
+under Section 43.26, Penal Code;
+(4)  five years from the date of the commission of the
+offense:
+(A)  theft or robbery;
+(B)  except as provided by Subdivision (5),
+kidnapping;
+(C)  except as provided by Subdivision (1) or (5),
+burglary;
+(D)  injury to an elderly or disabled individual
+that is not punishable as a felony of the first degree under Section
+22.04, Penal Code;
+(E)  abandoning or endangering an elderly or
+disabled individual;
+(F)  insurance fraud;
+(G)  assault under Section 22.01, Penal Code, if
+the assault was committed against a person whose relationship to or
+association with the defendant is described by Section 71.0021(b),
+71.003, or 71.005, Family Code;
+(H)  continuous violence against the family under
+Section 25.11, Penal Code; or
+(I)  aggravated assault under Section 22.02,
+Penal Code;
+(5)  if the investigation of the offense shows that the
+victim is younger than 17 years of age at the time the offense is
+committed, 20 years from the 18th birthday of the victim of one of
+the following offenses:
+(A)  kidnapping under Section 20.03, Penal Code,
+or aggravated kidnapping under Section 20.04, Penal Code; or
+(B)  subject to Subdivision (1)(L), burglary
+under Section 30.02, Penal Code, if the offense is punishable under
+Subsection (d) of that section because the defendant entered a
+habitation with the intent to commit an offense described by
+Subdivision (1)(B) or (D) of this article or Paragraph (A) of this
+subdivision;
+(6)  20 years from the 18th birthday of the victim of
+one of the following offenses:
+(A)  trafficking of a child under Section
+20A.02(a)(5) or (6), Penal Code; or
+(B)  sexual performance by a child under Section
+43.25, Penal Code;
+(7)  ten years from the 18th birthday of the victim of
+the offense:
+(A)  injury to a child under Section 22.04, Penal
+Code;
+(B)  bigamy under Section 25.01, Penal Code, if
+the investigation of the offense shows that the person, other than
+the legal spouse of the defendant, whom the defendant marries or
+purports to marry or with whom the defendant lives under the
+appearance of being married is younger than 18 years of age at the
+time the offense is committed; or
+(C)  abandoning or endangering a child;
+(8)  ten years from the date the offense was
+discovered: trafficking of a disabled individual under Section
+20A.02(a)(5) or (6), Penal Code;
+(9)  four years from the date the offense was
+discovered:  failure to report child abuse or neglect if the
+offense is punishable as a state jail felony under Section
+261.109(c), Family Code;
+(10)  two years from the date the offense was
+discovered:  sexual assault punishable as a state jail felony under
+Section 22.011(f)(2), Penal Code; or
+(11)  three years from the date of the commission of the
+offense:  all other felonies.
+SECTION 4.  The heading to Section 25.07, Penal Code, is
+amended to read as follows:
+Sec. 25.07.  VIOLATION OF CERTAIN COURT ORDERS OR CONDITIONS
+OF BOND IN [
+A
+] FAMILY VIOLENCE
+AND CERTAIN OTHER CASES
+[
+, CHILD
+ABUSE OR NEGLECT, SEXUAL ASSAULT OR ABUSE, INDECENT ASSAULT,
+STALKING, OR TRAFFICKING CASE
+].
+SECTION 5.  Section 25.07(a), Penal Code, is amended to read
+as follows:
+(a)  A person commits an offense if, in violation of a
+condition of bond set in a family violence, sexual assault or abuse,
+indecent assault, stalking, or trafficking case and related to the
+safety of a victim or the safety of the community, an order issued
+under Subchapter A, Chapter 7B, Code of Criminal Procedure, an
+order issued under Article 17.292, Code of Criminal Procedure, an
+order issued under Section 6.504, Family Code, Chapter 83, Family
+Code, if the temporary ex parte order has been served on the person,
+Chapter 85, Family Code, or Subchapter F, Chapter 261, Family Code,
+or an order issued by another jurisdiction as provided by Chapter
+88, Family Code, the person knowingly or intentionally:
+(1)  commits family violence or an act in furtherance
+of an offense under Section 20A.02,
+21.12,
+22.011, 22.012, 22.021,
+or 42.072;
+(2)  communicates:
+(A)  directly with a protected individual or a
+member of the family or household in a threatening or harassing
+manner;
+(B)  a threat through any person to a protected
+individual or a member of the family or household; or
+(C)  in any manner with the protected individual
+or a member of the family or household except through the person's
+attorney or a person appointed by the court, if the violation is of
+an order described by this subsection and the order prohibits any
+communication with a protected individual or a member of the family
+or household;
+(3)  goes to or near any of the following places as
+specifically described in the order or condition of bond:
+(A)  the residence or place of employment or
+business of a protected individual or a member of the family or
+household; or
+(B)  any child care facility, residence, or school
+where a child protected by the order or condition of bond normally
+resides or attends;
+(4)  possesses a firearm;
+(5)  harms, threatens, or interferes with the care,
+custody, or control of a pet, companion animal, or assistance
+animal that is possessed by a person protected by the order or
+condition of bond;
+(6)  removes, attempts to remove, or otherwise tampers
+with the normal functioning of a global positioning monitoring
+system; or
+(7)  tracks or monitors personal property or a motor
+vehicle in the possession of a protected individual or of a member
+of the family or household of a protected individual, without the
+individual's effective consent, including by:
+(A)  using a tracking application on a personal
+electronic device in the possession of the protected individual or
+the family or household member or using a tracking device; or
+(B)  physically following the protected
+individual or family or household member or causing another to
+physically follow the individual or member.
+SECTION 6.  The heading to Section 25.072, Penal Code, is
+amended to read as follows:
+Sec. 25.072.  REPEATED VIOLATION OF CERTAIN COURT ORDERS OR
+CONDITIONS OF BOND IN FAMILY VIOLENCE
+AND CERTAIN OTHER CASES
+[
+,
+CHILD ABUSE OR NEGLECT, SEXUAL ASSAULT OR ABUSE, INDECENT ASSAULT,
+STALKING, OR TRAFFICKING CASE
+].
+SECTION 7.  Article 56A.001(7), Code of Criminal Procedure,
+is amended to read as follows:
+(7)  "Victim" means a person who:
+(A)  is the victim of the offense of:
+(i)  sexual assault;
+(ii)
+improper relationship between
+educator and student;
+(iii)
+[
+(ii)
+]  kidnapping;
+(iv)
+[
+(iii)
+]  aggravated robbery;
+(v)
+[
+(iv)
+]  trafficking of persons;
+(vi)
+[
+(v)
+]  injury to a child, elderly
+individual, or disabled individual;
+(vii)
+[
+(vi)
+]  family violence; or
+(viii)
+[
+(vii)
+]  stalking;
+(B)  has suffered personal injury or death as a
+result of the criminal conduct of another; or
+(C)  is the victim of an offense committed under
+Section 25.07, 25.071, or 25.072, Penal Code, if a violation that is
+an element of the offense occurred through the commission of an
+assault, aggravated assault, or sexual assault or the offense of
+stalking, regardless of whether that violation occurred with
+respect to a person whose relationship to or association with the
+defendant is described by Section 71.0021(b), 71.003, or 71.005,
+Family Code.
+SECTION 8.  Article 56A.052(a), Code of Criminal Procedure,
+is amended to read as follows:
+(a)  A victim, guardian of a victim, or close relative of a
+deceased victim of an offense under Section 21.02, 21.11,
+21.12,
+22.011, 22.012, or 22.021, Penal Code, is entitled to the following
+rights within the criminal justice system:
+(1)  if requested, the right to a disclosure of
+information, in the manner provided by Article 56A.0525, regarding:
+(A)  any evidence that was collected during the
+investigation of the offense, unless disclosing the information
+would interfere with the investigation or prosecution of the
+offense, in which event the victim, guardian, or relative shall be
+informed of the estimated date on which that information is
+expected to be disclosed; and
+(B)  the status of any analysis being performed on
+any evidence described by Paragraph (A);
+(2)  if requested, the right to be notified in the
+manner provided by Article 56A.0525:
+(A)  at the time a request is submitted to a crime
+laboratory to process and analyze any evidence that was collected
+during the investigation of the offense;
+(B)  at the time of the submission of a request to
+compare any biological evidence collected during the investigation
+of the offense with DNA profiles maintained in a state or federal
+DNA database; and
+(C)  of the results of the comparison described by
+Paragraph (B), unless disclosing the results would interfere with
+the investigation or prosecution of the offense, in which event the
+victim, guardian, or relative shall be informed of the estimated
+date on which those results are expected to be disclosed;
+(3)  if requested, the right to counseling regarding
+acquired immune deficiency syndrome (AIDS) and human
+immunodeficiency virus (HIV) infection;
+(4)  if requested, the right to be informed about, and
+confer with the attorney representing the state regarding, the
+disposition of the offense, including sharing the victim's,
+guardian's, or relative's views regarding:
+(A)  a decision not to file charges;
+(B)  the dismissal of charges;
+(C)  the use of a pretrial intervention program;
+or
+(D)  a plea bargain agreement; and
+(5)  for the victim, the right to:
+(A)  testing for acquired immune deficiency
+syndrome (AIDS), human immunodeficiency virus (HIV) infection,
+antibodies to HIV, or infection with any other probable causative
+agent of AIDS;
+(B)  a forensic medical examination as provided by
+Subchapter G; and
+(C)  any prescribed continuing medical care that
+is related to the sexual assault and provided to the victim during
+the 30-day period following a forensic medical examination, as
+provided by Subchapter G.
+SECTION 9.  Article 62.001(5), Code of Criminal Procedure,
+as amended by Chapters 123 (H.B. 2000), 248 (H.B. 1465), 557 (H.B.
+1422), and 1145 (S.B. 1610), Acts of the 89th Legislature, Regular
+Session, 2025, is reenacted and amended to read as follows:
+(5)  "Reportable conviction or adjudication" means a
+conviction or adjudication, including an adjudication of
+delinquent conduct or a deferred adjudication, that, regardless of
+the pendency of an appeal, is a conviction for or an adjudication
+for or based on:
+(A)  a violation of Section 21.02 (Continuous
+sexual abuse of young child or disabled individual), 21.03
+(Continuous sexual abuse), 21.09 (Bestiality), 21.11 (Indecency
+with a child),
+21.12 (Improper relationship between educator and
+student),
+21.15 (Invasive visual recording), 22.011 (Sexual
+assault), 22.021 (Aggravated sexual assault), or 25.02 (Prohibited
+sexual conduct), Penal Code;
+(B)  a violation of Section 43.04 (Aggravated
+promotion of prostitution), 43.05 (Compelling prostitution), 43.25
+(Sexual performance by a child), or 43.26 (Possession or promotion
+of child pornography), Penal Code;
+(B-1)  a violation of Section 43.021
+(Solicitation of Prostitution), Penal Code, if the offense is
+punishable as a felony of the second degree;
+(C)  a violation of Section 20.04(a)(4)
+(Aggravated kidnapping), Penal Code, if the actor committed the
+offense or engaged in the conduct with intent to violate or abuse
+the victim sexually;
+(D)  a violation of Section 30.02 (Burglary),
+Penal Code, if the offense or conduct is punishable under
+Subsection (d) of that section and the actor committed the offense
+or engaged in the conduct with intent to commit a felony listed in
+Paragraph (A) or (C);
+(E)  a violation of Section 20.02 (Unlawful
+restraint), 20.03 (Kidnapping), or 20.04 (Aggravated kidnapping),
+Penal Code, if, as applicable:
+(i)  the judgment in the case contains an
+affirmative finding under Article 42.015; or
+(ii)  the order in the hearing or the papers
+in the case contain an affirmative finding that the victim or
+intended victim was younger than 17 years of age;
+(F)  the second violation of Section 21.08
+(Indecent exposure), Penal Code, but not if the second violation
+results in a deferred adjudication;
+(G)  an attempt, conspiracy, or solicitation, as
+defined by Chapter 15, Penal Code, to commit an offense or engage in
+conduct listed in Paragraph (A), (B), (C), (D), (E), (K), or (L);
+(H)  a violation of the laws of another state,
+federal law, the laws of a foreign country, or the Uniform Code of
+Military Justice for or based on the violation of an offense
+containing elements that are substantially similar to the elements
+of an offense listed under Paragraph (A), (B), (B-1), (C), (D), (E),
+(G), (J), (K), (L), or (M), but not if the violation results in a
+deferred adjudication;
+(I)  the second violation of the laws of another
+state, federal law, the laws of a foreign country, or the Uniform
+Code of Military Justice for or based on the violation of an offense
+containing elements that are substantially similar to the elements
+of the offense of indecent exposure, but not if the second violation
+results in a deferred adjudication;
+(J)  a violation of Section 33.021 (Online
+solicitation of a minor), Penal Code;
+(K)  a violation of Section 20A.02(a)(3), (4),
+(7), or (8) (Trafficking of persons), Penal Code;
+(L)  a violation of Section 20A.03 (Continuous
+trafficking of persons), Penal Code, if the offense is based partly
+or wholly on conduct that constitutes an offense under Section
+20A.02(a)(3), (4), (7), or (8) of that code; [
+or
+]
+(M)  a violation of Section 15.032 (Child
+grooming), Penal Code
+; or
+(N)
+[
+(M)
+]  a violation of any law of this state
+for which the person has been civilly committed as a sexually
+violent predator under Chapter 841, Health and Safety Code.
+SECTION 10.  Article 12.01, Code of Criminal Procedure, as
+amended by this Act, does not apply to an offense if the prosecution
+of that offense becomes barred by limitation before the effective
+date of this Act.  The prosecution of that offense remains barred as
+if this Act had not taken effect.
+SECTION 11.  Article 62.001(5), Code of Criminal Procedure,
+as reenacted and amended by this Act, applies only to an offense
+committed on or after the effective date of this Act.  An offense
+committed before the effective date of this Act is governed by the
+law in effect on the date the offense was committed, and the former
+law is continued in effect for that purpose.  For purposes of this
+section, an offense was committed before the effective date of this
+Act if any element of the offense occurred before that date.
+SECTION 12.  To the extent of any conflict, this Act prevails
+over another Act of the 90th Legislature, Regular Session, 2027,
+relating to nonsubstantive additions to and corrections in enacted
+codes.
+SECTION 13.  This Act takes effect September 1, 2027.
