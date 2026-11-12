@@ -5,7 +5,7 @@
 #   - Local IP:         192.168.4.20
 #   - Public IP:        108.218.244.42
 #   - Hostname/Domain:  legit.crickscreatives.com (Cloudflare Tunnel)
-#   - Application Port: 5001 (avoiding port 5000 conflict)
+#   - Application Port: 5001 (Zero port conflicts; no port 80 hijacking)
 #   - AI Engine:        Local Ollama (Pre-existing llama3.1)
 #   - Automated Sync:   Hourly (:00 Ingestion, :30 AI llama3.1 Enrichment)
 # ==============================================================================
@@ -38,18 +38,23 @@ OLLAMA_MODEL="llama3.1"
 echo -e "${GREEN}Deploying with Pre-Configured Parameters:${NC}"
 echo -e "  - Domain Name:       ${CYAN}${DOMAIN}${NC} (via Cloudflare Tunnel)"
 echo -e "  - Local IP:          ${CYAN}${LOCAL_IP}${NC}"
-echo -e "  - Service Port:      ${CYAN}${PORT}${NC} (Customized to avoid Port 5000 conflict)"
+echo -e "  - Service Port:      ${CYAN}${PORT}${NC} (Standalone port, no port 80 conflicts)"
 echo -e "  - Local AI Model:    ${CYAN}Ollama with ${OLLAMA_MODEL}${NC} (Pre-installed)"
 echo -e "  - Hourly Schedule:   ${CYAN}:00 Ingest TLO FTP | :30 AI Enrichment (${OLLAMA_MODEL})${NC}"
 echo -e "  - Service User:      ${CYAN}${CURRENT_USER}${NC}"
 echo ""
 
 # ------------------------------------------------------------------------------
-# 1. System Packages & Node.js 20 Setup
+# 1. Clean Up Any Broken Package State & Install Prerequisites
 # ------------------------------------------------------------------------------
-echo -e "${BLUE}[1/6] Verifying Ubuntu system packages and Node.js 20...${NC}"
+echo -e "${BLUE}[1/5] Verifying system packages and Node.js 20...${NC}"
+
+# If an earlier nginx package install failed due to port 80 conflict, fix dpkg
+sudo systemctl stop nginx 2>/dev/null || true
+sudo systemctl disable nginx 2>/dev/null || true
+
 sudo apt-get update -y
-sudo apt-get install -y curl git build-essential python3 python3-pip python3-venv nginx
+sudo apt-get install -y curl git build-essential python3 python3-pip python3-venv
 
 NODE_VERSION=$(node -v 2>/dev/null || echo "none")
 if [[ "$NODE_VERSION" == "none" || "${NODE_VERSION:1:2}" -lt 20 ]]; then
@@ -63,7 +68,7 @@ fi
 # ------------------------------------------------------------------------------
 # 2. Python Virtual Environment Setup
 # ------------------------------------------------------------------------------
-echo -e "\n${BLUE}[2/6] Preparing Python virtual environment for ingestion & AI enrichment...${NC}"
+echo -e "\n${BLUE}[2/5] Preparing Python virtual environment for ingestion & AI enrichment...${NC}"
 cd "$SCRIPT_DIR"
 if [ ! -d "venv" ]; then
     python3 -m venv venv
@@ -78,17 +83,19 @@ chmod +x "$SCRIPT_DIR/scripts/ingest_real_texas_data.py"
 chmod +x "$SCRIPT_DIR/scripts/enrich_bills.py"
 
 # ------------------------------------------------------------------------------
-# 3. Node Dependencies & Production Bundle Build
+# 3. Node Dependencies & Production Bundle Build (with peer-deps resilience)
 # ------------------------------------------------------------------------------
-echo -e "\n${BLUE}[3/6] Installing npm dependencies and compiling Vite SPA...${NC}"
+echo -e "\n${BLUE}[3/5] Installing npm dependencies and compiling Vite SPA...${NC}"
 cd "$SCRIPT_DIR"
-npm install
+
+# Install with --legacy-peer-deps to prevent npm version conflict halting
+npm install --legacy-peer-deps
 npm run build
 
 # ------------------------------------------------------------------------------
 # 4. Generate Production .env File (Configured for Port 5001 & Ollama)
 # ------------------------------------------------------------------------------
-echo -e "\n${BLUE}[4/6] Writing production environment configuration (.env)...${NC}"
+echo -e "\n${BLUE}[4/5] Writing production environment configuration (.env)...${NC}"
 cat <<EOF > "$SCRIPT_DIR/.env"
 NODE_ENV=production
 PORT=${PORT}
@@ -100,23 +107,23 @@ EOF
 # ------------------------------------------------------------------------------
 # 5. Verify Local Ollama and llama3.1
 # ------------------------------------------------------------------------------
-echo -e "\n${BLUE}[5/6] Checking local Ollama and ${OLLAMA_MODEL}...${NC}"
+echo -e "\n${BLUE}[5/5] Checking local Ollama and ${OLLAMA_MODEL}...${NC}"
 if command -v ollama &> /dev/null; then
     echo -e "${GREEN}✔ Local Ollama binary detected.${NC}"
     if curl -s http://127.0.0.1:11434/api/tags | grep -q "llama3.1"; then
-        echo -e "${GREEN}✔ Found existing '${OLLAMA_MODEL}' model in Ollama library.${NC}"
+        echo -e "${GREEN}✔ Found existing '${OLLAMA_MODEL}' in your Ollama library.${NC}"
     else
-        echo -e "${YELLOW}Notice: '${OLLAMA_MODEL}' was not detected in local list. Ensuring it is available...${NC}"
+        echo -e "${YELLOW}Notice: Pulling '${OLLAMA_MODEL}' to ensure it is ready...${NC}"
         ollama pull "$OLLAMA_MODEL" || true
     fi
 else
-    echo -e "${YELLOW}Warning: Ollama command not found in PATH. Please verify your Ollama service is active on port 11434.${NC}"
+    echo -e "${YELLOW}Notice: Ollama not found in standard PATH, but API will connect to http://127.0.0.1:11434.${NC}"
 fi
 
 # ------------------------------------------------------------------------------
 # 6. Systemd Background Service Setup (Port 5001)
 # ------------------------------------------------------------------------------
-echo -e "\n${BLUE}[6/6] Registering systemd background service (texas-legis.service)...${NC}"
+echo -e "\n${BLUE}Registering systemd background service (texas-legis.service on port ${PORT})...${NC}"
 SERVICE_FILE="/etc/systemd/system/texas-legis.service"
 sudo bash -c "cat <<EOF > ${SERVICE_FILE}
 [Unit]
@@ -144,37 +151,7 @@ sudo systemctl enable texas-legis
 sudo systemctl restart texas-legis
 
 # ------------------------------------------------------------------------------
-# 7. Configure Nginx Reverse Proxy (Optional LAN Access on 192.168.4.20)
-# ------------------------------------------------------------------------------
-NGINX_CONF="/etc/nginx/sites-available/texas-legis"
-sudo bash -c "cat <<EOF > ${NGINX_CONF}
-server {
-    listen 80;
-    server_name ${DOMAIN} ${LOCAL_IP} localhost;
-
-    location / {
-        proxy_pass http://127.0.0.1:${PORT};
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade \\\$http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host \\\$host;
-        proxy_cache_bypass \\\$http_upgrade;
-        proxy_set_header X-Real-IP \\\$remote_addr;
-        proxy_set_header X-Forwarded-For \\\$proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto \\\$scheme;
-
-        proxy_read_timeout 300s;
-        proxy_connect_timeout 300s;
-        proxy_send_timeout 300s;
-    }
-}
-EOF"
-
-sudo ln -sf "$NGINX_CONF" /etc/nginx/sites-enabled/texas-legis
-sudo nginx -t && sudo systemctl reload nginx || echo -e "${YELLOW}Nginx reload skipped.${NC}"
-
-# ------------------------------------------------------------------------------
-# 8. Two-Stage Hourly Cron Schedule (:00 Ingest, :30 AI Enrichment)
+# 7. Two-Stage Hourly Cron Schedule (:00 Ingest, :30 AI Enrichment)
 # ------------------------------------------------------------------------------
 echo -e "\n${YELLOW}Setting up 2-stage hourly cron schedule...${NC}"
 # Minute 00: Ingest fresh Capitol bills & reports
@@ -188,15 +165,15 @@ echo -e "   - Every hour at :00 -> TLO FTP ingestion"
 echo -e "   - Every hour at :30 -> AI initial evaluation (${OLLAMA_MODEL})"
 
 # ------------------------------------------------------------------------------
-# 9. Health Check & Cloudflare Tunnel Instructions
+# 8. Health Check & Cloudflare Tunnel Summary
 # ------------------------------------------------------------------------------
 echo ""
 echo -e "${YELLOW}Verifying application status on port ${PORT}...${NC}"
 sleep 3
 if curl -s "http://127.0.0.1:${PORT}/api/stats" > /dev/null; then
-    echo -e "${GREEN}✔ Application is responding on http://127.0.0.1:${PORT}${NC}"
+    echo -e "${GREEN}✔ Application is active and healthy on http://127.0.0.1:${PORT}!${NC}"
 else
-    echo -e "${YELLOW}Notice: Service is booting up. Check logs with: sudo journalctl -u texas-legis -n 30${NC}"
+    echo -e "${YELLOW}Service is starting up. Check status with: sudo systemctl status texas-legis${NC}"
 fi
 
 echo ""
@@ -204,18 +181,18 @@ echo -e "${GREEN}===============================================================
 echo -e "${GREEN}  🎉 DEPLOYMENT COMPLETE FOR ${DOMAIN}!${NC}"
 echo -e "${GREEN}======================================================================${NC}"
 echo -e "Access options:"
-echo -e "  • Local LAN:            ${CYAN}http://${LOCAL_IP}:${PORT}${NC} or ${CYAN}http://${LOCAL_IP}${NC}"
+echo -e "  • Local LAN (Direct):   ${CYAN}http://${LOCAL_IP}:${PORT}${NC}"
 echo -e "  • Cloudflare Tunnel:    ${CYAN}https://${DOMAIN}${NC}"
 echo ""
-echo -e "${PURPLE}Cloudflare Tunnel Configuration (cloudflared):${NC}"
-echo -e "In your Cloudflare Zero Trust dashboard (or in ~/.cloudflared/config.yml), point"
-echo -e "the hostname ${CYAN}${DOMAIN}${NC} to your local service:"
+echo -e "${PURPLE}Cloudflare Tunnel Route (zero port conflicts):${NC}"
+echo -e "In your Cloudflare Zero Trust tunnel config for ${CYAN}${DOMAIN}${NC}, point to:"
 echo -e "  ${YELLOW}service: http://localhost:${PORT}${NC}"
 echo ""
-echo -e "${PURPLE}Manual Pipeline Commands:${NC}"
-echo -e "  • Run Ingestion now:    ${CYAN}${SCRIPT_DIR}/venv/bin/python3 ${SCRIPT_DIR}/scripts/ingest_real_texas_data.py${NC}"
-echo -e "  • Run AI Analysis now: ${CYAN}${SCRIPT_DIR}/venv/bin/python3 ${SCRIPT_DIR}/scripts/enrich_bills.py${NC}"
-echo -e "  • View Ingestion logs:  ${CYAN}tail -f /var/log/texas_ingest.log${NC}"
-echo -e "  • View AI Analysis logs:${CYAN}tail -f /var/log/texas_enrich.log${NC}"
+echo -e "${PURPLE}Management Commands:${NC}"
 echo -e "  • View Web Server logs: ${CYAN}sudo journalctl -u texas-legis -f${NC}"
+echo -e "  • Restart Service:      ${CYAN}sudo systemctl restart texas-legis${NC}"
+echo -e "  • Test Ingestion:       ${CYAN}${SCRIPT_DIR}/venv/bin/python3 ${SCRIPT_DIR}/scripts/ingest_real_texas_data.py${NC}"
+echo -e "  • Test AI Analysis:    ${CYAN}${SCRIPT_DIR}/venv/bin/python3 ${SCRIPT_DIR}/scripts/enrich_bills.py${NC}"
+echo -e "  • Ingestion Cron Log:   ${CYAN}tail -f /var/log/texas_ingest.log${NC}"
+echo -e "  • AI Analysis Cron Log: ${CYAN}tail -f /var/log/texas_enrich.log${NC}"
 echo -e "${GREEN}======================================================================${NC}"

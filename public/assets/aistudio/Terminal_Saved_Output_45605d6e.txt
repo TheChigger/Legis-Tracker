@@ -1,0 +1,398 @@
+Last login: Wed Nov 11 17:05:23 on ttys000
+nathanielcrickenberger@Nathaniels-MacBook-Pro ~ % scp -r '/Users/nathanielcrickenberger/Downloads/texas-capitol-legislative-intelligence-&-policy-engine-2' thechiggerbug@192.168.4.20:/home/thechiggerbug/Gemini Stack
+Stack: No such file or directory
+nathanielcrickenberger@Nathaniels-MacBook-Pro ~ % scp -r '/Users/nathanielcrickenberger/Downloads/texas-capitol-legislative-intelligence-&-policy-engine-2' thechiggerbug@192.168.4.20:'/home/thechiggerbug/Gemini Stack'
+scp: stat remote: No such file or directory
+scp: failed to upload directory /Users/nathanielcrickenberger/Downloads/texas-capitol-legislative-intelligence-&-policy-engine-2 to /home/thechiggerbug/Gemini Stack
+nathanielcrickenberger@Nathaniels-MacBook-Pro ~ % scp -r '/Users/nathanielcrickenberger/Downloads/texas-capitol-legislative-intelligence-&-policy-engine-2' thechiggerbug@192.168.4.20:'root/home/thechiggerbug/Gemini Stack'
+scp: realpath root/home/thechiggerbug/Gemini Stack: No such file
+scp: upload "root/home/thechiggerbug/Gemini Stack": path canonicalization failed
+scp: failed to upload directory /Users/nathanielcrickenberger/Downloads/texas-capitol-legislative-intelligence-&-policy-engine-2 to root/home/thechiggerbug/Gemini Stack
+nathanielcrickenberger@Nathaniels-MacBook-Pro ~ % scp -r '/Users/nathanielcrickenberger/Downloads/texas-capitol-legislative-intelligence-&-policy-engine-2' thechiggerbug@192.168.4.20:'~/home/thechiggerbug/Gemini Stack'
+scp: realpath home/thechiggerbug/Gemini Stack: No such file
+scp: upload "home/thechiggerbug/Gemini Stack": path canonicalization failed
+scp: failed to upload directory /Users/nathanielcrickenberger/Downloads/texas-capitol-legislative-intelligence-&-policy-engine-2 to ~/home/thechiggerbug/Gemini Stack
+nathanielcrickenberger@Nathaniels-MacBook-Pro ~ % ssh 'thechiggerbug@192.168.4.20'
+Welcome to Ubuntu 26.04.1 LTS (GNU/Linux 7.0.0-30-generic x86_64)
+
+ * Documentation:  https://docs.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Thu Nov 12 05:19:21 PM UTC 2026
+
+  System load:                      0.05
+  Usage of /:                       5.0% of 935.33GB
+  Memory usage:                     28%
+  Swap usage:                       25%
+  Temperature:                      51.0 C
+  Processes:                        441
+  Users logged in:                  1
+  IPv4 address for enx6c1ff725518f: 192.168.4.20
+  IPv6 address for enx6c1ff725518f: 2600:1700:70:c35f:6e1f:f7ff:fe25:518f
+  IPv6 address for enx6c1ff725518f: fd11:9e7a:868a:1:6e1f:f7ff:fe25:518f
+
+ * Canonical Workshop gives developers fast, composable, reproducible, and
+   secure developer environments that are perfect for agentic workflows.
+
+   https://ubuntu.com/workshop
+
+Expanded Security Maintenance for Applications is not enabled.
+
+46 updates can be applied immediately.
+To see these additional updates run: apt list --upgradable
+
+2 additional security updates can be applied with ESM Apps.
+Learn more about enabling ESM Apps service at https://ubuntu.com/esm
+
+
+*** System restart required ***
+Last login: Wed Nov 11 18:50:37 2026 from 192.168.4.30
+thechiggerbug@homelab:~$ # 1. Create your deployment folder (if not already created)
+sudo mkdir -p /opt/texas-legis-engine
+sudo chown -R $USER:$USER /opt/texas-legis-engine
+
+# 2. Clone the repository
+git clone https://github.com/TheChigger/Legis-Tracker.git /opt/texas-legis-engine
+[sudo: authenticate] Password:               
+Cloning into '/opt/texas-legis-engine'...
+remote: Enumerating objects: 60, done.
+remote: Counting objects: 100% (60/60), done.
+remote: Compressing objects: 100% (56/56), done.
+remote: Total 60 (delta 8), reused 2 (delta 0), pack-reused 0 (from 0)
+Receiving objects: 100% (60/60), 296.61 KiB | 1.23 MiB/s, done.
+Resolving deltas: 100% (8/8), done.
+thechiggerbug@homelab:~$ cd /opt/texas-legis-engine
+
+# Ensure executable permissions and launch
+chmod +x deploy.sh
+./deploy.sh
+======================================================================
+  Texas Capitol Platform - Customized Ubuntu Deployment (Port 5001)  
+======================================================================
+
+Deploying with Pre-Configured Parameters:
+  - Domain Name:       legit.crickscreatives.com (via Cloudflare Tunnel)
+  - Local IP:          192.168.4.20
+  - Service Port:      5001 (Customized to avoid Port 5000 conflict)
+  - Local AI Model:    Ollama with llama3.1 (Pre-installed)
+  - Hourly Schedule:   :00 Ingest TLO FTP | :30 AI Enrichment (llama3.1)
+  - Service User:      thechiggerbug
+
+[1/6] Verifying Ubuntu system packages and Node.js 20...
+Get:1 https://nvidia.github.io/libnvidia-container/stable/deb/amd64  InRelease [1,477 B]
+Get:2 https://download.docker.com/linux/ubuntu resolute InRelease [32.5 kB]                    
+Get:3 https://download.docker.com/linux/ubuntu resolute/stable amd64 Packages [33.7 kB]
+Hit:4 http://security.ubuntu.com/ubuntu resolute-security InRelease    
+Hit:5 http://archive.ubuntu.com/ubuntu resolute InRelease  
+Hit:6 http://archive.ubuntu.com/ubuntu resolute-updates InRelease
+Hit:7 http://archive.ubuntu.com/ubuntu resolute-backports InRelease
+Fetched 67.6 kB in 1s (101 kB/s)
+Reading package lists... Done
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+curl is already the newest version (8.18.0-1ubuntu2.8).
+git is already the newest version (1:2.53.0-1ubuntu1.1).
+git set to manually installed.
+build-essential is already the newest version (12.12ubuntu2.26.04.2).
+build-essential set to manually installed.
+python3 is already the newest version (3.14.3-0ubuntu2).
+python3-pip is already the newest version (25.1.1+dfsg-1ubuntu2).
+python3-venv is already the newest version (3.14.3-0ubuntu2).
+Solving dependencies... Done
+The following package was automatically installed and is no longer required:
+  grub-pc-bin
+Use 'sudo apt autoremove' to remove it.
+The following additional packages will be installed:
+  nginx-common
+Suggested packages:
+  fcgiwrap nginx-doc ssl-cert
+The following NEW packages will be installed:
+  nginx nginx-common
+0 upgraded, 2 newly installed, 0 to remove and 53 not upgraded.
+Need to get 656 kB of archives.
+After this operation, 1,864 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 nginx-common all 1.28.3-2ubuntu1.12 [38.2 kB]
+Get:2 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 nginx amd64 1.28.3-2ubuntu1.12 [618 kB]
+Fetched 656 kB in 0s (1,346 kB/s)
+Preconfiguring packages ...
+Selecting previously unselected package nginx-common.
+(Reading database… 158057 files and directories currently installed.)
+Preparing to unpack …/nginx-common_1.28.3-2ubuntu1.12_all.deb…
+Unpacking nginx-common (1.28.3-2ubuntu1.12)…
+Selecting previously unselected package nginx.
+Preparing to unpack …/nginx_1.28.3-2ubuntu1.12_amd64.deb…
+Unpacking nginx (1.28.3-2ubuntu1.12)…
+Setting up nginx-common (1.28.3-2ubuntu1.12)…
+Created symlink '/etc/systemd/system/multi-user.target.wants/nginx.service' → '/usr/lib/systemd/system/nginx.service'.
+Could not execute systemctl:  at /usr/bin/deb-systemd-invoke line 148.
+Setting up nginx (1.28.3-2ubuntu1.12)…
+Job for nginx.service failed because the control process exited with error code.
+See "systemctl status nginx.service" and "journalctl -xeu nginx.service" for details.
+invoke-rc.d: initscript nginx, action "start" failed.
+× nginx.service - A high performance web server and a reverse proxy server
+     Loaded: loaded (/usr/lib/systemd/system/nginx.service; enabled; preset: enabled)
+     Active: failed (Result: exit-code) since Thu 2026-11-12 17:20:20 UTC; 12ms ago
+ Invocation: a94003f7950d40e2aa5393f55c8fdb8f
+       Docs: man:nginx(8)
+    Process: 823658 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
+    Process: 823659 ExecStart=/usr/sbin/nginx -g daemon on; master_process on; (code=exited, status=1/FAILURE)
+   Mem peak: 2.3M
+        CPU: 16ms
+
+Nov 12 17:20:18 homelab nginx[823659]: nginx: [emerg] bind() to 0.0.0.0:80 failed (98: Address already in use)
+Nov 12 17:20:18 homelab nginx[823659]: nginx: [emerg] bind() to [::]:80 failed (98: Address already in use)
+Nov 12 17:20:19 homelab nginx[823659]: nginx: [emerg] bind() to 0.0.0.0:80 failed (98: Address already in use)
+Nov 12 17:20:19 homelab nginx[823659]: nginx: [emerg] bind() to [::]:80 failed (98: Address already in use)
+Nov 12 17:20:19 homelab nginx[823659]: nginx: [emerg] bind() to 0.0.0.0:80 failed (98: Address already in use)
+Nov 12 17:20:19 homelab nginx[823659]: nginx: [emerg] bind() to [::]:80 failed (98: Address already in use)
+Nov 12 17:20:20 homelab nginx[823659]: nginx: [emerg] still could not bind()
+Nov 12 17:20:20 homelab systemd[1]: nginx.service: Control process exited, code=exited, status=1/FAILURE
+Nov 12 17:20:20 homelab systemd[1]: nginx.service: Failed with result 'exit-code'.
+Nov 12 17:20:20 homelab systemd[1]: Failed to start nginx.service - A high performance web server and a reverse proxy server.
+Failed to start NGINX in postinst script, please check the logs
+Processing triggers for man-db (2.13.1-1build1)…
+Processing triggers for ufw (0.36.2-9build1)…
+Scanning processes...                                                                                                                                
+Scanning candidates...                                                                                                                               
+Scanning processor microcode...                                                                                                                      
+Scanning linux images...                                                                                                                             
+
+Pending kernel upgrade!
+Running kernel version:
+  7.0.0-30-generic
+Diagnostics:
+  The currently running kernel version is not the expected kernel version 7.0.0-43-generic.
+
+Restarting the system to load the new kernel will not be handled automatically, so you should consider rebooting.
+
+The processor microcode seems to be up-to-date.
+
+Restarting services...
+
+Service restarts being deferred:
+ /etc/needrestart/restart.d/dbus.service
+ systemctl restart docker.service
+ systemctl restart networkd-dispatcher.service
+ systemctl restart systemd-logind.service
+ systemctl restart unattended-upgrades.service
+ systemctl restart wpa_supplicant.service
+
+No containers need to be restarted.
+
+User sessions running outdated binaries:
+ thechiggerbug @ session #1: login[1714]
+ thechiggerbug @ user manager: (sd-pam)[2843]
+ thechiggerbug @ user service: dbus.service[26221]
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Installing Node.js 20 LTS from NodeSource...
+sudo: preserving the entire environment is not supported, '-E' is ignored
+2026-11-12 17:20:21 - Installing pre-requisites
+Hit:1 https://download.docker.com/linux/ubuntu resolute InRelease
+Get:2 https://nvidia.github.io/libnvidia-container/stable/deb/amd64  InRelease [1,477 B]                                                   
+Hit:3 http://archive.ubuntu.com/ubuntu resolute InRelease                                                                                           
+Hit:4 http://security.ubuntu.com/ubuntu resolute-security InRelease                                                  
+Hit:5 http://archive.ubuntu.com/ubuntu resolute-updates InRelease
+Hit:6 http://archive.ubuntu.com/ubuntu resolute-backports InRelease
+Fetched 1,477 B in 0s (2,965 B/s)
+53 packages can be upgraded. Run 'apt list --upgradable' to see them.
+ca-certificates is already the newest version (20260816ubuntu0.26.04.2).
+ca-certificates set to manually installed.
+curl is already the newest version (8.18.0-1ubuntu2.8).
+gnupg is already the newest version (2.4.8-4ubuntu3.1).
+gnupg set to manually installed.
+The following package was automatically installed and is no longer required:
+  grub-pc-bin
+Use 'sudo apt autoremove' to remove it.
+
+Installing:
+  apt-transport-https
+
+Summary:
+  Upgrading: 0, Installing: 1, Removing: 0, Not Upgrading: 53
+  Download size: 26.0 kB
+  Space needed: 36.9 kB / 912 GB available
+
+Get:1 http://archive.ubuntu.com/ubuntu resolute-updates/universe amd64 apt-transport-https all 3.2.1ubuntu0.1 [26.0 kB]
+Fetched 26.0 kB in 0s (143 kB/s)               
+Selecting previously unselected package apt-transport-https.
+(Reading database… 158105 files and directories currently installed.)
+Preparing to unpack …/apt-transport-https_3.2.1ubuntu0.1_all.deb…
+Unpacking apt-transport-https (3.2.1ubuntu0.1)…
+Setting up apt-transport-https (3.2.1ubuntu0.1)…
+Scanning processes...                                                                                                                                
+Scanning candidates...                                                                                                                               
+Scanning processor microcode...                                                                                                                      
+Scanning linux images...                                                                                                                             
+
+Pending kernel upgrade!
+Running kernel version:
+  7.0.0-30-generic
+Diagnostics:
+  The currently running kernel version is not the expected kernel version 7.0.0-43-generic.
+
+Restarting the system to load the new kernel will not be handled automatically, so you should consider rebooting.
+
+The processor microcode seems to be up-to-date.
+
+Restarting services...
+
+Service restarts being deferred:
+ /etc/needrestart/restart.d/dbus.service
+ systemctl restart docker.service
+ systemctl restart networkd-dispatcher.service
+ systemctl restart systemd-logind.service
+ systemctl restart unattended-upgrades.service
+ systemctl restart wpa_supplicant.service
+
+No containers need to be restarted.
+
+User sessions running outdated binaries:
+ thechiggerbug @ session #1: login[1714]
+ thechiggerbug @ user manager: (sd-pam)[2843]
+ thechiggerbug @ user service: dbus.service[26221]
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Get:1 https://nvidia.github.io/libnvidia-container/stable/deb/amd64  InRelease [1,477 B]
+Hit:2 https://download.docker.com/linux/ubuntu resolute InRelease                                                                                   
+Get:3 https://deb.nodesource.com/node_20.x nodistro InRelease [12.1 kB]                                                                             
+Get:4 https://deb.nodesource.com/node_20.x nodistro/main amd64 Packages [14.4 kB]                                                                   
+Hit:5 http://archive.ubuntu.com/ubuntu resolute InRelease                      
+Hit:6 http://security.ubuntu.com/ubuntu resolute-security InRelease
+Hit:7 http://archive.ubuntu.com/ubuntu resolute-updates InRelease
+Hit:8 http://archive.ubuntu.com/ubuntu resolute-backports InRelease
+Fetched 28.0 kB in 0s (56.1 kB/s)
+53 packages can be upgraded. Run 'apt list --upgradable' to see them.
+2026-11-12 17:20:26 - Repository configured successfully.
+2026-11-12 17:20:26 - To install Node.js, run: apt install nodejs -y
+2026-11-12 17:20:26 - You can use N|solid Runtime as a node.js alternative
+2026-11-12 17:20:26 - To install N|solid Runtime, run: apt install nsolid -y 
+
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Solving dependencies... Done
+The following package was automatically installed and is no longer required:
+  grub-pc-bin
+Use 'sudo apt autoremove' to remove it.
+The following NEW packages will be installed:
+  nodejs
+0 upgraded, 1 newly installed, 0 to remove and 53 not upgraded.
+Need to get 32.2 MB of archives.
+After this operation, 196 MB of additional disk space will be used.
+Get:1 https://deb.nodesource.com/node_20.x nodistro/main amd64 nodejs amd64 20.20.2-1nodesource1 [32.2 MB]
+Fetched 32.2 MB in 1s (46.6 MB/s) 
+Selecting previously unselected package nodejs.
+(Reading database… 158109 files and directories currently installed.)
+Preparing to unpack …/nodejs_20.20.2-1nodesource1_amd64.deb…
+Unpacking nodejs (20.20.2-1nodesource1)…
+Setting up nodejs (20.20.2-1nodesource1)…
+Processing triggers for man-db (2.13.1-1build1)…
+Scanning processes...                                                                                                                                
+Scanning candidates...                                                                                                                               
+Scanning processor microcode...                                                                                                                      
+Scanning linux images...                                                                                                                             
+
+Pending kernel upgrade!
+Running kernel version:
+  7.0.0-30-generic
+Diagnostics:
+  The currently running kernel version is not the expected kernel version 7.0.0-43-generic.
+
+Restarting the system to load the new kernel will not be handled automatically, so you should consider rebooting.
+
+The processor microcode seems to be up-to-date.
+
+Restarting services...
+
+Service restarts being deferred:
+ /etc/needrestart/restart.d/dbus.service
+ systemctl restart docker.service
+ systemctl restart networkd-dispatcher.service
+ systemctl restart systemd-logind.service
+ systemctl restart unattended-upgrades.service
+ systemctl restart wpa_supplicant.service
+
+No containers need to be restarted.
+
+User sessions running outdated binaries:
+ thechiggerbug @ session #1: login[1714]
+ thechiggerbug @ user manager: (sd-pam)[2843]
+ thechiggerbug @ user service: dbus.service[26221]
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+
+[2/6] Preparing Python virtual environment for ingestion & AI enrichment...
+Requirement already satisfied: pip in ./venv/lib/python3.14/site-packages (25.1.1)
+Collecting pip
+  Downloading pip-26.3-py3-none-any.whl.metadata (4.6 kB)
+Downloading pip-26.3-py3-none-any.whl (2.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 36.8 MB/s eta 0:00:00
+Installing collected packages: pip
+  Attempting uninstall: pip
+    Found existing installation: pip 25.1.1
+    Uninstalling pip-25.1.1:
+      Successfully uninstalled pip-25.1.1
+Successfully installed pip-26.3
+Collecting requests
+  Using cached requests-2.34.2-py3-none-any.whl.metadata (4.8 kB)
+Collecting charset_normalizer<4,>=2 (from requests)
+  Using cached charset_normalizer-3.5.2-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (46 kB)
+Collecting idna<4,>=2.5 (from requests)
+  Using cached idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+Collecting urllib3<3,>=1.26 (from requests)
+  Using cached urllib3-2.8.0-py3-none-any.whl.metadata (7.4 kB)
+Collecting certifi>=2023.5.7 (from requests)
+  Using cached certifi-2026.10.23-py3-none-any.whl.metadata (2.5 kB)
+Using cached requests-2.34.2-py3-none-any.whl (73 kB)
+Using cached charset_normalizer-3.5.2-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (255 kB)
+Using cached idna-3.20-py3-none-any.whl (69 kB)
+Using cached urllib3-2.8.0-py3-none-any.whl (135 kB)
+Using cached certifi-2026.10.23-py3-none-any.whl (135 kB)
+Installing collected packages: urllib3, idna, charset_normalizer, certifi, requests
+Successfully installed certifi-2026.10.23 charset_normalizer-3.5.2 idna-3.20 requests-2.34.2 urllib3-2.8.0
+
+[3/6] Installing npm dependencies and compiling Vite SPA...
+npm error code ERESOLVE
+npm error ERESOLVE could not resolve
+npm error
+npm error While resolving: vite@8.3.8
+npm error Found: esbuild@0.25.12
+npm error node_modules/esbuild
+npm error   dev esbuild@"^0.25.0" from the root project
+npm error
+npm error Could not resolve dependency:
+npm error peerOptional esbuild@"^0.27.0 || ^0.28.0" from vite@8.3.8
+npm error node_modules/vite
+npm error   vite@"^8.3.0" from the root project
+npm error   peer vite@"^5.2.0 || ^6 || ^7 || ^8" from @tailwindcss/vite@4.3.5
+npm error   node_modules/@tailwindcss/vite
+npm error     @tailwindcss/vite@"^4.3.3" from the root project
+npm error   1 more (@vitejs/plugin-react)
+npm error
+npm error Conflicting peer dependency: esbuild@0.28.2
+npm error node_modules/esbuild
+npm error   peerOptional esbuild@"^0.27.0 || ^0.28.0" from vite@8.3.8
+npm error   node_modules/vite
+npm error     vite@"^8.3.0" from the root project
+npm error     peer vite@"^5.2.0 || ^6 || ^7 || ^8" from @tailwindcss/vite@4.3.5
+npm error     node_modules/@tailwindcss/vite
+npm error       @tailwindcss/vite@"^4.3.3" from the root project
+npm error     1 more (@vitejs/plugin-react)
+npm error
+npm error Fix the upstream dependency conflict, or retry
+npm error this command with --force or --legacy-peer-deps
+npm error to accept an incorrect (and potentially broken) dependency resolution.
+npm error
+npm error
+npm error For a full report see:
+npm error /home/thechiggerbug/.npm/_logs/2026-11-12T17_20_32_800Z-eresolve-report.txt
+npm notice
+npm notice New major version of npm available! 10.8.2 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+npm error A complete log of this run can be found in: /home/thechiggerbug/.npm/_logs/2026-11-12T17_20_32_800Z-debug-0.log
+thechiggerbug@homelab:/opt/texas-legis-engine$ 
