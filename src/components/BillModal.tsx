@@ -48,32 +48,68 @@ export const BillModal: React.FC<BillModalProps> = ({
   const [selectedStatutePreview, setSelectedStatutePreview] = useState<{ code: string; chapter: string; text: string } | null>(null);
   const [isLoadingStatute, setIsLoadingStatute] = useState<boolean>(false);
 
+  const sanitizeBillDisplayText = (raw: string): string => {
+    if (!raw) return '';
+    let cleaned = raw;
+    if (/<\/?(?:html|head|body|table|tr|td|div|span|style|script|meta|p|br|u|s|b|i|font|center)\b[^>]*>/i.test(cleaned)) {
+      cleaned = cleaned
+        .replace(/<head[^>]*>[\s\S]*?<\/head>/gi, '')
+        .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
+        .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
+        .replace(/<br\s*\/?>/gi, '\n')
+        .replace(/<\/(?:tr|p|div|center|h[1-6]|li)>/gi, '\n')
+        .replace(/<[^>]+>/g, '');
+    }
+    return cleaned
+      .replace(/&#x([0-9a-fA-F]+);/gi, (_, hex) => {
+        const code = parseInt(hex, 16);
+        return Number.isFinite(code) ? String.fromCodePoint(code) : '';
+      })
+      .replace(/&#([0-9]+);/g, (_, dec) => {
+        const code = parseInt(dec, 10);
+        return Number.isFinite(code) ? String.fromCodePoint(code) : '';
+      })
+      .replace(/&nbsp;/gi, ' ')
+      .replace(/&amp;/gi, '&')
+      .replace(/&lt;/gi, '<')
+      .replace(/&gt;/gi, '>')
+      .replace(/&quot;/gi, '"')
+      .replace(/&apos;/gi, "'")
+      .replace(/\u00A0/g, ' ');
+  };
+
   useEffect(() => {
     if (!bill) return;
 
     // Reset state
     setSelectedStatutePreview(null);
     const existingVer = bill.versions.find((v) => v.versionCode === selectedVersionCode) || bill.versions[0];
-    const initialText = existingVer?.fullText || '';
+    const initialRawText = existingVer?.fullText || '';
+    const initialText = sanitizeBillDisplayText(initialRawText);
     setLiveFullText(initialText);
     setAmendedStatutes(bill.amendedStatutes || []);
 
     const m = bill.billNumber.replace(/\s+/g, '').toUpperCase().match(/^([A-Z]+)(\d+)$/);
     if (m) {
       const [, prefix, num] = m;
-      const padded = `${prefix}${String(num).padStart(5, '0')}I`;
+      const padded = `${prefix}${String(num).padStart(5, '0')}${selectedVersionCode}`;
       setOfficialTloUrl(bill.officialTloUrl || `https://capitol.texas.gov/tlodocs/${bill.session}/billtext/html/${padded}.htm`);
       setOfficialPdfUrl(bill.officialPdfUrl || `https://capitol.texas.gov/tlodocs/${bill.session}/billtext/pdf/${padded}.pdf`);
     }
 
-    // If initial text is short or was a stub (< 600 chars), fetch the complete authentic text from the server
-    if (!initialText || initialText.length < 600) {
+    const hadRawHtml = initialRawText !== initialText;
+
+    // If initial text is short (< 600 chars) or had raw HTML/entities, fetch the clean authentic text from the server
+    if (!initialText || initialText.length < 600 || hadRawHtml) {
       setIsLoadingText(true);
       fetch(`/api/bills/${bill.session}/${bill.billNumber}/text?version=${selectedVersionCode}`)
         .then((res) => res.json())
         .then((data) => {
-          if (data.fullText && data.fullText.length > initialText.length) {
-            setLiveFullText(data.fullText);
+          if (data.fullText) {
+            const cleanServerText = sanitizeBillDisplayText(data.fullText);
+            if (cleanServerText.length >= initialText.length || hadRawHtml) {
+              setLiveFullText(cleanServerText);
+            }
           }
           if (data.amendedStatutes && data.amendedStatutes.length > 0) {
             setAmendedStatutes(data.amendedStatutes);
@@ -89,6 +125,7 @@ export const BillModal: React.FC<BillModalProps> = ({
   if (!bill) return null;
 
   const currentVersion = bill.versions.find((v) => v.versionCode === selectedVersionCode) || bill.versions[0];
+  const displayFullText = sanitizeBillDisplayText(liveFullText || currentVersion?.fullText || '');
   const isOppose = bill.stance === 'OPPOSE';
   const isSupport = bill.stance === 'SUPPORT';
 
@@ -99,14 +136,13 @@ export const BillModal: React.FC<BillModalProps> = ({
   };
 
   const handleCopyFullText = () => {
-    navigator.clipboard.writeText(liveFullText || currentVersion?.fullText || '');
+    navigator.clipboard.writeText(displayFullText);
     setCopiedText(true);
     setTimeout(() => setCopiedText(false), 2000);
   };
 
   const handleDownloadTextFile = () => {
-    const textToDownload = liveFullText || currentVersion?.fullText || '';
-    const blob = new Blob([textToDownload], { type: 'text/plain;charset=utf-8' });
+    const blob = new Blob([displayFullText], { type: 'text/plain;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
@@ -202,7 +238,7 @@ export const BillModal: React.FC<BillModalProps> = ({
         <div className="flex overflow-x-auto border-b border-slate-800 bg-slate-950/60 px-5 gap-1 text-xs">
           {[
             { id: 'policy', label: 'Policy Alignment', icon: ShieldAlert },
-            { id: 'versions', label: `Full Statutory Text (${(liveFullText || currentVersion.fullText).length.toLocaleString()} chars)`, icon: FileText },
+            { id: 'versions', label: `Full Statutory Text (${displayFullText.length.toLocaleString()} chars)`, icon: FileText },
             { id: 'statutes', label: `Amended Statutes (${amendedStatutes.length})`, icon: BookOpen },
             { id: 'analysis', label: 'State Agency Analysis', icon: Scale },
             { id: 'fiscal', label: 'Fiscal Note (LBB)', icon: DollarSign },
@@ -336,7 +372,7 @@ export const BillModal: React.FC<BillModalProps> = ({
                     Version {selectedVersionCode} (Introduced)
                   </span>
                   <span className="text-xs font-mono text-slate-400">
-                    Length: <strong>{(liveFullText || currentVersion.fullText).length.toLocaleString()}</strong> characters
+                    Length: <strong>{displayFullText.length.toLocaleString()}</strong> characters
                   </span>
                   {isLoadingText && (
                     <span className="text-xs font-mono text-amber-400 flex items-center gap-1">
@@ -397,7 +433,7 @@ export const BillModal: React.FC<BillModalProps> = ({
                 </div>
 
                 <div className="font-mono text-xs text-slate-200 bg-slate-950 p-5 overflow-x-auto whitespace-pre-wrap leading-relaxed max-h-[500px] select-text">
-                  {liveFullText || currentVersion.fullText}
+                  {displayFullText}
                 </div>
               </div>
 

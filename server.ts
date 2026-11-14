@@ -358,15 +358,148 @@ function extractStatutes(text: string) {
   return results;
 }
 
+const NAMED_HTML_ENTITIES: Record<string, string> = {
+  nbsp: ' ',
+  amp: '&',
+  lt: '<',
+  gt: '>',
+  quot: '"',
+  apos: "'",
+  ldquo: '"',
+  rdquo: '"',
+  lsquo: "'",
+  rsquo: "'",
+  mdash: '—',
+  ndash: '–',
+  sect: '§',
+  para: '¶',
+  deg: '°',
+  copy: '©',
+  reg: '®',
+  trade: '™',
+  hellip: '...',
+  bull: '•',
+};
+
+function decodeHtmlEntities(input: string, preserveNbsp = false): string {
+  return input
+    .replace(/&#x([0-9a-fA-F]+);/gi, (_, hex) => {
+      const code = parseInt(hex, 16);
+      if (!Number.isFinite(code)) return '';
+      if (preserveNbsp && code === 0xa0) return '\u00A0';
+      return code === 0xa0 ? ' ' : String.fromCodePoint(code);
+    })
+    .replace(/&#([0-9]+);/g, (_, dec) => {
+      const code = parseInt(dec, 10);
+      if (!Number.isFinite(code)) return '';
+      if (preserveNbsp && code === 0xa0) return '\u00A0';
+      return code === 0xa0 ? ' ' : String.fromCodePoint(code);
+    })
+    .replace(/&([a-zA-Z]+);/g, (full, name) => {
+      const lower = name.toLowerCase();
+      if (lower === 'nbsp') return preserveNbsp ? '\u00A0' : ' ';
+      return lower in NAMED_HTML_ENTITIES ? NAMED_HTML_ENTITIES[lower] : full;
+    });
+}
+
+function hasRawHtmlOrEntities(text: string): boolean {
+  return (
+    /&(?:#x[0-9a-fA-F]+|#[0-9]+|nbsp|amp|lt|gt|quot|apos|ldquo|rdquo|mdash|ndash);/i.test(text) ||
+    /<\/?(?:html|head|body|table|tr|td|div|span|style|script|meta|p|br|u|s|b|i|font|center)\b[^>]*>/i.test(text)
+  );
+}
+
+function cleanLegislativeHtmlToText(rawHtml: string): string {
+  // Extract <body> content if present so <head>/<title>/<style>/<meta> are dropped
+  const bodyMatch = rawHtml.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+  let text = bodyMatch ? bodyMatch[1] : rawHtml;
+
+  // Remove non-content blocks first
+  text = text
+    .replace(/<head[^>]*>[\s\S]*?<\/head>/gi, '')
+    .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
+    .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
+    .replace(/<!--[\s\S]*?-->/g, '')
+    .replace(/<meta[^>]*>/gi, '');
+
+  // If raw HTML source formatting has newlines/tabs inside tags or cells, collapse them to spaces
+  // so inline tags (<u>, <s>, <span>) and multi-line HTML attributes do not break bill sentences
+  if (/<[a-z][\s\S]*>/i.test(text)) {
+    text = text.replace(/[\r\n\t]+/g, ' ');
+  }
+
+  // Strip the left margin page-line-number table column (width="65") that only contains PGLN/nbsp
+  text = text.replace(/<td[^>]*\bwidth=["']?65["']?[^>]*>[\s\S]*?<\/td>/gi, '');
+
+  // Separate adjacent table cells on the same row cleanly (e.g. "By: Author   H.B. No. 101")
+  text = text.replace(/<\/td>\s*<td[^>]*>/gi, '   ');
+
+  // Convert closing block boundaries and explicit breaks into single newlines
+  text = text
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<hr[^>]*>/gi, '\n')
+    .replace(/<\/(?:tr|p|div|center|h[1-6]|li|blockquote|pre|section|article)>/gi, '\n');
+
+  // Strip all remaining HTML tags (<u>, <s>, <b>, <i>, <span>, <td>, <tr>, <table>, etc.) without breaking lines
+  text = text.replace(/<[^>]+>/g, '');
+
+  // Decode all HTML entities while temporarily keeping \u00A0 distinct from HTML source spaces
+  text = decodeHtmlEntities(text, true);
+
+  // Normalize lines, trim HTML-formatting spaces, preserve intentional nbsp paragraph indent
+  const rawLines = text.split('\n');
+  const cleanedLines: string[] = [];
+  let prevBlank = true;
+
+  for (const rawLine of rawLines) {
+    // Strip HTML pretty-printing regular spaces from start/end, then convert intentional \u00A0 to spaces
+    const noHtmlIndent = rawLine.replace(/^ +| +$/g, '');
+    const withSpaces = noHtmlIndent.replace(/\u00A0/g, ' ');
+    const stripped = withSpaces.trim();
+
+    if (!stripped) {
+      if (!prevBlank) {
+        cleanedLines.push('');
+        prevBlank = true;
+      }
+      continue;
+    }
+
+    if (
+      stripped.startsWith('td {') ||
+      stripped.startsWith('table {') ||
+      stripped.startsWith('@font-face')
+    ) {
+      continue;
+    }
+
+    const leadingNbspMatch = withSpaces.match(/^( +)/);
+    const indent = leadingNbspMatch ? ' '.repeat(Math.min(leadingNbspMatch[1].length, 8)) : '';
+    const collapsedBody = stripped.replace(/ {3,}/g, '   ');
+
+    cleanedLines.push(indent + collapsedBody);
+    prevBlank = false;
+  }
+
+  while (cleanedLines.length > 0 && cleanedLines[cleanedLines.length - 1] === '') {
+    cleanedLines.pop();
+  }
+
+  return cleanedLines.join('\n');
+}
+
 // On-demand Full Text & Statute Lookup with Persistent Disk Cache
 app.get('/api/bills/:session/:billNumber/text', async (req: Request, res: Response) => {
   const session = (req.params.session || '90R').toUpperCase();
   const billNumber = req.params.billNumber.replace(/%20/g, ' ').trim();
   const cleanNum = billNumber.replace(/\s+/g, '').toUpperCase();
-  const versionCode = (req.query.version as string) || 'I';
+  const rawVersion = ((req.query.version as string) || 'I').toUpperCase();
+  const versionCode: 'I' | 'H' | 'S' | 'E' | 'F' =
+    (['I', 'H', 'S', 'E', 'F'].includes(rawVersion) ? rawVersion : 'I') as 'I' | 'H' | 'S' | 'E' | 'F';
 
   const cacheDir = path.join(__dirname, 'data', 'bill_texts', session);
-  const cacheFilePath = path.join(cacheDir, `${cleanNum}.txt`);
+  const cacheFileName = versionCode === 'I' ? `${cleanNum}.txt` : `${cleanNum}_${versionCode}.txt`;
+  const cacheFilePath = path.join(cacheDir, cacheFileName);
 
   let fullText = '';
   let sourceUrl = '';
@@ -380,16 +513,19 @@ app.get('/api/bills/:session/:billNumber/text', async (req: Request, res: Respon
     pdfUrl = `https://capitol.texas.gov/tlodocs/${session}/billtext/pdf/${paddedCode}.pdf`;
   }
 
-  // Check local file cache first
+  // Check local file cache first, but reject/clean any previously cached files containing raw HTML/entities
   if (fs.existsSync(cacheFilePath)) {
     try {
-      fullText = fs.readFileSync(cacheFilePath, 'utf-8');
+      const cachedText = fs.readFileSync(cacheFilePath, 'utf-8');
+      if (cachedText && !hasRawHtmlOrEntities(cachedText)) {
+        fullText = cachedText;
+      }
     } catch {
       // Ignore read error
     }
   }
 
-  // If not cached on disk, fetch live from Texas Capitol TLO portal
+  // If not cached (or cache contained uncleaned HTML/entities), fetch live from Texas Capitol TLO portal
   if (!fullText && sourceUrl) {
     try {
       const response = await fetch(sourceUrl, {
@@ -397,24 +533,9 @@ app.get('/api/bills/:session/:billNumber/text', async (req: Request, res: Respon
       });
       if (response.ok) {
         const rawHtml = await response.text();
-        // Strip styling, scripts, and HTML tags into clean text
-        const cleaned = rawHtml
-          .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
-          .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
-          .replace(/<[^>]+>/g, '\n')
-          .replace(/&nbsp;/g, ' ')
-          .replace(/&amp;/g, '&')
-          .replace(/&lt;/g, '<')
-          .replace(/&gt;/g, '>');
+        fullText = cleanLegislativeHtmlToText(rawHtml);
 
-        const lines = cleaned
-          .split('\n')
-          .map((l) => l.trim())
-          .filter((l) => l.length > 0 && !l.startsWith('td {') && !l.startsWith('table {'));
-
-        fullText = lines.join('\n');
-
-        // Persist to disk cache
+        // Persist clean plain text to disk cache
         if (fullText.length > 100) {
           fs.mkdirSync(cacheDir, { recursive: true });
           fs.writeFileSync(cacheFilePath, fullText, 'utf-8');
@@ -425,35 +546,54 @@ app.get('/api/bills/:session/:billNumber/text', async (req: Request, res: Respon
     }
   }
 
+  // If still cached dirty and live fetch failed, sanitize the dirty cache as fallback
+  if (!fullText && fs.existsSync(cacheFilePath)) {
+    try {
+      const cachedText = fs.readFileSync(cacheFilePath, 'utf-8');
+      if (cachedText) {
+        fullText = cleanLegislativeHtmlToText(cachedText);
+        if (fullText.length > 100) {
+          fs.writeFileSync(cacheFilePath, fullText, 'utf-8');
+        }
+      }
+    } catch {
+      // Ignore read error
+    }
+  }
+
+  const currentBills = getFreshBillsDatabase();
+
   // If still empty, check in-memory bill
   if (!fullText) {
-    const found = billsDatabase.find(
+    const found = currentBills.find(
       (b) => b.session === session && b.billNumber.replace(/\s+/g, '').toUpperCase() === cleanNum
     );
     if (found && found.versions && found.versions.length > 0) {
-      fullText = found.versions[0].fullText;
+      const ver = found.versions.find((v) => v.versionCode === versionCode) || found.versions[0];
+      fullText = hasRawHtmlOrEntities(ver.fullText) ? cleanLegislativeHtmlToText(ver.fullText) : ver.fullText;
     }
   }
 
   const amendedStatutes = extractStatutes(fullText || '');
 
   // Update in-memory bill if present
-  const targetBill = billsDatabase.find(
+  const targetBill = currentBills.find(
     (b) => b.session === session && b.billNumber.replace(/\s+/g, '').toUpperCase() === cleanNum
   );
   if (targetBill && fullText) {
     if (!targetBill.versions || targetBill.versions.length === 0) {
       targetBill.versions = [{
-        versionCode: 'I',
-        versionName: 'Introduced',
+        versionCode,
+        versionName: versionCode === 'I' ? 'Introduced' : versionCode,
         dateFiled: targetBill.dateFiled,
         charCount: fullText.length,
         snippet: fullText.slice(0, 300) + '...',
         fullText,
       }];
     } else {
-      targetBill.versions[0].fullText = fullText;
-      targetBill.versions[0].charCount = fullText.length;
+      const targetVer = targetBill.versions.find((v) => v.versionCode === versionCode) || targetBill.versions[0];
+      targetVer.fullText = fullText;
+      targetVer.charCount = fullText.length;
     }
     targetBill.amendedStatutes = amendedStatutes;
     targetBill.officialTloUrl = sourceUrl;
@@ -487,16 +627,7 @@ app.get('/api/statutes/:code/:chapter', async (req: Request, res: Response) => {
       return res.status(404).json({ error: 'Statute chapter not found on Capitol portal', statuteUrl });
     }
     const html = await response.text();
-    const cleanText = html
-      .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
-      .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
-      .replace(/<[^>]+>/g, '\n')
-      .replace(/&nbsp;/g, ' ')
-      .replace(/&amp;/g, '&')
-      .split('\n')
-      .map((l) => l.trim())
-      .filter((l) => l.length > 0 && !l.startsWith('td {'))
-      .join('\n');
+    const cleanText = cleanLegislativeHtmlToText(html);
 
     res.json({
       code,

@@ -1,0 +1,37 @@
+90R3967 PRL-D
+
+By: Little   H.B. No. 1082
+
+A BILL TO BE ENTITLED
+
+AN ACT
+
+relating to prohibiting the operation of virtual currency kiosks;
+creating a criminal offense.
+       BE IT ENACTED BY THE LEGISLATURE OF THE STATE OF TEXAS:
+       SECTION 1.  Subtitle E, Title 3, Finance Code, is amended by
+adding Chapter 161 to read as follows:
+CHAPTER 161.  VIRTUAL CURRENCY KIOSKS
+       Sec. 161.001.  DEFINITIONS.  In this chapter:
+        (1)  "Electronic terminal" has the meaning assigned by
+Section 31.002.
+        (2)  "Virtual currency" has the meaning assigned by
+Section 12.001, Business & Commerce Code.
+        (3)  "Virtual currency kiosk" means an electronic
+terminal that facilitates the exchange of virtual currency for
+money, bank credit, or other virtual currency, including by:
+        (A)  connecting directly to a separate virtual
+currency exchange that performs the actual virtual currency
+transmission; or
+        (B)  drawing upon the virtual currency in the
+possession of the electronic terminal's operator.
+       Sec. 161.002.  OPERATION OF VIRTUAL CURRENCY KIOSK
+PROHIBITED.  (a)  A person commits an offense if the person
+knowingly:
+        (1)  owns or operates a virtual currency kiosk located
+in this state; or
+        (2)  allows another person to operate or install a
+virtual currency kiosk on property located in this state that is
+owned, leased, or controlled by the person.
+       (b)  An offense under this section is a state jail felony.
+       SECTION 2.  This Act takes effect September 1, 2027.

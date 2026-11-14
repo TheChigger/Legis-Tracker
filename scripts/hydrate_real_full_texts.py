@@ -87,11 +87,65 @@ def extract_statutes_from_text(text: str) -> list:
                 
     return results
 
+def clean_legislative_html(html: str) -> str:
+    """Convert official TLO HTML into clean, readable statutory plain text."""
+    body_match = re.search(r'<body[^>]*>(.*?)</body>', html, flags=re.DOTALL | re.IGNORECASE)
+    text = body_match.group(1) if body_match else html
+
+    text = re.sub(r'<head[^>]*>.*?</head>', '', text, flags=re.DOTALL | re.IGNORECASE)
+    text = re.sub(r'<style[^>]*>.*?</style>', '', text, flags=re.DOTALL | re.IGNORECASE)
+    text = re.sub(r'<script[^>]*>.*?</script>', '', text, flags=re.DOTALL | re.IGNORECASE)
+    text = re.sub(r'<!--.*?-->', '', text, flags=re.DOTALL)
+    text = re.sub(r'<meta[^>]*>', '', text, flags=re.IGNORECASE)
+
+    # Collapse HTML source pretty-printing whitespace so inline <u>/<s> tags do not split lines
+    text = re.sub(r'[\r\n\t]+', ' ', text)
+
+    # Drop left margin page-line-number cells
+    text = re.sub(r'<td[^>]*\bwidth=["\']?65["\']?[^>]*>.*?</td>', '', text, flags=re.DOTALL | re.IGNORECASE)
+
+    # Separate adjacent columns cleanly
+    text = re.sub(r'</td>\s*<td[^>]*>', '   ', text, flags=re.IGNORECASE)
+
+    # Convert block boundaries into newlines
+    text = re.sub(r'<br\s*/?>', '\n', text, flags=re.IGNORECASE)
+    text = re.sub(r'<hr[^>]*>', '\n', text, flags=re.IGNORECASE)
+    text = re.sub(r'</(?:tr|p|div|center|h[1-6]|li|blockquote|pre|section|article)>', '\n', text, flags=re.IGNORECASE)
+    text = re.sub(r'<(?:tr|p|div|center|h[1-6]|li)\b[^>]*>', '\n', text, flags=re.IGNORECASE)
+
+    # Strip remaining inline tags without breaking lines
+    text = re.sub(r'<[^>]+>', '', text)
+    text = unescape(text).replace('\u00a0', ' ')
+
+    lines = []
+    prev_blank = True
+    for raw_line in text.splitlines():
+        trimmed_right = raw_line.rstrip(' \t')
+        stripped = trimmed_right.strip()
+        if not stripped:
+            if not prev_blank:
+                lines.append('')
+                prev_blank = True
+            continue
+        if stripped.startswith('td {') or stripped.startswith('table {'):
+            continue
+        leading_len = len(trimmed_right) - len(trimmed_right.lstrip(' \t'))
+        indent = '    ' if leading_len >= 10 else ('  ' if leading_len >= 4 else '')
+        body = re.sub(r' {3,}', '   ', stripped)
+        lines.append(indent + body)
+        prev_blank = False
+
+    while lines and lines[-1] == '':
+        lines.pop()
+
+    return "\n".join(lines)
+
+
 def fetch_clean_bill_text(session: str, bill_number: str, version_code: str = "I") -> tuple:
     """Fetch official statutory text from TLO and clean HTML tags into pristine text."""
     m = re.search(r'([A-Za-z]+)\s*(\d+)', bill_number)
     if not m:
-        return "", ""
+        return "", "", ""
         
     prefix, num = m.groups()
     bill_code = f"{prefix.upper()}{int(num):05d}{version_code}"
@@ -103,19 +157,7 @@ def fetch_clean_bill_text(session: str, bill_number: str, version_code: str = "I
         with urllib.request.urlopen(req, timeout=8) as resp:
             html = resp.read().decode("utf-8", errors="ignore")
             
-        # Clean HTML into structured legal text
-        text = re.sub(r'<style[^>]*>.*?</style>', '', html, flags=re.DOTALL)
-        text = re.sub(r'<script[^>]*>.*?</script>', '', text, flags=re.DOTALL)
-        text = re.sub(r'<[^>]+>', '\n', text)
-        text = unescape(text)
-        
-        lines = []
-        for line in text.splitlines():
-            l = re.sub(r'[ \t]+', ' ', line).strip()
-            if l and not l.startswith('td {') and not l.startswith('table {'):
-                lines.append(l)
-                
-        clean_text = "\n".join(lines)
+        clean_text = clean_legislative_html(html)
         return clean_text, url, pdf_url
     except Exception as e:
         print(f"  [Notice] Could not fetch {bill_code}: {e}")
