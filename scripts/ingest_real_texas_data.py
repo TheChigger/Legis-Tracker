@@ -27,96 +27,112 @@ PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
 BILLS_JSON_PATH = os.path.join(PROJECT_ROOT, "src", "data", "realBills.json")
 CACHE_DIR = os.path.join(PROJECT_ROOT, "data", "bill_texts")
 
+_TLO_TEXT_REPAIRS = (
+    ("Men?ndez", "Menéndez"),
+    ("Gonz?lez", "González"),
+    ("Anch?a", "Anchía"),
+    ("G?mez", "Gámez"),
+    ("Gómez", "Gámez"),
+    ("Mu?oz", "Muñoz"),
+    ("Rodr?guez", "Rodríguez"),
+    ("Pe?a", "Peña"),
+    ("Cort?s", "Cortés"),
+    ("Ch?vez", "Chávez"),
+    ("Jim?nez", "Jiménez"),
+    ("N??ez", "Núñez"),
+    ("Ordonez", "Ordóñez"),
+    ("Texas?", "Texas'"),
+)
+
+
+def normalize_tlo_text(text: str) -> str:
+    """Repair Latin-1/Windows-1252 mojibake or '?' substitution in TLO text."""
+    if not text:
+        return text
+    cleaned = text
+    for broken, fixed in _TLO_TEXT_REPAIRS:
+        if broken in cleaned:
+            cleaned = cleaned.replace(broken, fixed)
+    return cleaned
+
+
+def parse_coauthors_from_author(author: str) -> list:
+    """Extract coauthor names from pipe-delimited TLO author strings."""
+    if not author or "|" not in author:
+        return []
+    return [
+        part.strip()
+        for part in author.split("|")[1:]
+        if part.strip() and part.strip().lower() != "et al."
+    ]
+
+
 def fetch_ftp_text(url: str, timeout: int = 15) -> str:
     try:
         req = urllib.request.urlopen(url, timeout=timeout)
-        return req.read().decode('utf-8', errors='ignore')
+        raw = req.read()
+        try:
+            decoded = raw.decode("utf-8")
+        except UnicodeDecodeError:
+            decoded = raw.decode("cp1252", errors="replace")
+        return normalize_tlo_text(decoded)
     except Exception as e:
         print(f"  [Warning] Error fetching {url}: {e}", file=sys.stderr)
         return ""
+
+
+def _parse_chamber_report_rows(html_doc: str, chamber: str) -> list:
+    """Parse House or Senate overnight filed report rows from TLO FTP HTML."""
+    bill_pattern = r'>((?:HB|HJR|HCR|HR)\s*\d+)\s*</a>' if chamber == "House" else r'>((?:SB|SJR|SCR|SR)\s*\d+)\s*</a>'
+    default_action = "11/09/2026 H Filed" if chamber == "House" else "11/09/2026 S Filed"
+    parsed = []
+
+    for r in html_doc.split('<div class="row">')[1:]:
+        m_bill = re.search(bill_pattern, r)
+        if not m_bill:
+            continue
+        m_auth = re.search(r'<b>Author</b>:\s*</div><div class="bill-search-result-data">([^<]*)</div>', r, re.S)
+        m_act = re.search(r'<b>Last Action:</b>\s*</div><div class="bill-search-result-data">([^<]*)</div>', r, re.S)
+        m_cap = re.search(r'<b>Caption</b>:\s*</div><div class="bill-search-result-data">([^<]*)</div>', r, re.S)
+
+        b_num = m_bill.group(1).strip()
+        auth = normalize_tlo_text(unescape(m_auth.group(1).strip())) if m_auth else "Unknown"
+        act = normalize_tlo_text(unescape(m_act.group(1).strip())) if m_act else default_action
+        cap = normalize_tlo_text(unescape(m_cap.group(1).strip())) if m_cap else ""
+
+        date_match = re.search(r'(\d{2}/\d{2}/\d{4})', act)
+        date_filed = date_match.group(1) if date_match else "11/09/2026"
+        try:
+            parts = date_filed.split('/')
+            formatted_date = f"{parts[2]}-{parts[0]}-{parts[1]}"
+        except Exception:
+            formatted_date = "2026-11-09"
+
+        parsed.append({
+            "id": f"90R-{b_num.replace(' ', '')}",
+            "session": "90R",
+            "billNumber": b_num,
+            "chamber": chamber,
+            "author": auth,
+            "coauthors": parse_coauthors_from_author(auth),
+            "dateFiled": formatted_date,
+            "lastAction": act,
+            "lastActionDate": formatted_date,
+            "currentStatus": "Filed / Introduced",
+            "committee": "Pending Assignment",
+            "caption": cap,
+        })
+
+    return parsed
+
 
 def parse_90r_overnight_reports():
     """Parses standard daily filed reports from TLO FTP."""
     print("--- 1. Checking 90R Baseline Filed Reports (TLO FTP) ---")
     h_html = fetch_ftp_text('ftp://ftp.legis.state.tx.us/bills/90R/reports/housefiled.htm')
     s_html = fetch_ftp_text('ftp://ftp.legis.state.tx.us/bills/90R/reports/senatefiled.htm')
-    
-    bills = []
-    
-    # Parse House bills
-    h_rows = h_html.split('<div class="row">')
-    for r in h_rows[1:]:
-        m_bill = re.search(r'>((?:HB|HJR|HCR|HR)\s*\d+)\s*</a>', r)
-        m_auth = re.search(r'<b>Author</b>:\s*</div><div class="bill-search-result-data">([^<]*)</div>', r, re.S)
-        m_act = re.search(r'<b>Last Action:</b>\s*</div><div class="bill-search-result-data">([^<]*)</div>', r, re.S)
-        m_cap = re.search(r'<b>Caption</b>:\s*</div><div class="bill-search-result-data">([^<]*)</div>', r, re.S)
-        
-        if m_bill:
-            b_num = m_bill.group(1).strip()
-            auth = m_auth.group(1).strip() if m_auth else "Unknown"
-            act = m_act.group(1).strip() if m_act else "11/09/2026 H Filed"
-            cap = m_cap.group(1).strip() if m_cap else ""
-            
-            date_match = re.search(r'(\d{2}/\d{2}/\d{4})', act)
-            date_filed = date_match.group(1) if date_match else "11/09/2026"
-            try:
-                parts = date_filed.split('/')
-                formatted_date = f"{parts[2]}-{parts[0]}-{parts[1]}"
-            except Exception:
-                formatted_date = "2026-11-09"
-                
-            bills.append({
-                "id": f"90R-{b_num.replace(' ', '')}",
-                "session": "90R",
-                "billNumber": b_num,
-                "chamber": "House",
-                "author": auth,
-                "coauthors": [],
-                "dateFiled": formatted_date,
-                "lastAction": act,
-                "lastActionDate": formatted_date,
-                "currentStatus": "Filed / Introduced",
-                "committee": "Pending Assignment",
-                "caption": cap,
-            })
 
-    # Parse Senate bills
-    s_rows = s_html.split('<div class="row">')
-    for r in s_rows[1:]:
-        m_bill = re.search(r'>((?:SB|SJR|SCR|SR)\s*\d+)\s*</a>', r)
-        m_auth = re.search(r'<b>Author</b>:\s*</div><div class="bill-search-result-data">([^<]*)</div>', r, re.S)
-        m_act = re.search(r'<b>Last Action:</b>\s*</div><div class="bill-search-result-data">([^<]*)</div>', r, re.S)
-        m_cap = re.search(r'<b>Caption</b>:\s*</div><div class="bill-search-result-data">([^<]*)</div>', r, re.S)
-        
-        if m_bill:
-            b_num = m_bill.group(1).strip()
-            auth = m_auth.group(1).strip() if m_auth else "Unknown"
-            act = m_act.group(1).strip() if m_act else "11/09/2026 S Filed"
-            cap = m_cap.group(1).strip() if m_cap else ""
-            
-            date_match = re.search(r'(\d{2}/\d{2}/\d{4})', act)
-            date_filed = date_match.group(1) if date_match else "11/09/2026"
-            try:
-                parts = date_filed.split('/')
-                formatted_date = f"{parts[2]}-{parts[0]}-{parts[1]}"
-            except Exception:
-                formatted_date = "2026-11-09"
-                
-            bills.append({
-                "id": f"90R-{b_num.replace(' ', '')}",
-                "session": "90R",
-                "billNumber": b_num,
-                "chamber": "Senate",
-                "author": auth,
-                "coauthors": [],
-                "dateFiled": formatted_date,
-                "lastAction": act,
-                "lastActionDate": formatted_date,
-                "currentStatus": "Filed / Introduced",
-                "committee": "Pending Assignment",
-                "caption": cap,
-            })
-
+    bills = _parse_chamber_report_rows(h_html, "House") + _parse_chamber_report_rows(s_html, "Senate")
     print(f"  Baseline reports contain {len(bills)} bills.")
     return bills
 
@@ -158,9 +174,9 @@ def fetch_bill_detail_from_xml(path: str) -> dict:
         
     try:
         root = ET.fromstring(xml_data)
-        caption = root.findtext('caption') or ''
-        author = root.findtext('authors') or 'Unknown'
-        last_action = root.findtext('lastaction') or ''
+        caption = normalize_tlo_text(root.findtext('caption') or '')
+        author = normalize_tlo_text(root.findtext('authors') or 'Unknown')
+        last_action = normalize_tlo_text(root.findtext('lastaction') or '')
         
         # Parse subjects
         subjects = []
@@ -330,7 +346,12 @@ def sync_all_texas_bills():
                 newly_added += 1
             else:
                 existing = existing_map[bid]
-                if b["lastAction"] != existing.get("lastAction") or (b["caption"] and b["caption"] != existing.get("caption")):
+                if (
+                    b["lastAction"] != existing.get("lastAction")
+                    or (b["caption"] and b["caption"] != existing.get("caption"))
+                    or (b["author"] and b["author"] != existing.get("author"))
+                    or (b["coauthors"] and not existing.get("coauthors"))
+                ):
                     db_store.upsert_ingested_bill(conn, b)
                     metadata_updated += 1
 
@@ -356,14 +377,15 @@ def sync_all_texas_bills():
                 chamber = "Senate" if bill_num.startswith("S") else "House"
                 cat, stance, prio, cc = classify_bill_policy(details["caption"], details.get("subjects", []))
                 date_filed = details.get("dateFiled", "2026-11-12")
+                author_val = details.get("author", "Unknown")
 
                 b_obj = {
                     "id": bid,
                     "session": "90R",
                     "billNumber": bill_num,
                     "chamber": chamber,
-                    "author": details.get("author", "Unknown"),
-                    "coauthors": [],
+                    "author": author_val,
+                    "coauthors": parse_coauthors_from_author(author_val),
                     "dateFiled": date_filed,
                     "lastAction": details.get("lastAction", "Filed"),
                     "lastActionDate": date_filed,

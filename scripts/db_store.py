@@ -136,19 +136,31 @@ def init_and_sync_seed(conn: Optional[sqlite3.Connection] = None) -> int:
                     changed = True
                 else:
                     ai_flag, existing_json_str = existing_rows[bid]
-                    if not ai_flag:
-                        existing = json.loads(existing_json_str)
-                        baseline_diff = (
-                            existing.get("stance") != seed_bill.get("stance")
-                            or existing.get("recommendedStance") != seed_bill.get("recommendedStance")
-                            or existing.get("priorityScore") != seed_bill.get("priorityScore")
-                            or existing.get("primaryCategory") != seed_bill.get("primaryCategory")
-                            or existing.get("comportConflict") != seed_bill.get("comportConflict")
-                        )
-                        seed_has_better_text = _best_full_text_len(seed_bill) > _best_full_text_len(existing)
+                    existing = json.loads(existing_json_str)
+                    needs_metadata_repair = (
+                        "?" in (existing.get("author") or "")
+                        or "?" in (existing.get("caption") or "")
+                        or ("|" in (existing.get("author") or "") and not existing.get("coauthors"))
+                    )
+                    baseline_diff = not ai_flag and (
+                        existing.get("stance") != seed_bill.get("stance")
+                        or existing.get("recommendedStance") != seed_bill.get("recommendedStance")
+                        or existing.get("priorityScore") != seed_bill.get("priorityScore")
+                        or existing.get("primaryCategory") != seed_bill.get("primaryCategory")
+                        or existing.get("comportConflict") != seed_bill.get("comportConflict")
+                    )
+                    seed_has_better_text = _best_full_text_len(seed_bill) > _best_full_text_len(existing)
 
-                        if baseline_diff or seed_has_better_text:
-                            merged = dict(existing)
+                    if needs_metadata_repair or baseline_diff or seed_has_better_text:
+                        merged = dict(existing)
+                        if needs_metadata_repair:
+                            for meta_key in ("author", "coauthors", "caption"):
+                                if seed_bill.get(meta_key) not in (None, ""):
+                                    merged[meta_key] = seed_bill[meta_key]
+                            if "?" in (merged.get("summary") or "") and seed_bill.get("caption"):
+                                merged["summary"] = seed_bill["caption"]
+
+                        if baseline_diff:
                             for key in (
                                 "stance",
                                 "recommendedStance",
@@ -162,18 +174,18 @@ def init_and_sync_seed(conn: Optional[sqlite3.Connection] = None) -> int:
                                 elif key in merged and key == "recommendedStance":
                                     merged.pop("recommendedStance", None)
 
-                            if seed_has_better_text:
-                                merged["versions"] = seed_bill["versions"]
-                                if seed_bill.get("amendedStatutes"):
-                                    merged["amendedStatutes"] = seed_bill["amendedStatutes"]
-                                if seed_bill.get("officialTloUrl"):
-                                    merged["officialTloUrl"] = seed_bill["officialTloUrl"]
-                                if seed_bill.get("officialPdfUrl"):
-                                    merged["officialPdfUrl"] = seed_bill["officialPdfUrl"]
+                        if seed_has_better_text:
+                            merged["versions"] = seed_bill["versions"]
+                            if seed_bill.get("amendedStatutes"):
+                                merged["amendedStatutes"] = seed_bill["amendedStatutes"]
+                            if seed_bill.get("officialTloUrl"):
+                                merged["officialTloUrl"] = seed_bill["officialTloUrl"]
+                            if seed_bill.get("officialPdfUrl"):
+                                merged["officialPdfUrl"] = seed_bill["officialPdfUrl"]
 
-                            _insert_or_replace_bill(conn, merged)
-                            existing_rows[bid] = (0, json.dumps(merged))
-                            changed = True
+                        _insert_or_replace_bill(conn, merged)
+                        existing_rows[bid] = (ai_flag, json.dumps(merged))
+                        changed = True
 
         # Merge pre-update homelab snapshot if present (preserves local Ollama enrichments across git migration)
         if os.path.exists(PRE_UPDATE_JSON_PATH):

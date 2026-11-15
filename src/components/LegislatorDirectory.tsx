@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Legislator, Bill, SessionId, HistoricalVote } from '../types/legislative';
+import { doesLawmakerMatchBill, normalizeTloToken } from '../data/texasLawmakerRoster';
 import { 
   Users, 
   Search, 
@@ -34,33 +35,54 @@ export const LegislatorDirectory: React.FC<LegislatorDirectoryProps> = ({
 }) => {
   const [search, setSearch] = useState('');
   const [selectedChamber, setSelectedChamber] = useState<string>('All');
+  const [selectedParty, setSelectedParty] = useState<string>('All');
+  const [sortBy, setSortBy] = useState<'most-filed' | 'align-desc' | 'align-asc' | 'name-asc'>('most-filed');
   const [selectedLawmakerId, setSelectedLawmakerId] = useState<string>(legislators[0]?.id || '');
-  const [activeProfileTab, setActiveProfileTab] = useState<'votes' | 'career' | 'bills'>('votes');
+  const [activeProfileTab, setActiveProfileTab] = useState<'votes' | 'career' | 'bills'>('bills');
   
   // Voting record filters
   const [voteSessionFilter, setVoteSessionFilter] = useState<string>('ALL');
   const [voteCastFilter, setVoteCastFilter] = useState<string>('ALL');
   const [voteAlignmentFilter, setVoteAlignmentFilter] = useState<string>('ALL');
 
-  const filteredLawmakers = legislators.filter((leg) => {
-    const matchesSearch =
-      leg.name.toLowerCase().includes(search.toLowerCase()) ||
-      leg.district.toLowerCase().includes(search.toLowerCase()) ||
-      leg.hometown.toLowerCase().includes(search.toLowerCase()) ||
-      leg.keyTopics.some((t) => t.toLowerCase().includes(search.toLowerCase()));
+  const normSearch = normalizeTloToken(search);
+  const filteredLawmakers = legislators
+    .filter((leg) => {
+      const matchesSearch =
+        !normSearch ||
+        normalizeTloToken(leg.name).includes(normSearch) ||
+        normalizeTloToken(leg.district).includes(normSearch) ||
+        normalizeTloToken(leg.hometown).includes(normSearch) ||
+        leg.keyTopics.some((t) => normalizeTloToken(t).includes(normSearch));
 
-    const matchesChamber = selectedChamber === 'All' || leg.chamber === selectedChamber;
+      const matchesChamber = selectedChamber === 'All' || leg.chamber === selectedChamber;
+      const matchesParty = selectedParty === 'All' || leg.party === selectedParty;
 
-    return matchesSearch && matchesChamber;
-  });
+      return matchesSearch && matchesChamber && matchesParty;
+    })
+    .sort((a, b) => {
+      if (sortBy === 'align-desc') {
+        return b.alignmentScore - a.alignmentScore || b.totalBillsFiled - a.totalBillsFiled || a.name.localeCompare(b.name);
+      }
+      if (sortBy === 'align-asc') {
+        return a.alignmentScore - b.alignmentScore || b.totalBillsFiled - a.totalBillsFiled || a.name.localeCompare(b.name);
+      }
+      if (sortBy === 'name-asc') {
+        return a.name.localeCompare(b.name);
+      }
+      return b.totalBillsFiled - a.totalBillsFiled || a.name.localeCompare(b.name);
+    });
 
-  const selectedLawmaker = legislators.find((l) => l.id === selectedLawmakerId) || legislators[0];
+  const selectedLawmaker =
+    filteredLawmakers.find((l) => l.id === selectedLawmakerId) ||
+    filteredLawmakers[0] ||
+    legislators.find((l) => l.id === selectedLawmakerId) ||
+    legislators[0];
 
-  // Find bills filed by this lawmaker in current dataset
-  const authoredBills = bills.filter((b) => {
-    const authorLastName = selectedLawmaker.name.split(',')[0].toLowerCase().trim();
-    return b.author.toLowerCase().includes(authorLastName);
-  });
+  // Find bills filed or coauthored by this lawmaker in current dataset
+  const authoredBills = selectedLawmaker
+    ? bills.filter((b) => doesLawmakerMatchBill(selectedLawmaker, b))
+    : [];
 
   // Identify first bill filed chronologically or by lowest bill number
   const sortedAuthored = [...authoredBills].sort((a, b) =>
@@ -98,14 +120,14 @@ export const LegislatorDirectory: React.FC<LegislatorDirectoryProps> = ({
         </div>
 
         {/* Filter Controls */}
-        <div className="flex items-center gap-3 w-full md:w-auto">
-          <div className="relative flex-1 md:w-60">
+        <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto">
+          <div className="relative flex-1 min-w-[180px] md:w-56">
             <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search by name, district, topic..."
+              placeholder="Search name, district, hometown, topic..."
               className="w-full bg-slate-950 border border-slate-800 text-xs text-slate-200 rounded-lg pl-8 pr-3 py-1.5 focus:outline-none focus:border-amber-500/60"
             />
           </div>
@@ -113,16 +135,42 @@ export const LegislatorDirectory: React.FC<LegislatorDirectoryProps> = ({
           <select
             value={selectedChamber}
             onChange={(e) => setSelectedChamber(e.target.value)}
-            className="bg-slate-950 border border-slate-800 text-xs text-slate-200 rounded-lg px-3 py-1.5 focus:outline-none focus:border-amber-500/60"
+            className="bg-slate-950 border border-slate-800 text-xs text-slate-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-amber-500/60"
           >
             <option value="All">All Chambers</option>
             <option value="House">House</option>
             <option value="Senate">Senate</option>
           </select>
+
+          <select
+            value={selectedParty}
+            onChange={(e) => setSelectedParty(e.target.value)}
+            className="bg-slate-950 border border-slate-800 text-xs text-slate-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-amber-500/60"
+          >
+            <option value="All">All Parties</option>
+            <option value="D">Democrats (D)</option>
+            <option value="R">Republicans (R)</option>
+          </select>
+
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value as 'most-filed' | 'align-desc' | 'align-asc' | 'name-asc')}
+            className="bg-slate-950 border border-slate-800 text-xs text-slate-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-amber-500/60"
+          >
+            <option value="most-filed">Most Bills Filed</option>
+            <option value="align-desc">Highest Alignment</option>
+            <option value="align-asc">Lowest Alignment</option>
+            <option value="name-asc">Name (A–Z)</option>
+          </select>
         </div>
       </div>
 
       {/* Main 2-Column Layout: Lawmaker List + Detailed Profile Card */}
+      {!selectedLawmaker ? (
+        <div className="bg-slate-900 border border-slate-800 rounded-xl p-8 text-center text-xs text-slate-400 font-mono">
+          No legislators available yet.
+        </div>
+      ) : (
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         {/* Left Column: Lawmaker Selector Cards */}
@@ -133,6 +181,11 @@ export const LegislatorDirectory: React.FC<LegislatorDirectoryProps> = ({
           </div>
 
           <div className="space-y-2.5 max-h-[780px] overflow-y-auto pr-1">
+            {filteredLawmakers.length === 0 && (
+              <div className="p-4 rounded-xl bg-slate-900/40 border border-slate-800 text-xs text-slate-400 font-mono text-center">
+                No lawmakers match "{search}".
+              </div>
+            )}
             {filteredLawmakers.map((leg) => {
               const isSelected = leg.id === selectedLawmaker.id;
               const isHighAlign = leg.alignmentScore >= 70;
@@ -141,7 +194,12 @@ export const LegislatorDirectory: React.FC<LegislatorDirectoryProps> = ({
               return (
                 <div
                   key={leg.id}
-                  onClick={() => setSelectedLawmakerId(leg.id)}
+                  onClick={() => {
+                    setSelectedLawmakerId(leg.id);
+                    if (activeProfileTab === 'votes' && (leg.votingRecord?.length || 0) === 0) {
+                      setActiveProfileTab('bills');
+                    }
+                  }}
                   className={`p-3.5 rounded-xl border cursor-pointer transition-all ${
                     isSelected
                       ? 'bg-slate-900 border-amber-500/50 shadow-md ring-1 ring-amber-500/20'
@@ -156,7 +214,9 @@ export const LegislatorDirectory: React.FC<LegislatorDirectoryProps> = ({
                           className={`font-mono text-[10px] px-1.5 py-0.2 rounded font-semibold ${
                             leg.party === 'R'
                               ? 'bg-red-950/60 text-red-300 border border-red-800/40'
-                              : 'bg-blue-950/60 text-blue-300 border border-blue-800/40'
+                              : leg.party === 'D'
+                                ? 'bg-blue-950/60 text-blue-300 border border-blue-800/40'
+                                : 'bg-slate-800 text-slate-300 border border-slate-700'
                           }`}
                         >
                           {leg.party}-{leg.chamber.slice(0, 1)}
@@ -214,10 +274,12 @@ export const LegislatorDirectory: React.FC<LegislatorDirectoryProps> = ({
                     className={`font-mono text-xs px-2 py-0.5 rounded font-semibold ${
                       selectedLawmaker.party === 'R'
                         ? 'bg-red-950/60 text-red-300 border border-red-800/40'
-                        : 'bg-blue-950/60 text-blue-300 border border-blue-800/40'
+                        : selectedLawmaker.party === 'D'
+                          ? 'bg-blue-950/60 text-blue-300 border border-blue-800/40'
+                          : 'bg-slate-800 text-slate-300 border border-slate-700'
                     }`}
                   >
-                    {selectedLawmaker.party === 'R' ? 'Republican' : 'Democrat'} • {selectedLawmaker.chamber}
+                    {selectedLawmaker.party === 'R' ? 'Republican' : selectedLawmaker.party === 'D' ? 'Democrat' : 'Independent'} • {selectedLawmaker.chamber}
                   </span>
                 </div>
                 <div className="text-xs text-slate-400 mt-1 flex flex-wrap gap-x-3">
@@ -380,7 +442,9 @@ export const LegislatorDirectory: React.FC<LegislatorDirectoryProps> = ({
                 {/* Vote Ledger List */}
                 {filteredVotes.length === 0 ? (
                   <div className="p-6 rounded-lg bg-slate-950 border border-slate-800 text-xs text-slate-400 text-center font-mono">
-                    No historical votes match the selected filters.
+                    {allVotes.length === 0
+                      ? 'No TLO floor roll-call ledger recorded yet for this lawmaker. View their Authored Bills or Career Summary tabs.'
+                      : 'No historical votes match the selected filters.'}
                   </div>
                 ) : (
                   <div className="space-y-3">
@@ -641,6 +705,7 @@ export const LegislatorDirectory: React.FC<LegislatorDirectoryProps> = ({
         </div>
 
       </div>
+      )}
 
     </div>
   );

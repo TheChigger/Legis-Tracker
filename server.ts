@@ -15,6 +15,7 @@ import {
 } from './src/data/mockData';
 import { Bill, PolicyPriority, Stance, SessionId, DashboardStats } from './src/types/legislative';
 import { reevaluateBillClient } from './src/utils/evaluateBillClient';
+import { buildCompleteLegislatorsList, doesLawmakerMatchBill } from './src/data/texasLawmakerRoster';
 
 dotenv.config();
 
@@ -642,16 +643,19 @@ app.get('/api/statutes/:code/:chapter', async (req: Request, res: Response) => {
 
 // Legislators
 app.get('/api/legislators', (_req: Request, res: Response) => {
-  res.json(MOCK_LEGISLATORS);
+  const currentBills = getFreshBillsDatabase();
+  const legislators = buildCompleteLegislatorsList(currentBills, MOCK_LEGISLATORS);
+  res.json(legislators);
 });
 
 app.get('/api/legislators/:id', (req: Request, res: Response) => {
-  const leg = MOCK_LEGISLATORS.find((l) => l.id === req.params.id);
+  const currentBills = getFreshBillsDatabase();
+  const legislators = buildCompleteLegislatorsList(currentBills, MOCK_LEGISLATORS);
+  const leg = legislators.find((l) => l.id === req.params.id);
   if (!leg) {
     return res.status(404).json({ error: 'Legislator not found' });
   }
-  const currentBills = getFreshBillsDatabase();
-  const sponsoredBills = currentBills.filter((b) => b.author.toLowerCase().includes(leg.name.toLowerCase().split(',')[0]));
+  const sponsoredBills = currentBills.filter((b) => doesLawmakerMatchBill(leg, b));
   res.json({ ...leg, sponsoredBills });
 });
 

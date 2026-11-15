@@ -24,6 +24,7 @@ import {
   INITIAL_PRIORITIES 
 } from './data/mockData';
 import { reevaluateBillClient } from './utils/evaluateBillClient';
+import { buildCompleteLegislatorsList } from './data/texasLawmakerRoster';
 
 const PRIORITIES_STORAGE_KEY = 'tx_legis_custom_priorities_v2';
 
@@ -88,7 +89,9 @@ export default function App() {
   // Server Snapshot + Visitor-Isolated Priorities State
   const [rawServerBills, setRawServerBills] = useState<Bill[]>(MOCK_BILLS.filter((b) => b.session === '90R'));
   const [serverStats, setServerStats] = useState<DashboardStats>(MOCK_STATS_90R);
-  const [legislators, setLegislators] = useState<Legislator[]>(MOCK_LEGISLATORS);
+  const [rawLegislators, setRawLegislators] = useState<Legislator[]>(() =>
+    buildCompleteLegislatorsList(MOCK_BILLS, MOCK_LEGISLATORS)
+  );
   const [meetings, setMeetings] = useState<CommitteeMeeting[]>(MOCK_COMMITTEE_MEETINGS);
   const [serverPriorities, setServerPriorities] = useState<PolicyPriority[]>(INITIAL_PRIORITIES);
   const [customPriorities, setCustomPriorities] = useState<PolicyPriority[] | null>(() => loadSavedCustomPriorities());
@@ -101,6 +104,14 @@ export default function App() {
         ? rawServerBills.map((b) => reevaluateBillClient(b, customPriorities, true))
         : rawServerBills,
     [rawServerBills, customPriorities]
+  );
+
+  const legislators = useMemo(
+    () =>
+      customPriorities
+        ? buildCompleteLegislatorsList(bills, rawLegislators)
+        : rawLegislators,
+    [customPriorities, bills, rawLegislators]
   );
 
   const stats = useMemo(
@@ -135,7 +146,9 @@ export default function App() {
       }
       if (legRes.ok) {
         const legData = await legRes.json();
-        setLegislators(legData);
+        if (Array.isArray(legData) && legData.length > 0) {
+          setRawLegislators(legData);
+        }
       }
       if (meetRes.ok) {
         const meetData = await meetRes.json();
