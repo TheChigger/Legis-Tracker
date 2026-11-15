@@ -11,6 +11,10 @@ data/texas_legis.db-shm
 data/texas_legis.db-wal
 data/runtime_bills.json
 data/runtime_bills.json.tmp
+data/runtime_rss.json
+data/runtime_rss.json.tmp
+data/runtime_meetings.json
+data/runtime_meetings.json.tmp
 data/pre_update_realBills.json
 venv/
 __pycache__/

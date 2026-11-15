@@ -8,10 +8,11 @@ import {
   Calendar, 
   FileText, 
   Terminal, 
-  Search 
+  Search,
+  Radio
 } from 'lucide-react';
 
-export type NavTab = 'dashboard' | 'bills' | 'legislators' | 'committees' | 'priorities' | 'ai' | 'python';
+export type NavTab = 'dashboard' | 'wire' | 'bills' | 'legislators' | 'committees' | 'priorities' | 'ai' | 'python';
 
 interface HeaderProps {
   activeTab: NavTab;
@@ -76,6 +77,18 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
 
             <button
+              onClick={() => setActiveTab('wire')}
+              className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all flex items-center gap-1.5 ${
+                activeTab === 'wire'
+                  ? 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30'
+                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
+              }`}
+            >
+              <Radio className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Live Wire</span>
+            </button>
+
+            <button
               onClick={() => setActiveTab('bills')}
               className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all flex items-center gap-1.5 ${
                 activeTab === 'bills'
@@ -108,7 +121,7 @@ export const Header: React.FC<HeaderProps> = ({
               }`}
             >
               <Calendar className="w-3.5 h-3.5" />
-              <span>Committees & Minutes</span>
+              <span>Calendars & Meetings</span>
             </button>
 
             <button
@@ -187,9 +200,10 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="flex lg:hidden overflow-x-auto py-2 space-x-1 border-t border-slate-800/60 no-scrollbar">
           {[
             { id: 'dashboard', label: 'Feed' },
+            { id: 'wire', label: 'Live Wire' },
             { id: 'bills', label: 'Bills' },
             { id: 'legislators', label: 'Lawmakers' },
-            { id: 'committees', label: 'Committees' },
+            { id: 'committees', label: 'Calendars' },
             { id: 'priorities', label: 'Priorities' },
             { id: 'ai', label: 'AI Analyst' },
             { id: 'python', label: 'Pipeline' },

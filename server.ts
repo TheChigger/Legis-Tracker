@@ -9,11 +9,13 @@ import {
   MOCK_BILLS,
   MOCK_LEGISLATORS,
   MOCK_COMMITTEE_MEETINGS,
+  MOCK_RSS_ITEMS,
+  OFFICIAL_TLO_RSS_FEEDS,
   HISTORICAL_STATS_MAP,
   SESSIONS_METADATA,
   INITIAL_PRIORITIES,
 } from './src/data/mockData';
-import { Bill, PolicyPriority, Stance, SessionId, DashboardStats } from './src/types/legislative';
+import { Bill, CommitteeMeeting, PolicyPriority, RssFeedItem, Stance, SessionId, DashboardStats } from './src/types/legislative';
 import { reevaluateBillClient } from './src/utils/evaluateBillClient';
 import { buildCompleteLegislatorsList, doesLawmakerMatchBill } from './src/data/texasLawmakerRoster';
 
@@ -31,15 +33,25 @@ app.use(express.json());
 let currentPriorities: PolicyPriority[] = [...INITIAL_PRIORITIES];
 let billsDatabase: Bill[] = JSON.parse(JSON.stringify(MOCK_BILLS));
 const RUNTIME_BILLS_PATH = path.join(__dirname, 'data', 'runtime_bills.json');
+const RUNTIME_RSS_PATH = path.join(__dirname, 'data', 'runtime_rss.json');
+const RUNTIME_MEETINGS_PATH = path.join(__dirname, 'data', 'runtime_meetings.json');
 const SEED_BILLS_PATH = path.join(__dirname, 'src', 'data', 'realBills.json');
 const DB_STORE_SCRIPT_PATH = path.join(__dirname, 'scripts', 'db_store.py');
+const RSS_SYNC_SCRIPT_PATH = path.join(__dirname, 'scripts', 'sync_tlo_rss.py');
 let activeBillsPath = '';
 let lastBillsMtime = 0;
+let rssDatabase: RssFeedItem[] = [...MOCK_RSS_ITEMS];
+let lastRssMtime = 0;
+let meetingsDatabase: CommitteeMeeting[] = [...MOCK_COMMITTEE_MEETINGS];
+let lastMeetingsMtime = 0;
 
 // Public-sharing guardrails for ingest concurrency & cooldown
 let isIngestRunning = false;
 let lastIngestTriggerMs = 0;
 const INGEST_COOLDOWN_MS = 5 * 60 * 1000;
+let isRssSyncRunning = false;
+let lastRssSyncMs = 0;
+const RSS_COOLDOWN_MS = 60 * 1000;
 
 function getPythonExecutable(): string {
   const venvPython = path.join(__dirname, 'venv', 'bin', 'python3');
@@ -75,6 +87,42 @@ function getFreshBillsDatabase(): Bill[] {
     console.error('Error reloading bills snapshot:', err);
   }
   return billsDatabase;
+}
+
+function getFreshRssItems(): RssFeedItem[] {
+  try {
+    if (fs.existsSync(RUNTIME_RSS_PATH)) {
+      const fileStats = fs.statSync(RUNTIME_RSS_PATH);
+      if (fileStats.mtimeMs > lastRssMtime || rssDatabase.length === 0) {
+        const parsed = JSON.parse(fs.readFileSync(RUNTIME_RSS_PATH, 'utf-8')) as RssFeedItem[];
+        if (Array.isArray(parsed)) {
+          rssDatabase = parsed;
+          lastRssMtime = fileStats.mtimeMs;
+        }
+      }
+    }
+  } catch (err) {
+    console.error('Error reloading RSS snapshot:', err);
+  }
+  return rssDatabase;
+}
+
+function getFreshMeetingsDatabase(): CommitteeMeeting[] {
+  try {
+    if (fs.existsSync(RUNTIME_MEETINGS_PATH)) {
+      const fileStats = fs.statSync(RUNTIME_MEETINGS_PATH);
+      if (fileStats.mtimeMs > lastMeetingsMtime || meetingsDatabase.length === 0) {
+        const parsed = JSON.parse(fs.readFileSync(RUNTIME_MEETINGS_PATH, 'utf-8')) as CommitteeMeeting[];
+        if (Array.isArray(parsed)) {
+          meetingsDatabase = parsed;
+          lastMeetingsMtime = fileStats.mtimeMs;
+        }
+      }
+    }
+  } catch (err) {
+    console.error('Error reloading meetings snapshot:', err);
+  }
+  return meetingsDatabase;
 }
 
 // Shared helper to load clean cached bill text excerpt (if present) for AI grounding
@@ -659,9 +707,190 @@ app.get('/api/legislators/:id', (req: Request, res: Response) => {
   res.json({ ...leg, sponsoredBills });
 });
 
-// Committee Meetings and Minutes
-app.get('/api/meetings', (_req: Request, res: Response) => {
-  res.json(MOCK_COMMITTEE_MEETINGS);
+// Live TLO RSS Monitoring Wire
+app.get('/api/rss', (req: Request, res: Response) => {
+  const feedTypeFilter = ((req.query.feedType as string) || 'ALL').trim();
+  const chamberFilter = ((req.query.chamber as string) || 'All').trim();
+  const stanceFilter = ((req.query.stance as string) || 'All').trim();
+  const q = ((req.query.q as string) || '').toLowerCase().trim();
+  const limit = Math.min(500, Math.max(10, parseInt((req.query.limit as string) || '250', 10) || 250));
+
+  const currentBills = getFreshBillsDatabase();
+  const billsBySessionNum = new Map<string, Bill>();
+  const billsByNum = new Map<string, Bill>();
+  for (const bill of currentBills) {
+    const cleanNum = bill.billNumber.replace(/\s+/g, '').toUpperCase();
+    billsBySessionNum.set(`${bill.session}-${cleanNum}`, bill);
+    if (!billsByNum.has(cleanNum) || bill.session === '90R') {
+      billsByNum.set(cleanNum, bill);
+    }
+  }
+
+  let items = getFreshRssItems().map((item) => {
+    let matched: Bill | undefined;
+    if (item.billNumber) {
+      const cleanNum = item.billNumber.replace(/\s+/g, '').toUpperCase();
+      matched = billsBySessionNum.get(`${item.session}-${cleanNum}`) || billsByNum.get(cleanNum);
+    }
+    const bestFullLen = (matched?.versions || []).reduce(
+      (maxLen, v) => Math.max(maxLen, (v.fullText || '').length),
+      0
+    );
+    return {
+      ...item,
+      matchedBill: matched
+        ? {
+            id: matched.id,
+            billNumber: matched.billNumber,
+            author: matched.author,
+            caption: matched.caption,
+            stance: matched.stance,
+            priorityScore: matched.priorityScore,
+            currentStatus: matched.currentStatus,
+            hasFullText: bestFullLen >= 300,
+          }
+        : undefined,
+    };
+  });
+
+  if (feedTypeFilter && feedTypeFilter !== 'ALL') {
+    items = items.filter((item) => item.feedType === feedTypeFilter);
+  }
+  if (chamberFilter && chamberFilter !== 'All') {
+    items = items.filter((item) => item.chamber.toLowerCase() === chamberFilter.toLowerCase());
+  }
+  if (stanceFilter && stanceFilter !== 'All') {
+    items = items.filter((item) => item.matchedBill?.stance === stanceFilter);
+  }
+  if (q) {
+    items = items.filter(
+      (item) =>
+        item.title.toLowerCase().includes(q) ||
+        item.description.toLowerCase().includes(q) ||
+        item.feedLabel.toLowerCase().includes(q) ||
+        (item.billNumber || '').toLowerCase().includes(q) ||
+        (item.matchedBill?.author || '').toLowerCase().includes(q) ||
+        (item.matchedBill?.caption || '').toLowerCase().includes(q)
+    );
+  }
+
+  items.sort((a, b) => b.pubTimestamp - a.pubTimestamp);
+
+  res.json({
+    total: items.length,
+    feedsMetadata: OFFICIAL_TLO_RSS_FEEDS,
+    lastSyncMs: lastRssSyncMs,
+    items: items.slice(0, limit),
+  });
+});
+
+app.post('/api/rss/sync', (req: Request, res: Response) => {
+  const isAdmin = hasValidAdminToken(req);
+  const now = Date.now();
+
+  if (isRssSyncRunning) {
+    return res.json({
+      success: true,
+      cached: true,
+      message: 'Live TLO RSS poll is already running.',
+      totalRssItems: getFreshRssItems().length,
+      totalMeetings: getFreshMeetingsDatabase().length,
+    });
+  }
+
+  if (!isAdmin && lastRssSyncMs > 0 && now - lastRssSyncMs < RSS_COOLDOWN_MS) {
+    const remainingSec = Math.max(1, Math.ceil((RSS_COOLDOWN_MS - (now - lastRssSyncMs)) / 1000));
+    return res.json({
+      success: true,
+      cached: true,
+      cooldownRemainingSec: remainingSec,
+      message: `Serving recent TLO RSS poll (next live refresh available in ${remainingSec}s).`,
+      totalRssItems: getFreshRssItems().length,
+      totalMeetings: getFreshMeetingsDatabase().length,
+    });
+  }
+
+  const pythonCmd = getPythonExecutable();
+  isRssSyncRunning = true;
+  execFile(pythonCmd, [RSS_SYNC_SCRIPT_PATH], { timeout: 60000 }, (err, stdout, stderr) => {
+    isRssSyncRunning = false;
+    if (err) {
+      console.error('[RSS Sync Error]:', err.message, stderr);
+      return res.status(500).json({ error: 'RSS sync failed', details: stderr || err.message });
+    }
+    lastRssSyncMs = Date.now();
+    lastRssMtime = 0;
+    lastMeetingsMtime = 0;
+    activeBillsPath = '';
+    lastBillsMtime = 0;
+
+    let summary: Record<string, unknown> = {};
+    try {
+      const lastLine = stdout.trim().split('\n').pop() || '{}';
+      summary = JSON.parse(lastLine);
+    } catch {
+      summary = { rawOutput: stdout.trim() };
+    }
+
+    res.json({
+      success: true,
+      cached: false,
+      summary,
+      totalRssItems: getFreshRssItems().length,
+      totalMeetings: getFreshMeetingsDatabase().length,
+    });
+  });
+});
+
+// Committee Meetings, Floor Calendars & Persistent Notes
+app.get('/api/meetings', (req: Request, res: Response) => {
+  const session = ((req.query.session as SessionId) || '90R');
+  const allMeetings = getFreshMeetingsDatabase();
+  const sessionMeetings = allMeetings.filter((m) => (m.session || '90R') === session);
+
+  if (session === '90R' && sessionMeetings.length === 0) {
+    const fallback89 = allMeetings.filter((m) => m.session === '89R');
+    return res.json({
+      session: '90R',
+      activeDataSession: '89R',
+      isFallback89R: true,
+      meetings: fallback89.length > 0 ? fallback89 : allMeetings,
+    });
+  }
+
+  return res.json({
+    session,
+    activeDataSession: session,
+    isFallback89R: false,
+    meetings: sessionMeetings,
+  });
+});
+
+app.post('/api/meetings/:id/notes', (req: Request, res: Response) => {
+  const userNotes = req.body?.userNotes;
+  if (typeof userNotes !== 'string') {
+    return res.status(400).json({ error: 'userNotes string is required' });
+  }
+
+  const pythonCmd = getPythonExecutable();
+  execFile(
+    pythonCmd,
+    [DB_STORE_SCRIPT_PATH, '--save-meeting-note', req.params.id, userNotes],
+    { timeout: 15000 },
+    (err, stdout, stderr) => {
+      if (err) {
+        console.error('[Save Meeting Note Error]:', err.message, stderr);
+        return res.status(404).json({ error: 'Failed to save meeting note', details: stderr || err.message });
+      }
+      lastMeetingsMtime = 0;
+      try {
+        const updatedMeeting = JSON.parse(stdout.trim()) as CommitteeMeeting;
+        return res.json({ success: true, meeting: updatedMeeting });
+      } catch {
+        return res.status(500).json({ error: 'Invalid response from SQLite note store' });
+      }
+    }
+  );
 });
 
 // Policy Priorities
@@ -964,7 +1193,12 @@ ${prioritiesContext}`;
 
 // Vite middleware integration for full-stack dev mode
 async function startServer() {
-  if (!fs.existsSync(RUNTIME_BILLS_PATH) && fs.existsSync(DB_STORE_SCRIPT_PATH)) {
+  if (
+    (!fs.existsSync(RUNTIME_BILLS_PATH) ||
+      !fs.existsSync(RUNTIME_RSS_PATH) ||
+      !fs.existsSync(RUNTIME_MEETINGS_PATH)) &&
+    fs.existsSync(DB_STORE_SCRIPT_PATH)
+  ) {
     const pythonCmd = getPythonExecutable();
     console.log(`[Startup DB Init] Initializing runtime SQLite snapshot via ${pythonCmd}...`);
     execFile(pythonCmd, [DB_STORE_SCRIPT_PATH, '--init'], { timeout: 60000 }, (err, stdout, stderr) => {
@@ -977,7 +1211,36 @@ async function startServer() {
       }
       activeBillsPath = '';
       lastBillsMtime = 0;
+      lastRssMtime = 0;
+      lastMeetingsMtime = 0;
     });
+  }
+
+  // Background 3-minute live TLO RSS poll (meetings, calendars, filings, bill text)
+  if (fs.existsSync(RSS_SYNC_SCRIPT_PATH)) {
+    const runBackgroundRssPoll = () => {
+      if (isRssSyncRunning) return;
+      isRssSyncRunning = true;
+      const pythonCmd = getPythonExecutable();
+      execFile(pythonCmd, [RSS_SYNC_SCRIPT_PATH], { timeout: 60000 }, (err, stdout) => {
+        isRssSyncRunning = false;
+        if (err) {
+          console.warn('[Background RSS Poll Warning]:', err.message);
+          return;
+        }
+        lastRssSyncMs = Date.now();
+        lastRssMtime = 0;
+        lastMeetingsMtime = 0;
+        activeBillsPath = '';
+        lastBillsMtime = 0;
+        if (stdout.trim()) {
+          console.log('[Background RSS Poll]', stdout.trim());
+        }
+      });
+    };
+
+    setTimeout(runBackgroundRssPoll, 5000);
+    setInterval(runBackgroundRssPoll, 3 * 60 * 1000);
   }
 
   if (process.env.NODE_ENV !== 'production') {

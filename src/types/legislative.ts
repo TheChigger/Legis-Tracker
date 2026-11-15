@@ -178,8 +178,46 @@ export interface SessionMetadata {
   politicalContext: string;
 }
 
+export type RssFeedType =
+  | 'upcomingmeetingshouse'
+  | 'upcomingmeetingssenate'
+  | 'upcomingcalendarshouse'
+  | 'upcomingcalendarssenate'
+  | 'todaysbilltext'
+  | 'todaysfiscalnotes'
+  | 'todaysbillanalyses'
+  | 'todaysfiledhouse'
+  | 'todaysfiledsenate'
+  | 'todaysbillspassed';
+
+export interface RssFeedItem {
+  id: string;
+  feedType: RssFeedType;
+  feedLabel: string;
+  session: SessionId;
+  chamber: Chamber;
+  billNumber?: string;
+  title: string;
+  description: string;
+  link: string;
+  pubDate: string;
+  pubTimestamp: number;
+  matchedBill?: {
+    id: string;
+    billNumber: string;
+    author: string;
+    caption: string;
+    stance: Stance;
+    priorityScore: PriorityScore;
+    currentStatus: string;
+    hasFullText: boolean;
+  };
+}
+
 export interface CommitteeMeeting {
   id: string;
+  session?: SessionId;
+  eventType?: 'Committee Hearing' | 'Floor Calendar';
   committeeName: string;
   chamber: Chamber;
   meetingDate: string;
@@ -191,6 +229,10 @@ export interface CommitteeMeeting {
   minutesSummary?: string;
   witnessCount?: number;
   recordingUrl?: string;
+  noticeUrl?: string;
+  rssFeedUrl?: string;
+  userNotes?: string;
+  notesUpdatedAt?: string;
 }
 
 export interface PolicyPriority {

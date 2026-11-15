@@ -5,6 +5,7 @@ import { BillExplorer } from './components/BillExplorer';
 import { BillModal } from './components/BillModal';
 import { LegislatorDirectory } from './components/LegislatorDirectory';
 import { CommitteeTracker } from './components/CommitteeTracker';
+import { LiveCapitolWire } from './components/LiveCapitolWire';
 import { PolicyPriorityManager } from './components/PolicyPriorityManager';
 import { AIResearchAssistant } from './components/AIResearchAssistant';
 import { PythonPipelineHub } from './components/PythonPipelineHub';
@@ -12,6 +13,7 @@ import {
   Bill, 
   Legislator, 
   CommitteeMeeting, 
+  RssFeedItem,
   PolicyPriority, 
   DashboardStats, 
   SessionId 
@@ -20,6 +22,7 @@ import {
   MOCK_BILLS, 
   MOCK_LEGISLATORS, 
   MOCK_COMMITTEE_MEETINGS, 
+  MOCK_RSS_ITEMS,
   MOCK_STATS_90R, 
   INITIAL_PRIORITIES 
 } from './data/mockData';
@@ -93,6 +96,8 @@ export default function App() {
     buildCompleteLegislatorsList(MOCK_BILLS, MOCK_LEGISLATORS)
   );
   const [meetings, setMeetings] = useState<CommitteeMeeting[]>(MOCK_COMMITTEE_MEETINGS);
+  const [isFallback89RMeetings, setIsFallback89RMeetings] = useState<boolean>(false);
+  const [rssItems, setRssItems] = useState<RssFeedItem[]>(MOCK_RSS_ITEMS);
   const [serverPriorities, setServerPriorities] = useState<PolicyPriority[]>(INITIAL_PRIORITIES);
   const [customPriorities, setCustomPriorities] = useState<PolicyPriority[] | null>(() => loadSavedCustomPriorities());
 
@@ -128,12 +133,13 @@ export default function App() {
   // Fetch data from server when session changes
   const fetchSessionData = async (sess: SessionId) => {
     try {
-      const [statsRes, billsRes, legRes, meetRes, prioRes] = await Promise.all([
+      const [statsRes, billsRes, legRes, meetRes, prioRes, rssRes] = await Promise.all([
         fetch(`/api/stats?session=${sess}`),
         fetch(`/api/bills?session=${sess}`),
         fetch('/api/legislators'),
-        fetch('/api/meetings'),
+        fetch(`/api/meetings?session=${sess}`),
         fetch('/api/priorities'),
+        fetch('/api/rss?limit=250'),
       ]);
 
       if (statsRes.ok) {
@@ -152,11 +158,23 @@ export default function App() {
       }
       if (meetRes.ok) {
         const meetData = await meetRes.json();
-        setMeetings(meetData);
+        if (Array.isArray(meetData)) {
+          setMeetings(meetData);
+          setIsFallback89RMeetings(sess === '90R' && meetData.every((m) => m.session === '89R'));
+        } else if (Array.isArray(meetData?.meetings)) {
+          setMeetings(meetData.meetings);
+          setIsFallback89RMeetings(Boolean(meetData.isFallback89R));
+        }
       }
       if (prioRes.ok) {
         const prioData = await prioRes.json();
         setServerPriorities(prioData);
+      }
+      if (rssRes.ok) {
+        const rssData = await rssRes.json();
+        if (Array.isArray(rssData?.items) && rssData.items.length > 0) {
+          setRssItems(rssData.items);
+        }
       }
     } catch (err) {
       console.warn('API fetch warning, using client fallback:', err);
@@ -169,20 +187,80 @@ export default function App() {
     fetchSessionData(session);
   }, [session]);
 
+  // Periodically refresh live wire & schedules while viewing those tabs
+  useEffect(() => {
+    if (activeTab !== 'wire' && activeTab !== 'committees') return;
+    const timer = window.setInterval(() => {
+      void fetchSessionData(session);
+    }, 60000);
+    return () => window.clearInterval(timer);
+  }, [activeTab, session]);
+
   const handleSelectBill = (bill: Bill) => {
     setSelectedBill(bill);
   };
 
-  const handleSelectBillNumber = (billNumber: string) => {
-    const cleanNum = billNumber.replace(/\s+/g, '').toLowerCase();
-    const found = bills.find((b) => b.billNumber.replace(/\s+/g, '').toLowerCase() === cleanNum);
-    if (found) {
-      setSelectedBill(found);
-    } else {
-      // Switch to Bill Explorer with search pre-filled
-      setGlobalSearch(billNumber);
-      setActiveTab('bills');
+  const handleSelectBillNumber = async (billNumber: string, billSession?: SessionId) => {
+    const cleanNum = billNumber.replace(/\s+/g, '').toUpperCase();
+    const targetSession = billSession || session;
+    if (targetSession === session) {
+      const found = bills.find(
+        (b) => b.billNumber.replace(/\s+/g, '').toUpperCase() === cleanNum
+      );
+      if (found) {
+        setSelectedBill(found);
+        return;
+      }
     }
+    try {
+      const res = await fetch(`/api/bills/${targetSession}-${cleanNum}`);
+      if (res.ok) {
+        const remoteBill = (await res.json()) as Bill;
+        setSelectedBill(
+          customPriorities ? reevaluateBillClient(remoteBill, customPriorities, true) : remoteBill
+        );
+        return;
+      }
+    } catch {
+      // Fall back to Bill Explorer search
+    }
+    setGlobalSearch(billNumber);
+    setActiveTab('bills');
+  };
+
+  const handleTriggerRssSync = async () => {
+    const response = await fetch('/api/rss/sync', { method: 'POST' });
+    const data = await response.json();
+    await fetchSessionData(session);
+    return data;
+  };
+
+  const handleSaveMeetingNotes = async (meetingId: string, userNotes: string) => {
+    try {
+      const response = await fetch(`/api/meetings/${encodeURIComponent(meetingId)}/notes`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userNotes }),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        if (data?.meeting) {
+          setMeetings((prev) =>
+            prev.map((m) => (m.id === meetingId ? data.meeting : m))
+          );
+          return;
+        }
+      }
+    } catch (err) {
+      console.warn('Could not persist meeting notes to server, applying local state:', err);
+    }
+    setMeetings((prev) =>
+      prev.map((m) =>
+        m.id === meetingId
+          ? { ...m, userNotes, notesUpdatedAt: new Date().toISOString() }
+          : m
+      )
+    );
   };
 
   const handleOpenAiChat = (prompt?: string) => {
@@ -280,6 +358,16 @@ export default function App() {
           />
         )}
 
+        {activeTab === 'wire' && (
+          <LiveCapitolWire
+            rssItems={rssItems}
+            bills={bills}
+            onSelectBillNumber={handleSelectBillNumber}
+            onTriggerRssSync={handleTriggerRssSync}
+            onOpenAiChat={handleOpenAiChat}
+          />
+        )}
+
         {activeTab === 'bills' && (
           <BillExplorer
             bills={displayBills}
@@ -302,8 +390,12 @@ export default function App() {
           <CommitteeTracker
             meetings={meetings}
             bills={bills}
+            isFallback89R={isFallback89RMeetings}
+            activeSession={session}
             onSelectBillNumber={handleSelectBillNumber}
             onOpenAiChat={handleOpenAiChat}
+            onSaveMeetingNotes={handleSaveMeetingNotes}
+            onTriggerRssSync={handleTriggerRssSync}
           />
         )}
 
