@@ -79,8 +79,13 @@ pip install requests
 deactivate
 
 # Make Python pipeline scripts executable
+chmod +x "$SCRIPT_DIR/scripts/db_store.py"
+chmod +x "$SCRIPT_DIR/scripts/hydrate_real_full_texts.py"
 chmod +x "$SCRIPT_DIR/scripts/ingest_real_texas_data.py"
 chmod +x "$SCRIPT_DIR/scripts/enrich_bills.py"
+
+# Initialize SQLite WAL store & export data/runtime_bills.json
+"$SCRIPT_DIR/venv/bin/python3" "$SCRIPT_DIR/scripts/db_store.py" --init
 
 # ------------------------------------------------------------------------------
 # 3. Node Dependencies & Production Bundle Build (with peer-deps resilience)

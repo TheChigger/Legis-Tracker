@@ -24,7 +24,11 @@ export const PythonPipelineHub: React.FC = () => {
       const res = await fetch('/api/ingest/trigger', { method: 'POST' });
       const data = await res.json();
       if (res.ok) {
-        setIngestStatus(`Synced with TLO FTP. Total 90R Bills: ${data.total90RBills}`);
+        setIngestStatus(
+          data.cached && data.message
+            ? data.message
+            : `Synced with TLO FTP. Total 90R Bills: ${data.total90RBills}`
+        );
       } else {
         setIngestStatus(`Sync notice: ${data.details || 'Unable to complete FTP sync'}`);
       }

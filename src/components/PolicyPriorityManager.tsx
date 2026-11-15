@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PolicyPriority } from '../types/legislative';
 import { 
   Sliders, 
@@ -28,6 +28,10 @@ export const PolicyPriorityManager: React.FC<PolicyPriorityManagerProps> = ({
   const [localPriorities, setLocalPriorities] = useState<PolicyPriority[]>(priorities);
   const [isSaving, setIsSaving] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
+
+  useEffect(() => {
+    setLocalPriorities(priorities);
+  }, [priorities]);
   
   // New priority form state
   const [showAddForm, setShowAddForm] = useState(false);
@@ -141,7 +145,7 @@ export const PolicyPriorityManager: React.FC<PolicyPriorityManagerProps> = ({
         <div className="bg-emerald-950/40 border border-emerald-800/60 text-emerald-300 p-4 rounded-xl flex items-center justify-between animate-fade-in text-xs font-medium">
           <div className="flex items-center gap-2">
             <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-            <span>Priorities saved! All bills in the database have been re-evaluated and re-scored.</span>
+            <span>Priorities saved for your browser session! Bills have been re-scored locally while shared server defaults remain protected.</span>
           </div>
           <button
             onClick={onNavigateToFeed}

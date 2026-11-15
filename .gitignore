@@ -6,3 +6,13 @@ coverage/
 *.log
 .env*
 !.env.example
+data/texas_legis.db
+data/texas_legis.db-shm
+data/texas_legis.db-wal
+data/runtime_bills.json
+data/runtime_bills.json.tmp
+data/pre_update_realBills.json
+venv/
+__pycache__/
+*.pyc
+.antigravity/

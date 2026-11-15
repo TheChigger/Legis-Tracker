@@ -50,7 +50,11 @@ export const PriorityDashboard: React.FC<PriorityDashboardProps> = ({
       const res = await fetch('/api/ingest/trigger', { method: 'POST' });
       const data = await res.json();
       if (res.ok) {
-        setSyncMessage(`Synced! Total 90R Bills: ${data.total90RBills}`);
+        setSyncMessage(
+          data.cached && data.message
+            ? data.message
+            : `Synced! Total 90R Bills: ${data.total90RBills}`
+        );
         if (onRefreshData) {
           await onRefreshData();
         }

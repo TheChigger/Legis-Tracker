@@ -20,20 +20,37 @@ echo -e "${CYAN}================================================================
 echo -e "${BLUE}  Pulling latest changes and updating Texas Capitol Engine...         ${NC}"
 echo -e "${CYAN}======================================================================${NC}"
 
+# 0. Preserve any legacy runtime edits on src/data/realBills.json before pulling
+if ! git diff --quiet -- src/data/realBills.json; then
+    echo -e "\n${YELLOW}[0/5] Backing up legacy local bill data before git pull...${NC}"
+    mkdir -p data
+    cp src/data/realBills.json data/pre_update_realBills.json
+    git checkout -- src/data/realBills.json
+fi
+
 # 1. Fetch latest commits from GitHub
-echo -e "\n${YELLOW}[1/4] Pulling latest code from GitHub...${NC}"
+echo -e "\n${YELLOW}[1/5] Pulling latest code from GitHub...${NC}"
 git pull
 
-# 2. Update Node dependencies if package.json was modified
-echo -e "\n${YELLOW}[2/4] Verifying dependencies...${NC}"
+# 2. Ensure executable permissions & initialize SQLite WAL runtime snapshot
+echo -e "\n${YELLOW}[2/5] Initializing SQLite WAL database & script permissions...${NC}"
+chmod +x scripts/*.py update.sh deploy.sh
+PYTHON_BIN="${SCRIPT_DIR}/venv/bin/python3"
+if [ ! -x "$PYTHON_BIN" ]; then
+    PYTHON_BIN="python3"
+fi
+"$PYTHON_BIN" "${SCRIPT_DIR}/scripts/db_store.py" --init
+
+# 3. Update Node dependencies if package.json was modified
+echo -e "\n${YELLOW}[3/5] Verifying dependencies...${NC}"
 npm install --legacy-peer-deps
 
-# 3. Rebuild production Vite frontend bundle
-echo -e "\n${YELLOW}[3/4] Rebuilding frontend assets (Vite)...${NC}"
+# 4. Rebuild production Vite frontend bundle
+echo -e "\n${YELLOW}[4/5] Rebuilding frontend assets (Vite)...${NC}"
 npm run build
 
-# 4. Restart background systemd service
-echo -e "\n${YELLOW}[4/4] Restarting texas-legis background service...${NC}"
+# 5. Restart background systemd service
+echo -e "\n${YELLOW}[5/5] Restarting texas-legis background service...${NC}"
 sudo systemctl restart texas-legis
 
 # 5. Quick Health Check

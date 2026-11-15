@@ -9,14 +9,31 @@ and updates realBills.json and local text cache in data/bill_texts/.
 import os
 import json
 import re
+import sys
 import urllib.request
 from html import unescape
 import time
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+if SCRIPT_DIR not in sys.path:
+    sys.path.insert(0, SCRIPT_DIR)
+
+import db_store
+
 PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
 BILLS_JSON_PATH = os.path.join(PROJECT_ROOT, "src", "data", "realBills.json")
 CACHE_DIR = os.path.join(PROJECT_ROOT, "data", "bill_texts")
+
+CHAMBER_FTP_FOLDERS = {
+    "HB": "house_bills",
+    "SB": "senate_bills",
+    "HJR": "house_joint_resolutions",
+    "SJR": "senate_joint_resolutions",
+    "HCR": "house_concurrent_resolutions",
+    "SCR": "senate_concurrent_resolutions",
+    "HR": "house_resolutions",
+    "SR": "senate_resolutions",
+}
 
 # Texas Statute Code Mappings
 TEXAS_CODES = {
@@ -142,98 +159,174 @@ def clean_legislative_html(html: str) -> str:
 
 
 def fetch_clean_bill_text(session: str, bill_number: str, version_code: str = "I") -> tuple:
-    """Fetch official statutory text from TLO and clean HTML tags into pristine text."""
+    """Fetch official statutory text from TLO HTTPS with FTP fallback and clean HTML into plain text."""
     m = re.search(r'([A-Za-z]+)\s*(\d+)', bill_number)
     if not m:
         return "", "", ""
-        
+
     prefix, num = m.groups()
-    bill_code = f"{prefix.upper()}{int(num):05d}{version_code}"
+    prefix_upper = prefix.upper()
+    bill_code = f"{prefix_upper}{int(num):05d}{version_code}"
     url = f"https://capitol.texas.gov/tlodocs/{session}/billtext/html/{bill_code}.htm"
     pdf_url = f"https://capitol.texas.gov/tlodocs/{session}/billtext/pdf/{bill_code}.pdf"
-    
+
+    chamber_folder = CHAMBER_FTP_FOLDERS.get(
+        prefix_upper,
+        "senate_bills" if prefix_upper.startswith("S") else "house_bills",
+    )
+    ftp_url = f"ftp://ftp.legis.state.tx.us/bills/{session}/billtext/html/{chamber_folder}/{bill_code}.htm"
+
+    clean_text = ""
     try:
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"})
         with urllib.request.urlopen(req, timeout=8) as resp:
             html = resp.read().decode("utf-8", errors="ignore")
-            
         clean_text = clean_legislative_html(html)
-        return clean_text, url, pdf_url
     except Exception as e:
-        print(f"  [Notice] Could not fetch {bill_code}: {e}")
-        return "", url, pdf_url
+        print(f"  [Notice] HTTPS fetch unavailable for {bill_code}, trying FTP: {e}")
+
+    if len(clean_text) < 200:
+        try:
+            with urllib.request.urlopen(ftp_url, timeout=10) as resp:
+                ftp_html = resp.read().decode("utf-8", errors="ignore")
+            ftp_clean = clean_legislative_html(ftp_html)
+            if len(ftp_clean) >= 200:
+                clean_text = ftp_clean
+        except Exception as e:
+            print(f"  [Notice] FTP fallback unavailable for {bill_code}: {e}")
+
+    return clean_text, url, pdf_url
+
+
+def _has_raw_html_or_entities(text: str) -> bool:
+    if not text:
+        return False
+    return bool(re.search(r"<(?:td|tr|table|html|head|p|div|span)\b|&#x[0-9a-f]+;|&#\d+;", text, re.IGNORECASE))
+
+
+def ensure_bill_full_text(bill: dict) -> str:
+    """
+    Ensure full statutory text for the Introduced ('I') version is cached cleanly in
+    data/bill_texts/{session}/{clean_num}.txt and attached to the bill dict (versions +
+    amendedStatutes). Returns the full text or falls back to bill caption.
+    """
+    session = (bill.get("session") or "90R").upper()
+    bill_number = str(bill.get("billNumber") or "")
+    clean_num = re.sub(r"\s+", "", bill_number).upper()
+    if not clean_num:
+        return bill.get("caption", "")
+
+    sess_cache_dir = os.path.join(CACHE_DIR, session)
+    cache_path = os.path.join(sess_cache_dir, f"{clean_num}.txt")
+
+    m = re.search(r"([A-Za-z]+)\s*(\d+)", bill_number)
+    default_tlo_url = bill.get("officialTloUrl", "")
+    default_pdf_url = bill.get("officialPdfUrl", "")
+    if m and (not default_tlo_url or not default_pdf_url):
+        prefix, num = m.groups()
+        bill_code = f"{prefix.upper()}{int(num):05d}I"
+        default_tlo_url = default_tlo_url or f"https://capitol.texas.gov/tlodocs/{session}/billtext/html/{bill_code}.htm"
+        default_pdf_url = default_pdf_url or f"https://capitol.texas.gov/tlodocs/{session}/billtext/pdf/{bill_code}.pdf"
+
+    full_text = ""
+    if os.path.exists(cache_path):
+        try:
+            with open(cache_path, "r", encoding="utf-8", errors="ignore") as f:
+                cached = f.read().strip()
+            if len(cached) > 200 and not _has_raw_html_or_entities(cached):
+                full_text = cached
+        except Exception:
+            pass
+
+    if not full_text:
+        fetched_text, tlo_url, pdf_url = fetch_clean_bill_text(session, bill_number, "I")
+        if tlo_url:
+            default_tlo_url = tlo_url
+        if pdf_url:
+            default_pdf_url = pdf_url
+        if fetched_text and len(fetched_text) > 200:
+            full_text = fetched_text
+            os.makedirs(sess_cache_dir, exist_ok=True)
+            with open(cache_path, "w", encoding="utf-8") as tf:
+                tf.write(full_text)
+
+    if full_text and len(full_text) > 200:
+        char_count = len(full_text)
+        snippet = full_text[:300] + ("..." if char_count > 300 else "")
+        versions = bill.get("versions") or []
+        if not versions or len(versions[0].get("fullText") or "") < char_count or _has_raw_html_or_entities(versions[0].get("fullText") or ""):
+            bill["versions"] = [{
+                "versionCode": "I",
+                "versionName": "Introduced",
+                "dateFiled": bill.get("dateFiled", "2026-11-09"),
+                "charCount": char_count,
+                "snippet": snippet,
+                "fullText": full_text,
+            }]
+        if not bill.get("amendedStatutes"):
+            bill["amendedStatutes"] = extract_statutes_from_text(full_text)
+        if default_tlo_url:
+            bill["officialTloUrl"] = default_tlo_url
+        if default_pdf_url:
+            bill["officialPdfUrl"] = default_pdf_url
+        return full_text
+
+    # Fall back to embedded version text or caption
+    versions = bill.get("versions") or []
+    if versions and isinstance(versions, list):
+        embedded = (versions[0].get("fullText") or "").strip()
+        if embedded and not _has_raw_html_or_entities(embedded):
+            return embedded
+    return bill.get("caption", "")
+
 
 def hydrate_bills():
     os.makedirs(CACHE_DIR, exist_ok=True)
-    
-    with open(BILLS_JSON_PATH, "r", encoding="utf-8") as f:
-        bills = json.load(f)
-        
-    print(f"Loaded {len(bills)} bills from database.")
-    
-    # Priority list of high-interest bills to hydrate immediately with full authentic text
-    priority_bill_numbers = [
-        "HB 101", "HB 126", "HB 687", "HB 705", "HB 708", "HB 789", "HB 20",
-        "SB 31", "SB 84", "SB 12", "HB 900", "SB 1515", "SB 17", "SB 1",
-        "HB 1927", "HB 3", "SB 2", "SB 4", "SB 6", "HB 2", "HB 12", "HB 100"
-    ]
-    
-    # Also include the first 40 prefiled 90R bills
-    prefiled_90r = [b["billNumber"] for b in bills if b.get("session") == "90R"][:40]
-    target_bill_numbers = set(priority_bill_numbers + prefiled_90r)
-    
-    print(f"Hydrating full authentic statutory texts for {len(target_bill_numbers)} featured bills...")
-    
-    hydrated_count = 0
-    for bill in bills:
-        num = bill.get("billNumber")
-        sess = bill.get("session", "90R")
-        
-        # Check if bill is in target list or has a short stub
-        versions = bill.get("versions", [])
-        has_short_text = not versions or len(versions[0].get("fullText", "")) < 800
-        
-        if num in target_bill_numbers or (sess == "90R" and has_short_text and hydrated_count < 60):
-            print(f"Fetching full text for {sess} {num}...")
-            full_text, tlo_url, pdf_url = fetch_clean_bill_text(sess, num, "I")
-            
-            if full_text and len(full_text) > 300:
-                char_count = len(full_text)
-                snippet = full_text[:300] + "..."
-                statutes = extract_statutes_from_text(full_text)
-                
-                # Update versions
-                bill["versions"] = [{
-                    "versionCode": "I",
-                    "versionName": "Introduced",
-                    "dateFiled": bill.get("dateFiled", "2026-11-09"),
-                    "charCount": char_count,
-                    "snippet": snippet,
-                    "fullText": full_text
-                }]
-                
-                bill["amendedStatutes"] = statutes
-                bill["officialTloUrl"] = tlo_url
-                bill["officialPdfUrl"] = pdf_url
-                
-                # Save to disk cache in data/bill_texts/
-                sess_cache_dir = os.path.join(CACHE_DIR, sess)
-                os.makedirs(sess_cache_dir, exist_ok=True)
-                clean_num_str = num.replace(" ", "")
-                with open(os.path.join(sess_cache_dir, f"{clean_num_str}.txt"), "w", encoding="utf-8") as tf:
-                    tf.write(full_text)
-                    
-                hydrated_count += 1
-                print(f"  ✔ {num}: {char_count:,} chars, {len(statutes)} amended statutes.")
-                time.sleep(0.1) # Respectful delay
-                
-    # Atomic save to realBills.json
-    tmp_path = BILLS_JSON_PATH + ".tmp"
-    with open(tmp_path, "w", encoding="utf-8") as f:
-        json.dump(bills, f, indent=2)
-    os.replace(tmp_path, BILLS_JSON_PATH)
-    
-    print(f"\n[Complete] Successfully hydrated {hydrated_count} bills with full authentic texts and statute mappings!")
+
+    conn = db_store.get_connection()
+    try:
+        db_store.init_and_sync_seed(conn)
+        bills = db_store.load_all_bills(conn)
+
+        print(f"Loaded {len(bills)} bills from SQLite store ({db_store.DB_PATH}).")
+
+        # Priority list of high-interest bills to hydrate immediately with full authentic text
+        priority_bill_numbers = [
+            "HB 101", "HB 126", "HB 687", "HB 705", "HB 708", "HB 789", "HB 20",
+            "SB 31", "SB 84", "SB 12", "HB 900", "SB 1515", "SB 17", "SB 1",
+            "HB 1927", "HB 3", "SB 2", "SB 4", "SB 6", "HB 2", "HB 12", "HB 100"
+        ]
+
+        # Also include the first 40 prefiled 90R bills
+        prefiled_90r = [b["billNumber"] for b in bills if b.get("session") == "90R"][:40]
+        target_bill_numbers = set(priority_bill_numbers + prefiled_90r)
+
+        print(f"Hydrating full authentic statutory texts for {len(target_bill_numbers)} featured bills...")
+
+        hydrated_count = 0
+        for bill in bills:
+            num = bill.get("billNumber")
+            sess = bill.get("session", "90R")
+
+            # Check if bill is in target list or has a short stub
+            versions = bill.get("versions", [])
+            has_short_text = not versions or len(versions[0].get("fullText", "")) < 800
+
+            if num in target_bill_numbers or (sess == "90R" and has_short_text and hydrated_count < 60):
+                print(f"Fetching full text for {sess} {num}...")
+                full_text = ensure_bill_full_text(bill)
+
+                if full_text and len(full_text) > 300:
+                    db_store.upsert_enriched_bill(conn, bill)
+                    hydrated_count += 1
+                    print(f"  ✔ {num}: {len(full_text):,} chars, {len(bill.get('amendedStatutes') or [])} amended statutes.")
+                    time.sleep(0.1)  # Respectful delay
+
+        total_exported = db_store.export_runtime_snapshot(conn)
+        print(f"\n[Complete] Successfully hydrated {hydrated_count} bills into SQLite and exported {total_exported} bills to runtime snapshot!")
+    finally:
+        conn.close()
+
 
 if __name__ == "__main__":
     hydrate_bills()

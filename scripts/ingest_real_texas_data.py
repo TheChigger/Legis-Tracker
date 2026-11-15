@@ -18,6 +18,11 @@ from html import unescape
 import time
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+if SCRIPT_DIR not in sys.path:
+    sys.path.insert(0, SCRIPT_DIR)
+
+import db_store
+
 PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
 BILLS_JSON_PATH = os.path.join(PROJECT_ROOT, "src", "data", "realBills.json")
 CACHE_DIR = os.path.join(PROJECT_ROOT, "data", "bill_texts")
@@ -276,134 +281,144 @@ def classify_bill_policy(caption: str, subjects: list) -> tuple:
     return subjects[0] if subjects else "General State Affairs", "NEUTRAL", 2, []
 
 def sync_all_texas_bills():
-    """Main ingestion coordinator: merges baseline + intraday feed into realBills.json."""
-    if not os.path.exists(BILLS_JSON_PATH):
-        print(f"[Error] Database not found at {BILLS_JSON_PATH}", file=sys.stderr)
-        return
+    """Main ingestion coordinator: merges baseline + intraday feed into SQLite WAL store."""
+    conn = db_store.get_connection()
+    try:
+        db_store.init_and_sync_seed(conn)
+        existing_bills = db_store.load_all_bills(conn)
 
-    with open(BILLS_JSON_PATH, "r", encoding="utf-8") as f:
-        existing_bills = json.load(f)
+        existing_map = {b["id"]: b for b in existing_bills}
+        initial_90r_count = sum(1 for b in existing_bills if b.get("session") == "90R")
+        print(f"Current SQLite database has {len(existing_bills)} total bills ({initial_90r_count} in Session 90R).")
 
-    existing_map = {b["id"]: b for b in existing_bills}
-    initial_90r_count = sum(1 for b in existing_bills if b.get("session") == "90R")
-    print(f"Current database has {len(existing_bills)} total bills ({initial_90r_count} in Session 90R).")
+        # 1. Check baseline reports
+        baseline_bills = parse_90r_overnight_reports()
+        newly_added = 0
+        metadata_updated = 0
+        for b in baseline_bills:
+            bid = b["id"]
+            if bid not in existing_map:
+                cat, stance, prio, cc = classify_bill_policy(b["caption"], [])
+                b_obj = {
+                    **b,
+                    "summary": b["caption"],
+                    "stance": stance,
+                    "priorityScore": prio,
+                    "primaryCategory": cat,
+                    "categories": [cat],
+                    "comportConflict": cc,
+                    "versions": [{
+                        "versionCode": "I",
+                        "versionName": "Introduced",
+                        "dateFiled": b["dateFiled"],
+                        "charCount": len(b["caption"]),
+                        "snippet": b["caption"],
+                        "fullText": b["caption"]
+                    }],
+                    "votes": [],
+                    "amendments": [],
+                    "impactedAgencies": [],
+                    "urgencyLevel": "Immediate Attention" if prio == 5 else ("High Watch" if prio >= 4 else "Routine"),
+                    "filedDateTimestamp": int(time.mktime(time.strptime(b["dateFiled"], "%Y-%m-%d"))) if b.get("dateFiled") else int(time.time()),
+                }
+                if stance in ("SUPPORT", "OPPOSE"):
+                    b_obj["recommendedStance"] = stance
+                elif cc and cc[0].get("alignment") == "NEUTRAL":
+                    b_obj["recommendedStance"] = "NEEDS REVIEW"
+                db_store.upsert_ingested_bill(conn, b_obj)
+                existing_map[bid] = b_obj
+                newly_added += 1
+            else:
+                existing = existing_map[bid]
+                if b["lastAction"] != existing.get("lastAction") or (b["caption"] and b["caption"] != existing.get("caption")):
+                    db_store.upsert_ingested_bill(conn, b)
+                    metadata_updated += 1
 
-    # 1. Check baseline reports
-    baseline_bills = parse_90r_overnight_reports()
-    newly_added = 0
-    for b in baseline_bills:
-        bid = b["id"]
-        if bid not in existing_map:
-            # Build full bill object
-            cat, stance, prio, cc = classify_bill_policy(b["caption"], [])
-            b_obj = {
-                **b,
-                "summary": b["caption"],
-                "stance": stance,
-                "priorityScore": prio,
-                "primaryCategory": cat,
-                "categories": [cat],
-                "comportConflict": cc,
-                "versions": [{
-                    "versionCode": "I",
-                    "versionName": "Introduced",
-                    "dateFiled": b["dateFiled"],
-                    "charCount": len(b["caption"]),
-                    "snippet": b["caption"],
-                    "fullText": b["caption"]
-                }],
-                "votes": [],
-                "amendments": [],
-                "impactedAgencies": [],
-                "urgencyLevel": "High Watch" if prio >= 4 else "Routine",
-                "filedDateTimestamp": int(time.mktime(time.strptime(b["dateFiled"], "%Y-%m-%d"))) if b.get("dateFiled") else int(time.time()),
-            }
-            existing_map[bid] = b_obj
-            newly_added += 1
+        # 2. Check live intraday feed (bills filed today!)
+        intraday_feed = parse_90r_live_intraday_feed()
+        intraday_added = 0
 
-    # 2. Check live intraday feed (bills filed today!)
-    intraday_feed = parse_90r_live_intraday_feed()
-    intraday_added = 0
-    
-    # Filter to items not yet in database
-    pending_items = []
-    for item in intraday_feed:
-        bill_num = item["id"].strip()
-        bid = f"90R-{bill_num.replace(' ', '')}"
-        if bid not in existing_map:
-            pending_items.append((bid, bill_num, item))
+        pending_items = []
+        for item in intraday_feed:
+            bill_num = item["id"].strip()
+            bid = f"90R-{bill_num.replace(' ', '')}"
+            if bid not in existing_map:
+                pending_items.append((bid, bill_num, item))
 
-    print(f"  Fetching details for {len(pending_items)} new intraday bills in parallel...")
+        print(f"  Fetching details for {len(pending_items)} new intraday bills in parallel...")
 
-    from concurrent.futures import ThreadPoolExecutor
+        from concurrent.futures import ThreadPoolExecutor
 
-    def process_item(entry):
-        bid, bill_num, item = entry
-        details = fetch_bill_detail_from_xml(item["path"])
-        if details and details.get("caption"):
-            chamber = "Senate" if bill_num.startswith("S") else "House"
-            cat, stance, prio, cc = classify_bill_policy(details["caption"], details.get("subjects", []))
-            date_filed = details.get("dateFiled", "2026-11-12")
-            
-            b_obj = {
-                "id": bid,
-                "session": "90R",
-                "billNumber": bill_num,
-                "chamber": chamber,
-                "author": details.get("author", "Unknown"),
-                "coauthors": [],
-                "dateFiled": date_filed,
-                "lastAction": details.get("lastAction", "Filed"),
-                "lastActionDate": date_filed,
-                "currentStatus": "Filed / Introduced",
-                "committee": "Pending Assignment",
-                "caption": details["caption"],
-                "summary": details["caption"],
-                "stance": stance,
-                "priorityScore": prio,
-                "primaryCategory": cat,
-                "categories": details.get("subjects", [cat])[:4],
-                "comportConflict": cc,
-                "versions": [{
-                    "versionCode": "I",
-                    "versionName": "Introduced",
+        def process_item(entry):
+            bid, bill_num, item = entry
+            details = fetch_bill_detail_from_xml(item["path"])
+            if details and details.get("caption"):
+                chamber = "Senate" if bill_num.startswith("S") else "House"
+                cat, stance, prio, cc = classify_bill_policy(details["caption"], details.get("subjects", []))
+                date_filed = details.get("dateFiled", "2026-11-12")
+
+                b_obj = {
+                    "id": bid,
+                    "session": "90R",
+                    "billNumber": bill_num,
+                    "chamber": chamber,
+                    "author": details.get("author", "Unknown"),
+                    "coauthors": [],
                     "dateFiled": date_filed,
-                    "charCount": len(details["caption"]),
-                    "snippet": details["caption"],
-                    "fullText": details["caption"]
-                }],
-                "votes": [],
-                "amendments": [],
-                "impactedAgencies": [],
-                "urgencyLevel": "High Watch" if prio >= 4 else "Routine",
-                "filedDateTimestamp": int(time.time()),
-            }
-            return bid, b_obj
-        return bid, None
+                    "lastAction": details.get("lastAction", "Filed"),
+                    "lastActionDate": date_filed,
+                    "currentStatus": "Filed / Introduced",
+                    "committee": "Pending Assignment",
+                    "caption": details["caption"],
+                    "summary": details["caption"],
+                    "stance": stance,
+                    "priorityScore": prio,
+                    "primaryCategory": cat,
+                    "categories": details.get("subjects", [cat])[:4],
+                    "comportConflict": cc,
+                    "versions": [{
+                        "versionCode": "I",
+                        "versionName": "Introduced",
+                        "dateFiled": date_filed,
+                        "charCount": len(details["caption"]),
+                        "snippet": details["caption"],
+                        "fullText": details["caption"]
+                    }],
+                    "votes": [],
+                    "amendments": [],
+                    "impactedAgencies": [],
+                    "urgencyLevel": "Immediate Attention" if prio == 5 else ("High Watch" if prio >= 4 else "Routine"),
+                    "filedDateTimestamp": int(time.time()),
+                }
+                if stance in ("SUPPORT", "OPPOSE"):
+                    b_obj["recommendedStance"] = stance
+                elif cc and cc[0].get("alignment") == "NEUTRAL":
+                    b_obj["recommendedStance"] = "NEEDS REVIEW"
+                return bid, b_obj
+            return bid, None
 
-    if pending_items:
-        with ThreadPoolExecutor(max_workers=10) as executor:
-            for bid, b_obj in executor.map(process_item, pending_items):
-                if b_obj:
-                    existing_map[bid] = b_obj
-                    intraday_added += 1
+        if pending_items:
+            with ThreadPoolExecutor(max_workers=10) as executor:
+                for bid, b_obj in executor.map(process_item, pending_items):
+                    if b_obj:
+                        db_store.upsert_ingested_bill(conn, b_obj)
+                        existing_map[bid] = b_obj
+                        intraday_added += 1
 
-    all_updated_bills = list(existing_map.values())
-    final_90r_count = sum(1 for b in all_updated_bills if b.get("session") == "90R")
+        all_updated_bills = db_store.load_all_bills(conn)
+        final_90r_count = sum(1 for b in all_updated_bills if b.get("session") == "90R")
+        snapshot_count = db_store.export_runtime_snapshot(conn)
 
-    print(f"\n--- Ingestion Results ---")
-    print(f"  Baseline newly added: {newly_added}")
-    print(f"  Intraday newly added: {intraday_added}")
-    print(f"  Total Session 90R Bills: {initial_90r_count} -> {final_90r_count}")
-    print(f"  Total Database Bills: {len(all_updated_bills)}")
+        print(f"\n--- Ingestion Results ---")
+        print(f"  Baseline newly added: {newly_added}")
+        print(f"  Baseline metadata updated: {metadata_updated}")
+        print(f"  Intraday newly added: {intraday_added}")
+        print(f"  Total Session 90R Bills: {initial_90r_count} -> {final_90r_count}")
+        print(f"  Total Database Bills: {snapshot_count}")
+        print(f"✔ Successfully persisted to SQLite WAL store ({db_store.DB_PATH}) and runtime snapshot ({db_store.RUNTIME_JSON_PATH})")
+    finally:
+        conn.close()
 
-    # Atomic write to realBills.json
-    tmp_path = BILLS_JSON_PATH + ".tmp"
-    with open(tmp_path, "w", encoding="utf-8") as f:
-        json.dump(all_updated_bills, f, indent=2)
-    os.replace(tmp_path, BILLS_JSON_PATH)
-
-    print(f"✔ Successfully saved updated database to {BILLS_JSON_PATH}")
 
 if __name__ == "__main__":
     sync_all_texas_bills()

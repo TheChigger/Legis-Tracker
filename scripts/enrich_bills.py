@@ -15,8 +15,13 @@ import urllib.request
 import urllib.error
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+if SCRIPT_DIR not in sys.path:
+    sys.path.insert(0, SCRIPT_DIR)
+
+import db_store
+from hydrate_real_full_texts import ensure_bill_full_text
+
 PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
-BILLS_JSON_PATH = os.path.join(PROJECT_ROOT, "src", "data", "realBills.json")
 TEXT_CACHE_DIR = os.path.join(PROJECT_ROOT, "data", "bill_texts")
 OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://127.0.0.1:11434/api/generate")
 OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "llama3.1")
@@ -69,27 +74,11 @@ You are a Legislative Policy Analyst evaluating Texas state legislation (House a
 """
 
 
-def load_bill_text_excerpt(bill: dict, max_chars: int = 3500) -> str:
-    """Load cached plain bill text if available, otherwise fall back to embedded version text."""
-    session = bill.get("session", "90R")
-    clean_num = re.sub(r"\s+", "", str(bill.get("billNumber", ""))).upper()
-    cache_path = os.path.join(TEXT_CACHE_DIR, session, f"{clean_num}.txt")
-
-    if os.path.exists(cache_path):
-        try:
-            with open(cache_path, "r", encoding="utf-8", errors="ignore") as f:
-                text = f.read().strip()
-            if len(text) > 100:
-                return text[:max_chars]
-        except Exception:
-            pass
-
-    versions = bill.get("versions") or []
-    if versions and isinstance(versions, list):
-        full_txt = (versions[0].get("fullText") or "").strip()
-        if len(full_txt) > 100:
-            return full_txt[:max_chars]
-
+def load_bill_text_excerpt(bill: dict, max_chars: int = 4000) -> str:
+    """Ensure full statutory text is cached from TLO HTTP/FTP and return an excerpt for Ollama."""
+    full_text = ensure_bill_full_text(bill)
+    if full_text and len(full_text.strip()) > 0:
+        return full_text.strip()[:max_chars]
     return bill.get("caption", "")
 
 
@@ -218,46 +207,45 @@ Statutory Text Excerpt:
 
 
 def run_enrichment_batch(max_bills: int = 15, force_re_enrich: bool = False):
-    """Process a batch of un-enriched or outdated-rubric bills."""
-    if not os.path.exists(BILLS_JSON_PATH):
-        print(f"[Error] Database not found at {BILLS_JSON_PATH}", file=sys.stderr)
-        return
-
+    """Process a batch of un-enriched or outdated-rubric bills with row-by-row SQLite commits."""
     print(f"=== Texas Capitol AI Bill Enrichment (Rubric v{RUBRIC_VERSION}) Started at {time.strftime('%Y-%m-%d %H:%M:%S')} ===")
-    print(f"Target Database: {BILLS_JSON_PATH}")
+    print(f"Target Database: {db_store.DB_PATH} (WAL Mode)")
     print(f"Ollama Endpoint: {OLLAMA_URL} (Model: {OLLAMA_MODEL})")
 
-    with open(BILLS_JSON_PATH, "r", encoding="utf-8") as f:
-        bills = json.load(f)
+    conn = db_store.get_connection()
+    try:
+        db_store.init_and_sync_seed(conn)
+        bills = db_store.load_all_bills(conn)
 
-    def needs_eval(b: dict) -> bool:
-        if force_re_enrich:
-            return True
-        return not b.get("aiEnriched", False) or b.get("aiRubricVersion", 1) < RUBRIC_VERSION
+        def needs_eval(b: dict) -> bool:
+            if force_re_enrich:
+                return True
+            return not b.get("aiEnriched", False) or b.get("aiRubricVersion", 1) < RUBRIC_VERSION
 
-    pending_90r = [b for b in bills if b.get("session") == "90R" and needs_eval(b)]
-    print(f"Found {len(pending_90r)} 90R bills pending Rubric v{RUBRIC_VERSION} analysis.")
+        pending_90r = [b for b in bills if b.get("session") == "90R" and needs_eval(b)]
+        print(f"Found {len(pending_90r)} 90R bills pending Rubric v{RUBRIC_VERSION} analysis.")
 
-    if not pending_90r:
-        pending_90r = [b for b in bills if needs_eval(b)]
+        if not pending_90r:
+            pending_90r = [b for b in bills if needs_eval(b)]
 
-    batch = pending_90r[:max_bills]
-    if not batch:
-        print("All bills are already enriched under the active rubric.")
-        return
+        batch = pending_90r[:max_bills]
+        if not batch:
+            print("All bills are already enriched under the active rubric.")
+            return
 
-    enriched_count = 0
-    for bill in batch:
-        enrich_bill(bill)
-        enriched_count += 1
-        time.sleep(0.3)
+        enriched_count = 0
+        for bill in batch:
+            enrich_bill(bill)
+            db_store.upsert_enriched_bill(conn, bill)
+            enriched_count += 1
+            if enriched_count % 5 == 0:
+                db_store.export_runtime_snapshot(conn)
+            time.sleep(0.3)
 
-    tmp_path = BILLS_JSON_PATH + ".tmp"
-    with open(tmp_path, "w", encoding="utf-8") as f:
-        json.dump(bills, f, indent=2)
-    os.replace(tmp_path, BILLS_JSON_PATH)
-
-    print(f"=== Completed AI Enrichment of {enriched_count} bills at {time.strftime('%X')} ===")
+        db_store.export_runtime_snapshot(conn)
+        print(f"=== Completed AI Enrichment of {enriched_count} bills at {time.strftime('%X')} ===")
+    finally:
+        conn.close()
 
 
 if __name__ == "__main__":

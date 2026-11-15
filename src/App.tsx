@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Header, NavTab } from './components/Header';
 import { PriorityDashboard } from './components/PriorityDashboard';
 import { BillExplorer } from './components/BillExplorer';
@@ -23,18 +23,93 @@ import {
   MOCK_STATS_90R, 
   INITIAL_PRIORITIES 
 } from './data/mockData';
+import { reevaluateBillClient } from './utils/evaluateBillClient';
+
+const PRIORITIES_STORAGE_KEY = 'tx_legis_custom_priorities_v2';
+
+function loadSavedCustomPriorities(): PolicyPriority[] | null {
+  try {
+    const raw = localStorage.getItem(PRIORITIES_STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) && parsed.length > 0 ? (parsed as PolicyPriority[]) : null;
+  } catch {
+    return null;
+  }
+}
+
+function computeClientStats(
+  sessionBills: Bill[],
+  session: SessionId,
+  fallbackStats: DashboardStats
+): DashboardStats {
+  if (sessionBills.length === 0) return fallbackStats;
+
+  let support = 0;
+  let oppose = 0;
+  let neutral = 0;
+  let urgent = 0;
+  const authors = new Set<string>();
+  const categoryCounts: Record<string, number> = {};
+
+  for (const b of sessionBills) {
+    if (b.stance === 'SUPPORT') support++;
+    else if (b.stance === 'OPPOSE') oppose++;
+    else neutral++;
+
+    if (b.priorityScore >= 4) urgent++;
+    if (b.author) authors.add(b.author);
+
+    const cat = b.primaryCategory || 'General State Affairs';
+    categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
+  }
+
+  const topCategories = Object.entries(categoryCounts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 6)
+    .map(([category, count]) => ({ category, count }));
+
+  return {
+    session,
+    totalTrackedBills: sessionBills.length,
+    totalVersions: sessionBills.reduce((acc, b) => acc + (b.versions?.length || 1), 0),
+    uniqueAuthors: authors.size || fallbackStats.uniqueAuthors,
+    urgentBillsToday: urgent,
+    stanceBreakdown: { support, oppose, neutral },
+    topCategories,
+  };
+}
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<NavTab>('dashboard');
   const [session, setSession] = useState<SessionId>('90R');
   const [globalSearch, setGlobalSearch] = useState<string>('');
   
-  // Data State
-  const [bills, setBills] = useState<Bill[]>(MOCK_BILLS.filter((b) => b.session === '90R'));
-  const [stats, setStats] = useState<DashboardStats>(MOCK_STATS_90R);
+  // Server Snapshot + Visitor-Isolated Priorities State
+  const [rawServerBills, setRawServerBills] = useState<Bill[]>(MOCK_BILLS.filter((b) => b.session === '90R'));
+  const [serverStats, setServerStats] = useState<DashboardStats>(MOCK_STATS_90R);
   const [legislators, setLegislators] = useState<Legislator[]>(MOCK_LEGISLATORS);
   const [meetings, setMeetings] = useState<CommitteeMeeting[]>(MOCK_COMMITTEE_MEETINGS);
-  const [priorities, setPriorities] = useState<PolicyPriority[]>(INITIAL_PRIORITIES);
+  const [serverPriorities, setServerPriorities] = useState<PolicyPriority[]>(INITIAL_PRIORITIES);
+  const [customPriorities, setCustomPriorities] = useState<PolicyPriority[] | null>(() => loadSavedCustomPriorities());
+
+  const priorities = customPriorities ?? serverPriorities;
+
+  const bills = useMemo(
+    () =>
+      customPriorities
+        ? rawServerBills.map((b) => reevaluateBillClient(b, customPriorities, true))
+        : rawServerBills,
+    [rawServerBills, customPriorities]
+  );
+
+  const stats = useMemo(
+    () =>
+      customPriorities && rawServerBills.length > 0
+        ? computeClientStats(bills, session, serverStats)
+        : serverStats,
+    [bills, customPriorities, rawServerBills.length, session, serverStats]
+  );
   
   // Modal & Selection State
   const [selectedBill, setSelectedBill] = useState<Bill | null>(null);
@@ -52,11 +127,11 @@ export default function App() {
 
       if (statsRes.ok) {
         const statsData = await statsRes.json();
-        setStats(statsData);
+        setServerStats(statsData);
       }
       if (billsRes.ok) {
         const billsData = await billsRes.json();
-        setBills(billsData.bills || []);
+        setRawServerBills(billsData.bills || []);
       }
       if (legRes.ok) {
         const legData = await legRes.json();
@@ -68,12 +143,12 @@ export default function App() {
       }
       if (prioRes.ok) {
         const prioData = await prioRes.json();
-        setPriorities(prioData);
+        setServerPriorities(prioData);
       }
     } catch (err) {
       console.warn('API fetch warning, using client fallback:', err);
       // Fallback already pre-seeded
-      setBills(MOCK_BILLS.filter((b) => b.session === sess));
+      setRawServerBills(MOCK_BILLS.filter((b) => b.session === sess));
     }
   };
 
@@ -103,6 +178,13 @@ export default function App() {
 
   const handleSavePriorities = async (updatedPriorities: PolicyPriority[]) => {
     try {
+      localStorage.setItem(PRIORITIES_STORAGE_KEY, JSON.stringify(updatedPriorities));
+    } catch {
+      // Ignore storage quota / private-browsing errors
+    }
+    setCustomPriorities(updatedPriorities);
+
+    try {
       const response = await fetch('/api/priorities', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -111,18 +193,31 @@ export default function App() {
 
       if (response.ok) {
         const data = await response.json();
-        setPriorities(data.priorities);
-        // Refresh bills to reflect updated comport/conflict rankings
-        await fetchSessionData(session);
+        if (data.scope === 'global') {
+          try {
+            localStorage.removeItem(PRIORITIES_STORAGE_KEY);
+          } catch {
+            // Ignore storage errors
+          }
+          setCustomPriorities(null);
+          setServerPriorities(data.priorities);
+          await fetchSessionData(session);
+        }
       }
     } catch (err) {
-      console.error('Failed to save priorities to server:', err);
-      setPriorities(updatedPriorities);
+      console.warn('Priorities saved in local browser session only:', err);
     }
   };
 
   const handleResetDefaults = () => {
-    handleSavePriorities(INITIAL_PRIORITIES);
+    try {
+      localStorage.removeItem(PRIORITIES_STORAGE_KEY);
+    } catch {
+      // Ignore storage errors
+    }
+    setCustomPriorities(null);
+    setServerPriorities(INITIAL_PRIORITIES);
+    void fetchSessionData(session);
   };
 
   // Filter bills if global search is active and on Bills tab
