@@ -111,8 +111,7 @@ export const PriorityDashboard: React.FC<PriorityDashboardProps> = ({
               Daily Legislative Priority & Stance Briefing
             </h1>
             <p className="text-xs md:text-sm text-slate-400 mt-1 max-w-2xl leading-relaxed">
-              Every real bill filed in the Texas Legislature is ingested from official Capitol records and interpreted against your active political priorities 
-              (Church/State neutrality, Public Education defense, Healthcare access, Grid weatherization).
+              Every bill filed in the Texas Legislature is ingested from official Capitol records and evaluated across Church/State separation, Public Education, LGBTQ+ rights, Healthcare, Transit, and nuanced Fiscal &amp; 2nd Amendment rules.
             </p>
           </div>
 
@@ -266,7 +265,7 @@ export const PriorityDashboard: React.FC<PriorityDashboardProps> = ({
             <span className="text-[11px] text-slate-400 font-mono">advances goals</span>
           </div>
           <div className="text-[11px] text-slate-500 mt-2">
-            Medicaid, Voting, Grid rules
+            Medicaid, Public Ed, Transit, Rights
           </div>
         </div>
 
@@ -282,7 +281,7 @@ export const PriorityDashboard: React.FC<PriorityDashboardProps> = ({
             <span className="text-[11px] text-slate-400 font-mono">violates goals</span>
           </div>
           <div className="text-[11px] text-slate-500 mt-2">
-            Vouchers, Classroom Displays
+            Vouchers, Mandates, Preemption
           </div>
         </div>
 

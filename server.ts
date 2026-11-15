@@ -38,7 +38,7 @@ function getFreshBillsDatabase(): Bill[] {
       if (fileStats.mtimeMs > lastBillsMtime || billsDatabase.length === 0) {
         const fileContent = fs.readFileSync(REAL_BILLS_PATH, 'utf-8');
         const parsed = JSON.parse(fileContent) as Bill[];
-        billsDatabase = parsed.map((b) => reevaluateBill(b, currentPriorities));
+        billsDatabase = parsed.map((b) => reevaluateBill(b, currentPriorities, false));
         lastBillsMtime = fileStats.mtimeMs;
       }
     }
@@ -48,91 +48,354 @@ function getFreshBillsDatabase(): Bill[] {
   return billsDatabase;
 }
 
-// Helper: Recalculate bill stance & priority score based on active user policy priorities
-function reevaluateBill(bill: Bill, priorities: PolicyPriority[]): Bill {
+// Helper: Direction-aware evaluation against active 8-pillar policy priorities
+function reevaluateBill(bill: Bill, priorities: PolicyPriority[], forceRecalculate = false): Bill {
+  // Preserve v2 Ollama evaluations unless the user explicitly recalculated priorities in the UI
+  if (!forceRecalculate && bill.aiEnriched && (bill.aiRubricVersion ?? 1) >= 2) {
+    return bill;
+  }
+
   const activePriorities = priorities.filter((p) => p.isActive);
+  const activeMap = new Map(activePriorities.map((p) => [p.id, p]));
+
+  const caption = (bill.caption || '').toLowerCase();
+  const fullSnippet = `${bill.caption || ''} ${bill.summary || ''} ${bill.primaryCategory || ''} ${(bill.categories || []).join(' ')}`.toLowerCase();
+
+  const isRepealOrStop = /\b(repeal|repealing|abolish|abolition|eliminat|terminat|prohibit\w* the use)\b/.test(caption);
+
   let totalComportScore = 0;
   let totalConflictScore = 0;
+  let forceNeedsReview = false;
+  let detectedCategory = bill.primaryCategory || 'General State Affairs';
+  const matches: NonNullable<Bill['comportConflict']> = [];
 
-  const contentToAnalyze = `${bill.caption} ${bill.summary} ${bill.primaryCategory} ${bill.categories.join(' ')}`.toLowerCase();
+  const addMatch = (
+    priorityId: string,
+    defaultName: string,
+    alignment: 'COMPORTS' | 'CONFLICTS' | 'NEUTRAL',
+    weightMultiplier: number,
+    explanation: string,
+    categoryOverride?: string
+  ) => {
+    const p = activeMap.get(priorityId);
+    if (!p && priorityId.startsWith('p')) return;
+    const weight = p ? p.weight : 7;
+    if (alignment === 'COMPORTS') totalComportScore += weight * weightMultiplier;
+    else if (alignment === 'CONFLICTS') totalConflictScore += weight * weightMultiplier;
+    if (categoryOverride) detectedCategory = categoryOverride;
 
-  bill.comportConflict = [];
+    matches.push({
+      priorityId: p?.id || priorityId,
+      priorityName: p?.title || defaultName,
+      alignment,
+      impactExplanation: explanation,
+    });
+  };
 
+  // 1. Separation of Church & State (Strict Priority)
+  if (/(ten commandments|chaplain|bible|prayer in public school|religious display|sincerely held religious belief|violation of a religious)/.test(fullSnippet)) {
+    if (isRepealOrStop && /(ten commandments|chaplain|display|prayer|religious)/.test(caption)) {
+      addMatch(
+        'p1',
+        'Separation of Church and State',
+        'COMPORTS',
+        1.5,
+        'Repeals state-mandated religious displays or sectarian rules, protecting Church/State neutrality in public institutions.',
+        'Church / State & First Amendment'
+      );
+    } else if (/(religious exemption|sincerely held religious belief|ten commandments|chaplain|bible|prayer)/.test(fullSnippet)) {
+      addMatch(
+        'p1',
+        'Separation of Church and State',
+        'CONFLICTS',
+        1.5,
+        'Mandates religious displays, school chaplains, or state-backed religious exemptions that violate strict Church/State separation.',
+        'Church / State & First Amendment'
+      );
+    }
+  }
+
+  // 2. Public Education & Anti-Voucher Integrity
+  const isClassroomSupplyAccount = caption.includes('classroom supply savings account');
+  if ((caption.includes('education savings account') || caption.includes('voucher') || caption.includes('parental choice')) && !isClassroomSupplyAccount) {
+    if (isRepealOrStop) {
+      addMatch(
+        'p2',
+        'Public Education & Equitable School Funding',
+        'COMPORTS',
+        1.5,
+        'Repeals or terminates the Education Savings Account / private voucher program, protecting public school per-pupil funding.',
+        'Public Education & School Funding'
+      );
+    } else if (caption.includes('eligibility requirements')) {
+      forceNeedsReview = true;
+      addMatch(
+        'p2',
+        'Public Education & Equitable School Funding',
+        'NEUTRAL',
+        0.5,
+        'Needs Review: Modifies ESA private school eligibility criteria—inspect full text to confirm whether it adds accountability or loosens access.',
+        'Public Education & School Funding'
+      );
+    } else {
+      addMatch(
+        'p2',
+        'Public Education & Equitable School Funding',
+        'CONFLICTS',
+        1.5,
+        'Establishes or expands private school vouchers / ESAs, diverting taxpayer dollars away from public ISDs.',
+        'Public Education & School Funding'
+      );
+    }
+  } else if (
+    isClassroomSupplyAccount ||
+    /(basic allotment|enrollment[- ]based|teacher retirement system|cost[- ]of[- ]living|teacher pay|free school meal|special education funding|pre-k|universal prekindergarten)/.test(caption) ||
+    (caption.includes('conservator') && caption.includes('removal'))
+  ) {
+    addMatch(
+      'p2',
+      'Public Education & Equitable School Funding',
+      'COMPORTS',
+      1.2,
+      'Strengthens public school funding, educator compensation/TRS benefits, classroom resources, or local school board governance.',
+      'Public Education & School Funding'
+    );
+  } else if (
+    /(bond election.*increas.*threshold|supermajority.*school|censor|obscene.*school librar|remove.*library material|conservator.*appoint|board of managers)/.test(caption)
+  ) {
+    addMatch(
+      'p2',
+      'Public Education & Equitable School Funding',
+      'CONFLICTS',
+      1.2,
+      'Restricts local public school bond capacity, imposes curriculum/library censorship, or weakens local elected ISD governance.',
+      'Public Education & School Funding'
+    );
+  }
+
+  // 3. Civil Rights & LGBTQ+ / Transgender Equality
+  if (/(gender[- ]affirming|gender transition|biological sex|transgender|lesbian, gay|drag performance|sexually oriented performance|bathroom|changing facilit|gender marker|pronoun)/.test(caption)) {
+    if (/(protect|non[- ]discrimination|prohibit discrimination|affirm|equal rights|barriers to equality|housing needs|task force|repeal.*prohibition)/.test(caption)) {
+      addMatch(
+        'p3',
+        'Civil Rights & LGBTQ+ Equality',
+        'COMPORTS',
+        1.4,
+        'Advances civil rights, housing equity studies, or statutory non-discrimination protections for LGBTQ+ and transgender Texans.',
+        'Civil Rights & LGBTQ+ Policy'
+      );
+    } else if (/(prohibit|restrict|ban|penalt|offense|biological sex|athletic competition|medical procedure)/.test(caption)) {
+      addMatch(
+        'p3',
+        'Civil Rights & LGBTQ+ Equality',
+        'CONFLICTS',
+        1.5,
+        'Restricts healthcare, public accommodations, IDs, or equal rights for transgender and LGBTQ+ Texans.',
+        'Civil Rights & LGBTQ+ Policy'
+      );
+    }
+  } else if (/(non[- ]discrimination|civil rights|sexual orientation|gender identity)/.test(caption)) {
+    addMatch(
+      'p3',
+      'Civil Rights & LGBTQ+ Equality',
+      'COMPORTS',
+      1.3,
+      'Expands non-discrimination protections across housing, employment, or public accommodations.',
+      'Civil Rights & LGBTQ+ Policy'
+    );
+  }
+
+  // 4. Healthcare, Medicare & Medicaid
+  if (/(medicaid|postpartum|patient protection and affordable care|express lane|chip|rural hospital|mental health|reproductive|immunization|maternal|telehealth|health care restriction)/.test(fullSnippet)) {
+    if (/(medically unnecessary.*health care restriction|repeal.*restriction|expand|expansion|awareness week|wellness check|express lane|coverage|postpartum|rural hospital|access to care|assistance)/.test(fullSnippet) && !(isRepealOrStop && caption.includes('immunization'))) {
+      addMatch(
+        'p4',
+        'Healthcare, Medicare & Medicaid',
+        'COMPORTS',
+        1.3,
+        'Expands Medicaid/CHIP coverage, maternal or preventive health awareness, rural hospital stability, or healthcare access.',
+        'Healthcare & Medicaid'
+      );
+    } else if ((isRepealOrStop && caption.includes('immunization')) || /(work requirement|cut medicaid|reduce eligibility|prohibit abortion|criminal penalt.*abortion|restrict.*reproductive)/.test(fullSnippet)) {
+      addMatch(
+        'p4',
+        'Healthcare, Medicare & Medicaid',
+        'CONFLICTS',
+        1.4,
+        'Repeals public health/immunization standards, imposes Medicaid barriers, or restricts reproductive/patient healthcare access.',
+        'Healthcare & Medicaid'
+      );
+    }
+  }
+
+  // 5. Transportation, Transit & Multimodal Infrastructure
+  if (/(public transit|mass transit|light rail|commuter rail|passenger rail|high[- ]speed rail|bike lane|bicycle|pedestrian|sidewalk|vision zero|multimodal|complete street)/.test(fullSnippet)) {
+    if (/(prohibit.*bike|restrict.*lane|preempt.*transit|penaliz.*transit|prohibit.*reducing.*lane|highway[- ]only)/.test(fullSnippet)) {
+      addMatch(
+        'p5',
+        'Transportation & Transit Infrastructure',
+        'CONFLICTS',
+        1.3,
+        'Preempts local cities from building bike lanes, pedestrian improvements, or multimodal public transit.',
+        'Transportation & Transit'
+      );
+    } else {
+      addMatch(
+        'p5',
+        'Transportation & Transit Infrastructure',
+        'COMPORTS',
+        1.3,
+        'Invests in multimodal public transit, rail, protected bike infrastructure, or pedestrian safety.',
+        'Transportation & Transit'
+      );
+    }
+  }
+
+  // 6. Taxation, Fiscal Policy & Budget Surplus (NUANCED)
+  if (/(ad valorem|property tax|homestead exemption|voter-approval tax rate|franchise tax|sales tax|budget surplus|corporate tax)/.test(fullSnippet)) {
+    if (/(abolition of ad valorem|abolish.*ad valorem|repeal.*ad valorem|sales tax rate.*increas|replace property tax with sales tax)/.test(fullSnippet)) {
+      addMatch(
+        'p6',
+        'Taxation & Budget Surplus (Nuanced)',
+        'CONFLICTS',
+        1.4,
+        'Abolishes local property tax base or shifts toward regressive sales taxes, starving public schools and municipal services.',
+        'Taxation & Fiscal Policy'
+      );
+    } else if (/(voter-approval tax rate|exceed.*voter-approval|cap.*municipal|limit.*local.*revenue|two-thirds)/.test(fullSnippet)) {
+      addMatch(
+        'p6',
+        'Taxation & Budget Surplus (Nuanced)',
+        'CONFLICTS',
+        1.3,
+        'Restricts municipal and local ISD fiscal authority to fund voter-approved local services.',
+        'Taxation & Fiscal Policy'
+      );
+    } else if (/(homestead exemption|working.*tax relief|disabled veteran.*exemption|transit.*tax|school.*revenue)/.test(fullSnippet)) {
+      addMatch(
+        'p6',
+        'Taxation & Budget Surplus (Nuanced)',
+        'COMPORTS',
+        1.0,
+        'Delivers targeted residential homeowner/working-family relief or dedicates revenue to clear public services.',
+        'Taxation & Fiscal Policy'
+      );
+    } else if (/(franchise tax|tax cut|tax rate reduction|exemption from ad valorem)/.test(caption)) {
+      forceNeedsReview = true;
+      addMatch(
+        'p6',
+        'Taxation & Budget Surplus (Nuanced)',
+        'NEUTRAL',
+        0.5,
+        'Needs Review: Fiscal trade-off must be evaluated on whether surplus relief hurts public schools or local services.',
+        'Taxation & Fiscal Policy'
+      );
+    }
+  }
+
+  // 7. Second Amendment & Practical Gun Safety (NUANCED - Do NOT blindly auto-oppose 2A bills)
+  if (/\b(firearm|handgun|gun safe|firearm safety|ammunition|background check|nics|second amendment|red flag|extreme risk|concealed carry|polling place.*weapon|child.*access.*firearm)\b/.test(caption)) {
+    if (/\b(gun safe|safety device|storage device|tax[- ]free.*safe|exemption.*safety|domestic violence.*firearm|protective order.*firearm|nics|background check.*report|mental health.*reporting)\b/.test(caption)) {
+      addMatch(
+        'p7',
+        'Second Amendment & Practical Safety (Nuanced)',
+        'COMPORTS',
+        1.1,
+        'Advances practical gun safety (such as tax-free safes, NICS accuracy, or DV protections) while respecting lawful gun ownership.',
+        'Second Amendment & Safety'
+      );
+    } else if (/\b(polling place.*carry|school.*carry.*without|repeal.*child.*storage|ban all.*firearm|confiscat|punitive.*tax.*ammunition)\b/.test(caption)) {
+      addMatch(
+        'p7',
+        'Second Amendment & Practical Safety (Nuanced)',
+        'CONFLICTS',
+        1.3,
+        'Either introduces reckless firearm deregulation (e.g., guns in polling places) or sweeps too broadly against lawful 2A owners.',
+        'Second Amendment & Safety'
+      );
+    } else {
+      forceNeedsReview = true;
+      addMatch(
+        'p7',
+        'Second Amendment & Practical Safety (Nuanced)',
+        'NEUTRAL',
+        0.5,
+        'Needs Review: Evaluated under nuanced 2A policy framework—balancing lawful firearm ownership with practical safety trade-offs.',
+        'Second Amendment & Safety'
+      );
+    }
+  }
+
+  // 8. Voting Rights, Labor, Environment & Grid Protection + Executive Accountability
+  if (/(online voter registration|automatic voter|early voting.*extend|polling location.*increas|ballot cure|weatheriz|ercot|electric grid|ratepayer|utility assistance|minimum wage|paid sick|worker safety|corporate owners.*single-family)/.test(fullSnippet)) {
+    if (/(restrict.*voting|eliminat.*early voting|reject.*ballot|preempt.*wage|preempt.*labor|roll back.*weatheriz)/.test(fullSnippet)) {
+      addMatch(
+        'p8',
+        'Voting, Labor & Grid Protection',
+        'CONFLICTS',
+        1.2,
+        'Restricts ballot access, weakens worker protections, or rolls back electric grid consumer safeguards.',
+        'Voting, Labor & Grid'
+      );
+    } else {
+      addMatch(
+        'p8',
+        'Voting, Labor & Grid Protection',
+        'COMPORTS',
+        1.1,
+        'Advances voting access, consumer/housing protections, worker rights, or ERCOT grid reliability.',
+        'Voting, Labor & Grid'
+      );
+    }
+  } else if (/(disaster declaration|emergency powers|curtail.*governor.*health|public health authority)/.test(fullSnippet) && /(curtail|limit|restrict|terminat|authority of the legislature, courts, the governor)/.test(caption)) {
+    addMatch(
+      'p8',
+      'Public Health & Governance Safeguards',
+      'CONFLICTS',
+      1.1,
+      'Curtails executive or local public health authority needed during statewide emergencies and disasters.',
+      'State Governance & Public Health'
+    );
+  }
+
+  // Evaluate custom user-added priorities (not p1..p8)
   for (const p of activePriorities) {
-    const matchesKeyword = p.keywords.some((kw) => contentToAnalyze.includes(kw.toLowerCase()));
-    if (matchesKeyword) {
-      if (p.stanceDirective === 'Defend' || p.stanceDirective === 'Promote') {
-        // If bill conflicts with or advances
-        // Determine whether this bill aligns with or opposes the principle
-        const opposesPrinciple =
-          bill.caption.toLowerCase().includes('mandat') ||
-          bill.caption.toLowerCase().includes('requir') ||
-          bill.caption.toLowerCase().includes('prohibit') ||
-          bill.caption.toLowerCase().includes('voucher') ||
-          bill.caption.toLowerCase().includes('repeal');
-
-        if (p.id === 'p1' && (contentToAnalyze.includes('ten commandments') || contentToAnalyze.includes('chaplain') || contentToAnalyze.includes('christian'))) {
-          totalConflictScore += p.weight * 1.5;
-          bill.comportConflict.push({
-            priorityId: p.id,
-            priorityName: p.title,
-            alignment: 'CONFLICTS',
-            impactExplanation: `Directly conflicts with ${p.title} by imposing religious displays or state-sponsored religious presence.`,
-          });
-        } else if (p.id === 'p2' && (contentToAnalyze.includes('voucher') || contentToAnalyze.includes('savings account'))) {
-          totalConflictScore += p.weight * 1.4;
-          bill.comportConflict.push({
-            priorityId: p.id,
-            priorityName: p.title,
-            alignment: 'CONFLICTS',
-            impactExplanation: `Diverts public tax revenue to private schools, undermining public school per-pupil funding.`,
-          });
-        } else if (p.id === 'p3' && contentToAnalyze.includes('medicaid')) {
-          totalComportScore += p.weight * 1.3;
-          bill.comportConflict.push({
-            priorityId: p.id,
-            priorityName: p.title,
-            alignment: 'COMPORTS',
-            impactExplanation: `Significantly advances ${p.title} by expanding healthcare coverage to vulnerable Texans.`,
-          });
-        } else if (p.id === 'p4' && contentToAnalyze.includes('online voter registration')) {
-          totalComportScore += p.weight * 1.2;
-          bill.comportConflict.push({
-            priorityId: p.id,
-            priorityName: p.title,
-            alignment: 'COMPORTS',
-            impactExplanation: `Promotes civic participation and voting access through modern online registration.`,
-          });
-        } else if (p.id === 'p5' && contentToAnalyze.includes('weatherization')) {
-          totalComportScore += p.weight * 1.1;
-          bill.comportConflict.push({
-            priorityId: p.id,
-            priorityName: p.title,
-            alignment: 'COMPORTS',
-            impactExplanation: `Strengthens ERCOT power grid reliability and winterization enforcement.`,
-          });
-        } else if (p.id === 'p6' && contentToAnalyze.includes('homestead exemption')) {
-          totalComportScore += p.weight * 1.0;
-          bill.comportConflict.push({
-            priorityId: p.id,
-            priorityName: p.title,
-            alignment: 'COMPORTS',
-            impactExplanation: `Delivers progressive residential property tax savings directly to Texas homeowners.`,
-          });
-        }
+    if (/^p[1-8]$/.test(p.id)) continue;
+    const kwMatched = p.keywords.some((kw) => kw.trim() && fullSnippet.includes(kw.toLowerCase().trim()));
+    if (kwMatched) {
+      if (p.stanceDirective === 'Oppose') {
+        addMatch(p.id, p.title, 'CONFLICTS', 1.1, `Matches custom priority "${p.title}" (Directive: Oppose).`);
+      } else {
+        addMatch(p.id, p.title, 'COMPORTS', 1.1, `Matches custom priority "${p.title}" (Directive: ${p.stanceDirective}).`);
       }
     }
   }
 
-  if (totalConflictScore > totalComportScore && totalConflictScore > 6) {
+  bill.comportConflict = matches;
+  if (detectedCategory) {
+    bill.primaryCategory = detectedCategory;
+  }
+
+  if (totalConflictScore > totalComportScore && totalConflictScore >= 8) {
     bill.stance = 'OPPOSE';
+    bill.recommendedStance = 'OPPOSE';
     bill.priorityScore = Math.min(5, Math.max(3, Math.round(totalConflictScore / 3))) as any;
-  } else if (totalComportScore > totalConflictScore && totalComportScore > 5) {
+    bill.urgencyLevel = bill.priorityScore === 5 ? 'Immediate Attention' : 'High Watch';
+  } else if (totalComportScore > totalConflictScore && totalComportScore >= 7) {
     bill.stance = 'SUPPORT';
+    bill.recommendedStance = 'SUPPORT';
     bill.priorityScore = Math.min(5, Math.max(3, Math.round(totalComportScore / 3))) as any;
+    bill.urgencyLevel = bill.priorityScore === 5 ? 'Immediate Attention' : 'High Watch';
+  } else if (forceNeedsReview) {
+    bill.stance = 'NEUTRAL';
+    bill.recommendedStance = 'NEEDS REVIEW';
+    bill.priorityScore = 3;
+    bill.urgencyLevel = 'Moderate';
   } else {
     bill.stance = 'NEUTRAL';
-    bill.priorityScore = 2;
+    bill.recommendedStance = undefined;
+    bill.priorityScore = Math.min(2, bill.priorityScore || 2) as any;
+    bill.urgencyLevel = 'Routine';
   }
 
   return bill;
@@ -652,7 +915,8 @@ app.get('/api/legislators/:id', (req: Request, res: Response) => {
   if (!leg) {
     return res.status(404).json({ error: 'Legislator not found' });
   }
-  const sponsoredBills = billsDatabase.filter((b) => b.author.toLowerCase().includes(leg.name.toLowerCase().split(',')[0]));
+  const currentBills = getFreshBillsDatabase();
+  const sponsoredBills = currentBills.filter((b) => b.author.toLowerCase().includes(leg.name.toLowerCase().split(',')[0]));
   res.json({ ...leg, sponsoredBills });
 });
 
@@ -673,8 +937,9 @@ app.post('/api/priorities', (req: Request, res: Response) => {
   }
   currentPriorities = updated;
 
-  // Re-evaluate all bills with the updated user priorities
-  billsDatabase = billsDatabase.map((bill) => reevaluateBill(bill, currentPriorities));
+  // Re-evaluate all bills with the updated user priorities (force recalculation across database)
+  const currentBills = getFreshBillsDatabase();
+  billsDatabase = currentBills.map((bill) => reevaluateBill(bill, currentPriorities, true));
 
   res.json({
     message: 'Priorities updated and bills re-scored successfully',
@@ -690,35 +955,37 @@ app.post('/api/ai/query', async (req: Request, res: Response) => {
   }
 
   const queryLower = query.toLowerCase();
+  const currentBills = getFreshBillsDatabase();
 
   // Find relevant database facts
-  const billsInSession = billsDatabase.filter((b) => b.session === session);
+  const billsInSession = currentBills.filter((b) => b.session === session);
   const matchedBills = billsInSession.filter(
     (b) =>
-      queryLower.includes(b.billNumber.toLowerCase().replace(' ', '')) ||
+      queryLower.includes(b.billNumber.toLowerCase().replace(/\s+/g, '')) ||
       queryLower.includes(b.billNumber.toLowerCase()) ||
       queryLower.includes(b.author.toLowerCase().split(',')[0]) ||
-      b.categories.some((c) => queryLower.includes(c.toLowerCase())) ||
-      queryLower.includes(b.primaryCategory.toLowerCase())
+      (b.categories || []).some((c) => c && queryLower.includes(c.toLowerCase())) ||
+      queryLower.includes((b.primaryCategory || '').toLowerCase())
   );
 
-  // Check specifically for author questions (like the user's Harrison query)
+  // Author timeline summary (e.g., Harrison filing queries)
   const isHarrisonQuery = queryLower.includes('harrison');
   let harrisonFacts = '';
   if (isHarrisonQuery) {
-    const harrisonBills = billsDatabase
+    const harrisonBills = billsInSession
       .filter((b) => b.author.toLowerCase().includes('harrison'))
       .sort((a, b) => a.billNumber.localeCompare(b.billNumber, undefined, { numeric: true }));
 
-    const firstBill = harrisonBills[0] || { billNumber: 'HB 687', caption: 'Relating to voter approval for tax rates exceeding the voter-approval rate', dateFiled: '2026-11-09' };
-    harrisonFacts = `Representative Brian Harrison (R-Midlothian, House District 10) filed 45 bills on opening day of pre-filing for the 90th Legislative Session (and 75 bills in the 89th Session). His very first filed bill for 90R was ${firstBill.billNumber} ('${firstBill.caption}'), filed on ${firstBill.dateFiled}. It establishes strict voter approval thresholds for local taxing units seeking to exceed voter-approval tax rate limits. Other notable filings include HB 705 (immunization mandate repeal), HB 708 (curtailing gubernatorial emergency disaster declarations), HB 731 (abolition of ad valorem property taxes), and HB 695 (agency rule reviews).`;
+    const firstBill = harrisonBills[0] || { billNumber: 'HB 687', caption: 'Relating to the vote required in an election to approve an ad valorem tax rate that exceeds a taxing unit\'s voter-approval tax rate; making conforming changes.', dateFiled: '2026-11-09' };
+    harrisonFacts = `Representative Brian Harrison (R-Midlothian, House District 10) has ${harrisonBills.length || 45} tracked filings in Session ${session}. His lowest-numbered pre-filing in 90R is ${firstBill.billNumber} ('${firstBill.caption}'), filed on ${firstBill.dateFiled}. Other notable filings include HB 705 (immunization requirements), HB 708 (emergency disaster powers), HB 731 (abolition of ad valorem taxes), and HB 695 (state agency rule reviews).`;
   }
 
   // Build facts snippet for grounding
-  const topBillsContext = (matchedBills.length > 0 ? matchedBills : billsInSession.slice(0, 5))
+  const contextSource = matchedBills.length > 0 ? matchedBills.slice(0, 10) : billsInSession.slice(0, 6);
+  const topBillsContext = contextSource
     .map(
       (b) =>
-        `- ${b.billNumber} by ${b.author} (${b.dateFiled}): ${b.caption}. Status: ${b.currentStatus}. Stance: ${b.stance} (Priority Score: ${b.priorityScore}/5). Summary: ${b.summary}`
+        `- ${b.billNumber} by ${b.author} (${b.dateFiled}): ${b.caption}. Status: ${b.currentStatus}. Stance: ${b.recommendedStance || b.stance} (Priority Score: ${b.priorityScore}/5). Summary: ${b.summary}`
     )
     .join('\n');
 
@@ -727,23 +994,81 @@ app.post('/api/ai/query', async (req: Request, res: Response) => {
     .map((p) => `- ${p.title} (Weight: ${p.weight}/10, Directive: ${p.stanceDirective}): ${p.description}`)
     .join('\n');
 
-  // If Gemini client is available, generate grounded response
   if (geminiAi) {
     try {
-      const systemInstruction = `You are the Texas Capitol Legislative Intelligence Engine and senior policy counsel.
-Your job is to provide authoritative, nonpartisan, highly precise analysis of Texas legislative bills, lawmaker filings, statutory changes, and policy comport/conflict evaluations.
-Always cite specific bill numbers (e.g. HB 126, SB 12, HB 789), authors, dates, and committees when answering.
+      const systemInstruction = `# ROLE & OBJECTIVE
+You are a Legislative Policy Analyst evaluating Texas state legislation (House and Senate bills, joint resolutions, and amendments) on behalf of a specific user. Your task is to read bill captions, statutory texts, fiscal notes, or bill summaries and accurately determine whether the user would **SUPPORT**, **OPPOSE**, or **NEEDS REVIEW** (Monitor / Neutral) based on the policy framework below.
+
+---
+
+# CORE POLITICAL IDENTITY & DEFAULT HEURISTIC
+- **Baseline Alignment:** Texas Liberal Democrat.
+- **Default Heuristic:** On standard partisan issues not explicitly detailed below (e.g., voting access, labor rights, environmental protection, reproductive freedom, consumer protection), default to progressive/Democratic positions (SUPPORT) and oppose conservative/Republican-led restrictions or deregulation (OPPOSE).
+- **Critical Override:** Do NOT blindly apply party-line assumptions to **2nd Amendment/Firearms** or **Taxation/Surplus Spending**. Follow the specific domain rules below for those topics.
+- **Direction Check:** Always distinguish bills that **repeal or restrict** a bad program (e.g., repealing ESA vouchers -> SUPPORT; repealing Ten Commandments display -> SUPPORT) from bills that **enact or expand** it (e.g., creating ESAs -> OPPOSE).
+
+---
+
+# DOMAIN-SPECIFIC DECISION MATRIX
+
+## 1. Separation of Church and State (STRICT PRIORITY)
+- **Core Principle:** Absolute separation between religious institutions and public governance/taxpayer funds.
+- **OPPOSE (Hard No):** School vouchers, ESAs, or tax-credit scholarships allowing public funds to flow to private/religious schools; bills mandating or promoting religious texts, displays (e.g., Ten Commandments), prayer, or chaplains in public schools or government buildings; religious exemptions allowing state-funded contractors, healthcare providers, or agencies to discriminate.
+- **SUPPORT:** Legislation reinforcing secular public institutions and repealing state-sponsored religious coercion.
+
+## 2. Public Education & School Funding
+- **Core Principle:** Every public school in Texas should be fully funded, with equitable per-student funding across the state.
+- **SUPPORT:** Increases to the Basic Allotment, enrollment-based funding formulas, teacher/staff pay raises and TRS COLAs, special education, school safety, free school meals, and repealing voucher/ESA programs.
+- **OPPOSE:** Diverting public funds to private/charter entities lacking public accountability, unfunded ISD mandates, library censorship, curriculum gag orders, or partisan takeovers of school boards.
+
+## 3. Civil Rights & LGBTQ+ / Transgender Policy
+- **Core Principle:** Reject anti-transgender and anti-LGBTQ+ fear-mongering; policy must be grounded in medical reality, human dignity, and equal rights.
+- **OPPOSE:** Bans/restrictions on gender-affirming care for youth or adults, sports/bathroom/drag bans, ID gender-marker restrictions, "Don't Say Gay/Trans" educational gags, or forced outing policies.
+- **SUPPORT:** Non-discrimination protections covering sexual orientation and gender identity in housing, employment, and public accommodations.
+
+## 4. Healthcare, Medicare & Medicaid
+- **Core Principle:** Healthcare is a public good; expand public coverage and lower barriers to care.
+- **SUPPORT:** Full ACA Medicaid expansion, state public healthcare options, free public health clinics, postpartum Medicaid extension, CHIP expansion, rural hospitals, mental health services, preventive/immunization awareness, and reproductive healthcare access.
+- **OPPOSE:** Work requirements, administrative hurdles, Medicaid/CHIP cuts, or repealing public health/immunization standards.
+
+## 5. Transportation, Transit & Urban Infrastructure
+- **Core Principle:** Shift away from car-only dependency toward safe, multimodal, and sustainable public infrastructure.
+- **SUPPORT:** Public transit, bus/light/commuter/intercity rail, protected bike lanes, Vision Zero pedestrian safety, sidewalks, trails, and multimodal TxDOT funding.
+- **OPPOSE:** Municipal preemption stopping cities from reducing car lanes, adding bike lanes, building transit, or penalizing transit agencies.
+
+## 6. Taxation, Fiscal Policy & Budget Surplus (NUANCED RULE)
+- **Core Principle:** Evaluate taxes and spending by tangible public benefit and impact on public services, considering Texas's multi-billion-dollar budget surplus.
+- **SUPPORT:** Raising revenue IF funding a clear, tangible public good (transit, healthcare, parks, education, infrastructure); OR cutting taxes from budget surplus IF providing genuine relief to working/middle-class Texans AND NOT starving public schools, healthcare, or local governments.
+- **OPPOSE:** Tax cuts primarily benefiting wealthy corporations/luxury property, regressive sales tax swaps, abolishing the ad valorem school tax base without sustainable replacement, or capping local voter-approved services.
+- **NEEDS REVIEW:** If a tax-cut or surplus-spending bill has ambiguous fiscal trade-offs or unclear funding impacts.
+
+## 7. Second Amendment & Firearms (NUANCED RULE)
+- **Core Principle:** The user is NOT anti-2nd Amendment and respects the right of law-abiding citizens to own and carry firearms. Do NOT blindly flag every firearm bill as OPPOSE.
+- **SUPPORT:** Removing unnecessary barriers/punitive fees on lawful owners; incentivizing safe storage (tax-free gun safes, voluntary training); common-sense targeted safety (keeping guns out of domestic abusers' hands, improving NICS mental-health/criminal reporting).
+- **OPPOSE:** Sweeping gun bans, confiscation, arbitrary bans on common firearms, OR reckless deregulation putting public safety at risk (e.g., guns in polling places, eliminating child-storage penalties).
+- **NEEDS REVIEW:** If a gun bill mixes gun-rights protections with safety trade-offs.
+
+---
+
+# OUTPUT FORMAT
+- Whenever evaluating specific bill(s), structure each bill's evaluation clearly with:
+  1. **Bill Identifier & Title**
+  2. **Recommended Stance:** **SUPPORT** | **OPPOSE** | **NEEDS REVIEW** (with Confidence: High / Medium / Low)
+  3. **Primary Policy Triggers**
+  4. **What the Bill Actually Does** (2-3 plain-English bullets)
+  5. **Reasoning & Alignment**
+- For broad lawmaker or session-wide statistical questions, synthesize directly using the verified database records below.
 
 VERIFIED CAPITOL DATABASE FACTS:
-${harrisonFacts ? `Special Author Note: ${harrisonFacts}\n` : ''}
-Relevant Session Bills:
+${harrisonFacts ? `Author Filing Summary: ${harrisonFacts}\n` : ''}
+Relevant Session (${session}) Bills:
 ${topBillsContext}
 
-USER ACTIVE POLITICAL PRIORITIES:
+USER ACTIVE POLICY PRIORITIES:
 ${prioritiesContext}`;
 
       const aiResponse = await geminiAi.models.generateContent({
-        model: 'gemini-3.8-flash',
+        model: 'gemini-4-hydrogen',
         contents: query,
         config: {
           systemInstruction,
@@ -755,49 +1080,79 @@ ${prioritiesContext}`;
       return res.json({
         query,
         answer: responseText,
-        groundedBills: matchedBills.map((b) => ({
+        groundedBills: matchedBills.slice(0, 12).map((b) => ({
           billNumber: b.billNumber,
           author: b.author,
           caption: b.caption,
           stance: b.stance,
           priorityScore: b.priorityScore,
         })),
-        engine: 'Gemini 3.8 Flash (Grounding + State Database)',
+        engine: 'Gemini 4 Flash (Grounding + State Database)',
       });
     } catch (err: any) {
       console.warn('Gemini generateContent error, falling back to deterministic synthesis:', err?.message || err);
     }
   }
 
-  // Deterministic fallback if API key is not configured or network issue occurs
+  // Deterministic fallback when API key is not configured
   let answer = '';
   if (isHarrisonQuery) {
-    answer = `**Representative Brian Harrison (R - Midlothian, HD 10)** has filed **45 bills** in the 90th Legislative Session (and **75 bills** in the 89th Session), verified directly from Texas Capitol records:\n\n1. **First Bill Filed in 90R**: **HB 687** filed on **November 9, 2026**.\n   - **Caption**: *Relating to the vote required in an election to approve an ad valorem tax rate that exceeds a taxing unit's voter-approval tax rate; making conforming changes.*\n   - **What it does**: Enforces a strict two-thirds ballot threshold before any local municipality, county, or special district can exceed its voter-approval tax rate.\n   - **Policy Alignment**: Evaluated as **OPPOSE (Priority 4/5)** because rigid ballot caps restrict local funding for emergency medical and municipal services.\n\n2. **Key Notable 90R Filings by Harrison**:\n   - **HB 705**: *Relating to immunization requirements* (Repealing school and public health immunization mandates).\n   - **HB 708**: *Relating to emergency powers* (Restricting emergency disaster declarations by the governor and local health authorities).\n   - **HB 731**: *Relating to the abolition of ad valorem taxes* (Proposing total elimination of local property taxes in Texas).\n   - **HB 695**: *Relating to state agency review of adopted rules*.\n\n*(Note: 100% verified real data ingested directly from the Texas Legislature Online FTP portal).*`;
+    const harrisonBills = billsInSession
+      .filter((b) => b.author.toLowerCase().includes('harrison'))
+      .sort((a, b) => a.billNumber.localeCompare(b.billNumber, undefined, { numeric: true }));
+    const firstBill = harrisonBills[0];
+
+    answer = `**Representative Brian Harrison (R - Midlothian, HD 10)** has **${harrisonBills.length || 45} tracked filings** in Session **${session}** from Texas Capitol records:\n\n` +
+      `1. **First Pre-Filed Bill (${firstBill ? firstBill.billNumber : 'HB 687'})**\n` +
+      `- **Recommended Stance:** **${firstBill ? firstBill.recommendedStance || firstBill.stance : 'OPPOSE'}** (Confidence: High)\n` +
+      `- **Primary Policy Triggers:** Taxation & Fiscal Policy (Local Revenue Preemption)\n` +
+      `- **What the Bill Actually Does:**\n` +
+      `  • ${firstBill ? firstBill.caption : 'Requires a heightened supermajority election to approve an ad valorem tax rate exceeding a taxing unit\'s voter-approval rate.'}\n` +
+      `- **Reasoning & Alignment:** Rigid supermajority caps constrain cities, counties, and school districts from funding voter-approved local services.\n\n` +
+      `2. **Other Notable Filings by Harrison:**\n` +
+      `- **HB 705 (OPPOSE):** Repeals school and public health immunization requirements.\n` +
+      `- **HB 708 (OPPOSE):** Curtails executive and local disaster declaration powers.\n` +
+      `- **HB 731 (OPPOSE):** Proposes abolition of local ad valorem property taxes, threatening school funding.`;
+  } else if (matchedBills.length > 0 && matchedBills.length <= 4) {
+    answer = matchedBills
+      .map((b) => {
+        const stanceLabel = b.recommendedStance || b.stance;
+        const reason = b.comportConflict?.[0]?.impactExplanation || `Evaluated against active 7-pillar policy framework (${b.primaryCategory}).`;
+        return `### ${b.billNumber} — ${b.author}\n` +
+          `**Recommended Stance:** **${stanceLabel}** (Priority ${b.priorityScore}/5)\n` +
+          `**Primary Policy Triggers:** ${b.primaryCategory}\n` +
+          `**What the Bill Actually Does:**\n` +
+          `• ${b.caption}\n` +
+          `**Reasoning & Alignment:** ${reason}`;
+      })
+      .join('\n\n---\n\n');
   } else if (queryLower.includes('ten commandments') || queryLower.includes('church') || queryLower.includes('religion') || queryLower.includes('sb 12')) {
-    answer = `**Church/State Separation Analysis (90R Session)**:\n\n- **SB 12 (Hughes)**: Requires mandatory display of the Ten Commandments (minimum 16"x20") in every public elementary and secondary classroom. Evaluated as **OPPOSE (Priority 5/5, Immediate Attention)** due to direct Establishment Clause violations.\n- **Status**: Referred to Senate State Affairs on Jan 28, 2025. Follows the precedent of SB 1515 from the 88th session which passed the Senate but died in the House Calendars committee.`;
+    answer = `**Separation of Church and State Analysis (${session})**\n\n` +
+      `- **SB 12 (OPPOSE — Confidence: High):** Mandates display of the Ten Commandments in public school classrooms. Conflicts directly with strict separation of Church and State.\n` +
+      `- **SB 115 by Menéndez (SUPPORT — Confidence: High):** Repeals mandatory Ten Commandments classroom display requirements, defending religious neutrality in public schools.`;
   } else if (queryLower.includes('voucher') || queryLower.includes('education') || queryLower.includes('sb 84')) {
-    answer = `**Public Education & Voucher Analysis**:\n\n- **SB 84 (Creighton)**: Establishes universal Education Savings Accounts (ESAs) awarding ~$10,500/student for private school tuition from state General Revenue.\n- **Policy Stance**: **OPPOSE (Priority 5/5)**. The Legislative Budget Board estimates a 5-year cost of $3.4 Billion, siphoning critical operational funding from public school districts.\n- **Counter-proposals**: HB 789 and educator coalition bills prioritize basic allotment increases and public teacher retention.`;
+    answer = `**Public Education & ESA Policy Analysis (${session})**\n\n` +
+      `- **Expanding ESAs / Vouchers (OPPOSE — Confidence: High):** Proposals such as **SB 291** (online/virtual ESA expansion in 90R) or universal voucher bills siphon General Revenue away from public ISDs.\n` +
+      `- **ESA Repeal Bills (SUPPORT — Confidence: High):** Bills such as **HB 164 (Bucy)**, **HB 646 (González)**, **HB 675 (Herbert)**, **HB 735 (Jimenez)**, **SB 106 (Menéndez)**, and **SB 294 (West)** repeal the Education Savings Account program to protect public ISD funding.`;
   } else {
-    answer = `Based on the Texas Capitol database for session ${session}, here are the key findings for your query: "${query}":\n\n` +
+    answer = `Based on the Texas Capitol database for session ${session}, here are the top matching bills for "${query}":\n\n` +
       topBillsContext
         .split('\n')
-        .slice(0, 4)
-        .map((line) => line)
-        .join('\n\n') +
-      `\n\nAll bills have been cross-referenced against your active policy priorities (Church/State separation, Public Education defense, Healthcare access, Grid weatherization, and Property tax relief).`;
+        .slice(0, 5)
+        .join('\n\n');
   }
 
   return res.json({
     query,
     answer,
-    groundedBills: matchedBills.map((b) => ({
+    groundedBills: matchedBills.slice(0, 12).map((b) => ({
       billNumber: b.billNumber,
       author: b.author,
       caption: b.caption,
       stance: b.stance,
       priorityScore: b.priorityScore,
     })),
-    engine: 'Capitol Structured Knowledge Engine',
+    engine: 'Capitol Policy Engine (Structured Grounding)',
   });
 });
 

@@ -144,7 +144,7 @@ export const Header: React.FC<HeaderProps> = ({
               }`}
             >
               <Terminal className="w-3.5 h-3.5 text-indigo-400" />
-              <span>Local Pipeline (v2)</span>
+              <span>Data Pipeline</span>
             </button>
           </nav>
 
@@ -192,7 +192,7 @@ export const Header: React.FC<HeaderProps> = ({
             { id: 'committees', label: 'Committees' },
             { id: 'priorities', label: 'Priorities' },
             { id: 'ai', label: 'AI Analyst' },
-            { id: 'python', label: 'Python Scripts' },
+            { id: 'python', label: 'Pipeline' },
           ].map((item) => (
             <button
               key={item.id}

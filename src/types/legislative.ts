@@ -90,6 +90,13 @@ export interface Bill {
   officialPdfUrl?: string;
   urgencyLevel: 'Immediate Attention' | 'High Watch' | 'Moderate' | 'Routine';
   filedDateTimestamp: number;
+  aiEnriched?: boolean;
+  aiRubricVersion?: number;
+  aiEnrichedAt?: string;
+  recommendedStance?: 'SUPPORT' | 'OPPOSE' | 'NEEDS REVIEW';
+  confidence?: 'High' | 'Medium' | 'Low';
+  policyTriggers?: string[];
+  whatItDoes?: string[];
 }
 
 export interface AmendedStatute {

@@ -34,11 +34,11 @@ interface AIResearchAssistantProps {
 }
 
 const DEFAULT_QUESTIONS = [
-  'How many bills has Harrison filed, which was first, and what does it do?',
-  'What does HB 101 by John Bucy and SB 31 by Judith Zaffirini do regarding Medicaid expansion?',
-  'What does Brian Harrison propose in HB 708 regarding emergency executive disaster powers?',
-  'What does Donna Howard propose in HB 126 regarding healthcare restrictions?',
-  'Summarize landmark education bill HB 2 from the 89th session signed by the Governor.',
+  'Evaluate HB 164 (ESA repeal) vs SB 84 (ESAs) under the Public Education & Church/State rules.',
+  'How many bills has Brian Harrison filed in 90R, which was lowest-numbered, and what does it do?',
+  'What does HB 101 by John Bucy and SB 31 by Judith Zaffirini propose regarding Medicaid expansion?',
+  'Explain the nuanced Second Amendment and Budget Surplus tax rules for Texas legislation.',
+  'Compare SB 12 and SB 115 regarding the Ten Commandments in public school classrooms.',
 ];
 
 export const AIResearchAssistant: React.FC<AIResearchAssistantProps> = ({
@@ -89,7 +89,7 @@ export const AIResearchAssistant: React.FC<AIResearchAssistantProps> = ({
         id: `ai-${Date.now()}`,
         sender: 'assistant',
         text: data.answer || 'No analysis generated.',
-        engine: data.engine || 'Gemini 3.8 Flash',
+        engine: data.engine || 'Gemini 4 Flash',
         groundedBills: data.groundedBills || [],
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
@@ -153,7 +153,7 @@ export const AIResearchAssistant: React.FC<AIResearchAssistantProps> = ({
       <div className="space-y-2">
         <div className="text-[11px] font-mono text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
           <Flame className="w-3 h-3 text-amber-400" />
-          <span>Verified Query Benchmarks (Including Harrison Filing Query):</span>
+          <span>Suggested Legislative Queries:</span>
         </div>
         <div className="flex flex-wrap gap-2">
           {DEFAULT_QUESTIONS.map((q, idx) => (

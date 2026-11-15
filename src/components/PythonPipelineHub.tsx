@@ -1,22 +1,18 @@
 import React, { useState } from 'react';
-import { ROOT_CAUSE_ANALYSIS, FIXED_PYTHON_SCRIPTS, PythonScriptDoc } from '../data/pythonPipelineCode';
-import { 
-  Terminal, 
-  CheckCircle2, 
-  AlertTriangle, 
-  Copy, 
-  Check, 
-  Download, 
-  FileCode, 
-  ArrowRight,
-  Database,
-  Cpu,
-  Layers,
-  RefreshCw
+import { PIPELINE_ARCHITECTURE, PIPELINE_SCRIPTS, PythonScriptDoc } from '../data/pythonPipelineCode';
+import {
+  Terminal,
+  CheckCircle2,
+  Copy,
+  Check,
+  Download,
+  FileCode,
+  Clock,
+  RefreshCw,
 } from 'lucide-react';
 
 export const PythonPipelineHub: React.FC = () => {
-  const [selectedScript, setSelectedScript] = useState<PythonScriptDoc>(FIXED_PYTHON_SCRIPTS[0]);
+  const [selectedScript, setSelectedScript] = useState<PythonScriptDoc>(PIPELINE_SCRIPTS[0]);
   const [copied, setCopied] = useState(false);
   const [isIngesting, setIsIngesting] = useState(false);
   const [ingestStatus, setIngestStatus] = useState<string | null>(null);
@@ -28,12 +24,12 @@ export const PythonPipelineHub: React.FC = () => {
       const res = await fetch('/api/ingest/trigger', { method: 'POST' });
       const data = await res.json();
       if (res.ok) {
-        setIngestStatus(`Success! Ingested from FTP. Total 90R Bills: ${data.total90RBills}`);
+        setIngestStatus(`Synced with TLO FTP. Total 90R Bills: ${data.total90RBills}`);
       } else {
-        setIngestStatus(`Error: ${data.details || 'Failed to run script'}`);
+        setIngestStatus(`Sync notice: ${data.details || 'Unable to complete FTP sync'}`);
       }
     } catch (e: any) {
-      setIngestStatus(`Failed: ${e.message}`);
+      setIngestStatus(`Sync request failed: ${e.message}`);
     } finally {
       setIsIngesting(false);
     }
@@ -50,32 +46,30 @@ export const PythonPipelineHub: React.FC = () => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = selectedScript.filename;
+    a.download = selectedScript.filename.split('/').pop() || selectedScript.filename;
     a.click();
     URL.revokeObjectURL(url);
   };
 
   return (
     <div className="max-w-5xl mx-auto space-y-8">
-      
       {/* Header Banner */}
       <div className="bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 border border-indigo-500/30 rounded-xl p-6 shadow-sm">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2">
               <span className="font-mono text-xs uppercase px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 font-semibold">
-                Local Environment Bridge
+                Automated Sync & AI Engine
               </span>
               <span className="text-xs text-slate-400 font-mono">
-                Python 3.12+ • Ollama (Llama 3.1) • ChromaDB • SQLite
+                TLO FTP • Ollama (Llama 3.1) • Gemini Grounding
               </span>
             </div>
             <h1 className="text-xl md:text-2xl font-bold text-slate-100 mt-2 tracking-tight">
-              Local Legislative Ingestion & Evaluation Pipeline (v2)
+              Legislative Data Ingestion & Policy Analysis Pipeline
             </h1>
             <p className="text-xs md:text-sm text-slate-300 mt-1 max-w-3xl leading-relaxed">
-              We identified the exact failure points causing your previous 500 errors and script loops. 
-              Below are the corrected, drop-in Python scripts ready to run on your local machine alongside Ollama.
+              Hourly automation keeps Texas Legislature filings, statutory full texts, and 7-domain policy evaluations synchronized directly from official Capitol FTP feeds.
             </p>
           </div>
 
@@ -100,7 +94,7 @@ export const PythonPipelineHub: React.FC = () => {
               className="px-3.5 py-2 text-xs font-bold rounded-lg bg-indigo-500 hover:bg-indigo-400 text-slate-950 flex items-center gap-1.5 shadow-sm transition"
             >
               <Download className="w-3.5 h-3.5" />
-              <span>Download {selectedScript.filename}</span>
+              <span>Download</span>
             </button>
           </div>
         </div>
@@ -113,30 +107,30 @@ export const PythonPipelineHub: React.FC = () => {
         )}
       </div>
 
-      {/* Root Cause Diagnosis Section */}
+      {/* Pipeline Architecture Overview */}
       <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-4">
         <div className="flex items-center gap-2 pb-3 border-b border-slate-800">
-          <AlertTriangle className="w-5 h-5 text-amber-400" />
+          <Clock className="w-5 h-5 text-amber-400" />
           <h2 className="text-base font-bold text-slate-100">
-            Root-Cause Diagnosis: Why Your Previous Scripts Failed
+            {PIPELINE_ARCHITECTURE.summary}
           </h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {ROOT_CAUSE_ANALYSIS.issues.map((issue) => (
-            <div key={issue.id} className="p-4 rounded-xl bg-slate-950 border border-slate-800/80 space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="font-bold text-slate-200 text-xs">{issue.title}</span>
-                <span className="font-mono text-[10px] px-1.5 py-0.5 rounded bg-rose-950/50 text-rose-300 border border-rose-800/50">
-                  {issue.severity}
+          {PIPELINE_ARCHITECTURE.stages.map((stage) => (
+            <div key={stage.id} className="p-4 rounded-xl bg-slate-950 border border-slate-800/80 space-y-2">
+              <div className="flex items-center justify-between gap-2">
+                <span className="font-bold text-slate-200 text-xs">{stage.title}</span>
+                <span className="font-mono text-[10px] px-1.5 py-0.5 rounded bg-indigo-950/60 text-indigo-300 border border-indigo-800/50 shrink-0">
+                  {stage.schedule}
                 </span>
               </div>
               <p className="text-xs text-slate-400 leading-relaxed">
-                {issue.description}
+                {stage.description}
               </p>
               <div className="pt-2 border-t border-slate-800/60 text-xs text-emerald-300 flex items-start gap-1.5">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                <span><strong>Fix Applied:</strong> {issue.fix}</span>
+                <span>{stage.output}</span>
               </div>
             </div>
           ))}
@@ -145,10 +139,8 @@ export const PythonPipelineHub: React.FC = () => {
 
       {/* Script Selector and Code Viewer */}
       <div className="space-y-4">
-        
-        {/* Tabs for scripts */}
         <div className="flex flex-wrap gap-2">
-          {FIXED_PYTHON_SCRIPTS.map((script) => (
+          {PIPELINE_SCRIPTS.map((script) => (
             <button
               key={script.filename}
               onClick={() => setSelectedScript(script)}
@@ -164,7 +156,6 @@ export const PythonPipelineHub: React.FC = () => {
           ))}
         </div>
 
-        {/* Selected Script Details */}
         <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-3">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-800">
             <div>
@@ -189,63 +180,60 @@ export const PythonPipelineHub: React.FC = () => {
             </div>
           </div>
 
-          {/* Fixes checklist */}
           <div className="flex flex-wrap gap-2 text-xs">
-            {selectedScript.fixesApplied.map((fix, idx) => (
-              <span key={idx} className="font-mono text-[11px] px-2 py-0.5 rounded bg-emerald-950/30 text-emerald-300 border border-emerald-900/40 flex items-center gap-1">
+            {selectedScript.capabilities.map((cap, idx) => (
+              <span
+                key={idx}
+                className="font-mono text-[11px] px-2 py-0.5 rounded bg-emerald-950/30 text-emerald-300 border border-emerald-900/40 flex items-center gap-1"
+              >
                 <CheckCircle2 className="w-3 h-3 text-emerald-400" />
-                <span>{fix}</span>
+                <span>{cap}</span>
               </span>
             ))}
           </div>
 
-          {/* Code block */}
           <div className="relative mt-2">
-            <pre className="font-mono text-xs text-slate-200 bg-slate-950 p-4 rounded-xl overflow-x-auto max-h-[500px] border border-slate-850 leading-relaxed">
+            <pre className="font-mono text-xs text-slate-200 bg-slate-950 p-4 rounded-xl overflow-x-auto max-h-[500px] border border-slate-800 leading-relaxed">
               {selectedScript.code}
             </pre>
           </div>
         </div>
-
       </div>
 
-      {/* 3-Step Execution Quick Start */}
+      {/* 3-Step Self-Hosting Quick Start */}
       <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-6 space-y-4">
         <h3 className="text-sm font-bold font-mono text-slate-200 uppercase tracking-wider flex items-center gap-2">
           <Terminal className="w-4 h-4 text-amber-400" />
-          <span>Local Deployment Quick-Start (3 Terminal Steps)</span>
+          <span>Self-Hosting Quick-Start</span>
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-          
           <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
-            <div className="font-mono text-amber-400 font-bold">Step 1: Install Dependencies</div>
-            <p className="text-slate-400">Install Python packages for FastAPI, Chroma, and Ollama:</p>
+            <div className="font-mono text-amber-400 font-bold">Step 1: Sync Capitol FTP</div>
+            <p className="text-slate-400">Fetch baseline reports and live intraday filings into the database:</p>
             <div className="bg-slate-900 p-2.5 rounded font-mono text-[11px] text-slate-200 select-all border border-slate-800">
-              pip install fastapi uvicorn requests beautifulsoup4 ollama chromadb
+              python3 scripts/ingest_real_texas_data.py
             </div>
           </div>
 
           <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
-            <div className="font-mono text-amber-400 font-bold">Step 2: Sync TLO & Enrich</div>
-            <p className="text-slate-400">Run the robust scraper and evaluate against political priorities:</p>
+            <div className="font-mono text-amber-400 font-bold">Step 2: Hydrate & Enrich</div>
+            <p className="text-slate-400">Cache statutory full texts and run Ollama 7-domain evaluation:</p>
             <div className="bg-slate-900 p-2.5 rounded font-mono text-[11px] text-slate-200 select-all border border-slate-800 space-y-1">
-              <div>python pipeline_v2.py</div>
-              <div>python enrich_bills_v2.py</div>
+              <div>python3 scripts/hydrate_real_full_texts.py</div>
+              <div>python3 scripts/enrich_bills.py 25</div>
             </div>
           </div>
 
           <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
-            <div className="font-mono text-amber-400 font-bold">Step 3: Launch Resilient API</div>
-            <p className="text-slate-400">Start the backend on port 8000 with guarded vector search:</p>
+            <div className="font-mono text-amber-400 font-bold">Step 3: Serve Dashboard</div>
+            <p className="text-slate-400">Build and launch the web dashboard and Express API server:</p>
             <div className="bg-slate-900 p-2.5 rounded font-mono text-[11px] text-slate-200 select-all border border-slate-800">
-              uvicorn main_v2:app --reload --port 8000
+              npm run build && npm start
             </div>
           </div>
-
         </div>
       </div>
-
     </div>
   );
 };

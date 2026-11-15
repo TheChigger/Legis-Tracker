@@ -185,27 +185,95 @@ def fetch_bill_detail_from_xml(path: str) -> dict:
         return {}
 
 def classify_bill_policy(caption: str, subjects: list) -> tuple:
-    """Basic rule-based classification against active priorities until Ollama enriches it."""
-    text = (caption + " " + " ".join(subjects)).lower()
-    
-    if any(k in text for k in ['ten commandments', 'chaplain', 'religious', 'prayer']):
+    """Direction-aware rule-based baseline classification until Ollama enriches the bill."""
+    cap = (caption or "").lower()
+    text = (cap + " " + " ".join(subjects)).lower()
+    is_repeal = bool(re.search(r"\b(repeal|repealing|abolish|abolition|eliminat|terminat)\b", cap))
+
+    # 1. Church / State Separation (Strict)
+    if any(k in text for k in ["ten commandments", "chaplain", "prayer in public school", "religious display", "sincerely held religious belief"]):
+        if is_repeal and any(k in cap for k in ["ten commandments", "chaplain", "display", "prayer"]):
+            return "Church / State & First Amendment", "SUPPORT", 5, [
+                {"priorityId": "p1", "priorityName": "Separation of Church and State", "alignment": "COMPORTS", "impactExplanation": "Repeals mandatory religious displays or sectarian rules in public institutions."}
+            ]
         return "Church / State & First Amendment", "OPPOSE", 5, [
-            {"priorityId": "p1", "priorityName": "Church / State Separation", "alignment": "CONFLICTS", "impactExplanation": "Mandates religious displays or clerical roles in public institutions."}
+            {"priorityId": "p1", "priorityName": "Separation of Church and State", "alignment": "CONFLICTS", "impactExplanation": "Mandates religious displays, school chaplains, or religious discrimination exemptions."}
         ]
-    elif any(k in text for k in ['voucher', 'education savings account', 'parental choice']):
-        return "Public Education & Civil Rights", "OPPOSE", 5, [
-            {"priorityId": "p2", "priorityName": "Public Education Defense", "alignment": "CONFLICTS", "impactExplanation": "Diverts public tax revenue to private schooling."}
+
+    # 2. Public Education & Anti-Voucher Integrity
+    if ("education savings account" in cap or "voucher" in cap or "parental choice" in cap) and "classroom supply" not in cap:
+        if is_repeal:
+            return "Public Education & School Funding", "SUPPORT", 5, [
+                {"priorityId": "p2", "priorityName": "Public Education & Equitable School Funding", "alignment": "COMPORTS", "impactExplanation": "Repeals the Education Savings Account / private voucher program to protect ISD funding."}
+            ]
+        if "eligibility requirements" in cap:
+            return "Public Education & School Funding", "NEUTRAL", 3, [
+                {"priorityId": "p2", "priorityName": "Public Education & Equitable School Funding", "alignment": "NEUTRAL", "impactExplanation": "Needs Review: Modifies ESA private school eligibility criteria—inspect full text to confirm whether it tightens accountability or loosens access."}
+            ]
+        return "Public Education & School Funding", "OPPOSE", 5, [
+            {"priorityId": "p2", "priorityName": "Public Education & Equitable School Funding", "alignment": "CONFLICTS", "impactExplanation": "Diverts public tax dollars to private school vouchers / ESAs."}
         ]
-    elif any(k in text for k in ['medicaid', 'postpartum', 'maternal', 'telehealth']):
-        return "Healthcare Access & Medicaid", "SUPPORT", 4, [
-            {"priorityId": "p3", "priorityName": "Healthcare Access", "alignment": "COMPORTS", "impactExplanation": "Expands healthcare coverage and maternal care access."}
+
+    if "classroom supply savings account" in cap or any(k in cap for k in ["basic allotment", "teacher retirement system", "cost-of-living", "free school meal", "special education funding"]):
+        return "Public Education & School Funding", "SUPPORT", 4, [
+            {"priorityId": "p2", "priorityName": "Public Education & Equitable School Funding", "alignment": "COMPORTS", "impactExplanation": "Strengthens public school funding, classroom resources, or educator benefits."}
         ]
-    elif any(k in text for k in ['weatheriz', 'ercot', 'electric grid', 'power outage']):
-        return "Electric Grid & Consumer Protection", "SUPPORT", 4, [
-            {"priorityId": "p5", "priorityName": "Grid Weatherization", "alignment": "COMPORTS", "impactExplanation": "Strengthens grid reliability and weatherization requirements."}
+
+    # 3. LGBTQ+ & Civil Rights
+    if any(k in text for k in ["gender-affirming", "gender transition", "transgender", "lesbian, gay", "biological sex", "drag performance", "gender marker"]):
+        if any(k in cap for k in ["non-discrimination", "protect", "equal rights", "barriers to equality", "housing needs", "task force"]):
+            return "Civil Rights & LGBTQ+ Policy", "SUPPORT", 4, [
+                {"priorityId": "p3", "priorityName": "Civil Rights & LGBTQ+ Equality", "alignment": "COMPORTS", "impactExplanation": "Advances equal rights, housing equity, or non-discrimination studies/protections for LGBTQ+ Texans."}
+            ]
+        if any(k in cap for k in ["prohibit", "restrict", "ban", "biological sex", "athletic", "bathroom", "drag", "offense"]):
+            return "Civil Rights & LGBTQ+ Policy", "OPPOSE", 5, [
+                {"priorityId": "p3", "priorityName": "Civil Rights & LGBTQ+ Equality", "alignment": "CONFLICTS", "impactExplanation": "Restricts healthcare, accommodations, or equal rights for transgender and LGBTQ+ Texans."}
+            ]
+
+    # 4. Healthcare & Medicaid
+    if any(k in cap for k in ["medicaid", "postpartum", "patient protection and affordable care", "express lane", "rural hospital", "immunization", "health care restriction"]):
+        if is_repeal and "immunization" in cap:
+            return "Healthcare & Medicaid", "OPPOSE", 4, [
+                {"priorityId": "p4", "priorityName": "Healthcare, Medicare & Medicaid", "alignment": "CONFLICTS", "impactExplanation": "Repeals public health immunization protections."}
+            ]
+        if any(k in cap for k in ["expansion", "awareness week", "wellness check", "postpartum", "express lane", "rural hospital", "medically unnecessary"]):
+            return "Healthcare & Medicaid", "SUPPORT", 4, [
+                {"priorityId": "p4", "priorityName": "Healthcare, Medicare & Medicaid", "alignment": "COMPORTS", "impactExplanation": "Expands Medicaid, preventive health awareness, or patient healthcare access."}
+            ]
+
+    # 5. Transportation & Transit
+    if any(k in cap for k in ["public transit", "light rail", "commuter rail", "passenger rail", "bike lane", "vision zero", "multimodal"]):
+        if any(k in cap for k in ["prohibit", "preempt", "penaliz"]):
+            return "Transportation & Transit", "OPPOSE", 4, [
+                {"priorityId": "p5", "priorityName": "Transportation & Transit", "alignment": "CONFLICTS", "impactExplanation": "Preempts municipalities from expanding bike lanes or public transit."}
+            ]
+        return "Transportation & Transit", "SUPPORT", 4, [
+            {"priorityId": "p5", "priorityName": "Transportation & Transit", "alignment": "COMPORTS", "impactExplanation": "Advances multimodal public transit, rail, or pedestrian/bike infrastructure."}
         ]
-    else:
-        return subjects[0] if subjects else "General State Affairs", "NEUTRAL", 2, []
+
+    # 6. Taxation & Budget Surplus (Nuanced)
+    if any(k in cap for k in ["abolition of ad valorem", "voter-approval tax rate", "exceed a taxing unit's voter-approval", "exceeds the political subdivision's voter-approval"]):
+        return "Taxation & Fiscal Policy", "OPPOSE", 4, [
+            {"priorityId": "p6", "priorityName": "Taxation & Budget Surplus", "alignment": "CONFLICTS", "impactExplanation": "Eliminates local property tax funding or constrains local voter-approved services."}
+        ]
+    if "homestead exemption" in cap:
+        return "Taxation & Fiscal Policy", "SUPPORT", 3, [
+            {"priorityId": "p6", "priorityName": "Taxation & Budget Surplus", "alignment": "COMPORTS", "impactExplanation": "Delivers targeted residential homeowner tax relief."}
+        ]
+
+    # 7. Second Amendment (Nuanced - word boundary safe, avoid blind auto-opposition)
+    if re.search(r"\b(gun safe|storage device|domestic violence.*firearm|nics)\b", cap):
+        return "Second Amendment & Safety", "SUPPORT", 3, [
+            {"priorityId": "p7", "priorityName": "Second Amendment & Practical Safety", "alignment": "COMPORTS", "impactExplanation": "Advances voluntary safe storage or targeted safety while respecting lawful ownership."}
+        ]
+
+    # 8. Voting, Labor & Grid
+    if any(k in cap for k in ["weatheriz", "ercot", "online voter registration", "automatic voter"]):
+        return "Voting, Labor & Grid", "SUPPORT", 4, [
+            {"priorityId": "p8", "priorityName": "Voting, Labor & Grid Protection", "alignment": "COMPORTS", "impactExplanation": "Strengthens voting access, worker protections, or electric grid reliability."}
+        ]
+
+    return subjects[0] if subjects else "General State Affairs", "NEUTRAL", 2, []
 
 def sync_all_texas_bills():
     """Main ingestion coordinator: merges baseline + intraday feed into realBills.json."""
